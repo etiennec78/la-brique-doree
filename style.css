@@ -5,7 +5,7 @@
 @font-face {
     font-family: 'Brix';
     src: url('fonts/brix.ttf') format('truetype');
-  }
+}
   
 body {
   margin: 0;
@@ -31,9 +31,38 @@ h1 {
   filter: drop-shadow(1px 0px 5px rgba(0, 0, 0, 0.5));
 }
 
-
 h1 {
   font-size: 50px;
   padding-top: 15px;
   filter: drop-shadow(1px 0px 5px rgba(0, 0, 0, 0.2));
+}
+
+article {
+    background-color: darkorange;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+article figure {
+    margin: 0;
+}
+
+main {
+    margin-inline: auto;
+    padding-block-start: 2rem;
+}
+
+main img {
+    width: 100%;
+}
+
+.bento {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.bento > * {
+    margin: 0.5rem;
+    border-radius: 0.5rem;
 }
