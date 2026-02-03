@@ -51,6 +51,8 @@ h2 {
 #navbarbutton {
   position: relative;
   text-decoration: none;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+  font-weight: bold;
   color: var(--navbartext);
   
 }
