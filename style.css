@@ -1,5 +1,6 @@
 :root {
   --legoyellow: #ffd502;
+  --navbargrey: #d1ccc577;
 }
 
 @font-face {
@@ -18,12 +19,23 @@ h1 {
 
 #main-header {
   display: flex;
-  background-color : var(--legoyellow);
+  position: relative;
+  justify-content: center;
+}
+
+#navbar-header {
+  padding: 8px 32px;
+  background-color: var(--navbargrey);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #logo {
   height: 78px;
   width: 150px;
+  z-index: 1;
 
   padding-top: 37px;
   padding-left: 30px;
@@ -31,9 +43,37 @@ h1 {
   filter: drop-shadow(1px 0px 5px rgba(0, 0, 0, 0.5));
 }
 
+#navbarbutton{
+  text-decoration: none;
+  color: black;
+  
+ 
+}
+
+#navbarbutton:hover{
+  text-decoration: underline;
+}
 
 h1 {
   font-size: 50px;
   padding-top: 15px;
   filter: drop-shadow(1px 0px 5px rgba(0, 0, 0, 0.2));
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color:white;
 }
+
+.video-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  
+    z-index: 0;
+    filter: brightness(45%); 
+    
+}
+
+
+
+
