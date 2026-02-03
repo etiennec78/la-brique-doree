@@ -92,8 +92,40 @@ h1 {
     object-fit: cover;  
     z-index: 0;
     filter: brightness(45%); 
-    
 }
+#slideshow {
+  display: flex;
+  width: 300%;     
+  animation: slide-boucle 21s ease-in-out infinite;
+}
+
+.slide {
+  padding-top:50px;
+  flex: 0 0 33.333%;      
+  display: flex;
+  justify-content: center;         
+}
+
+.slide img {
+  max-width: 100%;  
+  border-radius: 20px;         
+}
+
+@keyframes slide-boucle {
+  0%, 28% {
+    transform: translateX(0);
+  }
+  33%, 61% {
+    transform: translateX(-33.333%);
+  }
+  66%, 95% {
+    transform: translateX(-66.666%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
 article {
     background-color: darkorange;
     padding: 1rem;
