@@ -18,6 +18,10 @@ h1 {
   font-family: 'Brix', sans-serif;
 }
 
+h2 {
+  text-align: center;
+}
+
 #main-header {
   display: flex;
   position: relative;
