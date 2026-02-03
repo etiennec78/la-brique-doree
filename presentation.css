@@ -1,6 +1,7 @@
 article {
   padding: 1rem;
   margin-bottom: 1rem;
+  padding: 0px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -15,6 +16,14 @@ article {
 .bento > * {
   margin: 0.5rem;
   border-radius: 0.5rem;
+}
+
+article header h2 {
+  margin: 0;
+  filter: saturate(50%);
+  backdrop-filter: blur(5px);
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
 }
 
 article#crab {
