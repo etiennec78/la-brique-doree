@@ -6,7 +6,7 @@
 @font-face {
     font-family: 'Brix';
     src: url('fonts/brix.ttf') format('truetype');
-  }
+}
   
 body {
   margin: 0;
@@ -46,12 +46,16 @@ h1 {
 #navbarbutton{
   text-decoration: none;
   color: black;
-  
- 
 }
 
 #navbarbutton:hover{
   text-decoration: underline;
+}
+
+#map {
+    width: 80%;
+    height: 500px;
+    margin: auto; /*centrer*/
 }
 
 h1 {
@@ -73,7 +77,32 @@ h1 {
     filter: brightness(45%); 
     
 }
+article {
+    background-color: darkorange;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
 
+article figure {
+    margin: 0;
+}
 
+main {
+    margin-inline: auto;
+    padding-block-start: 2rem;
+}
 
+main img {
+    width: 100%;
+}
 
+.bento {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.bento > * {
+    margin: 0.5rem;
+    border-radius: 0.5rem;
+}
