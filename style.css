@@ -10,11 +10,11 @@
   
 body {
   margin: 0;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 h1 {
   font-family: 'Brix', sans-serif;
-
 }
 
 #main-header {
@@ -24,7 +24,7 @@ h1 {
 }
 
 #navbar-header {
-  padding: 8px 32px;
+  padding: 8px 44px;
   background-color: var(--navbargrey);
   display: flex;
   flex-direction: row;
@@ -43,13 +43,29 @@ h1 {
   filter: drop-shadow(1px 0px 5px rgba(0, 0, 0, 0.5));
 }
 
-#navbarbutton{
+#navbarbutton {
+  position: relative;
   text-decoration: none;
   color: black;
+  
 }
 
-#navbarbutton:hover{
-  text-decoration: underline;
+#navbarbutton::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;                
+  height: 2px;
+  background-color: black;
+
+  transform: scaleX(0);        
+  transform-origin: center;    
+  transition: 0.3s;  
+}
+
+#navbarbutton:hover::after {
+  transform: scaleX(1);       
 }
 
 #map {
