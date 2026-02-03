@@ -2,6 +2,7 @@ article {
   padding: 1rem;
   margin-bottom: 1rem;
   padding: 0px;
+  height: 200px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -9,7 +10,7 @@ article {
 
 .bento {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 1fr);
 }
 
