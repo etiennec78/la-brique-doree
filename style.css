@@ -173,3 +173,23 @@ main {
 main img {
     width: 100%;
 }
+
+div#reviews-title {
+    color: #c0c0c0;
+    margin-left: 45%;
+    margin-top: 5%;
+}
+
+*.reviews {
+    color: white;
+}
+
+body>table {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    width: 60%;
+    padding: 1%;
+    border-style: solid;
+    border-color: white;
+}
