@@ -1,6 +1,7 @@
 :root {
   --lego: #ffd502;
   --navbartext: #dbdbdb;
+  --gold: linear-gradient(#a58741, #4e4e07);
 }
 
 @font-face {
@@ -31,7 +32,7 @@ h2 {
 
 #navbar-header {
   padding: 8px 44px;
-  background: linear-gradient(#a58741, #4e4e07);
+  background: var(--gold);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -191,4 +192,21 @@ body>table {
     padding: 1%;
     border-style: solid;
     border-color: white;
+
+.description {
+  position: relative;
+  cursor: help;
+  border-radius: 50%;
+}
+
+.description:hover:after {
+  content: attr(description);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  padding: 5px 14px;
+  background: var(--gold);
+  border-radius: 8px;
+  font-size: 1.2rem;
 }
