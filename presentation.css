@@ -1,0 +1,106 @@
+article {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bento {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.bento > * {
+  margin: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+article#crab {
+  background-image: url('./images/food/dish/crab.jpg');
+}
+
+article#bento {
+  background-image: url('./images/food/dish/bento.jpg');
+}
+
+article#burger {
+  background-image: url('./images/food/dish/burger.jpg');
+}
+
+article#veggy-burger {
+  background-image: url('./images/food/dish/veggy_burger.jpg');
+}
+
+article#kid-burger {
+  background-image: url('./images/food/dish/kid_burger.jpg');
+}
+
+article#noodles {
+  background-image: url('./images/food/dish/noodles.jpg');
+}
+
+article#sashimi {
+  background-image: url('./images/food/dish/sashimi.webp');
+}
+
+article#shrimp {
+  background-image: url('./images/food/dish/shrimp.jpg');
+}
+
+article#steak {
+  background-image: url('./images/food/dish/steak.jpg');
+}
+
+article#sushi {
+  background-image: url('./images/food/dish/sushi.jpg');
+}
+
+article#egg {
+  background-image: url('./images/food/dish/egg.jpg');
+}
+
+article#bacon {
+  background-image: url('./images/food/dish/bacon.jpg');
+}
+
+article#coke {
+  background-image: url('./images/food/drink/coke.jpg');
+}
+
+article#orange-juice {
+  background-image: url('./images/food/drink/orange_juice.jpg');
+}
+
+article#champaign {
+  background-image: url('./images/food/drink/champaign.webp');
+}
+
+article#cake {
+  background-image: url('./images/food/dessert/cake.jpg');
+}
+
+article#raspberry-pie {
+  background-image: url('./images/food/dessert/raspberry_pie.jpg');
+}
+
+article#cupcake {
+  background-image: url('./images/food/dessert/cupcake.jpg');
+}
+
+article#cupcakes-ice-cream {
+  background-image: url('./images/food/dessert/cupcakes_ice_cream.jpg');
+}
+
+article#ice-cream {
+  background-image: url('./images/food/dessert/ice_cream.jpg');
+}
+
+article#cheese {
+  background-image: url('./images/food/dessert/cheese.jpg');
+}
+
+article#banana {
+  background-image: url('./images/food/dessert/banana.jpg');
+}

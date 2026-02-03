@@ -97,6 +97,7 @@ h1 {
     z-index: 0;
     filter: brightness(45%); 
 }
+
 #slideshow {
   display: flex;
   width: 300%;     
@@ -136,10 +137,6 @@ article {
     margin-bottom: 1rem;
 }
 
-article figure {
-    margin: 0;
-}
-
 main {
     margin-inline: auto;
     padding-block-start: 2rem;
@@ -147,15 +144,4 @@ main {
 
 main img {
     width: 100%;
-}
-
-.bento {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-}
-
-.bento > * {
-    margin: 0.5rem;
-    border-radius: 0.5rem;
 }
