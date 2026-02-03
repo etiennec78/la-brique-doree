@@ -1,6 +1,6 @@
 :root {
-  --legoyellow: #ffd502;
-  --navbargrey: #d1ccc577;
+  --lego: #ffd502;
+  --navbartext: #dbdbdb;
 }
 
 @font-face {
@@ -11,6 +11,7 @@
 body {
   margin: 0;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  background:black;
 }
 
 h1 {
@@ -25,7 +26,7 @@ h1 {
 
 #navbar-header {
   padding: 8px 44px;
-  background-color: var(--navbargrey);
+  background: linear-gradient(#a58741, #4e4e07);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -46,7 +47,7 @@ h1 {
 #navbarbutton {
   position: relative;
   text-decoration: none;
-  color: black;
+  color: var(--navbartext);
   
 }
 
@@ -56,8 +57,8 @@ h1 {
   left: 0;
   bottom: -2px;
   width: 100%;                
-  height: 2px;
-  background-color: black;
+  height: 1px;
+  background-color: var(--navbartext);
 
   transform: scaleX(0);        
   transform-origin: center;    
