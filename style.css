@@ -108,9 +108,16 @@ h1 {
   animation: slide-boucle 21s ease-in-out infinite;
 }
 
+#slideshow-frame {
+  width: 90%;
+  margin: 24px auto;
+  margin-top: 50px;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
 .slide {
   position: relative;
-  padding-top:50px;
   flex: 0 0 25%;      
   display: flex;
   justify-content: center;         
@@ -138,8 +145,9 @@ h1 {
 }
 
 .slide img {
-  max-width: 100%;  
-  border-radius: 0px;         
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 @keyframes slide-boucle {
