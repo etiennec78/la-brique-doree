@@ -2,6 +2,7 @@
   --lego: #ffd502;
   --navbartext: #dbdbdb;
   --gold: linear-gradient(#a58741, #4a3c1d);
+  --offwhite: #fffcf5;
 }
 
 @font-face {
@@ -13,7 +14,7 @@ body {
   margin: 0;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   background:black;
-  color: white;
+  color: var(--offwhite);
 }
 
 h1 {
@@ -90,7 +91,6 @@ h1 {
   position: relative;
   z-index: 1;
   text-align: center;
-  color:white;
 }
 
 .video-background {
@@ -188,10 +188,6 @@ div#reviews-title {
     margin-top: 5%;
 }
 
-*.reviews {
-    color: white;
-}
-
 body>table {
     margin-left: auto;
     margin-right: auto;
@@ -199,7 +195,7 @@ body>table {
     width: 60%;
     padding: 1%;
     border-style: solid;
-    border-color: white;
+    border-color: var(--offwhite);
 }
 
 .description {

@@ -1,7 +1,7 @@
 :root {
   --solid-gold: #a58741;
   --solid-dark-gold: #4a3c1d;
-  --offwhite: #f9f9f9;
+  --offwhite: #fffcf5;
 }
 
 .login-page {
@@ -34,7 +34,7 @@
     border: 0px;
     border-radius: 5px;
     background-color: var(--solid-gold);
-    color: white;
+    color: var(--offwhite);
     cursor: pointer;
 }
 
