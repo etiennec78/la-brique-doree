@@ -1,0 +1,47 @@
+:root {
+  --solid-gold: #a58741;
+  --solid-dark-gold: #4a3c1d;
+  --offwhite: #f9f9f9;
+}
+
+.login-page {
+    width: 300px;
+    margin: 100px auto;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: var(--offwhite);
+    color: var(--solid-gold);
+}
+
+.login-page h2 {
+    text-align: center;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.btn {
+    width: 100%;
+    padding: 10px;
+    border: 0px;
+    border-radius: 5px;
+    background-color: var(--solid-gold);
+    color: white;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: var(--solid-dark-gold);
+}
+
+p {
+    text-align: center;
+}
