@@ -28,7 +28,28 @@ h2 {
 #main-header {
   display: flex;
   position: relative;
+  align-items: center;
   justify-content: center;
+  width: 100%;
+  padding-inline: 30px;
+  gap: 12px;
+  box-sizing: border-box;
+}
+
+#main-header h1 {
+  text-align: left;
+}
+
+#main-header .icon {
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.icon {
+  width: 70px;
 }
 
 #navbar-header {
@@ -42,12 +63,8 @@ h2 {
 
 #logo {
   height: 78px;
-  width: 150px;
+  width: auto;
   z-index: 1;
-
-  padding-top: 37px;
-  padding-left: 30px;
-  padding-right: 30px;
   filter: drop-shadow(1px 0px 5px rgba(0, 0, 0, 0.5));
 }
 
