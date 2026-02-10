@@ -28,6 +28,14 @@
     border-radius: 3px;
 }
 
+.input-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background: white;
+}
+
 .btn {
     width: 100%;
     padding: 10px;
