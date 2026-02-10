@@ -58,7 +58,7 @@ h2 {
 }
 
 #navbar-header {
-  padding: 8px 44px;
+  padding: 8px 200px;
   background: var(--gold);
   display: flex;
   flex-direction: row;
