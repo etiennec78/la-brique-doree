@@ -182,20 +182,30 @@ main img {
     width: 100%;
 }
 
-div#reviews-title {
+h2#reviews-title {
     color: #c0c0c0;
-    margin-left: 45%;
+    margin-left: auto;
     margin-top: 5%;
 }
 
-body>table {
+table.reviews {
     margin-left: auto;
     margin-right: auto;
     margin-top: 5%;
     width: 60%;
-    padding: 1%;
-    border-style: solid;
-    border-color: var(--offwhite);
+    padding: 20px;
+    border: 30px solid transparent;
+    border-image: url(images/reviews/reviewsborder.png) 9% repeat;
+}
+
+table.reviews td.review-description {
+    color: transparent;
+    font-size: 0%;
+}
+
+table.reviews:hover td.review-description {
+    color: var(--offwhite);
+    font-size: 20px;
 }
 
 .description {
