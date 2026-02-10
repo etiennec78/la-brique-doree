@@ -4,7 +4,7 @@
   --offwhite: #fffcf5;
 }
 
-.login-page {
+.form-page {
     width: 300px;
     margin: 100px auto;
     padding: 20px;
@@ -13,7 +13,7 @@
     color: var(--solid-gold);
 }
 
-.login-page h2 {
+.form-page h2 {
     text-align: center;
 }
 
