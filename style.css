@@ -214,7 +214,7 @@ table.reviews {
     margin-left: auto;
     margin-right: auto;
     margin-top: 5%;
-    width: 60%;
+    width: 80%;
     padding: 20px;
     border: 30px solid transparent;
     border-image: url(images/reviews/reviewsborder.png) 9% repeat;
@@ -228,6 +228,11 @@ table.reviews td.review-description {
 table.reviews:hover td.review-description {
     color: var(--offwhite);
     font-size: 20px;
+}
+
+.stars {
+    height: 17px;
+    width: auto;
 }
 
 .description {
