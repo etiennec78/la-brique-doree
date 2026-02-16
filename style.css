@@ -79,7 +79,6 @@ h2 {
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bold;
   color: var(--navbartext);
-  
 }
 
 #navbarbutton::after {
@@ -104,6 +103,16 @@ h2 {
     width: 80%;
     height: 500px;
     margin: auto; /*centrer*/
+}
+
+footer{
+  background: var(--gold);
+  height: 100px;
+  padding: 30px;
+}
+
+footer a{
+  color:red;
 }
 
 h1 {
@@ -218,7 +227,7 @@ table.reviews {
     padding: 20px;
     border: 30px solid transparent;
     border-image: url(images/reviews/reviewsborder.png) 9% repeat;
-}
+  }
 
 table.reviews td.review-description {
     color: transparent;
