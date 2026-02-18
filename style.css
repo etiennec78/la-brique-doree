@@ -57,6 +57,29 @@ h2 {
   transform: translateY(-50%) scale(1.15);
 }
 
+#main-header .bubble {
+  color: #ffffff;
+  background: #e53935;
+  position: absolute;
+  right: 40px;
+  top: 30%;
+  transform: translateY(-50%);
+  z-index: 2;
+  border-radius: 999px;
+  min-width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.bubble {
+  transition: transform 0.2s;
+}
+
 #navbar-header {
   padding: 8px 200px;
   background: var(--gold);
