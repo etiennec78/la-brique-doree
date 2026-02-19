@@ -13,7 +13,7 @@
 body {
   margin: 0;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  background:black;
+  background-image: url('images/background.png');
   color: var(--offwhite);
 }
 
