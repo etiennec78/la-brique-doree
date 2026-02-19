@@ -29,25 +29,43 @@
         </section>
     </header>
     <main>
-      <div id="dishes">
+      <input type="checkbox" class="filter" id="crustacean" checked />
+      <label for="crustacean">Crustacé</label>
+      <input type="checkbox" class="filter" id="fish" checked />
+      <label for="fish">Poisson</label>
+      <input type="checkbox" class="filter" id="gluten" checked />
+      <label for="gluten">Gluten</label>
+      <input type="checkbox" class="filter" id="milk" checked />
+      <label for="milk">Lait</label>
+      <input type="checkbox" class="filter" id="sesame" checked />
+      <label for="sesame">Sésame</label>
+      <input type="checkbox" class="filter" id="egg" checked />
+      <label for="egg">Œuf</label>
+      <input type="checkbox" class="filter" id="soy" checked />
+      <label for="soy">Soja</label>
+      <input type="checkbox" class="filter" id="nut" checked />
+      <label for="nut">Fruit à coque</label>
+      <input type="checkbox" class="filter" id="sulfite" checked />
+      <label for="sulfite">Sulfite</label>
+      <div id="dishes" class="food-section">
         <h2>~ Plats ~</h2>
         <section class="bento">
-          <article id="crab" class="description" description="Chair de crabe fraîche et délicate, un délice à savourer brique par brique !">
+          <article id="crab" class="description crustacean" description="Chair de crabe fraîche et délicate, un délice à savourer brique par brique !">
             <header>
               <h3>Crabe</h3>
             </header>
           </article>
-          <article id="bento" class="description" description="Assortiment coloré de riz, légumes et protéines, un repas complet et joyeux">
+          <article id="bento" class="description crustacean" description="Assortiment coloré de riz, légumes et protéines, un repas complet et joyeux">
             <header>
               <h3>Bento</h3>
             </header>
           </article>
-          <article id="sushi" class="description" description="Riz vinaigré et poisson frais, préparés avec soin pour une bouchée pleine de finesse">
+          <article id="sushi" class="description fish" description="Riz vinaigré et poisson frais, préparés avec soin pour une bouchée pleine de finesse">
             <header>
               <h3>Sushis</h3>
             </header>
           </article>
-          <article id="sashimi" class="description" description="Tranches de poisson ultra-frais, fondantes et prêtes à être dégustées en une bouchée.">
+          <article id="sashimi" class="description fish" description="Tranches de poisson ultra-frais, fondantes et prêtes à être dégustées en une bouchée.">
             <header>
               <h3>Sashimis</h3>
             </header>
@@ -57,17 +75,17 @@
               <h3>Steak</h3>
             </header>
           </article>
-          <article id="kid-burger" class="description" description="Mini-burger tendre et fromage fondant, parfait pour les petits appétits.">
+          <article id="kid-burger" class="description gluten milk sesame" description="Mini-burger tendre et fromage fondant, parfait pour les petits appétits.">
             <header>
               <h3>Burger enfant</h3>
             </header>
           </article>
-          <article id="veggy-burger" class="description" description="Galette de légumes savoureuse et pain moelleux, un burger coloré et fun à manger.">
+          <article id="veggy-burger" class="description soja gluten sesame" description="Galette de légumes savoureuse et pain moelleux, un burger coloré et fun à manger.">
             <header>
               <h3>Burger végé</h3>
             </header>
           </article>
-          <article id="burger" class="description" description="Burger gourmand avec frites dorées et croustillantes, un classique qui se déguste sans effort.">
+          <article id="burger" class="description gluten milk sesame" description="Burger gourmand avec frites dorées et croustillantes, un classique qui se déguste sans effort.">
             <header>
               <h3>Burger frites</h3>
             </header>
@@ -77,24 +95,24 @@
               <h3>Pâtes</h3>
             </header>
           </article>
-          <article id="egg" class="description" description="Œuf coulant sur steak haché tendre, un duo réconfortant et délicieux.">
+          <article id="egg" class="description egg" description="Œuf coulant sur steak haché tendre, un duo réconfortant et délicieux.">
             <header>
               <h3>Œuf & Steak haché</h3>
             </header>
           </article>
-          <article id="shrimp" class="description" description="Crevettes sautées, légèrement relevées, pleines de goût et de fraîcheur.">
+          <article id="shrimp" class="description crustacean" description="Crevettes sautées, légèrement relevées, pleines de goût et de fraîcheur.">
             <header>
               <h3>Crevettes</h3>
             </header>
           </article>
-          <article id="bacon" class="description" description="Bacon croustillant et œufs dorés, un petit déjeuner ou dîner plein de gourmandise.">
+          <article id="bacon" class="description egg gluten" description="Bacon croustillant et œufs dorés, un petit déjeuner ou dîner plein de gourmandise.">
             <header>
               <h3>Bacon & Œufs</h3>
             </header>
           </article>
         </section>
       </div>
-      <div id="drinks">
+      <div id="drinks" class="food-section">
         <h2>~ Boissons ~</h2>
         <section class="bento">
           <article id="coke" class="description" description="Boisson fraîche et pétillante, parfaite pour accompagner chaque bouchée.">
@@ -107,42 +125,42 @@
               <h3>Jus d'orange</h3>
             </header>
           </article>
-          <article id="champaign" class="description" description="Champagne de la maison de la brique. Bulles fines et élégantes, pour un moment festif et léger.">
+          <article id="champaign" class="description sulfite" description="Champagne de la maison de la brique. Bulles fines et élégantes, pour un moment festif et léger.">
             <header>
               <h3>Champagne</h3>
             </header>
           </article>
         </section>
       </div>
-      <div id="desserts">
+      <div id="desserts" class="food-section">
         <h2>~ Desserts ~</h2>
         <section class="bento">
-          <article id="cheese" class="description" description="Sélection de fromages affinés, à savourer brique par brique… ou tout d’un coup !">
+          <article id="cheese" class="description milk" description="Sélection de fromages affinés, à savourer brique par brique… ou tout d’un coup !">
             <header>
               <h3>Plateau de fromages</h3>
             </header>
           </article>
-          <article id="raspberry-pie" class="description" description="Pâte croustillante et framboises acidulées, douce et fruitée.">
+          <article id="raspberry-pie" class="description gluten milk egg" description="Pâte croustillante et framboises acidulées, douce et fruitée.">
             <header>
               <h3>Tarte à la framboise</h3>
             </header>
           </article>
-          <article id="ice-cream" class="description" description="Boules glacées onctueuses, parfaites pour une pause fraîcheur.">
+          <article id="ice-cream" class="description milk nut soy" description="Boules glacées onctueuses, parfaites pour une pause fraîcheur.">
             <header>
               <h3>Glace</h3>
             </header>
           </article>
-          <article id="cake" class="description" description="Gâteau moelleux et gourmand, un vrai plaisir à chaque bouchée.">
+          <article id="cake" class="description gluten egg soy" description="Gâteau moelleux et gourmand, un vrai plaisir à chaque bouchée.">
             <header>
               <h3>Gâteau</h3>
             </header>
           </article>
-          <article id="cupcake" class="description" description="Petit gâteau fondant, recouvert d’un glaçage généreux et coloré.">
+          <article id="cupcake" class="description gluten egg milk soy" description="Petit gâteau fondant, recouvert d’un glaçage généreux et coloré.">
             <header>
               <h3>Cupcake</h3>
             </header>
           </article>
-          <article id="cupcakes-ice-cream" class="description" description="Alliance sucrée et rafraîchissante, pour les plus gourmands.">
+          <article id="cupcakes-ice-cream" class="description gluten egg milk soy" description="Alliance sucrée et rafraîchissante, pour les plus gourmands.">
             <header>
               <h3>Cupcakes et glaces</h3>
             </header>

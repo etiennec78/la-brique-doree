@@ -19,6 +19,18 @@ article {
   border-radius: 0.5rem;
 }
 
+#crustacean.filter:not(:checked) ~ .food-section .crustacean,
+#fish.filter:not(:checked) ~ .food-section .fish,
+#gluten.filter:not(:checked) ~ .food-section .gluten,
+#milk.filter:not(:checked) ~ .food-section .milk,
+#sesame.filter:not(:checked) ~ .food-section .sesame,
+#egg.filter:not(:checked) ~ .food-section .egg,
+#soy.filter:not(:checked) ~ .food-section .soy,
+#nut.filter:not(:checked) ~ .food-section .nut,
+#sulfite.filter:not(:checked) ~ .food-section .sulfite {
+  display: none;
+}
+
 article header h3 {
   text-align: center;
   font-size: 28px;
