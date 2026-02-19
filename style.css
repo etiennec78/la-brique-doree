@@ -267,21 +267,3 @@ table.reviews:hover td.review-description {
     height: 17px;
     width: auto;
 }
-
-.description {
-  position: relative;
-  cursor: help;
-  border-radius: 50%;
-}
-
-.description:hover:after {
-  content: attr(description);
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1;
-  padding: 5px 14px;
-  background: var(--gold);
-  border-radius: 8px;
-  font-size: 1.2rem;
-}
