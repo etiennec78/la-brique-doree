@@ -270,3 +270,19 @@ table.reviews:hover td.review-description {
     height: 17px;
     width: auto;
 }
+
+textarea[name=text-review] {
+    resize: none;
+}
+
+input[name="food"] {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+input[name="delivery"] {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
