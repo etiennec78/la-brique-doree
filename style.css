@@ -165,13 +165,14 @@ h1 {
 .rectangle h2{
   text-align: center;
   font-weight: bold;
-  font-size: 22px;
+  font-size: 26px;
   color: #ffffff;
+  margin-left: 25px;
 }
 
 .rectangle p{
    color: #ffffff;
-  font-size: 15px;
+  font-size: 22px;
   text-align: center;
 }
 
