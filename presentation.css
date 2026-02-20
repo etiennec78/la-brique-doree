@@ -17,6 +17,12 @@
   background: var(--darkgray);
 }
 
+.filters-panel summary img {
+  width: 32px;
+  height: 32px;
+  display: block;
+}
+
 .filters-menu {
   margin-top: 10px;
   background: var(--darkgray);
