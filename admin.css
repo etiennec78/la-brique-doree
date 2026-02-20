@@ -1,0 +1,66 @@
+
+.admin-main {
+    padding: 40px;
+}
+
+.panel {
+    background: rgba(0, 0, 0, 0.7); 
+    border: 1px solid var(--gold); 
+    border-radius: 15px;
+    padding: 25px;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 10px;
+}
+
+.search-bar, .filter-select {
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    margin-left: 10px;
+}
+
+.admin-table {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.admin-table th {
+    color: var(--lego);
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid var(--gold);
+}
+
+.admin-table td {
+    padding: 12px;
+    color: var(--offwhite);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tag {
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    background: #555;
+}
+
+.tag.gold {
+    background: var(--gold);
+}
+
+.action-link {
+    color: var(--lego);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.action-link:hover {
+    text-decoration: underline;
+}

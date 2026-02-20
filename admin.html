@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - La Brique Dorée</title>
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <header>
+        <div id="main-header">
+            <img id="logo" src="./images/LOGO.png" alt="Logo">
+            <h1>ADMINISTRATEUR</h1>
+            <video class="video-background" autoplay muted loop>
+                <source src="./images/Header_Background.mp4" type="video/mp4">
+            </video>
+        </div>
+        <section id="navbar-header">
+            <a href="index.html" id="navbarbutton">Accueil</a>
+            <a href="presentation.html" id="navbarbutton">Produits</a>
+            <a href="avis.html" id="navbarbutton">Avis</a>
+            <a href="profile.html" id="navbarbutton">Mon Profil</a>
+        </section>
+    </header>
+
+    <main class="admin-main">
+        <div class="panel">
+            <div class="panel-header">
+                <h2>Gestion des comptes utilisateurs</h2>
+                <div class="controls">
+                    <input type="text" placeholder="Rechercher un nom ou ID..." class="search-bar">
+                    <select class="filter-select">
+                        <option>Tous les profils</option>
+                        <option>Clients actifs</option>
+                        <option>Livreurs</option>
+                        <option>Restaurateurs</option>
+                    </select>
+                </div>
+            </div>
+
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Utilisateur</th>
+                        <th>Adresse Email</th>
+                        <th>Commandes</th> <th>Rôle</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#001</td>
+                        <td><strong>Etienne C.</strong></td>
+                        <td>etienne@yumland.fr</td>
+                        <td>12</td>
+                        <td><span class="tag gold">Admin</span></td>
+                        <td><a href="profile.html" class="action-link">Gérer</a></td>
+                    </tr>
+                    <tr>
+                        <td>#042</td>
+                        <td><strong>Martin J.</strong></td>
+                        <td>martin@yumland.fr</td>
+                        <td>5</td>
+                        <td><span class="tag">Client</span></td>
+                        <td><a href="profile.html" class="action-link">Gérer</a></td>
+                    </tr>
+                    <tr>
+                        <td>#089</td>
+                        <td><strong>Axel C.</strong></td>
+                        <td>axel@yumland.fr</td>
+                        <td><small>Aucune</small></td>
+                        <td><span class="tag delivery">Livreur</span></td>
+                        <td><a href="profile.html" class="action-link">Gérer</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>
