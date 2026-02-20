@@ -69,3 +69,8 @@
     cursor: pointer;
 }
 
+#map {
+width: 80%;
+height: 500px;
+margin: auto; /*centrer*/
+}

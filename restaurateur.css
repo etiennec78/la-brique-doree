@@ -1,7 +1,7 @@
 table {
     width: 90%;
     margin: 30px auto;
-    background: #181818;
+    background: var(--darkgray);
 }
 
 .tab-content {
@@ -28,7 +28,7 @@ table {
 }
 
 .tab-item:has(input:checked){
-    background: #181818;
+    background: var(--darkgray);
 }
 
 .tabs:has(#waiting-toggle:checked) #waiting-content{
