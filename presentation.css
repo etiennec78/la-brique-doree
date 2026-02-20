@@ -3,6 +3,61 @@
   --card-title-height: 38px;
 }
 
+.filters-panel {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.filters-panel summary {
+  list-style: none;
+  cursor: pointer;
+  display: inline-flex;
+  padding: 8px 14px;
+  border-radius: 10px;
+  background: var(--darkgray);
+}
+
+.filters-menu {
+  margin-top: 10px;
+  background: var(--darkgray);
+  border: 0px;
+  border-radius: 16px;
+  padding: 14px;
+}
+
+.filters-list {
+  display: flex;
+  gap: 8px;
+}
+
+.filter {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.filters-menu label {
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: var(--input-color);
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+#crustacean:checked ~ .filters-panel .filters-menu label[for="crustacean"],
+#fish:checked ~ .filters-panel .filters-menu label[for="fish"],
+#gluten:checked ~ .filters-panel .filters-menu label[for="gluten"],
+#milk:checked ~ .filters-panel .filters-menu label[for="milk"],
+#sesame:checked ~ .filters-panel .filters-menu label[for="sesame"],
+#egg:checked ~ .filters-panel .filters-menu label[for="egg"],
+#soy:checked ~ .filters-panel .filters-menu label[for="soy"],
+#nut:checked ~ .filters-panel .filters-menu label[for="nut"],
+#sulfite:checked ~ .filters-panel .filters-menu label[for="sulfite"] {
+  color: black;
+  background: var(--lego);
+}
+
 article {
   padding: 1rem;
   margin-bottom: 1rem;
@@ -38,15 +93,15 @@ article::before {
   border-radius: 0.5rem;
 }
 
-#crustacean.filter:not(:checked) ~ .food-section .crustacean,
-#fish.filter:not(:checked) ~ .food-section .fish,
-#gluten.filter:not(:checked) ~ .food-section .gluten,
-#milk.filter:not(:checked) ~ .food-section .milk,
-#sesame.filter:not(:checked) ~ .food-section .sesame,
-#egg.filter:not(:checked) ~ .food-section .egg,
-#soy.filter:not(:checked) ~ .food-section .soy,
-#nut.filter:not(:checked) ~ .food-section .nut,
-#sulfite.filter:not(:checked) ~ .food-section .sulfite {
+#crustacean.filter:not(:checked) ~ .menu-content .food-section .crustacean,
+#fish.filter:not(:checked) ~ .menu-content .food-section .fish,
+#gluten.filter:not(:checked) ~ .menu-content .food-section .gluten,
+#milk.filter:not(:checked) ~ .menu-content .food-section .milk,
+#sesame.filter:not(:checked) ~ .menu-content .food-section .sesame,
+#egg.filter:not(:checked) ~ .menu-content .food-section .egg,
+#soy.filter:not(:checked) ~ .menu-content .food-section .soy,
+#nut.filter:not(:checked) ~ .menu-content .food-section .nut,
+#sulfite.filter:not(:checked) ~ .menu-content .food-section .sulfite {
   display: none;
 }
 

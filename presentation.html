@@ -28,25 +28,35 @@
             <a href="profile.html" id="navbarbutton">Mon Profil</a>
         </section>
     </header>
-    <main>
+    <main class="menu-layout">
       <input type="checkbox" class="filter" id="crustacean" checked />
-      <label for="crustacean">Crustacé</label>
       <input type="checkbox" class="filter" id="fish" checked />
-      <label for="fish">Poisson</label>
       <input type="checkbox" class="filter" id="gluten" checked />
-      <label for="gluten">Gluten</label>
       <input type="checkbox" class="filter" id="milk" checked />
-      <label for="milk">Lait</label>
       <input type="checkbox" class="filter" id="sesame" checked />
-      <label for="sesame">Sésame</label>
       <input type="checkbox" class="filter" id="egg" checked />
-      <label for="egg">Œuf</label>
       <input type="checkbox" class="filter" id="soy" checked />
-      <label for="soy">Soja</label>
       <input type="checkbox" class="filter" id="nut" checked />
-      <label for="nut">Fruit à coque</label>
       <input type="checkbox" class="filter" id="sulfite" checked />
-      <label for="sulfite">Sulfite</label>
+
+      <details class="filters-panel">
+        <summary>Filtres</summary>
+        <aside class="filters-menu" aria-label="Filtres allergenes">
+          <div class="filters-list">
+            <label for="crustacean">Crustacé</label>
+            <label for="fish">Poisson</label>
+            <label for="gluten">Gluten</label>
+            <label for="milk">Lait</label>
+            <label for="sesame">Sésame</label>
+            <label for="egg">Œuf</label>
+            <label for="soy">Soja</label>
+            <label for="nut">Fruit à coque</label>
+            <label for="sulfite">Sulfite</label>
+          </div>
+        </aside>
+      </details>
+
+      <section class="menu-content">
       <div id="dishes" class="food-section">
         <h2>~ Plats ~</h2>
         <section class="bento">
@@ -150,6 +160,7 @@
           </article>
         </section>
       </div>
+      </section>
     </main>
 
     <footer>
