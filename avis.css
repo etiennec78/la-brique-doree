@@ -11,6 +11,7 @@
     background: var(--darkgray);
     border-collapse: collapse;
     transition: 0.3s;
+    border-radius: 0.5rem;
 }
 
 .review-block:hover {
@@ -48,7 +49,6 @@
     height: 12px;
 }
 
-
 .select-note {
     background: var(--darkgray);
     color: var(--lego);
@@ -56,27 +56,46 @@
     padding: 5px;
 }
 
+.select-note option {
+    background: var(--darkgray);
+    color: var(--lego);
+}
+
+td.user-ratings p {
+    display: inline;
+    font-size: 16px;
+}
+
+td.user-ratings p.stars {
+    color: var(--lego);
+    display: inline;
+}
+
 textarea {
     width: 100%;
     height: 80px;
     background: #ffffff0d;
-    border: 1px solid rgba(212, 175, 55, 0.35);
+    border: 0px;
     color: var(--offwhite);
     padding: 10px;
     margin-bottom: 10px;
     display: block;
     box-sizing: border-box;
+    border-radius: 0.5rem;
 }
 
 .btn-send {
-    background: var(--gold);
-    color: black;
+    color: var(--offwhite);
+    background: var(--solid-gold);
     padding: 10px 20px;
     font-weight: bold;
     border: none;
     transition: 0.3s;
+    border-radius: 0.5rem;
+    margin-top: 15px;
 }
 
 .btn-send:hover {
-    background: var(--lego);
+    background: var(--solid-dark-gold);
+    cursor: pointer;
 }
