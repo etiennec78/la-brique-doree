@@ -1,21 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Brique Dorée</title>
+    <title>Avis - La Brique Dorée</title>
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="avis.css">
 </head>
-
 <body>
-
     <header>
         <div id="main-header">
-            <img id="logo" src="./images/LOGO.png" alt="Logo d'une brique LEGO dorée">
+            <img id="logo" src="./images/LOGO.png" alt="Logo">
             <h1>NOS AVIS</h1>
             <a href="commands.html">
-                <img id="cart" class="icon" src="./images/cart.svg" alt="Icône de panier de courses">
+                <img id="cart" class="icon" src="./images/cart.svg">
                 <p id="cart_items" class="bubble">10</p>
             </a>
             <video class="video-background" autoplay muted loop>
@@ -26,84 +25,68 @@
             <a href="index.html" id="navbarbutton">Accueil</a>
             <a href="presentation.html" id="navbarbutton">Nos produits</a>
             <a href="avis.html" id="navbarbutton">Avis</a>
-            <a href="profile.html" id="navbarbutton">Livreur / Administrateur / Profil / Se connecter</a>
+            <a href="profile.html" id="navbarbutton">Mon Profil</a>
         </section>
     </header>
 
-    <h2 id="reviews-title">~ Avis Clients ~</h2>
-    <table class="reviews" background="./images/reviews/reviewsbackground.png">
-        <tr>
-            <th>NOM / PRENOM</th>
-            <td>
-                <p>Qualité Produits :  <img class="stars" src="images/reviews/star-3.png" alt="3 étoiles"></p>
-                <p>Qualité Livraison :  <img class="stars" src="images/reviews/star-3.png" alt="3 étoiles"></p>
-            </td>
-        </tr>
+    <main>
+        <h2 id="reviews-title">~ Avis Clients ~</h2>
 
-        <tr>
-            <td colspan="2" class="review-description"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></td>
-        </tr>
-    </table>
+        <table class="review-block">
+            <tr>
+                <th class="user-name">JEAN DUPONT</th>
+                <td class="user-ratings">
+                    <p>Produits : <img class="stars" src="images/reviews/star-3.png"></p>
+                    <p>Livraison : <img class="stars" src="images/reviews/star-3.png"></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="review-text">
+                    <p>Excellent restaurant blablabla</p>
+                </td>
+            </tr>
+        </table>
 
-    <table class="reviews" background="./images/reviews/reviewsbackground.png">
-        <tr>
-            <th>NOM / PRENOM</th>
-            <td>
-                <p>Qualité Produits :  <img class="stars" src="images/reviews/star-3.png" alt="3 étoiles"></p>
-                <p>Qualité Livraison :  <img class="stars" src="images/reviews/star-3.png" alt="3 étoiles"></p>
-            </td>
-        </tr>
+        <table class="review-block">
+            <tr>
+                <th class="user-name">MARIE</th>
+                <td class="user-ratings">
+                    <p>Produits : <img class="stars" src="images/reviews/star-3.png"></p>
+                    <p>Livraison : <img class="stars" src="images/reviews/star-3.png"></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="review-text">
+                    <p>C'était bon miam miam blabla venez je recommande</p>
+                </td>
+            </tr>
+        </table>
 
-        <tr>
-            <td colspan="2" class="review-description"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></td>
-        </tr>
-    </table>
+        <form class="add-review">
+            <table class="review-block">
+                <tr>
+                    <th class="user-name">LAISSER UN AVIS</th>
+                    <td class="user-ratings">
+                        Note : 
+                        <select class="select-note">
+                            <option>5 ★</option>
+                            <option>4 ★</option>
+                            <option>3 ★</option>
+                            <option>2 ★</option>
+                            <option>1 ★</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="review-text">
+                        <textarea placeholder="Votre message..."></textarea>
+                        <button type="submit" class="btn-send">Envoyer l'avis</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </main>
 
-    <table class="reviews" background="./images/reviews/reviewsbackground.png">
-        <tr>
-            <th>NOM / PRENOM</th>
-            <td>
-                <p>Qualité Produits :  <img class="stars" src="images/reviews/star-3.png" alt="3 étoiles"></p>
-                <p>Qualité Livraison :  <img class="stars" src="images/reviews/star-3.png" alt="3 étoiles"></p>
-            </td>
-        </tr>
-
-        <tr>
-            <td colspan="2" class="review-description"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></td>
-        </tr>
-    </table>
-
-    <table class="reviews" background="./images/reviews/reviewsbackground.png">
-        <tr>
-            <th>NOM / PRENOM</th>
-            <td>
-                <p>Qualité Produits :  <img class="stars" src="images/reviews/star-3.png" alt="3 étoiles"></p>
-                <p>Qualité Livraison :  <img class="stars" src="images/reviews/star-3.png" alt="3 étoiles"></p>
-            </td>
-        </tr>
-
-        <tr>
-            <td colspan="2" class="review-description"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></td>
-        </tr>
-    </table>
-
-    <table class="reviews" background="./images/reviews/reviewsbackground.png">
-        <tr>
-            <th>NOM / PRENOM</th>
-            <td>
-                <p>Qualité Produits :  <img class="stars" src="images/reviews/star-3.png" alt="3 étoiles"></p>
-                <p>Qualité Livraison :  <img class="stars" src="images/reviews/star-3.png" alt="3 étoiles"></p>
-            </td>
-        </tr>
-
-        <tr>
-            <td colspan="2" class="review-description"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></td>
-        </tr>
-    </table>
-    <footer>
-        <a href="avis.html">Remonter en Haut de la page</a>
-
-    </footer>
+    <footer></footer>
 </body>
-
 </html>

@@ -1,0 +1,82 @@
+#reviews-title {
+    text-align: center;
+    color: var(--lego);
+    margin: 40px 0;
+}
+
+.review-block {
+    width: 80%;
+    margin: 30px auto;
+    border: 2px solid var(--gold);
+    background: #181818;
+    border-collapse: collapse;
+    transition: 0.3s;
+}
+
+.review-block:hover {
+    transform: scale(1.01);
+    border-color: var(--lego);
+    box-shadow: 0 0 15px rgba(255, 213, 2, 0.35);
+}
+
+.user-name {
+    padding: 20px;
+    color: var(--lego);
+    text-align: left;
+    border-bottom: 1px solid var(--gold);
+}
+
+.user-ratings {
+    padding: 10px 20px;
+    text-align: right;
+    border-bottom: 1px solid var(--gold);
+}
+
+.user-ratings p {
+    color: var(--offwhite);
+    font-size: 12px;
+    margin: 2px 0;
+}
+
+.review-text {
+    padding: 20px;
+    color: var(--offwhite);
+    font-style: italic;
+}
+
+.stars {
+    height: 12px;
+}
+
+
+.select-note {
+    background: #181818;
+    color: var(--lego);
+    border: 1px solid var(--gold);
+    padding: 5px;
+}
+
+textarea {
+    width: 100%;
+    height: 80px;
+    background: #ffffff0d;
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    color: var(--offwhite);
+    padding: 10px;
+    margin-bottom: 10px;
+    display: block;
+    box-sizing: border-box;
+}
+
+.btn-send {
+    background: var(--gold);
+    color: black;
+    padding: 10px 20px;
+    font-weight: bold;
+    border: none;
+    transition: 0.3s;
+}
+
+.btn-send:hover {
+    background: var(--lego);
+}
