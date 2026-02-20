@@ -1,0 +1,40 @@
+table {
+    width: 90%;
+    margin: 30px auto;
+    background: #181818;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tabs-nav{
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    user-select: none;
+}
+
+.tab-item{
+    background: var(--gold);
+    padding: 25px 18%;
+    border-radius: 6px;
+    margin: auto;
+    color: var(--offwhite);
+}
+
+.tab-item input{
+    display: none;
+}
+
+.tab-item:has(input:checked){
+    background: #181818;
+}
+
+.tabs:has(#waiting-toggle:checked) #waiting-content{
+    display: block;
+}
+
+.tabs:has(#delivery-toggle:checked) #delivery-content{
+    display: block;
+}

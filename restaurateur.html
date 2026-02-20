@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurateur - La Brique Dorée</title>
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="restaurateur.css">
+</head>
+<body>
+    <header>
+        <div id="main-header">
+            <img id="logo" src="./images/LOGO.png" alt="Logo">
+            <h1>RESTAURATEUR</h1>
+            <a href="commands.html">
+                <img id="cart" class="icon" src="./images/cart.svg">
+                <p id="cart_items" class="bubble">10</p>
+            </a>
+            <video class="video-background" autoplay muted loop>
+                <source src="./images/Header_Background.mp4" type="video/mp4">
+            </video>
+        </div>
+        <section id="navbar-header">
+            <a href="index.html" id="navbarbutton">Accueil</a>
+            <a href="presentation.html" id="navbarbutton">Nos produits</a>
+            <a href="avis.html" id="navbarbutton">Avis</a>
+            <a href="profile.html" id="navbarbutton">Mon Profil</a>
+        </section>
+    </header>
+
+    <main>
+        <h2>~ Commandes ~</h2>
+        <div class="tabs">  
+            <nav class="tabs-nav">
+                <label class="tab-item">
+                    <span>En Attente</span>
+                    <input type="radio" id="waiting-toggle" name="tabs-toggle" checked>
+                </label>
+
+                <label class="tab-item">
+                    <span>En Livraison</span>
+                    <input type="radio" id="delivery-toggle" name="tabs-toggle">
+                </label>
+            </nav>
+
+            <div class="tab-content" id="waiting-content">
+                <table>
+                    <tr>
+                        <td>commandes en attente</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="tab-content" id="delivery-content">
+                <table>
+                    <tr>
+                        <td>commandes en livraison</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer></footer>
+</body>
+</html>
