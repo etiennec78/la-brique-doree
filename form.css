@@ -1,10 +1,16 @@
+.input-group input,
+.input-group select,
+.btn {
+    box-sizing: border-box;
+}
+
 .form-page {
     width: 300px;
     margin: 100px auto;
     padding: 20px;
-    border-radius: 5px;
-    background-color: var(--offwhite);
-    color: var(--solid-gold);
+    border-radius: 1rem;
+    background-color: var(--darkgray);
+    color: var(--lego);
 }
 
 .form-page h2 {
@@ -18,16 +24,19 @@
 .input-group input {
     width: 100%;
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 0px;
     border-radius: 3px;
+    color: var(--offwhite);
+    background: var(--input-color);
 }
 
 .input-group select {
     width: 100%;
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 0px;
     border-radius: 3px;
-    background: white;
+    color: var(--offwhite);
+    background: var(--input-color);
 }
 
 .btn {
@@ -47,4 +56,9 @@
 
 p {
     text-align: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
 }
