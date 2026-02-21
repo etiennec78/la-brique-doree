@@ -10,7 +10,7 @@ table {
 }
 
 table h3, table span, table input {
-    margin-left: 50%;
+    margin-left: 40%;
 }
 
 .tab-content {
@@ -47,3 +47,4 @@ table h3, table span, table input {
 .tabs:has(#delivery-toggle:checked) #delivery-content {
     display: block;
 }
+
