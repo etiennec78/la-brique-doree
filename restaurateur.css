@@ -2,20 +2,29 @@ table {
     width: 90%;
     margin: 30px auto;
     background: var(--darkgray);
+    border-style: solid;
+    border-color: var(--gold);
+    border-radius: 15px;
+    padding: 5%;
+
+}
+
+table h3, table span, table input {
+    margin-left: 50%;
 }
 
 .tab-content {
     display: none;
 }
 
-.tabs-nav{
+.tabs-nav {
     display: flex;
     gap: 8px;
     margin-bottom: 16px;
     user-select: none;
 }
 
-.tab-item{
+.tab-item {
     background: var(--gold);
     padding: 25px 18%;
     border-radius: 6px;
@@ -23,18 +32,18 @@ table {
     color: var(--offwhite);
 }
 
-.tab-item input{
+.tab-item input {
     display: none;
 }
 
-.tab-item:has(input:checked){
+.tab-item:has(input:checked) {
     background: var(--darkgray);
 }
 
-.tabs:has(#waiting-toggle:checked) #waiting-content{
+.tabs:has(#waiting-toggle:checked) #waiting-content {
     display: block;
 }
 
-.tabs:has(#delivery-toggle:checked) #delivery-content{
+.tabs:has(#delivery-toggle:checked) #delivery-content {
     display: block;
 }
