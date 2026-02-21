@@ -24,9 +24,9 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      showgrid="true"
-     inkscape:zoom="10.389351"
-     inkscape:cx="110.73839"
-     inkscape:cy="26.46941"
+     inkscape:zoom="2.5973378"
+     inkscape:cx="61.024023"
+     inkscape:cy="10.01025"
      inkscape:window-width="1667"
      inkscape:window-height="1009"
      inkscape:window-x="0"
@@ -57,17 +57,9 @@
      inkscape:groupmode="layer"
      id="layer1">
     <path
-       style="baseline-shift:baseline;display:inline;overflow:visible;opacity:1;vector-effect:none;fill:#ffffff;stroke:none;stroke-width:7.42853;stroke-linecap:square;stroke-dasharray:1.2124, 4.84959;stroke-opacity:1;paint-order:stroke fill markers;enable-background:accumulate;stop-color:#000000;stop-opacity:1"
-       d="M 0,1.4024982 V 0 h 4.4156536 v 1.4024982 z m 7.3594219,0 V 0 h 4.4223141 v 1.4024982 z m 7.3660831,0 V 0 h 4.415654 v 1.4024982 z m 7.359423,0 V 0 h 4.415653 v 1.4024982 z m 7.366084,0 V 0 h 4.415652 v 1.4024982 z"
        id="path5"
-       sodipodi:nodetypes="ccccccccccccccccccccccccc"
-       inkscape:label="Studs" />
-    <path
-       id="path6"
-       style="baseline-shift:baseline;display:inline;overflow:visible;opacity:1;vector-effect:none;fill:#fffcf5;fill-opacity:0.996078;stroke:none;stroke-width:2.64583;stroke-linecap:square;stroke-dasharray:0.43182, 1.72728;stroke-opacity:1;paint-order:stroke fill markers;enable-background:accumulate;stop-color:#000000;stop-opacity:1"
-       d="M -2.9542835,-2.7059906 11.508719,14.66173 v 11.257284 l 8.946183,7.678808 V 14.66173 L 34.917905,-2.7059906 Z"
+       style="baseline-shift:baseline;display:inline;overflow:visible;opacity:1;vector-effect:none;fill:#fffcf5;stroke:none;stroke-width:7.42853;stroke-linecap:square;stroke-dasharray:1.2124, 4.84959;stroke-opacity:1;paint-order:stroke fill markers;enable-background:accumulate;stop-color:#000000;stop-opacity:1;fill-opacity:0.99607843"
        inkscape:label="Filter"
-       sodipodi:nodetypes="ccccccc"
-       transform="matrix(0.89423573,0,0,0.89423573,2.6418258,3.8222917)" />
+       d="M 0 0 L 0 1.4024984 L 12.933577 16.933333 L 12.933577 26.999902 L 20.933089 33.866667 L 20.933089 16.933333 L 33.866667 1.4024984 L 33.866667 0 L 29.450916 0 L 29.450916 1.4024984 L 26.500708 1.4024984 L 26.500708 0 L 22.084957 0 L 22.084957 1.4024984 L 19.140951 1.4024984 L 19.140951 0 L 14.725716 0 L 14.725716 1.4024984 L 11.78171 1.4024984 L 11.78171 0 L 7.3592407 0 L 7.3592407 1.4024984 L 4.4157511 1.4024984 L 4.4157511 0 L 0 0 z " />
   </g>
 </svg>
