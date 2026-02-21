@@ -46,16 +46,63 @@
 
             <div class="tab-content" id="waiting-content">
                 <table>
+                    <th>
+                        <td>Plat</td>
+                        <td>Etat</td>
+                    </th>
+
                     <tr>
-                        <td>commandes en attente</td>
+                        <td>Plat 1</td>
+                        <td>
+                            <input type="radio" name="state-0" value="waiting" checked/> En préparation
+                            <input type="radio" name="state-0" value="delivery"/> En livraison
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Plat 2</td>
+                        <td>
+                            <input type="radio" name="state-1" value="waiting" checked/> En préparation
+                            <input type="radio" name="state-1" value="delivery"/> En livraison
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Plat 3</td>
+                        <td>
+                            <input type="radio" name="state-2" value="waiting" checked/> En préparation
+                            <input type="radio" name="state-2" value="delivery"/> En livraison
+                        </td>
                     </tr>
                 </table>
             </div>
 
             <div class="tab-content" id="delivery-content">
                 <table>
+                    <th>
+                        <td>Plat</td>
+                        <td>Etat</td>
+                    </th>
+
                     <tr>
-                        <td>commandes en livraison</td>
+                        <td>Plat 1</td>
+                        <td>
+                            <input type="checkbox" name="state-bis-1" value="delivered"/> Livré
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Plat 2</td>
+                        <td>
+                            <input type="checkbox" name="state-bis-2" value="delivered"/> Livré
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Plat 3</td>
+                        <td>
+                            <input type="checkbox" name="state-bis-3" value="delivered"/> Livré
+                        </td>
                     </tr>
                 </table>
             </div>
