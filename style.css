@@ -265,19 +265,3 @@ main {
 main img {
     width: 100%;
 }
-
-textarea[name=text-review] {
-    resize: none;
-}
-
-input[name="food"] {
-  -webkit-appearance: none;
-  appearance: none;
-  margin: 0;
-}
-
-input[name="delivery"] {
-  -webkit-appearance: none;
-  appearance: none;
-  margin: 0;
-}
