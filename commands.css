@@ -19,7 +19,9 @@
   transform: translateY(0);
 }
 
-.remove-from-cart, .add-to-cart {
+.remove-from-cart,
+.add-to-cart,
+.amount {
   width: 100%;
   height: 100%;
   border: none;
@@ -30,6 +32,7 @@
   font-weight: 700;
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 
 .remove-from-cart {
@@ -40,6 +43,14 @@
   border-radius: 0px 16px 16px 0px;
 }
 
-.add-to-cart:hover, .remove-from-cart:hover {
+.amount {
+  border-radius: 0px;
+  border: 0px;
+  appearance: textfield;
+  box-sizing: border-box;
+}
+
+.add-to-cart:hover,
+.remove-from-cart:hover {
   background: #b32c29;
 }
