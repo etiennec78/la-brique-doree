@@ -253,17 +253,3 @@ h1 {
     transform: translateX(0);
   }
 }
-
-article {
-    padding: 1rem;
-    margin-bottom: 1rem;
-}
-
-main {
-    margin-inline: auto;
-    padding-block-start: 2rem;
-}
-
-main img {
-    width: 100%;
-}

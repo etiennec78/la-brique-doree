@@ -1,6 +1,6 @@
 .section-title {
     margin-top: 50px;
-    top-padding: 50px;
+    padding-top: 50px;
 }
 
 .map-box {
@@ -70,8 +70,3 @@
     border-radius: 5px;
 }
 
-#map {
-width: 80%;
-height: 500px;
-margin: auto; /*centrer*/
-}
