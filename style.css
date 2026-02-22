@@ -35,26 +35,26 @@ h2 {
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding-inline: 30px;
+  padding-inline: clamp(10px, 3vw, 30px);
   gap: 12px;
   box-sizing: border-box;
 }
 
 #main-header h1 {
   text-align: left;
-  margin-right: 90px;
+  margin-right: clamp(20px, 9vw, 90px);
 }
 
 #main-header .icon {
   position: absolute;
-  right: 50px;
+  right: clamp(15px, 5vw, 50px);
   top: 47%;
   transform: translateY(-50%);
   z-index: 1;
 }
 
 .icon {
-  width: 70px;
+  width: clamp(35px, 7vw, 70px);
   transition: transform 0.2s;
 }
 
@@ -66,7 +66,7 @@ h2 {
   color: #ffffff;
   background: #e53935;
   position: absolute;
-  right: 40px;
+  right: clamp(5px, 4vw, 40px);
   top: 30%;
   transform: translateY(-50%);
   z-index: 2;
@@ -77,7 +77,7 @@ h2 {
   align-items: center;
   justify-content: center;
   padding: 0 6px;
-  font-size: 12px;
+  font-size: clamp(10px, 2vw, 12px);
   font-weight: bold;
 }
 
@@ -86,7 +86,7 @@ h2 {
 }
 
 #navbar-header {
-  padding: 8px 150px;
+  padding: 8px clamp(10px, 10vw, 150px);
   background: var(--gold);
   display: flex;
   flex-direction: row;
@@ -95,7 +95,7 @@ h2 {
 }
 
 #logo {
-  height: 78px;
+  height: clamp(40px, 8vw, 78px);
   width: auto;
   z-index: 1;
   filter: drop-shadow(1px 0px 5px rgba(0, 0, 0, 0.5));
@@ -156,7 +156,8 @@ footer a {
 }
 
 h1 {
-  font-size: 50px;
+  font-size: clamp(1rem, 5vw, 50px);
+  white-space: nowrap;
   padding-top: 15px;
   filter: drop-shadow(1px 0px 5px rgba(0, 0, 0, 0.2));
   position: relative;
