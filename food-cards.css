@@ -1,0 +1,167 @@
+:root {
+  --card-height: 200px;
+  --card-title-height: 38px;
+}
+
+article {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  padding: 0px;
+  height: var(--card-height);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+}
+
+article::before {
+  content: attr(price);
+  position: absolute;
+  right: 0;
+  height: var(--card-title-height);
+  display: flex;
+  align-items: center;
+  padding-right: 15px;
+  text-shadow: 0px 0px 5px black;
+  z-index: 1;
+}
+
+.bento {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 1fr;
+}
+
+.bento > * {
+  margin: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+article h3 {
+  text-align: center;
+  font-size: 28px;
+  height: var(--card-title-height);
+  margin: 0;
+  text-shadow: 0px 0px 5px black;
+  filter: saturate(50%);
+  backdrop-filter: blur(5px);
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  padding-inline: 4.5rem;
+}
+
+.description::after {
+  content: attr(description);
+  position: absolute;
+  bottom: 0;
+  height: 0;
+  filter: saturate(50%);
+  backdrop-filter: blur(5px);
+  text-shadow: 0px 0px 5px black;
+  font-size: 1.2rem;
+  text-align: center;
+  align-items: center;
+  transition: height .25s ease, padding .25s ease, opacity .25s ease;
+  display: flex;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.description:hover::after {
+  height: calc(100% - var(--card-title-height));
+  opacity: 1;
+}
+
+.description:hover .add-to-cart {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+article#crab {
+  background-image: url('./images/food/dish/crab.jpg');
+}
+
+article#bento {
+  background-image: url('./images/food/dish/bento.jpg');
+}
+
+article#burger {
+  background-image: url('./images/food/dish/burger.png');
+}
+
+article#veggy-burger {
+  background-image: url('./images/food/dish/veggy_burger.jpg');
+}
+
+article#kid-burger {
+  background-image: url('./images/food/dish/kid_burger.jpg');
+}
+
+article#noodles {
+  background-image: url('./images/food/dish/noodles.jpg');
+}
+
+article#sashimi {
+  background-image: url('./images/food/dish/sashimi.webp');
+}
+
+article#shrimp {
+  background-image: url('./images/food/dish/shrimp.jpg');
+}
+
+article#steak {
+  background-image: url('./images/food/dish/steak.jpg');
+}
+
+article#sushi {
+  background-image: url('./images/food/dish/sushi.jpg');
+}
+
+article#egg {
+  background-image: url('./images/food/dish/egg.jpg');
+}
+
+article#bacon {
+  background-image: url('./images/food/dish/bacon.jpg');
+}
+
+article#coke {
+  background-image: url('./images/food/drink/coke.jpg');
+}
+
+article#orange-juice {
+  background-image: url('./images/food/drink/orange_juice.jpg');
+}
+
+article#champaign {
+  background-image: url('./images/food/drink/champaign.png');
+}
+
+article#cake {
+  background-image: url('./images/food/dessert/cake.jpg');
+}
+
+article#raspberry-pie {
+  background-image: url('./images/food/dessert/raspberry_pie.jpg');
+}
+
+article#cupcake {
+  background-image: url('./images/food/dessert/cupcake.jpg');
+}
+
+article#cupcakes-ice-cream {
+  background-image: url('./images/food/dessert/cupcakes_ice_cream.jpg');
+}
+
+article#ice-cream {
+  background-image: url('./images/food/dessert/ice_cream.jpg');
+}
+
+article#cheese {
+  background-image: url('./images/food/dessert/cheese.jpg');
+}
+
+article#banana {
+  background-image: url('./images/food/dessert/banana.jpg');
+}
