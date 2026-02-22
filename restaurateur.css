@@ -41,6 +41,7 @@ table span {
     margin: auto;
     color: var(--offwhite);
     cursor: pointer;
+    font-size: 20px;
 }
 
 .selection {
