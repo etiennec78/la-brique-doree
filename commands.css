@@ -52,5 +52,5 @@
 
 .add-to-cart:hover,
 .remove-from-cart:hover {
-  background: #b32c29;
+  background: var(--darkred);
 }

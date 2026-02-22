@@ -1,8 +1,6 @@
 .section-title {
-    text-align: center;
-    color: var(--lego);
-    margin: 20px 0;
-    font-size: 35px;
+    margin-top: 50px;
+    top-padding: 50px;
 }
 
 .map-box {
@@ -20,17 +18,19 @@
 .delivery-card {
     width: 95%;
     margin: 20px auto;
-    background: #111;
+    background: var(--darkgray);
     box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    border-radius: 0.5rem;
 }
 
 .card-header {
-    background: #222;
+    background: var(--input-color);
     padding: 15px;
+    border-radius: 0.5rem 0.5rem 0 0;
 }
 
 .order-id {
-    color: var(--lego);
+    color: var(--solid-gold);
     font-weight: bold;
     font-size: 40px;
 }
@@ -52,7 +52,7 @@
 }
 
 .access {
-    color: var(--lego);
+    color: var(--solid-gold);
     margin: 10px;
     font-size: 15px
 }
@@ -60,13 +60,14 @@
 .action-btn {
     width: 100%;
     height: 100px;
-    background: #28a745;
+    background: var(--solid-gold);
     color: var(--offwhite);
     font-size: 30px;
     font-weight: bold;
     border: none;
-    border-top: 2px solid var(--gold);
     cursor: pointer;
+    margin: 10px;
+    border-radius: 5px;
 }
 
 #map {

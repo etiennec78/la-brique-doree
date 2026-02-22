@@ -4,8 +4,8 @@
 }
 
 .panel {
-    background: rgba(0, 0, 0, 0.7); 
-    border: 1px solid var(--gold); 
+    background: var(--darkgray);
+    border: 0px;
     border-radius: 15px;
     padding: 25px;
 }
@@ -15,7 +15,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    border-bottom: 2px solid var(--gold);
+    border: 0px;
     padding-bottom: 10px;
 }
 
@@ -32,10 +32,10 @@
 }
 
 .admin-table th {
-    color: var(--lego);
+    color: var(--solid-gold);
     text-align: left;
     padding: 12px;
-    border-bottom: 1px solid var(--gold);
+    border-bottom: 1px solid var(--solid-gold);
 }
 
 .admin-table td {
@@ -48,15 +48,15 @@
     padding: 3px 8px;
     border-radius: 4px;
     font-size: 0.8rem;
-    background: #555;
+    background: var(--darkgray);
 }
 
 .tag.gold {
-    background: var(--gold);
+    background: var(--solid-gold);
 }
 
 .action-link {
-    color: var(--lego);
+    color: var(--solid-gold);
     text-decoration: none;
     font-weight: bold;
 }

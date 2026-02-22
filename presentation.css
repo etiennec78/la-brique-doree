@@ -44,7 +44,7 @@
 }
 
 .filters-list::-webkit-scrollbar-thumb {
-  background: var(--lego);
+  background: var(--solid-gold);
   border-radius: 10px;
 }
 
@@ -74,7 +74,7 @@
 #nut:checked ~ .filters-panel .filters-menu label[for="nut"],
 #sulfite:checked ~ .filters-panel .filters-menu label[for="sulfite"] {
   color: black;
-  background: var(--lego);
+  background: var(--solid-gold);
 }
 
 #crustacean.filter:not(:checked) ~ .menu-content .food-section .crustacean,

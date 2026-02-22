@@ -2,8 +2,7 @@ table {
     width: 90%;
     margin: 30px auto;
     background: var(--darkgray);
-    border-style: solid;
-    border-color: var(--gold);
+    border: 0px;
     border-radius: 15px;
     padding-bottom: 5%;
     padding-left: 15%;
@@ -35,9 +34,9 @@ table span {
 }
 
 .tab-item {
-    background: var(--gold);
+    background: var(--solid-gold);
     padding: 25px 18%;
-    border-radius: 6px;
+    border-radius: 1rem;
     margin: auto;
     color: var(--offwhite);
     cursor: pointer;
@@ -54,7 +53,7 @@ table span {
 }
 
 .selection:has(input:checked) {
-    background: var(--gold);
+    background: var(--solid-gold);
 }
 
 .tab-item input {
@@ -62,7 +61,7 @@ table span {
 }
 
 .tab-item:has(input:checked) {
-    background: var(--darkgray);
+    background: var(--solid-dark-gold);
 }
 
 .tabs:has(#waiting-toggle:checked) #waiting-content {
@@ -73,4 +72,6 @@ table span {
     display: block;
 }
 
-
+input {
+    visibility:hidden;
+}

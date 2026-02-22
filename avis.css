@@ -1,6 +1,4 @@
 #reviews-title {
-    text-align: center;
-    color: var(--lego);
     margin: 40px 0;
 }
 
@@ -16,13 +14,13 @@
 
 .review-block:hover {
     transform: scale(1.01);
-    border-color: var(--lego);
+    border-color: var(--solid-gold);
     box-shadow: 0 0 15px rgba(255, 213, 2, 0.35);
 }
 
 .user-name {
     padding: 20px;
-    color: var(--lego);
+    color: var(--solid-gold);
     text-align: left;
     border-bottom: 1px solid var(--gold);
 }
@@ -51,14 +49,14 @@
 
 .select-note {
     background: var(--darkgray);
-    color: var(--lego);
+    color: var(--solid-gold);
     border: 1px solid var(--gold);
     padding: 5px;
 }
 
 .select-note option {
     background: var(--darkgray);
-    color: var(--lego);
+    color: var(--solid-gold);
 }
 
 td.user-ratings p {
@@ -67,7 +65,7 @@ td.user-ratings p {
 }
 
 td.user-ratings p.stars {
-    color: var(--lego);
+    color: var(--solid-gold);
     display: inline;
 }
 
