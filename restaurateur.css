@@ -30,6 +30,7 @@ table h3, table span, table input {
     border-radius: 6px;
     margin: auto;
     color: var(--offwhite);
+    cursor: pointer;
 }
 
 .tab-item input {
