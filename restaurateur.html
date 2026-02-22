@@ -48,30 +48,48 @@
                 <table>
                     <tr>
                         <td><h3>PLAT</h3></td>
-                        <td><h3>ETAT</h3></td>
+                        <td><h3 id="state">ETAT</h3></td>
                     </tr>
 
                     <tr>
                         <td><span>Plat 1</span></td>
                         <td>
-                            <input type="radio" name="state-1" value="waiting" checked/> En préparation
-                            <input type="radio" name="state-1" value="delivery"/> En livraison
+                            <label class="selection">
+                                <span>Préparation</span>
+                                <input type="radio" name="state-1" value="waiting" checked/> 
+                            </label>                            
+                            <label class="selection">
+                                <span>Livraison</span>
+                                <input type="radio" name="state-1" value="delivery"/>                                
+                            </label>
                         </td>
                     </tr>
 
                     <tr>
                         <td><span>Plat 2</span></td>
                         <td>
-                            <input type="radio" name="state-2" value="waiting" checked/> En préparation
-                            <input type="radio" name="state-2" value="delivery"/> En livraison
+                            <label class="selection">
+                                <span>Préparation</span>
+                                <input type="radio" name="state-2" value="waiting" checked/>                               
+                            </label>
+                            <label class="selection">
+                                <span>Livraison</span>
+                                <input type="radio" name="state-2" value="delivery"/>                               
+                            </label>
                         </td>
                     </tr>
 
                     <tr>
                         <td><span>Plat 3</span></td>
                         <td>
-                            <input type="radio" name="state-3" value="waiting" checked/> En préparation
-                            <input type="radio" name="state-3" value="delivery"/> En livraison
+                            <label class="selection">
+                                <span>Préparation</span>
+                                <input type="radio" name="state-3" value="waiting" checked/>                                
+                            </label>
+                            <label class="selection">
+                                <span>Livraison</span>
+                                <input type="radio" name="state-3" value="delivery"/>                                 
+                            </label>
                         </td>
                     </tr>
                 </table>
@@ -81,27 +99,36 @@
                 <table>
                     <tr>
                         <td><h3>PLAT</h3></td>
-                        <td><h3>ETAT</h3></td>
+                        <td><h3 id="state">ETAT</h3></td>
                     </tr>
 
                     <tr>
                         <td><span>Plat 1</span></td>
                         <td>
-                            <input type="checkbox" name="state-1" value="delivered"/> Livré
+                            <label class="selection">
+                                <span>Livré</span>
+                                <input type="checkbox" name="state-1" value="delivered"/> 
+                            </label>
                         </td>
                     </tr>
 
                     <tr>
                         <td><span>Plat 2</span></td>
                         <td>
-                            <input type="checkbox" name="state-2" value="delivered"/> Livré
+                            <label class="selection">
+                                <span>Livré</span>
+                                <input type="checkbox" name="state-2" value="delivered"/> 
+                            </label>
                         </td>
                     </tr>
 
                     <tr>
                         <td><span>Plat 3</span></td>
                         <td>
-                            <input type="checkbox" name="state-3" value="delivered"/> Livré
+                            <label class="selection">
+                                <span>Livré</span>
+                                <input type="checkbox" name="state-3" value="delivered"/> 
+                            </label>
                         </td>
                     </tr>
                 </table>
