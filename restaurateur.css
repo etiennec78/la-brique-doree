@@ -5,12 +5,22 @@ table {
     border-style: solid;
     border-color: var(--gold);
     border-radius: 15px;
-    padding: 5%;
-
+    padding-bottom: 5%;
+    padding-left: 20%;
+    padding-right: auto;
+    border-spacing: 20px;
 }
 
-table h3, table span, table input {
-    margin-left: 40%;
+table h3 {
+    font-size: 32px;
+}
+
+h3#state {
+    margin-left: 7%;
+}
+
+table span {
+    font-size: 20px;
 }
 
 .tab-content {
@@ -31,6 +41,19 @@ table h3, table span, table input {
     margin: auto;
     color: var(--offwhite);
     cursor: pointer;
+}
+
+.selection {
+    background: var(--darkgray);
+    padding: 4px 7%;
+    border-radius: 15px;
+    margin: auto;
+    color: var(--offwhite);
+    cursor: pointer;
+}
+
+.selection:has(input:checked) {
+    background: var(--gold);
 }
 
 .tab-item input {
