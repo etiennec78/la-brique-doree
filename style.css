@@ -64,6 +64,7 @@ h2 {
 }
 
 #main-header .bubble {
+  color: var(--offwhite);
   background: var(--red);
   position: absolute;
   right: clamp(5px, 4vw, 40px);
@@ -217,12 +218,12 @@ h1 {
   text-align: center;
   font-weight: bold;
   font-size: clamp(14px, 3vw, 26px);
-  color: #ffffff;
+  color: var(--offwhite);
   margin: 0;
 }
 
 .rectangle p{
-  color: #ffffff;
+  color: var(--offwhite);
   font-size: clamp(10px, 2vw, 22px);
   text-align: center;
   margin: clamp(5px, 1vw, 10px) 0 0 0;

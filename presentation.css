@@ -98,6 +98,7 @@
   padding: 0;
   border-radius: 50%;
   border: none;
+  color: var(--offwhite);
   background: var(--red);
   align-items: center;
   justify-content: center;
