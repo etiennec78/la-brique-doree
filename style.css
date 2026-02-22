@@ -71,13 +71,13 @@ h2 {
   transform: translateY(-50%);
   z-index: 2;
   border-radius: 999px;
-  min-width: 20px;
-  height: 20px;
+  min-width: clamp(12px, 3vw, 20px);
+  height: clamp(12px, 3vw, 20px);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 6px;
-  font-size: clamp(10px, 2vw, 12px);
+  padding: 0 clamp(2px, 1vw, 6px);
+  font-size: clamp(8px, 1.5vw, 12px);
   font-weight: bold;
 }
 
