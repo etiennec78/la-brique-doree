@@ -130,23 +130,25 @@ h2 {
 footer {
   background: var(--darkgray);
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  padding-bottom: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: 20px;
+  padding: 20px clamp(10px, 5vw, 50px);
   box-sizing: border-box;
   text-align: center;
 }
 
 footer h4 {
-  font-size: 22px;
+  font-size: clamp(18px, 4vw, 22px);
 }
 
 footer p {
   text-align: center;
+  font-size: clamp(14px, 3vw, 16px);
 }
 
 footer #map iframe {
-  width: 70%;
-  height: 60%;
+  width: clamp(200px, 90%, 400px);
+  height: clamp(150px, 40vw, 250px);
   border: 0;
 }
 
