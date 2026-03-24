@@ -128,10 +128,10 @@ CREATE TABLE cart (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
     delivery_address TEXT,
-    int payment_status_id,
-    FOREIGN KEY(payment_status_id) REFERENCES payment_status(id),
+    payment_status_id INTEGER,
     created_at DATETIME NOT NULL,
     coupon_id INTEGER,
+    FOREIGN KEY(payment_status_id) REFERENCES payment_status(id),
     FOREIGN KEY(user_id) REFERENCES users(id),
     FOREIGN KEY(coupon_id) REFERENCES coupon(id)
 );
