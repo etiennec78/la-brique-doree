@@ -40,7 +40,7 @@ CREATE TABLE food (
     FOREIGN KEY(nutriscore_id) REFERENCES nutriscore(id)
 );
 
--- Table de liaison pour les allergènes (remplace l'ancienne plat_allergen)
+-- Table de liaison pour les allergènes
 CREATE TABLE food_allergen (
     food_id INTEGER,
     allergen_id INTEGER,
@@ -55,7 +55,7 @@ CREATE TABLE food_allergen (
 CREATE TABLE menu (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name varchar(30) NOT NULL,
-    price float NOT NULL, -- Virgule manquante corrigée ici
+    price float NOT NULL,
     min_people INTEGER,
     time_slot_id INTEGER,
     FOREIGN KEY(time_slot_id) REFERENCES time_slot(id)
@@ -96,16 +96,16 @@ CREATE TABLE users (
     street TEXT,
     town TEXT,
     zip_code INTEGER,
-    FOREIGN KEY(role_id) REFERENCES role(id) -- Déplacé à la fin pour la syntaxe
+    FOREIGN KEY(role_id) REFERENCES role(id)
 );
 
 
------ COUPONS (NOUVEAU) -----
+----- COUPONS -----
 
 CREATE TABLE coupon (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     code varchar(20) UNIQUE NOT NULL,
-    discount_percent float, -- Ex: 10.0 pour 10%
+    discount_percent float,
     is_active BOOLEAN DEFAULT 1,
     expiration_date DATETIME
 );
@@ -123,7 +123,7 @@ INSERT INTO payment_status (name) VALUES
 ('pending'), ('paid'), ('failed');
 
 
--- Le panier principal
+-- Le panier
 CREATE TABLE cart (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
@@ -136,7 +136,7 @@ CREATE TABLE cart (
     FOREIGN KEY(coupon_id) REFERENCES coupon(id)
 );
 
--- Table de liaison pour stocker la "liste des menus" dans le panier
+-- Table de liaison entre les menus et le panier
 CREATE TABLE cart_menu (
     cart_id INTEGER,
     menu_id INTEGER,
@@ -147,7 +147,7 @@ CREATE TABLE cart_menu (
 );
 
 
------ PAIEMENT (NOUVEAU) -----
+----- PAIEMENT -----
 
 CREATE TABLE payment (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
