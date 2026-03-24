@@ -1,4 +1,26 @@
-<?php session_start(); ?>
+<?php 
+session_start(); 
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $file = 'users.json';
+    $users = json_decode(file_get_contents($file), true);
+    
+    $newUser = [
+        "email" => $_POST['email'],
+        "password" => $_POST['password'],
+        "role" => "client", 
+        "nom" => "???",
+        "prenom" => "???"
+    ];
+
+    $users[] = $newUser;
+    file_put_contents($file, json_encode($users, JSON_PRETTY_PRINT));
+    
+    $_SESSION['user'] = $newUser;
+    header("Location: index.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -27,17 +49,15 @@
             <?php if (isset($_SESSION['user'])): ?>
                 <a href="profile.php" id="navbarbutton">Mon Profil (<?php echo $_SESSION['user']['prenom']; ?>)</a>
 
-            <?php if ($_SESSION['user']['role'] === 'admin'): ?>
-                <a href="admin.php" id="navbarbutton">Panel Admin</a>
-                
-            <?php elseif ($_SESSION['user']['role'] === 'restaurateur'): ?>
-                <a href="restaurateur.php" id="navbarbutton">Gestion Commandes</a>
-                
-            <?php elseif ($_SESSION['user']['role'] === 'livreur'): ?>
-                <a href="delivery.php" id="navbarbutton">Mes Livraisons</a>
-            <?php endif; ?>
+                <?php if ($_SESSION['user']['role'] === 'admin'): ?>
+                    <a href="admin.php" id="navbarbutton">Panel Admin</a>
+                <?php elseif ($_SESSION['user']['role'] === 'restaurateur'): ?>
+                    <a href="restaurateur.php" id="navbarbutton">Gestion Commandes</a>
+                <?php elseif ($_SESSION['user']['role'] === 'livreur'): ?>
+                    <a href="delivery.php" id="navbarbutton">Mes Livraisons</a>
+                <?php endif; ?>
 
-            <a href="logout.php" id="navbarbutton" style="color: #ff4d4d;">Déconnexion</a>
+                <a href="logout.php" id="navbarbutton" style="color: #ff4d4d;">Déconnexion</a>
 
             <?php else: ?>
                 <a href="login.php" id="navbarbutton">Connexion</a>
@@ -48,7 +68,7 @@
     <main>
         <div class="form-page">
             <h2>Inscription</h2>
-            <form action="/register" method="post">
+            <form action="register.php" method="post">
                 <div class="input-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" required>
@@ -59,7 +79,7 @@
                 </div>
                 <button type="submit" class="btn">S'inscrire</button>
             </form>
-            <p>Déjà un compte ? <a href="login.html">Connexion</a></p>
+            <p>Déjà un compte ? <a href="login.php">Connexion</a></p>
         </div>
     </main>
   </body>
