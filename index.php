@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -22,12 +23,32 @@
                 <source src="./images/header_background.mp4" type="video/mp4">
             </video>
         </div>
+       
         <section id="navbar-header">
-            <a href="index.html" style="border-bottom: 2px solid;" id="navbarbutton">Accueil</a>
-            <a href="presentation.html" id="navbarbutton">Nos produits</a>
-            <a href="avis.html" id="navbarbutton">Avis</a>
-            <a href="profile.html" id="navbarbutton">Mon Profil</a>
+            <a href="index.php" id="navbarbutton">Accueil</a>
+            <a href="presentation.php" id="navbarbutton">Nos produits</a>
+            <a href="avis.php" id="navbarbutton">Avis</a>
+
+            <?php if (isset($_SESSION['user'])): ?>
+                <a href="profile.php" id="navbarbutton">Mon Profil (<?php echo $_SESSION['user']['prenom']; ?>)</a>
+
+            <?php if ($_SESSION['user']['role'] === 'admin'): ?>
+                <a href="admin.php" id="navbarbutton">Panel Admin</a>
+                
+            <?php elseif ($_SESSION['user']['role'] === 'restaurateur'): ?>
+                <a href="restaurateur.php" id="navbarbutton">Gestion Commandes</a>
+                
+            <?php elseif ($_SESSION['user']['role'] === 'livreur'): ?>
+                <a href="delivery.php" id="navbarbutton">Mes Livraisons</a>
+            <?php endif; ?>
+
+            <a href="logout.php" id="navbarbutton" style="color: #ff4d4d;">Déconnexion</a>
+
+            <?php else: ?>
+                <a href="login.php" id="navbarbutton">Connexion</a>
+            <?php endif; ?>
         </section>
+
     </header>
 
     <div id="slideshow-frame">
