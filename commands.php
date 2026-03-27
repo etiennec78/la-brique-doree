@@ -30,7 +30,7 @@
           <a href="avis.php" id="navbarbutton">Avis</a>
 
           <?php if (isset($_SESSION['user'])): ?>
-              <a href="profile.php" id="navbarbutton">Mon Profil (<?php echo $_SESSION['user']['prenom']; ?>)</a>
+              <a href="profile.php" id="navbarbutton">Mon Profil</a>
 
           <?php if ($_SESSION['user']['role'] === 'admin'): ?>
               <a href="admin.php" id="navbarbutton">Panel Admin</a>
