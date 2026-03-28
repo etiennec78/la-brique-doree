@@ -118,7 +118,7 @@ h2 {
   bottom: -2px;
   width: 100%;                
   height: 1px;
-  background-color: var(--navbartext);
+  background: var(--navbartext);
 
   transform: scaleX(0);        
   transform-origin: center;    
@@ -259,7 +259,7 @@ button {
   padding: 10px;
   border: 0px;
   border-radius: 5px;
-  background-color: var(--solid-gold);
+  background: var(--solid-gold);
   color: var(--offwhite);
   cursor: pointer;
   margin-top: 20px;
@@ -267,5 +267,5 @@ button {
 }
 
 button:hover {
-  background-color: var(--solid-dark-gold);
+  background: var(--solid-dark-gold);
 }

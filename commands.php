@@ -87,7 +87,13 @@
           </div>
         </div>
         <div id="cart-bar">
-          Total: 50€
+          <h2>Votre panier</h2>
+          <p>
+            • Crabe (21,70€)<br/>
+            • Bento (11,50€)
+          <p>
+          <p>Total: 33,20€</p>
+          <button id="checkout" type="button">Payer</button>
         </div>
       </section>
     </main>
