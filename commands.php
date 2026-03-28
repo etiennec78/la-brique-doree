@@ -51,21 +51,16 @@
 
     </header>
       <section class="cart-content">
-        <?php
-        include_once 'db_connect.php';
+        <div class="food-section" name="Éléments du panier">
+        <h2>~ Éléments du panier ~</h2>
+        <section class="bento">
+          <?php
+          include_once 'db_connect.php';
 
-        try {
-          $stmt = $pdo->prepare("SELECT id, name FROM food_type");
-          $stmt->execute();
-          $food_types = $stmt->fetchAll();
+          try {
 
-          foreach($food_types as $food_type) {
-            echo '<div class="food-section" name="'. $food_type['name'] .'">
-            <h2>~ '. $food_type['name'] .' ~</h2>
-            <section class="bento">';
-
-            $stmt = $pdo->prepare("SELECT name, price, description, image_path FROM food f WHERE f.food_type = ?");
-            $stmt->execute([$food_type['id']]);
+            $stmt = $pdo->prepare("SELECT name, price, description, image_path FROM food f");
+            $stmt->execute();
             $food_items = $stmt->fetchAll();
             foreach($food_items as $food) {
               $name = $food['name'];
@@ -82,15 +77,13 @@
               </div>
               </article>';
             }
-
-            echo "</section>
-            </div>";
+          } catch (\PDOException $e) {
+            $erreur = "Erreur de base de données : " . $e->getMessage();
           }
+          ?>
 
-        } catch (\PDOException $e) {
-          $erreur = "Erreur de base de données : " . $e->getMessage();
-        }
-        ?>
+          </section>
+        </div>
       </section>
     </main>
 
