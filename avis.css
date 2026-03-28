@@ -81,19 +81,3 @@ textarea {
     box-sizing: border-box;
     border-radius: 0.5rem;
 }
-
-.btn-send {
-    color: var(--offwhite);
-    background: var(--solid-gold);
-    padding: 10px 20px;
-    font-weight: bold;
-    border: none;
-    transition: 0.3s;
-    border-radius: 0.5rem;
-    margin-top: 15px;
-}
-
-.btn-send:hover {
-    background: var(--solid-dark-gold);
-    cursor: pointer;
-}

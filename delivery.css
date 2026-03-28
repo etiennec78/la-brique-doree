@@ -58,14 +58,8 @@
 }
 
 .action-btn {
-    width: 100%;
+    width: calc(100% - 20px);
     height: 100px;
-    background: var(--solid-gold);
-    color: var(--offwhite);
     font-size: 30px;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
     margin: 10px;
-    border-radius: 5px;
 }

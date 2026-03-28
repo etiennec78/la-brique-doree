@@ -41,18 +41,6 @@
 
 .btn {
     width: 100%;
-    padding: 10px;
-    border: 0px;
-    border-radius: 5px;
-    background-color: var(--solid-gold);
-    color: var(--offwhite);
-    cursor: pointer;
-    margin-top: 20px;
-    transition: 0.3s;
-}
-
-.btn:hover {
-    background-color: var(--solid-dark-gold);
 }
 
 p {
