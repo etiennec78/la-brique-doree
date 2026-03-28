@@ -141,7 +141,6 @@ CREATE TABLE coupon (
     id INT PRIMARY KEY AUTO_INCREMENT,
     code VARCHAR(20) UNIQUE NOT NULL,
     discount_percent FLOAT,
-    is_active TINYINT(1) DEFAULT 1,
     expiration_date DATETIME
 );
 
