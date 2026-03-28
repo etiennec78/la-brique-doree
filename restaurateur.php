@@ -14,7 +14,7 @@
         <div id="main-header">
             <img id="logo" src="./images/LOGO.png" alt="Logo">
             <h1>RESTAURATEUR</h1>
-            <a href="commands.html">
+            <a href="commands.php">
                 <img id="cart" class="icon" src="./images/cart.svg">
                 <p id="cart_items" class="bubble">10</p>
             </a>

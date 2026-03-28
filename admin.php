@@ -78,7 +78,7 @@
                         <td>etienne@yumland.fr</td>
                         <td>12</td>
                         <td><span class="tag gold">Admin</span></td>
-                        <td><a href="profile.html" class="action-link">Gérer</a></td>
+                        <td><a href="profile.php" class="action-link">Gérer</a></td>
                     </tr>
                     <tr>
                         <td>#042</td>
@@ -86,7 +86,7 @@
                         <td>martin@yumland.fr</td>
                         <td>5</td>
                         <td><span class="tag">Client</span></td>
-                        <td><a href="profile.html" class="action-link">Gérer</a></td>
+                        <td><a href="profile.php" class="action-link">Gérer</a></td>
                     </tr>
                     <tr>
                         <td>#089</td>
@@ -94,7 +94,7 @@
                         <td>axel@yumland.fr</td>
                         <td><small>Aucune</small></td>
                         <td><span class="tag delivery">Livreur</span></td>
-                        <td><a href="profile.html" class="action-link">Gérer</a></td>
+                        <td><a href="profile.php" class="action-link">Gérer</a></td>
                     </tr>
                 </tbody>
             </table>

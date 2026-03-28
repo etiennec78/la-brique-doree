@@ -15,7 +15,7 @@
         <div id="main-header">
             <img id="logo" src="./images/LOGO.png" alt="Logo d'une brique LEGO dorée">
             <h1>LA BRIQUE DOREE</h1>
-            <a href="commands.html">
+            <a href="commands.php">
                 <img id="cart" class="icon" src="./images/cart.svg" alt="Icône de panier de courses">
                 <p id="cart_items" class="bubble">10</p>
             </a>
