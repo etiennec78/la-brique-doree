@@ -52,36 +52,39 @@
 
     <main>
         <h2 id="reviews-title">~ Avis Clients ~</h2>
+        <?php
+        include_once 'db_connect.php';
 
-        <table class="review-block">
-            <tr>
-                <th class="user-name">JEAN DUPONT</th>
-                <td class="user-ratings">
-                    <p>Produits : </p><p class="stars">★★★</p>
-                    <p>Livraison : </p><p class="stars">★★★</p>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" class="review-text">
-                    <p>Excellent restaurant blablabla</p>
-                </td>
-            </tr>
-        </table>
+        try {
+          $stmt = $pdo->prepare("SELECT u.first_name, u.last_name, r.product_stars, r.delivery_stars, r.comment FROM reviews r JOIN users u ON r.user_id = u.id");
+          $stmt->execute();
+          $reviews = $stmt->fetchAll();
+          foreach($reviews as $review) {
+            $first_name = $review['first_name'];
+            $last_name = $review['last_name'];
+            $product = $review['product_stars'];
+            $delivery = $review['delivery_stars'];
+            $comment = $review['comment'];
 
-        <table class="review-block">
+            echo '<table class="review-block">
             <tr>
-                <th class="user-name">MARIE</th>
-                <td class="user-ratings">
-                    <p>Produits : </p><p class="stars">★★★</p>
-                    <p>Livraison : </p><p class="stars">★★★</p>
-                </td>
+              <th class="user-name">'. "$first_name $last_name" .'</th>
+              <td class="user-ratings">
+                <p>Produits : </p><p class="stars">'. str_repeat('★', $product) .'</p>
+                <p>Livraison : </p><p class="stars">'. str_repeat('★', $delivery) .'</p>
+              </td>
             </tr>
             <tr>
-                <td colspan="2" class="review-text">
-                    <p>C'était bon miam miam blabla venez je recommande</p>
-                </td>
+              <td colspan="2" class="review-text">
+                <p>'. $comment .'</p>
+              </td>
             </tr>
-        </table>
+          </table>';
+          }
+        } catch (\PDOException $e) {
+          $erreur = "Erreur de base de données : " . $e->getMessage();
+        }
+        ?>
 
         <form>
             <table class="review-block">
