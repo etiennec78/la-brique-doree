@@ -60,11 +60,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <?php if (isset($_SESSION['user'])): ?>
                 <a href="profile.php" id="navbarbutton">Mon Profil</a>
 
-                <?php if ($_SESSION['user']['role'] === 'admin'): ?>
+                <?php if ($_SESSION['user']['role'] === 'administrator'): ?>
                     <a href="admin.php" id="navbarbutton">Panel Admin</a>
                 <?php elseif ($_SESSION['user']['role'] === 'restaurateur'): ?>
                     <a href="restaurateur.php" id="navbarbutton">Gestion Commandes</a>
-                <?php elseif ($_SESSION['user']['role'] === 'livreur'): ?>
+                <?php elseif ($_SESSION['user']['role'] === 'delivery_person'): ?>
                     <a href="delivery.php" id="navbarbutton">Mes Livraisons</a>
                 <?php endif; ?>
 
