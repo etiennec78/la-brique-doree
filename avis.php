@@ -1,4 +1,23 @@
-<?php session_start(); ?>
+<?php
+session_start();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  include_once 'db_connect.php';
+
+  $user_id = $_SESSION['user']['id'];
+  $comment = $_POST['comment'];
+  $product = $_POST['product'];
+  $delivery = $_POST['delivery'];
+
+  // Ajouter l'avis à la base de données
+  try {
+    $stmt = $pdo->prepare("INSERT INTO reviews (user_id, product_stars, delivery_stars, comment) VALUES (?, ?, ?, ?)");
+    $stmt->execute([$user_id, $product, $delivery, $comment]);
+  } catch (\PDOException $e) {
+    $error = "Erreur lors de l'inscription : " . $e->getMessage();
+  }
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -82,33 +101,52 @@
           </table>';
           }
         } catch (\PDOException $e) {
-          $erreur = "Erreur de base de données : " . $e->getMessage();
+          $error = "Erreur de base de données : " . $e->getMessage();
         }
         ?>
 
-        <form>
-            <table class="review-block">
-                <tr>
-                    <th class="user-name">LAISSER UN AVIS</th>
-                    <td class="user-ratings">
-                        Note :
-                        <select class="select-note">
-                            <option value=5>★★★★★</option>
-                            <option value=4>★★★★</option>
-                            <option value=3>★★★</option>
-                            <option value=2>★★</option>
-                            <option value=1>★</option>
+    <form action="avis.php" method="post">
+        <table class="review-block">
+            <tr>
+                <th class="user-name">LAISSER UN AVIS</th>
+                <td class="user-ratings">
+                    <?php if(isset($error)): ?>
+                        <div style="color: #e74c3c; margin-bottom: 10px; font-weight: bold;">
+                            <?php echo htmlspecialchars($error); ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <div class="rating-group">
+                        <label for="product">Produit :</label>
+                        <select name="product" id="product" class="select-note" required>
+                            <option value="5">★★★★★</option>
+                            <option value="4">★★★★</option>
+                            <option value="3">★★★</option>
+                            <option value="2">★★</option>
+                            <option value="1">★</option>
                         </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" class="review-text">
-                        <textarea placeholder="Votre message..."></textarea>
-                        <button type="submit" class="btn-send">Envoyer l'avis</button>
-                    </td>
-                </tr>
-            </table>
-        </form>
+                    </div>
+
+                    <div class="rating-group">
+                        <label for="delivery">Livraison :</label>
+                        <select name="delivery" id="delivery" class="select-note" required>
+                            <option value="5">★★★★★</option>
+                            <option value="4">★★★★</option>
+                            <option value="3">★★★</option>
+                            <option value="2">★★</option>
+                            <option value="1">★</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="review-text">
+                    <textarea name="comment" placeholder="Partagez votre expérience ici..." required></textarea>
+                    <button type="submit" name="submit_avis" class="btn-send">Envoyer l'avis</button>
+                </td>
+            </tr>
+        </table>
+    </form>
     </main>
 
     <footer>
