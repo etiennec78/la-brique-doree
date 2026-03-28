@@ -2,6 +2,7 @@
 
 DB_NAME="brique_doree"
 SQL_FILE="schema.sql"
+SQL_DUMMY_FILE="schema_dummy.sql"
 
 sudo systemctl start mariadb
 
@@ -42,11 +43,36 @@ if [ $? -ne 0 ]; then
     exit 5
 fi
 
-if [ $? -eq 0 ]; then
-    echo "----------------------------------------------"
-    echo "Success ! The database '$DB_NAME' was created."
-    echo "The MariaDB service is running."
-else
-    echo "The database could not be created !"
+if [ $? -ne 0 ]; then
+    echo "Error: The database could not be created !"
     exit 3
+fi
+
+echo "----------------------------------------------"
+echo "Success ! The database '$DB_NAME' was created."
+echo "The MariaDB service is running."
+echo
+echo "Do you want to fill in dummy values in the database ? (debug only, not for prod)"
+echo "[Y/n]"
+
+read yes_no
+yes_no=`echo "$yes_no" | tr '[:upper:]' '[:lower:]'`
+case "$yes_no" in
+    "")
+    ;;
+    "y")
+    ;;
+    "yes")
+    ;;
+    *)
+    echo "Dummy values were not added to the database."
+    exit 6
+esac
+
+echo "Adding dummy values to the database..."
+sudo mariadb "$DB_NAME" < "$SQL_DUMMY_FILE"
+
+if [ $? -ne 0 ]; then
+    echo "Error: Dummy values could not be added !"
+    exit 7
 fi
