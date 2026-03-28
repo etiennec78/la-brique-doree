@@ -50,188 +50,47 @@
         </section>
 
     </header>
-      <section>
-      <div id="dishes">
-        <h2>~ Éléments du panier ~</h2>
-        <section class="bento">
-          <article id="crab" class="description crustacean" description="Chair de crabe fraîche et délicate, un délice à savourer brique par brique !" price="21,70€">
-            <h3>Crabe</h3>
-            <div class="nb-selector">
-              <button class="remove-from-cart" type="button" aria-label="Retirer du panier">-</button>
-              <input type="number" class="amount" min="0" max="9" value="0"/>
-              <button class="add-to-cart" type="button" aria-label="Ajouter au panier">+</button>
-            </div>
-          </article>
-          <article id="bento" class="description crustacean" description="Assortiment coloré de riz, légumes et protéines, un repas complet et joyeux" price="11,50€">
-            <h3>Bento</h3>
-            <div class="nb-selector">
-              <button class="remove-from-cart" type="button" aria-label="Retirer du panier">-</button>
-              <input type="number" class="amount" min="0" max="9" value="0"/>
-              <button class="add-to-cart" type="button" aria-label="Ajouter au panier">+</button>
-            </div>
-          </article>
-          <article id="sushi" class="description fish" description="Riz vinaigré et poisson frais, préparés avec soin pour une bouchée pleine de finesse" price="9,30€">
-            <h3>Sushis</h3>
-            <div class="nb-selector">
-              <button class="remove-from-cart" type="button" aria-label="Retirer du panier">-</button>
-              <input type="number" class="amount" min="0" max="9" value="0"/>
-              <button class="add-to-cart" type="button" aria-label="Ajouter au panier">+</button>
-            </div>
-          </article>
-          <article id="sashimi" class="description fish" description="Tranches de poisson ultra-frais, fondantes et prêtes à être dégustées en une bouchée." price="15,90€">
-            <h3>Sashimis</h3>
-            <div class="nb-selector">
-              <button class="remove-from-cart" type="button" aria-label="Retirer du panier">-</button>
-              <input type="number" class="amount" min="0" max="9" value="0"/>
-              <button class="add-to-cart" type="button" aria-label="Ajouter au panier">+</button>
-            </div>
-          </article>
-          <article id="steak" class="description" description="Pièce de bœuf juteuse et grillée à la perfection, une vraie brique de gourmandise." price="13,50€">
-            <h3>Steak</h3>
-            <div class="nb-selector">
-              <button class="remove-from-cart" type="button" aria-label="Retirer du panier">-</button>
-              <input type="number" class="amount" min="0" max="9" value="0"/>
-              <button class="add-to-cart" type="button" aria-label="Ajouter au panier">+</button>
-            </div>
-          </article>
-          <article id="kid-burger" class="description gluten milk sesame" description="Mini-burger tendre et fromage fondant, parfait pour les petits appétits." price="5,00€">
-            <h3>Burger enfant</h3>
-            <div class="nb-selector">
-              <button class="remove-from-cart" type="button" aria-label="Retirer du panier">-</button>
-              <input type="number" class="amount" min="0" max="9" value="0"/>
-              <button class="add-to-cart" type="button" aria-label="Ajouter au panier">+</button>
-            </div>
-          </article>
-          <article id="veggy-burger" class="description soja gluten sesame" description="Galette de légumes savoureuse et pain moelleux, un burger coloré et fun à manger." price="10,20€">
-            <h3>Burger végé</h3>
-            <div class="nb-selector">
-              <button class="remove-from-cart" type="button" aria-label="Retirer du panier">-</button>
-              <input type="number" class="amount" min="0" max="9" value="0"/>
-              <button class="add-to-cart" type="button" aria-label="Ajouter au panier">+</button>
-            </div>
-          </article>
-          <article id="burger" class="description gluten milk sesame" description="Burger gourmand avec frites dorées et croustillantes, un classique qui se déguste sans effort." price="14,60€">
-            <h3>Burger frites</h3>
-            <div class="nb-selector">
-              <button class="remove-from-cart" type="button" aria-label="Retirer du panier">-</button>
-              <input type="number" class="amount" min="0" max="9" value="0"/>
-              <button class="add-to-cart" type="button" aria-label="Ajouter au panier">+</button>
-            </div>
-          </article>
-          <article id="noodles" class="description" description="Pâtes al dente nappées d’une sauce riche et parfumée, simples mais toujours délicieuses." price="4,00€">
-            <h3>Pâtes</h3>
-            <div class="nb-selector">
-              <button class="remove-from-cart" type="button" aria-label="Retirer du panier">-</button>
-              <input type="number" class="amount" min="0" max="9" value="0"/>
-              <button class="add-to-cart" type="button" aria-label="Ajouter au panier">+</button>
-            </div>
-          </article>
-          <article id="egg" class="description egg" description="Œuf coulant sur steak haché tendre, un duo réconfortant et délicieux." price="9,50€">
-            <h3>Œuf & Steak</h3>
-            <div class="nb-selector">
-              <button class="remove-from-cart" type="button" aria-label="Retirer du panier">-</button>
-              <input type="number" class="amount" min="0" max="9" value="0"/>
-              <button class="add-to-cart" type="button" aria-label="Ajouter au panier">+</button>
-            </div>
-          </article>
-          <article id="shrimp" class="description crustacean" description="Crevettes sautées, légèrement relevées, pleines de goût et de fraîcheur." price="10,80€">
-            <h3>Crevettes</h3>
-            <div class="nb-selector">
-              <button class="remove-from-cart" type="button" aria-label="Retirer du panier">-</button>
-              <input type="number" class="amount" min="0" max="9" value="0"/>
-              <button class="add-to-cart" type="button" aria-label="Ajouter au panier">+</button>
-            </div>
-          </article>
-          <article id="bacon" class="description egg gluten" description="Bacon croustillant et œufs dorés, un petit déjeuner ou dîner plein de gourmandise." price="6,50€">
-            <h3>Bacon & Œufs</h3>
-            <div class="nb-selector">
-              <button class="remove-from-cart" type="button" aria-label="Retirer du panier">-</button>
-              <input type="number" class="amount" min="0" max="9" value="0"/>
-              <button class="add-to-cart" type="button" aria-label="Ajouter au panier">+</button>
-            </div>
-          </article>
-          <article id="coke" class="description" description="Boisson fraîche et pétillante, parfaite pour accompagner chaque bouchée." price="2,30€">
-            <h3>Coca-Cola</h3>
-            <div class="nb-selector">
-              <button class="remove-from-cart" type="button" aria-label="Retirer du panier">-</button>
-              <input type="number" class="amount" min="0" max="9" value="0"/>
-              <button class="add-to-cart" type="button" aria-label="Ajouter au panier">+</button>
-            </div>
-          </article>
-          <article id="orange-juice" class="description" description="Jus maison fruité et vitaminé, idéal pour une pause rafraîchissante." price="1,50€">
-            <h3>Jus d'orange</h3>
-            <div class="nb-selector">
-              <button class="remove-from-cart" type="button" aria-label="Retirer du panier">-</button>
-              <input type="number" class="amount" min="0" max="9" value="0"/>
-              <button class="add-to-cart" type="button" aria-label="Ajouter au panier">+</button>
-            </div>
-          </article>
-          <article id="champaign" class="description sulfite" description="Champagne de la maison de la brique. Bulles fines et élégantes, pour un moment festif et léger." price="25,90€">
-            <h3>Champagne</h3>
-            <div class="nb-selector">
-              <button class="remove-from-cart" type="button" aria-label="Retirer du panier">-</button>
-              <input type="number" class="amount" min="0" max="9" value="0"/>
-              <button class="add-to-cart" type="button" aria-label="Ajouter au panier">+</button>
-            </div>
-          </article>
-          <article id="cheese" class="description milk" description="Sélection de fromages affinés, à savourer brique par brique… ou tout d’un coup !" price="8,50€">
-            <h3>Fromages</h3>
-            <div class="nb-selector">
-              <button class="remove-from-cart" type="button" aria-label="Retirer du panier">-</button>
-              <input type="number" class="amount" min="0" max="9" value="0"/>
-              <button class="add-to-cart" type="button" aria-label="Ajouter au panier">+</button>
-            </div>
-          </article>
-          <article id="raspberry-pie" class="description gluten milk egg" description="Tarte à la framboise. Pâte croustillante et framboises acidulées, douces et fruitées." price="4,20€">
-            <h3>Tarte</h3>
-            <div class="nb-selector">
-              <button class="remove-from-cart" type="button" aria-label="Retirer du panier">-</button>
-              <input type="number" class="amount" min="0" max="9" value="0"/>
-              <button class="add-to-cart" type="button" aria-label="Ajouter au panier">+</button>
-            </div>
-          </article>
-          <article id="ice-cream" class="description milk nut soy" description="Boules glacées onctueuses, parfaites pour une pause fraîcheur." price="3,30€">
-            <h3>Glace</h3>
-            <div class="nb-selector">
-              <button class="remove-from-cart" type="button" aria-label="Retirer du panier">-</button>
-              <input type="number" class="amount" min="0" max="9" value="0"/>
-              <button class="add-to-cart" type="button" aria-label="Ajouter au panier">+</button>
-            </div>
-          </article>
-          <article id="cake" class="description gluten egg soy" description="Gâteau moelleux et gourmand, un vrai plaisir à chaque bouchée." price="4,70€">
-            <h3>Gâteau</h3>
-            <div class="nb-selector">
-              <button class="remove-from-cart" type="button" aria-label="Retirer du panier">-</button>
-              <input type="number" class="amount" min="0" max="9" value="0"/>
-              <button class="add-to-cart" type="button" aria-label="Ajouter au panier">+</button>
-            </div>
-          </article>
-          <article id="cupcake" class="description gluten egg milk soy" description="Petit gâteau fondant, recouvert d’un glaçage généreux et coloré." price="2,30€">
-            <h3>Cupcake</h3>
-            <div class="nb-selector">
-              <button class="remove-from-cart" type="button" aria-label="Retirer du panier">-</button>
-              <input type="number" class="amount" min="0" max="9" value="0"/>
-              <button class="add-to-cart" type="button" aria-label="Ajouter au panier">+</button>
-            </div>
-          </article>
-          <article id="cupcakes-ice-cream" class="description gluten egg milk soy" description="Alliance sucrée et rafraîchissante, pour les plus gourmands." price="4,70€">
-            <h3>Dessert glacé</h3>
-            <div class="nb-selector">
-              <button class="remove-from-cart" type="button" aria-label="Retirer du panier">-</button>
-              <input type="number" class="amount" min="0" max="9" value="0"/>
-              <button class="add-to-cart" type="button" aria-label="Ajouter au panier">+</button>
-            </div>
-          </article>
-          <article id="banana" class="description" description="Simple et naturellement sucrée, parfaite en dessert ou en encas." price="0,90€">
-            <h3>Banane</h3>
-            <div class="nb-selector">
-              <button class="remove-from-cart" type="button" aria-label="Retirer du panier">-</button>
-              <input type="number" class="amount" min="0" max="9" value="0"/>
-              <button class="add-to-cart" type="button" aria-label="Ajouter au panier">+</button>
-            </div>
-          </article>
-        </section>
-      </div>
+      <section class="cart-content">
+        <?php
+        include_once 'db_connect.php';
+
+        try {
+          $stmt = $pdo->prepare("SELECT id, name FROM food_type");
+          $stmt->execute();
+          $food_types = $stmt->fetchAll();
+
+          foreach($food_types as $food_type) {
+            echo '<div class="food-section" name="'. $food_type['name'] .'">
+            <h2>~ '. $food_type['name'] .' ~</h2>
+            <section class="bento">';
+
+            $stmt = $pdo->prepare("SELECT name, price, description, image_path FROM food f WHERE f.food_type = ?");
+            $stmt->execute([$food_type['id']]);
+            $food_items = $stmt->fetchAll();
+            foreach($food_items as $food) {
+              $name = $food['name'];
+              $description = $food['description'];
+              $price = number_format($food['price'], 2, ",");
+              $image_path = $food['image_path'];
+
+              echo '<article class="description" description="'. $description. '" price="'. $price .'€" style="background-image: url('. $image_path .');">
+              <h3>'. $name .'</h3>
+              <div class="nb-selector">
+                <button class="remove-from-cart" type="button" aria-label="Retirer du panier">-</button>
+                <input type="number" class="amount" min="0" max="9" value="0"/>
+                <button class="add-to-cart" type="button" aria-label="Ajouter au panier">+</button>
+              </div>
+              </article>';
+            }
+
+            echo "</section>
+            </div>";
+          }
+
+        } catch (\PDOException $e) {
+          $erreur = "Erreur de base de données : " . $e->getMessage();
+        }
+        ?>
       </section>
     </main>
 
