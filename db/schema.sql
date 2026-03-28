@@ -40,6 +40,30 @@ CREATE TABLE food (
     FOREIGN KEY(nutriscore_id) REFERENCES nutriscore(id)
 );
 
+INSERT INTO food (name, price, description, image_path) VALUES
+('Crabe', 21.7, 'Chair de crabe fraîche et délicate, un délice à savourer brique par brique !', 'images/food/dish/crab.jpg'),
+('Bento', 11.5, 'Assortiment coloré de riz, légumes et protéines, un repas complet et joyeux.', 'images/food/dish/bento.jpg'),
+('Sushis', 9.3, 'Riz vinaigré et poisson frais, préparés avec soin pour une bouchée pleine de finesse.', 'images/food/dish/sushi.jpg'),
+('Sashimis', 15.9, 'Tranches de poisson ultra-frais, fondantes et prêtes à être dégustées en une bouchée.', 'images/food/dish/sashimi.webp'),
+('Steak', 13.5, 'Pièce de bœuf juteuse et grillée à la perfection, une vraie brique de gourmandise.', 'images/food/dish/steak.jpg'),
+('Burger enfant', 5, 'Mini-burger tendre et fromage fondant, parfait pour les petits appétits.', 'images/food/dish/kid_burger.jpg'),
+('Burger végé', 10.2, 'Galette de légumes savoureuse et pain moelleux, un burger coloré et fun à manger.', 'images/food/dish/veggy_burger.jpg'),
+('Burger frites', 14.6, 'Burger gourmand avec frites dorées et croustillantes, un classique qui se déguste sans effort.', 'images/food/dish/burger.png'),
+('Pâtes', 4, 'Pâtes al dente nappées d’une sauce riche et parfumée, simples mais toujours délicieuses.', 'images/food/dish/noodles.jpg'),
+('Œuf & Steak', 9.5, 'Œuf coulant sur steak haché tendre, un duo réconfortant et délicieux.', 'images/food/dish/egg.jpg'),
+('Crevettes', 10.8, 'Crevettes sautées, légèrement relevées, pleines de goût et de fraîcheur.', 'images/food/dish/shrimp.jpg'),
+('Bacon & Œufs', 6.5, 'Bacon croustillant et œufs dorés, un petit déjeuner ou dîner plein de gourmandise.', 'images/food/dish/bacon.jpg'),
+('Coca-Cola', 2.3, 'Boisson fraîche et pétillante, parfaite pour accompagner chaque bouchée.', 'images/food/drink/coke.jpg'),
+('Jus dorange', 1.5, 'Jus maison fruité et vitaminé, idéal pour une pause rafraîchissante.', 'images/food/drink/orange_juice.jpg'),
+('Champagne', 25.9, 'Champagne de la maison de la brique. Bulles fines et élégantes, pour un moment festif et léger.', 'images/food/drink/champaign.png'),
+('Fromages', 8.5, 'Sélection de fromages affinés, à savourer brique par brique… ou tout d’un coup !', 'images/food/dessert/cheese.jpg'),
+('Tarte', 4.2, 'Tarte à la framboise. Pâte croustillante et framboises acidulées, douces et fruitées.', 'images/food/dessert/raspberry_pie.jpg'),
+('Glace', 3.3, 'Boules glacées onctueuses, parfaites pour une pause fraîcheur.', 'images/food/dessert/ice_cream.jpg'),
+('Gâteau', 4.7, 'Gâteau moelleux et gourmand, un vrai plaisir à chaque bouchée.', 'images/food/dessert/cake.jpg'),
+('Cupcake', 2.3, 'Petit gâteau fondant, recouvert d’un glaçage généreux et coloré.', 'images/food/dessert/cupcake.jpg'),
+('Dessert glacé', 4.7, 'Alliance sucrée et rafraîchissante, pour les plus gourmands.', 'images/food/dessert/cupcakes_ice_cream.jpg'),
+('Banane', 0.9, 'Simple et naturellement sucrée, parfaite en dessert ou en encas.', 'images/food/dessert/banana.jpg');
+
 -- Table de liaison pour les allergènes
 CREATE TABLE food_allergen (
     food_id INT,
