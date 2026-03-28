@@ -50,39 +50,44 @@
         </section>
 
     </header>
-      <section class="cart-content">
-        <div class="food-section" name="Éléments du panier">
-        <h2>~ Éléments du panier ~</h2>
-        <section class="bento">
-          <?php
-          include_once 'db_connect.php';
+      <section class="cart-page">
+        <div id="cart-content">
+          <div class="food-section" name="Éléments du panier">
+          <h2>~ Éléments du panier ~</h2>
+          <section class="bento">
+            <?php
+            include_once 'db_connect.php';
 
-          try {
+            try {
 
-            $stmt = $pdo->prepare("SELECT name, price, description, image_path FROM food f");
-            $stmt->execute();
-            $food_items = $stmt->fetchAll();
-            foreach($food_items as $food) {
-              $name = $food['name'];
-              $description = $food['description'];
-              $price = number_format($food['price'], 2, ",");
-              $image_path = $food['image_path'];
+              $stmt = $pdo->prepare("SELECT name, price, description, image_path FROM food f");
+              $stmt->execute();
+              $food_items = $stmt->fetchAll();
+              foreach($food_items as $food) {
+                $name = $food['name'];
+                $description = $food['description'];
+                $price = number_format($food['price'], 2, ",");
+                $image_path = $food['image_path'];
 
-              echo '<article class="description" description="'. $description. '" price="'. $price .'€" style="background-image: url('. $image_path .');">
-              <h3>'. $name .'</h3>
-              <div class="nb-selector">
-                <button class="remove-from-cart" type="button" aria-label="Retirer du panier">-</button>
-                <input type="number" class="amount" min="0" max="9" value="0"/>
-                <button class="add-to-cart" type="button" aria-label="Ajouter au panier">+</button>
-              </div>
-              </article>';
+                echo '<article class="description" description="'. $description. '" price="'. $price .'€" style="background-image: url('. $image_path .');">
+                <h3>'. $name .'</h3>
+                <div class="nb-selector">
+                  <button class="remove-from-cart" type="button" aria-label="Retirer du panier">-</button>
+                  <input type="number" class="amount" min="0" max="9" value="0"/>
+                  <button class="add-to-cart" type="button" aria-label="Ajouter au panier">+</button>
+                </div>
+                </article>';
+              }
+            } catch (\PDOException $e) {
+              $erreur = "Erreur de base de données : " . $e->getMessage();
             }
-          } catch (\PDOException $e) {
-            $erreur = "Erreur de base de données : " . $e->getMessage();
-          }
-          ?>
+            ?>
 
-          </section>
+            </section>
+          </div>
+        </div>
+        <div id="cart-bar">
+          Total: 50€
         </div>
       </section>
     </main>

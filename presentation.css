@@ -89,6 +89,10 @@
   display: none;
 }
 
+.bento {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, max(220px, 25%)), 1fr));
+}
+
 .add-to-cart {
   position: absolute;
   bottom: 12px;

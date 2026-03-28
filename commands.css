@@ -1,3 +1,23 @@
+.cart-page {
+  display: flex;
+}
+
+#cart-content {
+  flex: 3;
+}
+
+#cart-bar {
+  flex: 1;
+  margin: 25px;
+  padding: 12px;
+  border-radius: 1rem;
+  background: var(--darkgray);
+}
+
+.bento {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, max(220px, 33%)), 1fr));
+}
+
 .nb-selector {
   position: absolute;
   bottom: 12px;
