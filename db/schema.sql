@@ -192,3 +192,16 @@ CREATE TABLE payment (
     FOREIGN KEY(cart_id) REFERENCES cart(id),
     FOREIGN KEY(user_id) REFERENCES users(id)
 );
+
+
+
+----- AVIS -----
+
+CREATE TABLE reviews (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    product_stars TINYINT(3) NOT NULL,
+    delivery_stars TINYINT(3) NOT NULL,
+    comment VARCHAR(255) NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES users(id)
+);
