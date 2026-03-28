@@ -2,23 +2,34 @@
 session_start(); 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $file = 'users.json';
-    $users = json_decode(file_get_contents($file), true);
-    
-    $newUser = [
-        "email" => $_POST['email'],
-        "password" => $_POST['password'],
-        "role" => "client", 
-        "nom" => "???",
-        "prenom" => "???"
-    ];
+    include_once 'db_connect.php';
 
-    $users[] = $newUser;
-    file_put_contents($file, json_encode($users, JSON_PRETTY_PRINT));
-    
-    $_SESSION['user'] = $newUser;
-    header("Location: index.php");
-    exit();
+    $email = $_POST['email'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+    // Obtenir l'id du rôle "client" dans la base de données
+    $stmtRole = $pdo->prepare("SELECT id FROM role WHERE name = 'client'");
+    $stmtRole->execute();
+    $role = $stmtRole->fetch();
+    $role_id = $role ? $role['id'] : 1;
+
+    // Ajouter l'utilisateur à la base de données
+    try {
+        $stmt = $pdo->prepare("INSERT INTO users (email, password_hash, role_id, inscription_date) VALUES (?, ?, ?, NOW())");
+        $stmt->execute([$email, $password, $role_id]);
+        
+        $newUser = [
+            "id" => $pdo->lastInsertId(),
+            "email" => $email,
+            "role" => "client"
+        ];
+
+        $_SESSION['user'] = $newUser;
+        header("Location: index.php");
+        exit();
+    } catch (\PDOException $e) {
+        $erreur = "Erreur lors de l'inscription : " . $e->getMessage();
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -47,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <a href="avis.php" id="navbarbutton">Avis</a>
 
             <?php if (isset($_SESSION['user'])): ?>
-                <a href="profile.php" id="navbarbutton">Mon Profil (<?php echo $_SESSION['user']['prenom']; ?>)</a>
+                <a href="profile.php" id="navbarbutton">Mon Profil</a>
 
                 <?php if ($_SESSION['user']['role'] === 'admin'): ?>
                     <a href="admin.php" id="navbarbutton">Panel Admin</a>

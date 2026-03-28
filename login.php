@@ -2,32 +2,26 @@
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email_saisi = $_POST['email'];
-    $password_saisi = $_POST['password'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
-    if (file_exists('users.json')) {
-        $json_data = file_get_contents('users.json');
-        $utilisateurs = json_decode($json_data, true);
+    include_once 'db_connect.php';
 
-        $user_found = null;
+    try {
+        $stmt = $pdo->prepare("SELECT u.*, r.name as role_name FROM users u JOIN role r ON u.role_id = r.id WHERE u.email = ?");
+        $stmt->execute([$email]);
+        $user_found = $stmt->fetch();
 
-
-        foreach ($utilisateurs as $user) {
-            if ($user['email'] === $email_saisi && $user['password'] === $password_saisi) {
-                $user_found = $user;
-                break;
-            }
-        }
-
-        if ($user_found) {
-           
+        if ($user_found && password_verify($password, $user_found['password_hash'])) {
+            $user_found['role'] = $user_found['role_name'];
+            
             $_SESSION['user'] = $user_found;
 
-            if ($user_found['role'] === 'admin') {
+            if ($user_found['role'] === 'administrator') {
                 header("Location: admin.php");
             } elseif ($user_found['role'] === 'restaurateur') {
                 header("Location: restaurateur.php");
-            } elseif ($user_found['role'] === 'livreur') {
+            } elseif ($user_found['role'] === 'delivery_person') {
                 header("Location: delivery.php");
             } else {
                 header("Location: index.php");
@@ -36,8 +30,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             $erreur = "Email ou mot de passe incorrect.";
         }
-    } else {
-        $erreur = "Erreur : le fichier users.json est introuvable à la racine.";
+    } catch (\PDOException $e) {
+        $erreur = "Erreur de base de données : " . $e->getMessage();
     }
 }
 ?>
