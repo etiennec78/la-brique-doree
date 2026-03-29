@@ -2,10 +2,41 @@
     session_start();
     include_once 'db_connect.php';
 
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+        // Modifier les données de l'utilisateur dans la base de données
+        try {
+            $stmt = $pdo->prepare("UPDATE users SET first_name=?, last_name=?, street_nb=?, street_nb_suf=?, street=?, zip_code=?, phone=?, email=?, intercom_code=?, birth_date=? WHERE id = ?");
+
+            $birth_date = !empty($_POST['birth_date']) ? $_POST['birth_date'] : null;
+
+            $stmt->execute([
+                $_POST['first_name'],
+                $_POST['last_name'],
+                $_POST['street_nb'],
+                $_POST['street_nb_suf'],
+                $_POST['street'],
+                $_POST['zip_code'],
+                $_POST['phone'],
+                $_POST['email'],
+                $_POST['intercom_code'],
+                $birth_date,
+                $_SESSION['user']['id']
+            ]);
+
+            $_SESSION['user'] = array_merge($_SESSION['user'], $_POST);
+        } catch (\PDOException $e) {
+            $erreur = "Erreur lors de la mise à jour : " . $e->getMessage();
+        }
+    }
+
     // Obtenir les infos de l'utilisateur dans la base de données
     $stmt = $pdo->prepare("SELECT email, first_name, last_name, phone, birth_date, street_nb, street_nb_suf, street, town, zip_code, intercom_code FROM users u WHERE u.id = ?");
     $stmt->execute([$_SESSION['user']['id']]);
     $user_data = $stmt->fetch();
+    if (!$user_data) {
+        $user_data = [];
+    }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -61,28 +92,20 @@
     <main>
         <div class="form-page">
             <h2>Profil</h2>
-            <form action="/update-profile" method="post">
+            <form action="/profile.php" method="post">
                 <div class="input-group">
-                    <label for="marital-status">État civil</label>
-                    <select name="marital-status" id="marital-status">
-                        <option value="mr">Monsieur</option>
-                        <option value="ms">Madame</option>
-                        <option value="other">Autre</option>
-                    </select>
+                    <label for="first_name">Prénom</label>
+                    <input type="text" id="first_name" name="first_name" value="<?php echo $user_data['first_name']; ?>" required>
                 </div>
                 <div class="input-group">
                     <label for="last_name">Nom</label>
                     <input type="text" id="last_name" name="last_name" value="<?php echo $user_data['last_name']; ?>" required>
                 </div>
                 <div class="input-group">
-                    <label for="first_name">Prénom</label>
-                    <input type="text" id="first_name" name="first_name" value="<?php echo $user_data['first_name']; ?>" required>
-                </div>
-                <div class="input-group">
-                    <label for="number">Adresse</label>
+                    <label for="street_nb">Adresse</label>
                     <div id="address-group">
-                        <input type="number" id="number" name="number" value="<?php echo $user_data['street_nb']; ?>" required>
-                        <select name="number_suffix" id="number_suffix" value="<?php echo $user_data['street_nb_suf']; ?>" required>
+                        <input type="number" id="street_nb" name="street_nb" value="<?php echo $user_data['street_nb']; ?>" required>
+                        <select name="street_nb_suf" id="street_nb_suf" value="<?php echo $user_data['street_nb_suf']; ?>">
                             <option value=""></option>
                             <option value="bis">Bis</option>
                             <option value="ter">Ter</option>
@@ -94,8 +117,8 @@
                 </div>
                 <div class="input-group">
                    
-                    <label for="address">Code postal</label>
-                    <input type="number" id="postal-code" name="postal-code" value="<?php echo $user_data['zip_code']; ?>" required>
+                    <label for="zip_code">Code postal</label>
+                    <input type="number" id="zip_code" name="zip_code" value="<?php echo $user_data['zip_code']; ?>" required>
                 </div>
                 <div class="input-group">
                     <label for="phone">Numéro de téléphone</label>
@@ -106,8 +129,8 @@
                     <input type="email" id="email" name="email" value="<?php echo $user_data['email']; ?>" required>
                 </div>
                 <div class="input-group">
-                    <label for="intercom">Code interphone (optionnel)</label>
-                    <input type="text" id="intercom" name="intercom" value="<?php echo $user_data['intercom_code']; ?>">
+                    <label for="intercom_code">Code interphone (optionnel)</label>
+                    <input type="text" id="intercom_code" name="intercom_code" value="<?php echo $user_data['intercom_code']; ?>">
                 </div>
                 <div class="input-group">
                     <label for="birth_date">Date de naissance (optionnel)</label>
