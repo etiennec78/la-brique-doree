@@ -64,7 +64,7 @@ INSERT INTO food (name, food_type, price, description, image_path) VALUES
 ('Crevettes', 1, 10.8, 'Crevettes sautées, légèrement relevées, pleines de goût et de fraîcheur.', 'images/food/dish/shrimp.jpg'),
 ('Bacon & Œufs', 1, 6.5, 'Bacon croustillant et œufs dorés, un petit déjeuner ou dîner plein de gourmandise.', 'images/food/dish/bacon.jpg'),
 ('Coca-Cola', 2, 2.3, 'Boisson fraîche et pétillante, parfaite pour accompagner chaque bouchée.', 'images/food/drink/coke.jpg'),
-('Jus dorange', 2, 1.5, 'Jus maison fruité et vitaminé, idéal pour une pause rafraîchissante.', 'images/food/drink/orange_juice.jpg'),
+('Jus d''orange', 2, 1.5, 'Jus maison fruité et vitaminé, idéal pour une pause rafraîchissante.', 'images/food/drink/orange_juice.jpg'),
 ('Champagne', 2, 25.9, 'Champagne de la maison de la brique. Bulles fines et élégantes, pour un moment festif et léger.', 'images/food/drink/champaign.png'),
 ('Fromages', 3, 8.5, 'Sélection de fromages affinés, à savourer brique par brique… ou tout d’un coup !', 'images/food/dessert/cheese.jpg'),
 ('Tarte', 3, 4.2, 'Tarte à la framboise. Pâte croustillante et framboises acidulées, douces et fruitées.', 'images/food/dessert/raspberry_pie.jpg'),
