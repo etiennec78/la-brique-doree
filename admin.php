@@ -3,7 +3,7 @@ session_start();
 include_once 'db_connect.php';
 
 // Obtenir les infos des utilisateurs dans la base de données
-$stmt = $pdo->prepare("SELECT u.id, u.email, u.first_name, u.last_name, r.name as role, m.quantity FROM users u JOIN role r ON u.role_id = r.id JOIN cart c ON u.id = c.user_id JOIN cart_menu m ON c.id = m.cart_id");
+$stmt = $pdo->prepare("SELECT u.id, u.email, u.first_name, u.last_name, r.name as role, COALESCE(m.quantity, 0) as quantity FROM users u JOIN role r ON u.role_id = r.id LEFT JOIN cart c ON u.id = c.user_id LEFT JOIN cart_menu m ON c.id = m.cart_id");
 $stmt->execute();
 $users_data = $stmt->fetchAll();
 if (!$users_data) {
@@ -84,14 +84,14 @@ if (!$users_data) {
                 <tbody>
                     <?php
                     foreach($users_data as $user_data) {
-                    echo '<tr>
-                        <td>'. $user_data['id'] .'</td>
-                        <td><strong>'. $user_data['first_name'] .' '. $user_data['last_name'] .'</strong></td>
-                        <td>'. $user_data['email'] .'</td>
-                        <td>'. $user_data['quantity'] .'</td>
-                        <td><span class="tag gold">'. $user_data['role'] .'</span></td>
-                        <td><a href="profile.php" class="action-link">Gérer</a></td>
-                    </tr>';
+                        echo '<tr>
+                            <td>'. $user_data['id'] .'</td>
+                            <td><strong>'. $user_data['first_name'] .' '. $user_data['last_name'] .'</strong></td>
+                            <td>'. $user_data['email'] .'</td>
+                            <td>'. $user_data['quantity'] .'</td>
+                            <td><span class="tag gold">'. $user_data['role'] .'</span></td>
+                            <td><a href="profile.php" class="action-link">Gérer</a></td>
+                        </tr>';
                     }
                     ?>
                 </tbody>
