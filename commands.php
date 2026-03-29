@@ -50,6 +50,7 @@
         </section>
 
     </header>
+    <main>
       <section class="cart-page">
         <div id="cart-content">
           <div class="food-section" name="Éléments du panier">

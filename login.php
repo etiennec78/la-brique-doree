@@ -58,6 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <a href="avis.php" id="navbarbutton">Avis</a>
             <a href="login.php" id="navbarbutton">Connexion</a>
         </section>
+    </header>
 
     <main>
         <div class="form-page">
