@@ -81,7 +81,7 @@
                             <option value="quater">Quater</option>
                             <option value="quinquiens">Quinquiens</option>
                         </select>
-                        <input type="text" id="street" name="street" required style="flex-grow: 1;">
+                        <input type="text" id="street" name="street" required>
                     </div>
                 </div>
                 <div class="input-group">
