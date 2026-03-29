@@ -254,7 +254,7 @@ h1 {
   }
 }
 
-button {
+.basic-btn {
   font-weight: bold;
   padding: 10px;
   border: 0px;
@@ -266,6 +266,6 @@ button {
   transition: 0.3s;
 }
 
-button:hover {
+.basic-btn:hover {
   background: var(--solid-dark-gold);
 }

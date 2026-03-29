@@ -136,7 +136,7 @@
                     <label for="birth_date">Date de naissance (optionnel)</label>
                     <input type="date" id="birth_date" name="birth_date" value="<?php echo $user_data['birth_date']; ?>">
                 </div>
-                <button type="submit" class="btn">Mettre à jour les informations</button>
+                <button type="submit" class="basic-btn">Mettre à jour les informations</button>
             </form>
         </div>
     </main>

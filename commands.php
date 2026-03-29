@@ -94,7 +94,7 @@
             • Bento (11,50€)
           <p>
           <p>Total: 33,20€</p>
-          <button id="checkout" type="button">Payer</button>
+          <button id="checkout" type="button" class="basic-btn">Payer</button>
         </div>
       </section>
     </main>

@@ -36,7 +36,7 @@
                 <p class="address">📍 15 AVE DES CHAMPS, CERGY</p>
                 <p class="access">🔑 ÉTAGE 3 - CODE: 123</p>
             </div>
-            <button class="action-btn"> CONFIRMER LIVRAISON</button>
+            <button class="basic-btn action-btn"> CONFIRMER LIVRAISON</button>
         </div>
 
         <div class="delivery-card">
@@ -48,7 +48,7 @@
                 <p class="address">📍 3 RUE DU PORT, PONTOISE</p>
                 <p class="access">🔑 RDC - SONNER "BERNARD"</p>
             </div>
-            <button class="action-btn">CONFIRMER LIVRAISON</button>
+            <button class="basic-btn action-btn">CONFIRMER LIVRAISON</button>
         </div>
     </main>
 </body>

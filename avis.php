@@ -178,7 +178,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <tr>
                 <td colspan="2" class="review-text">
                     <textarea name="comment" placeholder="Partagez votre expérience ici..." required></textarea>
-                    <button type="submit" name="submit_avis" class="btn-send">Envoyer l'avis</button>
+                    <button type="submit" name="submit_avis" class="basic-btn btn-send">Envoyer l'avis</button>
                 </td>
             </tr>
         </table>
@@ -189,7 +189,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <td id="review-unavailable">
                     <h3>Vous ne pouvez pas encorer laisser d'avis.</h3>
                     <p>Veuillez renseigner votre prénom et votre nom dans votre profil pour pouvoir écrire un avis.</p>
-                    <button onclick="location.href='profile.php'" type="button">Compléter mon profil</button>
+                    <button onclick="location.href='profile.php'" type="button" class="basic-btn">Compléter mon profil</button>
                 </td>
             </tr>
         </table>
@@ -199,7 +199,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <td id="review-unavailable">
                     <h3>Connectez-vous pour laisser un avis !</h3>
                     <p>Vous devez avoir un compte et le compléter pour laisser un avis sur nos produits et la livraison.</p>
-                    <button onclick="location.href='login.php'" type="button">Me connecter</button>
+                    <button onclick="location.href='login.php'" type="button" class="basic-btn">Me connecter</button>
                 </td>
             </tr>
         </table>
