@@ -14,12 +14,24 @@ INSERT INTO users (email, password_hash, first_name, last_name, role_id, phone, 
 ('grignon@gmail.com', '$2y$12$0FEsdSyYSTrC0713vB2KzuoXFnZldB0v1Wr8JxUmMTmoHow07bDwe', 'Romuald', 'Grignon', 1, '+33712345678', '2006-03-27', '2026-03-28 22:00:00.000000', '2026-03-28 23:00:00.000000', 2, NULL, 'Rue de la Brique', 'Paris', 75000, '012345'),
 ('lebreton@gmail.com', '$2y$12$0FEsdSyYSTrC0713vB2KzuoXFnZldB0v1Wr8JxUmMTmoHow07bDwe', 'Caryl', 'Le Breton', 1, '+33712345678', '2006-03-27', '2026-03-28 22:00:00.000000', '2026-03-28 23:00:00.000000', 2, NULL, 'Rue de la Brique', 'Paris', 75000, NULL);
 
+
+----- COUPONS -----
+
 INSERT INTO coupon (code, discount_percent, expiration_date) VALUES
 ('GRIGNON75', 0.75, '2027-01-01 00:00:00.000000'),
 ('LEBRETON75', 0.75, '2027-01-01 00:00:00.000000');
 
+
+----- CART -----
+
 INSERT INTO cart (user_id, payment_status_id, created_at, coupon_id) VALUES
 (1, 1, '2026-03-28 22:30:00.000000', 1);
+
+INSERT INTO cart_menu (cart_id, menu_id, quantity) VALUES
+(1, 1, 10);
+
+
+----- REVIEWS -----
 
 INSERT INTO reviews (user_id, product_stars, delivery_stars, comment) VALUES
 (1, 5, 5, 'Excellent restaurant !'),
