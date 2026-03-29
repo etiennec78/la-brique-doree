@@ -1,4 +1,8 @@
-<?php session_start(); ?>
+<?php
+session_start();
+include_once 'db_connect.php';
+include_once 'get_cart_count.php';
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -16,7 +20,7 @@
             <h1>RESTAURATEUR</h1>
             <a href="commands.php">
                 <img id="cart" class="icon" src="./images/cart.svg">
-                <p id="cart_items" class="bubble">10</p>
+                <p id="cart_items" class="bubble"><?php echo $cart_count; ?></p>
             </a>
             <video class="video-background" autoplay muted loop>
                 <source src="./images/header_background.mp4" type="video/mp4">

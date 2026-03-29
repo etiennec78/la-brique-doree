@@ -1,28 +1,7 @@
 <?php
 session_start();
 include_once 'db_connect.php';
-
-$cart_count = 0;
-if (isset($_SESSION['user'])) {
-    try {
-        $stmt = $pdo->prepare("SELECT id FROM cart WHERE user_id = ? AND payment_status_id = 1");
-        $stmt->execute([$_SESSION['user']['id']]);
-        $cart = $stmt->fetch();
-        if ($cart) {
-            $stmt = $pdo->prepare("SELECT SUM(quantity) FROM cart_food WHERE cart_id = ?");
-            $stmt->execute([$cart['id']]);
-            $count_food = $stmt->fetchColumn() ?: 0;
-
-            $stmt = $pdo->prepare("SELECT SUM(quantity) FROM cart_menu WHERE cart_id = ?");
-            $stmt->execute([$cart['id']]);
-            $count_menu = $stmt->fetchColumn() ?: 0;
-
-            $cart_count = (int)$count_food + (int)$count_menu;
-        }
-    } catch (\PDOException $e) {
-        error_log("Cart error: " . $e->getMessage());
-    }
-}
+include_once 'get_cart_count.php';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
