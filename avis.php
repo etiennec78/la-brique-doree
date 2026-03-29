@@ -1,20 +1,33 @@
 <?php
 session_start();
+include_once 'db_connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  include_once 'db_connect.php';
+  if (isset($_SESSION['user'])) {
+    $user_id = $_SESSION['user']['id'];
+    
+    // Vérifier si l'utilisateur a un prénom et un nom
+    $stmt_check = $pdo->prepare("SELECT first_name, last_name FROM users WHERE id = ?");
+    $stmt_check->execute([$user_id]);
+    $user_data = $stmt_check->fetch();
+    
+    if ($user_data && !empty($user_data['first_name']) && !empty($user_data['last_name'])) {
+      $comment = $_POST['comment'];
+      $product = $_POST['product'];
+      $delivery = $_POST['delivery'];
 
-  $user_id = $_SESSION['user']['id'];
-  $comment = $_POST['comment'];
-  $product = $_POST['product'];
-  $delivery = $_POST['delivery'];
-
-  // Ajouter l'avis à la base de données
-  try {
-    $stmt = $pdo->prepare("INSERT INTO reviews (user_id, product_stars, delivery_stars, comment) VALUES (?, ?, ?, ?)");
-    $stmt->execute([$user_id, $product, $delivery, $comment]);
-  } catch (\PDOException $e) {
-    $error = "Erreur lors de l'inscription : " . $e->getMessage();
+      // Ajouter l'avis à la base de données
+      try {
+        $stmt = $pdo->prepare("INSERT INTO reviews (user_id, product_stars, delivery_stars, comment) VALUES (?, ?, ?, ?)");
+        $stmt->execute([$user_id, $product, $delivery, $comment]);
+      } catch (\PDOException $e) {
+        $error = "Erreur lors de l'insertion : " . $e->getMessage();
+      }
+    } else {
+      $error = "Vous devez renseigner votre prénom et nom dans votre profil pour laisser un avis.";
+    }
+  } else {
+    $error = "Vous devez être connecté pour laisser un avis.";
   }
 }
 ?>
@@ -105,6 +118,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         ?>
 
+    <?php
+    $can_review = false;
+    $missing_info = false;
+    $not_connected = true;
+
+    if (isset($_SESSION['user']['id'])) {
+        $not_connected = false;
+        try {
+            $stmt_check = $pdo->prepare("SELECT first_name, last_name FROM users WHERE id = ?");
+            $stmt_check->execute([$_SESSION['user']['id']]);
+            $current_user = $stmt_check->fetch();
+            if ($current_user && !empty($current_user['first_name']) && !empty($current_user['last_name'])) {
+                $can_review = true;
+            } else {
+                $missing_info = true;
+            }
+        } catch (\PDOException $e) {
+            $error = "Erreur : " . $e->getMessage();
+        }
+    }
+    ?>
+
+    <?php if ($can_review): ?>
     <form action="avis.php" method="post">
         <table class="review-block">
             <tr>
@@ -147,6 +183,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </tr>
         </table>
     </form>
+    <?php elseif ($missing_info): ?>
+        <table class="review-block">
+            <tr>
+                <td id="review-unavailable">
+                    <h3>Vous ne pouvez pas encorer laisser d'avis.</h3>
+                    <p>Veuillez renseigner votre prénom et votre nom dans votre profil pour pouvoir écrire un avis.</p>
+                    <button onclick="location.href='profile.php'" type="button">Compléter mon profil</button>
+                </td>
+            </tr>
+        </table>
+    <?php else: ?>
+        <table class="review-block">
+            <tr>
+                <td id="review-unavailable">
+                    <h3>Connectez-vous pour laisser un avis !</h3>
+                    <p>Vous devez avoir un compte et le compléter pour laisser un avis sur nos produits et la livraison.</p>
+                    <button onclick="location.href='login.php'" type="button">Me connecter</button>
+                </td>
+            </tr>
+        </table>
+    <?php endif; ?>
     </main>
 
     <footer>

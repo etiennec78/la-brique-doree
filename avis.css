@@ -81,3 +81,8 @@ textarea {
     box-sizing: border-box;
     border-radius: 0.5rem;
 }
+
+#review-unavailable {
+    text-align: center;
+    padding: 30px;
+}
