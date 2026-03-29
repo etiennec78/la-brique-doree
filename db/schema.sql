@@ -95,14 +95,31 @@ CREATE TABLE menu (
     FOREIGN KEY(time_slot_id) REFERENCES time_slot(id)
 );
 
+INSERT INTO menu (name, price, min_people, time_slot_id) VALUES
+('Menu enfant', 7.5, 1, NULL),
+('Partage d''Asie', 32, 3, 1);
+
 -- Table de liaison entre Menu et Food
 CREATE TABLE menu_food (
     menu_id INT,
     food_id INT,
+    quantity INT DEFAULT 1,
     PRIMARY KEY (menu_id, food_id),
     FOREIGN KEY (menu_id) REFERENCES menu(id) ON DELETE CASCADE,
     FOREIGN KEY (food_id) REFERENCES food(id) ON DELETE CASCADE
 );
+
+INSERT INTO menu_food (menu_id, food_id, quantity) VALUES
+-- Menu enfant
+(1, 6, 1), -- Burger enfant
+(1, 12, 1), -- Coca
+(1, 22, 1), -- Cupcake
+-- Partage d'Asie
+(2, 11, 1), -- Crevettes
+(2, 4, 1), -- Sashimi
+(2, 3, 1), -- Sushi
+(2, 17, 2), -- Ice cream (x2)
+(2, 19, 1); -- Cake
 
 
 ----- ROLES et USERS -----
