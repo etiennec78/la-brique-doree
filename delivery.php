@@ -14,9 +14,9 @@
             <h1>LIVRAISON</h1>
         </div>
         <nav id="navbar-header">
-            <a href="index.php" id="navbarbutton">Accueil</a>
-            <a href="avis.php" id="navbarbutton">Avis</a>
-            <a href="delivery.php" id="navbarbutton" style="color:var(--solid-gold); border-bottom:2px solid var(--solid-gold)">Livraison</a>
+            <a href="index.php" class="navbarbutton">Accueil</a>
+            <a href="avis.php" class="navbarbutton">Avis</a>
+            <a href="delivery.php" class="navbarbutton">Livraison</a>
         </nav>
     </header>
 

@@ -53,10 +53,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         
          <section id="navbar-header">
-            <a href="index.php" id="navbarbutton">Accueil</a>
-            <a href="presentation.php" id="navbarbutton">Nos produits</a>
-            <a href="avis.php" id="navbarbutton">Avis</a>
-            <a href="login.php" id="navbarbutton">Connexion</a>
+            <a href="index.php" class="navbarbutton">Accueil</a>
+            <a href="presentation.php" class="navbarbutton">Nos produits</a>
+            <a href="avis.php" class="navbarbutton">Avis</a>
+            <a href="login.php" class="navbarbutton">Connexion</a>
         </section>
     </header>
 
@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h2>Connexion</h2>
 
             <?php if(isset($erreur)): ?>
-                <p style="color: red; text-align: center; font-weight: bold;"><?php echo $erreur; ?></p>
+                <p class="alert"><?php echo $erreur; ?></p>
             <?php endif; ?>
 
             <form action="login.php" method="post">

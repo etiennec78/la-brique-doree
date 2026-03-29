@@ -64,27 +64,27 @@
         </div>
         
         <section id="navbar-header">
-            <a href="index.php" id="navbarbutton">Accueil</a>
-            <a href="presentation.php" id="navbarbutton">Nos produits</a>
-            <a href="avis.php" id="navbarbutton">Avis</a>
+            <a href="index.php" class="navbarbutton">Accueil</a>
+            <a href="presentation.php" class="navbarbutton">Nos produits</a>
+            <a href="avis.php" class="navbarbutton">Avis</a>
 
             <?php if (isset($_SESSION['user'])): ?>
-                <a href="profile.php" id="navbarbutton">Mon Profil</a>
+                <a href="profile.php" class="navbarbutton">Mon Profil</a>
 
             <?php if ($_SESSION['user']['role'] === 'administrator'): ?>
-                <a href="admin.php" id="navbarbutton">Panel Admin</a>
+                <a href="admin.php" class="navbarbutton">Panel Admin</a>
                 
             <?php elseif ($_SESSION['user']['role'] === 'restaurateur'): ?>
-                <a href="restaurateur.php" id="navbarbutton">Gestion Commandes</a>
+                <a href="restaurateur.php" class="navbarbutton">Gestion Commandes</a>
                 
             <?php elseif ($_SESSION['user']['role'] === 'delivery_person'): ?>
-                <a href="delivery.php" id="navbarbutton">Mes Livraisons</a>
+                <a href="delivery.php" class="navbarbutton">Mes Livraisons</a>
             <?php endif; ?>
 
-            <a href="logout.php" id="navbarbutton" style="color: #ff4d4d;">Déconnexion</a>
+            <a href="logout.php" class="navbarbutton alert">Déconnexion</a>
 
             <?php else: ?>
-                <a href="login.php" id="navbarbutton">Connexion</a>
+                <a href="login.php" class="navbarbutton">Connexion</a>
             <?php endif; ?>
         </section>
 

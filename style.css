@@ -103,7 +103,7 @@ h2 {
   filter: drop-shadow(1px 0px 5px rgba(0, 0, 0, 0.5));
 }
 
-#navbarbutton {
+.navbarbutton {
   position: relative;
   text-decoration: none;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -111,7 +111,7 @@ h2 {
   color: var(--navbartext);
 }
 
-#navbarbutton::after {
+.navbarbutton::after {
   content: "";
   position: absolute;
   left: 0;
@@ -125,7 +125,7 @@ h2 {
   transition: 0.3s;  
 }
 
-#navbarbutton:hover::after {
+.navbarbutton:hover::after {
   transform: scaleX(1);       
 }
 
@@ -268,4 +268,8 @@ h1 {
 
 .basic-btn:hover {
   background: var(--solid-dark-gold);
+}
+
+.alert {
+  color: var(--red);
 }
