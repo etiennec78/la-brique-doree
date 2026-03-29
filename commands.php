@@ -71,7 +71,7 @@ include_once 'get_cart_count.php';
                   
                   // Récupérer les plats du panier
                   $stmt_f = $pdo->prepare("
-                      SELECT f.name, f.price, f.description, f.image_path, cf.quantity
+                      SELECT f.id as item_id, 'food' as item_type, f.name, f.price, f.description, f.image_path, cf.quantity
                       FROM cart c
                       JOIN cart_food cf ON c.id = cf.cart_id
                       JOIN food f ON cf.food_id = f.id
@@ -82,7 +82,7 @@ include_once 'get_cart_count.php';
 
                   // Récupérer les menus du panier
                   $stmt_m = $pdo->prepare("
-                      SELECT m.name, m.price, 'Menu complet' as description, 'images/LOGO.png' as image_path, cm.quantity
+                      SELECT m.id as item_id, 'menu' as item_type, m.name, m.price, 'Menu complet' as description, 'images/LOGO.png' as image_path, cm.quantity
                       FROM cart c
                       JOIN cart_menu cm ON c.id = cm.cart_id
                       JOIN menu m ON cm.menu_id = m.id
@@ -104,16 +104,18 @@ include_once 'get_cart_count.php';
                     $price_val = floatval($item['price']);
                     $price_str = number_format($price_val, 2, ",");
                     $image_path = $item['image_path'];
+                    $item_id = $item['item_id'];
+                    $item_type = $item['item_type'];
 
                     $total_price += $price_val * $quantity;
                     $cart_details[] = "• $name ($price_str €) x$quantity";
 
-                    echo '<article class="description" description="'. $description. '" price="'. $price_str .'€" style="background-image: url('. $image_path .');">
-                    <h3>'. $name .'</h3>
+                    echo '<article class="description" description="'. htmlspecialchars($description). '" price="'. $price_str .'€" style="background-image: url('. htmlspecialchars($image_path) .');">
+                    <h3>'. htmlspecialchars($name) .'</h3>
                     <div class="nb-selector">
-                      <button class="remove-from-cart" type="button" aria-label="Retirer du panier">-</button>
+                      <button class="remove-from-cart" type="button" aria-label="Retirer du panier" onclick="updateCart('. $item_id .', \''. $item_type .'\', \'remove\')">-</button>
                       <input type="number" class="amount" min="0" max="9" value="'. $quantity .'"/>
-                      <button class="add-to-cart" type="button" aria-label="Ajouter au panier">+</button>
+                      <button class="add-to-cart" type="button" aria-label="Ajouter au panier" onclick="updateCart('. $item_id .', \''. $item_type .'\', \'add\')">+</button>
                     </div>
                     </article>';
                   }
@@ -142,6 +144,39 @@ include_once 'get_cart_count.php';
         </div>
       </section>
     </main>
+
+    <script>
+    function updateCart(itemId, itemType, action) {
+        // Create form
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = 'update_cart.php';
+        
+        // Add item_id
+        const idInput = document.createElement('input');
+        idInput.type = 'hidden';
+        idInput.name = 'item_id';
+        idInput.value = itemId;
+        form.appendChild(idInput);
+        
+        // Add item_type
+        const typeInput = document.createElement('input');
+        typeInput.type = 'hidden';
+        typeInput.name = 'item_type';
+        typeInput.value = itemType;
+        form.appendChild(typeInput);
+
+        // Add action
+        const actionInput = document.createElement('input');
+        actionInput.type = 'hidden';
+        actionInput.name = 'action';
+        actionInput.value = action;
+        form.appendChild(actionInput);
+        
+        document.body.appendChild(form);
+        form.submit();
+    }
+    </script>
 
     <footer>
         <div id="contact">
