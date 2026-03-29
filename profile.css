@@ -1,3 +1,12 @@
 .form-page {
   width: 90%;
 }
+
+#address-group {
+  display: flex;
+  gap: 10px;
+}
+
+#number, #number_suffix {
+  width: 75px;
+}

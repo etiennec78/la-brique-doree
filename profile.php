@@ -71,8 +71,18 @@
                     <input type="text" id="surname" name="surname" required>
                 </div>
                 <div class="input-group">
-                    <label for="address">Adresse</label>
-                    <input type="text" id="address" name="address" required>
+                    <label for="number">Adresse</label>
+                    <div id="address-group">
+                        <input type="number" id="number" name="number" required>
+                        <select name="number_suffix" id="number_suffix" required>
+                            <option value=""></option>
+                            <option value="bis">Bis</option>
+                            <option value="ter">Ter</option>
+                            <option value="quater">Quater</option>
+                            <option value="quinquiens">Quinquiens</option>
+                        </select>
+                        <input type="text" id="street" name="street" required style="flex-grow: 1;">
+                    </div>
                 </div>
                 <div class="input-group">
                    
