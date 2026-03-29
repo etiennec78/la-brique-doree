@@ -1,4 +1,15 @@
-<?php session_start(); ?>
+<?php
+session_start();
+include_once 'db_connect.php';
+
+// Obtenir les infos des utilisateurs dans la base de données
+$stmt = $pdo->prepare("SELECT u.id, u.email, u.first_name, u.last_name, r.name as role, m.quantity FROM users u JOIN role r ON u.role_id = r.id JOIN cart c ON u.id = c.user_id JOIN cart_menu m ON c.id = m.cart_id");
+$stmt->execute();
+$users_data = $stmt->fetchAll();
+if (!$users_data) {
+    $users_data = [];
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -45,7 +56,6 @@
         </section>
 
     </header>
-
     <main class="admin-main">
         <div class="panel">
             <div class="panel-header">
@@ -72,30 +82,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>#001</td>
-                        <td><strong>Etienne C.</strong></td>
-                        <td>etienne@yumland.fr</td>
-                        <td>12</td>
-                        <td><span class="tag gold">Admin</span></td>
+                    <?php
+                    foreach($users_data as $user_data) {
+                    echo '<tr>
+                        <td>'. $user_data['id'] .'</td>
+                        <td><strong>'. $user_data['first_name'] .' '. $user_data['last_name'] .'</strong></td>
+                        <td>'. $user_data['email'] .'</td>
+                        <td>'. $user_data['quantity'] .'</td>
+                        <td><span class="tag gold">'. $user_data['role'] .'</span></td>
                         <td><a href="profile.php" class="action-link">Gérer</a></td>
-                    </tr>
-                    <tr>
-                        <td>#042</td>
-                        <td><strong>Martin J.</strong></td>
-                        <td>martin@yumland.fr</td>
-                        <td>5</td>
-                        <td><span class="tag">Client</span></td>
-                        <td><a href="profile.php" class="action-link">Gérer</a></td>
-                    </tr>
-                    <tr>
-                        <td>#089</td>
-                        <td><strong>Axel C.</strong></td>
-                        <td>axel@yumland.fr</td>
-                        <td><small>Aucune</small></td>
-                        <td><span class="tag delivery">Livreur</span></td>
-                        <td><a href="profile.php" class="action-link">Gérer</a></td>
-                    </tr>
+                    </tr>';
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>
