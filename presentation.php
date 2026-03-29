@@ -1,4 +1,29 @@
-<?php session_start(); ?>
+<?php
+session_start();
+include_once 'db_connect.php';
+
+$cart_count = 0;
+if (isset($_SESSION['user'])) {
+    try {
+        $stmt = $pdo->prepare("SELECT id FROM cart WHERE user_id = ? AND payment_status_id = 1");
+        $stmt->execute([$_SESSION['user']['id']]);
+        $cart = $stmt->fetch();
+        if ($cart) {
+            $stmt = $pdo->prepare("SELECT SUM(quantity) FROM cart_food WHERE cart_id = ?");
+            $stmt->execute([$cart['id']]);
+            $count_food = $stmt->fetchColumn() ?: 0;
+
+            $stmt = $pdo->prepare("SELECT SUM(quantity) FROM cart_menu WHERE cart_id = ?");
+            $stmt->execute([$cart['id']]);
+            $count_menu = $stmt->fetchColumn() ?: 0;
+
+            $cart_count = (int)$count_food + (int)$count_menu;
+        }
+    } catch (\PDOException $e) {
+        error_log("Cart error: " . $e->getMessage());
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -17,7 +42,7 @@
             <h1>NOS PRODUITS</h1>
             <a href="commands.php">
                 <img id="cart" class="icon" src="./images/cart.svg" alt="Icône de panier de courses">
-                <p id="cart_items" class="bubble">10</p>
+                <p id="cart_items" class="bubble"><?php echo $cart_count; ?></p>
             </a>
             <video class="video-background" autoplay muted loop>
                 <source src="./images/header_background.mp4" type="video/mp4">
@@ -94,10 +119,11 @@
               <h2>~ '. $food_type['name'] .' ~</h2>
               <section class="bento">';
 
-              $stmt = $pdo->prepare("SELECT name, price, description, image_path FROM food f WHERE f.food_type = ?");
+              $stmt = $pdo->prepare("SELECT id, name, price, description, image_path FROM food f WHERE f.food_type = ?");
               $stmt->execute([$food_type['id']]);
               $food_items = $stmt->fetchAll();
               foreach($food_items as $food) {
+                $id = $food['id'];
                 $name = $food['name'];
                 $description = $food['description'];
                 $price = number_format($food['price'], 2, ",");
@@ -105,7 +131,10 @@
 
                 echo '<article class="description" description="'. $description. '" price="'. $price .'€" style="background-image: url('. $image_path .');">
                 <h3>'. $name .'</h3>
-                <button class="add-to-cart" type="button" aria-label="Ajouter au panier">+</button>
+                <form action="add_to_cart.php" method="POST" style="margin: 0;">
+                    <input type="hidden" name="food_id" value="'. $id .'">
+                    <button class="add-to-cart" type="submit" aria-label="Ajouter au panier">+</button>
+                </form>
                 </article>';
               }
 
