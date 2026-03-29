@@ -1,4 +1,12 @@
-<?php session_start(); ?>
+<?php
+    session_start();
+    include_once 'db_connect.php';
+
+    // Obtenir les infos de l'utilisateur dans la base de données
+    $stmt = $pdo->prepare("SELECT email, first_name, last_name, phone, birth_date, street_nb, street_nb_suf, street, town, zip_code, intercom_code FROM users u WHERE u.id = ?");
+    $stmt->execute([$_SESSION['user']['id']]);
+    $user_data = $stmt->fetch();
+?>
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -63,39 +71,47 @@
                     </select>
                 </div>
                 <div class="input-group">
-                    <label for="name">Nom</label>
-                    <input type="text" id="name" name="name" required>
+                    <label for="last_name">Nom</label>
+                    <input type="text" id="last_name" name="last_name" value="<?php echo $user_data['last_name']; ?>" required>
                 </div>
                 <div class="input-group">
-                    <label for="surname">Prénom</label>
-                    <input type="text" id="surname" name="surname" required>
+                    <label for="first_name">Prénom</label>
+                    <input type="text" id="first_name" name="first_name" value="<?php echo $user_data['first_name']; ?>" required>
                 </div>
                 <div class="input-group">
                     <label for="number">Adresse</label>
                     <div id="address-group">
-                        <input type="number" id="number" name="number" required>
-                        <select name="number_suffix" id="number_suffix" required>
+                        <input type="number" id="number" name="number" value="<?php echo $user_data['street_nb']; ?>" required>
+                        <select name="number_suffix" id="number_suffix" value="<?php echo $user_data['street_nb_suf']; ?>" required>
                             <option value=""></option>
                             <option value="bis">Bis</option>
                             <option value="ter">Ter</option>
                             <option value="quater">Quater</option>
                             <option value="quinquiens">Quinquiens</option>
                         </select>
-                        <input type="text" id="street" name="street" required>
+                        <input type="text" id="street" name="street" value="<?php echo $user_data['street']; ?>" required>
                     </div>
                 </div>
                 <div class="input-group">
                    
                     <label for="address">Code postal</label>
-                    <input type="number" id="postal-code" name="postal-code" required>
+                    <input type="number" id="postal-code" name="postal-code" value="<?php echo $user_data['zip_code']; ?>" required>
+                </div>
+                <div class="input-group">
+                    <label for="phone">Numéro de téléphone</label>
+                    <input type="tel" id="phone" name="phone" value="<?php echo $user_data['phone']; ?>" required>
                 </div>
                 <div class="input-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="email" value="<?php echo $user_data['email']; ?>" required>
                 </div>
                 <div class="input-group">
                     <label for="intercom">Code interphone (optionnel)</label>
-                    <input type="text" id="intercom" name="intercom">
+                    <input type="text" id="intercom" name="intercom" value="<?php echo $user_data['intercom_code']; ?>">
+                </div>
+                <div class="input-group">
+                    <label for="birth_date">Date de naissance (optionnel)</label>
+                    <input type="date" id="birth_date" name="birth_date" value="<?php echo $user_data['birth_date']; ?>">
                 </div>
                 <button type="submit" class="btn">Mettre à jour les informations</button>
             </form>

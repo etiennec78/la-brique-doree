@@ -127,10 +127,11 @@ CREATE TABLE users (
     inscription_date DATETIME,
     last_connection DATETIME,
     street_nb INT,
-    street_nb_ext VARCHAR(3),
+    street_nb_suf VARCHAR(3),
     street VARCHAR(50),
     town VARCHAR(50),
     zip_code INT,
+    intercom_code VARCHAR(50),
     FOREIGN KEY(role_id) REFERENCES role(id)
 );
 
