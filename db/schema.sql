@@ -197,6 +197,16 @@ CREATE TABLE cart_menu (
     FOREIGN KEY (menu_id) REFERENCES menu(id) ON DELETE CASCADE
 );
 
+-- Table de liaison entre la nourriture et le panier
+CREATE TABLE cart_food (
+    cart_id INT,
+    food_id INT,
+    quantity INT DEFAULT 1,
+    PRIMARY KEY (cart_id, food_id),
+    FOREIGN KEY (cart_id) REFERENCES cart(id) ON DELETE CASCADE,
+    FOREIGN KEY (food_id) REFERENCES food(id) ON DELETE CASCADE
+);
+
 
 ----- PAIEMENT -----
 

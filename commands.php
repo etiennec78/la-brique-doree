@@ -58,29 +58,64 @@
           <section class="bento">
             <?php
             include_once 'db_connect.php';
+            $cart_details = [];
+            $total_price = 0;
 
-            try {
+            if (isset($_SESSION['user'])) {
+                try {
+                  $uid = $_SESSION['user']['id'];
+                  
+                  // Récupérer les plats du panier
+                  $stmt_f = $pdo->prepare("
+                      SELECT f.name, f.price, f.description, f.image_path, cf.quantity
+                      FROM cart c
+                      JOIN cart_food cf ON c.id = cf.cart_id
+                      JOIN food f ON cf.food_id = f.id
+                      WHERE c.user_id = ? AND c.payment_status_id = 1
+                  ");
+                  $stmt_f->execute([$uid]);
+                  $cart_foods = $stmt_f->fetchAll();
 
-              $stmt = $pdo->prepare("SELECT name, price, description, image_path FROM food f");
-              $stmt->execute();
-              $food_items = $stmt->fetchAll();
-              foreach($food_items as $food) {
-                $name = $food['name'];
-                $description = $food['description'];
-                $price = number_format($food['price'], 2, ",");
-                $image_path = $food['image_path'];
+                  // Récupérer les menus du panier
+                  $stmt_m = $pdo->prepare("
+                      SELECT m.name, m.price, 'Menu complet' as description, 'images/LOGO.png' as image_path, cm.quantity
+                      FROM cart c
+                      JOIN cart_menu cm ON c.id = cm.cart_id
+                      JOIN menu m ON cm.menu_id = m.id
+                      WHERE c.user_id = ? AND c.payment_status_id = 1
+                  ");
+                  $stmt_m->execute([$uid]);
+                  $cart_menus = $stmt_m->fetchAll();
 
-                echo '<article class="description" description="'. $description. '" price="'. $price .'€" style="background-image: url('. $image_path .');">
-                <h3>'. $name .'</h3>
-                <div class="nb-selector">
-                  <button class="remove-from-cart" type="button" aria-label="Retirer du panier">-</button>
-                  <input type="number" class="amount" min="0" max="9" value="0"/>
-                  <button class="add-to-cart" type="button" aria-label="Ajouter au panier">+</button>
-                </div>
-                </article>';
-              }
-            } catch (\PDOException $e) {
-              $erreur = "Erreur de base de données : " . $e->getMessage();
+                  $cart_items = array_merge($cart_foods, $cart_menus);
+
+                  if (empty($cart_items)) {
+                      echo '<p>Votre panier est vide.</p>';
+                  }
+
+                  foreach($cart_items as $item) {
+                    $name = $item['name'];
+                    $description = $item['description'];
+                    $quantity = $item['quantity'];
+                    $price_val = floatval($item['price']);
+                    $price_str = number_format($price_val, 2, ",");
+                    $image_path = $item['image_path'];
+
+                    $total_price += $price_val * $quantity;
+                    $cart_details[] = "• $name ($price_str €) x$quantity";
+
+                    echo '<article class="description" description="'. $description. '" price="'. $price_str .'€" style="background-image: url('. $image_path .');">
+                    <h3>'. $name .'</h3>
+                    <div class="nb-selector">
+                      <button class="remove-from-cart" type="button" aria-label="Retirer du panier">-</button>
+                      <input type="number" class="amount" min="0" max="9" value="'. $quantity .'"/>
+                      <button class="add-to-cart" type="button" aria-label="Ajouter au panier">+</button>
+                    </div>
+                    </article>';
+                  }
+                } catch (\PDOException $e) {
+                  echo "Erreur de base de données : " . $e->getMessage();
+                }
             }
             ?>
 
@@ -90,11 +125,16 @@
         <div id="cart-bar">
           <h2>Votre panier</h2>
           <p>
-            • Crabe (21,70€)<br/>
-            • Bento (11,50€)
-          <p>
-          <p>Total: 33,20€</p>
-          <button id="checkout" type="button" class="basic-btn">Payer</button>
+            <?php 
+              if (empty($cart_details)) {
+                  echo "Panier vide.";
+              } else {
+                  echo implode("<br/>", $cart_details);
+              }
+            ?>
+          </p>
+          <p>Total: <?php echo number_format($total_price, 2, ","); ?>€</p>
+          <button id="checkout" type="button" class="basic-btn" <?php if($total_price <= 0) echo 'disabled'; ?>>Payer</button>
         </div>
       </section>
     </main>
