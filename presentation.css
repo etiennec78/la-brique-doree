@@ -1,6 +1,5 @@
 .filters-panel {
-  padding-left: 50px;
-  padding-right: 50px;
+  padding: 20px 20px 0px 20px;
 }
 
 .filters-panel summary {
@@ -29,23 +28,6 @@
 .filters-list {
   display: flex;
   gap: 8px;
-  overflow-x: auto;
-  padding-bottom: 8px; /* Pour laisser de la place à la scrollbar */
-  scrollbar-width: thin; /* Pour Firefox */
-}
-
-.filters-list::-webkit-scrollbar {
-  height: 6px;
-}
-
-.filters-list::-webkit-scrollbar-track {
-  background: var(--input-color);
-  border-radius: 10px;
-}
-
-.filters-list::-webkit-scrollbar-thumb {
-  background: var(--solid-gold);
-  border-radius: 10px;
 }
 
 .filter {
@@ -61,7 +43,6 @@
   display: inline-flex;
   align-items: center;
   cursor: pointer;
-  white-space: nowrap; /* Empêche le texte des labels de passer à la ligne */
 }
 
 #crustacean:checked ~ .filters-panel .filters-menu label[for="crustacean"],
