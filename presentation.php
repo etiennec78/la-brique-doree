@@ -89,7 +89,7 @@ include_once 'get_cart_count.php';
           include_once 'db_connect.php';
 
           try {
-            $stmt = $pdo->prepare("SELECT id, name FROM food_type");
+            $stmt = $pdo->prepare("SELECT id, name FROM food_type ORDER BY id ASC");
             $stmt->execute();
             $food_types = $stmt->fetchAll();
 
