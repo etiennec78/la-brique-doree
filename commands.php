@@ -135,7 +135,9 @@ include_once 'get_cart_count.php';
               if (empty($cart_details)) {
                   echo "Panier vide.";
               } else {
-                  echo implode("<br/>", $cart_details);
+                  echo "<ul>";
+                  echo implode("<li/>", $cart_details);
+                  echo "</ul>";
               }
             ?>
           </p>
