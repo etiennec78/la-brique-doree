@@ -115,7 +115,7 @@ $cart_details = [];
                     $item_type = $item['item_type'];
 
                     $total_price += $price_val * $quantity;
-                    $cart_details[] = "• $name ($price_str €) x$quantity";
+                    $cart_details[] = "$name ($price_str €) x$quantity";
 
                     echo '<article class="description" description="'. htmlspecialchars($description). '" price="'. $price_str .'€" style="background-image: url('. htmlspecialchars($image_path) .');">
                     <h3>'. htmlspecialchars($name) .'</h3>
