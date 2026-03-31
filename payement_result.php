@@ -1,25 +1,30 @@
 <?php
 session_start();
+include_once 'getapikey.php';
 
-if (isset($_GET['status'])) {
-    $status = $_GET['status']; 
-} else {
-    $status = 'error'; 
-}
+$trans = $_GET['transaction'] ?? 'error';
+$montant = $_GET['montant'] ?? 'error';
+$vendeur = $_GET['vendeur'] ?? 'error';
+$status_bank = $_GET['status'] ?? 'error'; 
+$control_bank = $_GET['control'] ?? 'error';
 
-if ($status === 'success') {
-    $title = "COMMANDE VALIDEE !";
-    $message = "Merci pour votre confiance. </br> Vos briques sont en cours d'assemblage.";
+$api_key = getAPIKey($vendeur);
+$control_check = md5($api_key . "#" . $trans . "#" . $montant . "#" . $vendeur . "#" . $status_bank . "#");
+
+$isSuccess = ($status_bank === 'accepted' && $control_bank === $control_check);
+
+if ($isSuccess) {
+    $title = "COMMANDE VALIDÉE !";
+    $message = "Merci pour votre confiance. <br> Vos briques sont en cours d'assemblage.";
     $icon = "./images/favicon.png";
     $statusClass = "payment-success";
 } else {
-    $title = "PAIEMENT ECHOUE";
+    $title = "PAIEMENT ÉCHOUÉ";
     $message = "Mince ! Un problème est survenu lors de la transaction. <br> Aucune brique n'a été prélevée de votre compte.";
     $icon = "./images/cart.svg"; 
     $statusClass = "payment-error";
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -48,7 +53,7 @@ if ($status === 'success') {
             <p><?php echo $message; ?></p>
 
             <div class="btn-group">
-                <?php if ($status === 'success'): ?>
+                <?php if ($isSuccess): ?>
                     <a href="index.php" class="basic-btn">RETOURNER À L'ACCUEIL</a>
                 <?php else: ?>
                     <a href="commands.php" class="basic-btn">RÉESSAYER</a>

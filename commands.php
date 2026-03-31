@@ -2,6 +2,16 @@
 session_start();
 include_once 'db_connect.php';
 include_once 'get_cart_count.php';
+include_once 'getapikey.php'; 
+
+$vendeur = 'MI-4_J'; 
+$api_key = getAPIKey($vendeur); 
+$transaction = uniqid();
+
+$retour_url = "http://localhost/la-brique-doree/payement_result.php";
+
+$total_price = 0;
+$cart_details = [];
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -36,17 +46,17 @@ include_once 'get_cart_count.php';
           <?php if (isset($_SESSION['user'])): ?>
               <a href="profile.php" class="navbarbutton">Mon Profil</a>
 
-          <?php if ($_SESSION['user']['role'] === 'administrator'): ?>
-              <a href="admin.php" class="navbarbutton">Panel Admin</a>
-              
-          <?php elseif ($_SESSION['user']['role'] === 'restaurateur'): ?>
-              <a href="restaurateur.php" class="navbarbutton">Gestion Commandes</a>
-              
-          <?php elseif ($_SESSION['user']['role'] === 'delivery_person'): ?>
-              <a href="delivery.php" class="navbarbutton">Mes Livraisons</a>
-          <?php endif; ?>
+              <?php if ($_SESSION['user']['role'] === 'administrator'): ?>
+                  <a href="admin.php" class="navbarbutton">Panel Admin</a>
 
-          <a href="logout.php" class="navbarbutton alert">Déconnexion</a>
+              <?php elseif ($_SESSION['user']['role'] === 'restaurateur'): ?>
+                  <a href="restaurateur.php" class="navbarbutton">Gestion Commandes</a>
+
+              <?php elseif ($_SESSION['user']['role'] === 'delivery_person'): ?>
+                  <a href="delivery.php" class="navbarbutton">Mes Livraisons</a>
+              <?php endif; ?>
+
+              <a href="logout.php" class="navbarbutton alert">Déconnexion</a>
 
           <?php else: ?>
               <a href="login.php" class="navbarbutton">Connexion</a>
@@ -58,29 +68,26 @@ include_once 'get_cart_count.php';
       <section class="cart-page">
         <div id="cart-content">
           <div class="food-section" name="Éléments du panier">
-          <h2>~ Éléments du panier ~</h2>
-          <section class="bento">
-            <?php
-            include_once 'db_connect.php';
-            $cart_details = [];
-            $total_price = 0;
-
-            if (isset($_SESSION['user'])) {
-                try {
-                  $uid = $_SESSION['user']['id'];
-                  
-                  // Récupérer les plats du panier
-                  $stmt_f = $pdo->prepare("
+            <h2>~ Éléments du panier ~</h2>
+            <section class="bento">
+              <?php
+          
+              if (isset($_SESSION['user'])) {
+                  try {
+                    $uid = $_SESSION['user']['id'];
+                    
+                    // Récupérer les plats du panier
+                    $stmt_f = $pdo->prepare("
                       SELECT f.id as item_id, 'food' as item_type, f.name, f.price, f.description, f.image_path, cf.quantity
                       FROM cart c
                       JOIN cart_food cf ON c.id = cf.cart_id
                       JOIN food f ON cf.food_id = f.id
                       WHERE c.user_id = ? AND c.payment_status_id = 1
                   ");
-                  $stmt_f->execute([$uid]);
-                  $cart_foods = $stmt_f->fetchAll();
+                    $stmt_f->execute([$uid]);
+                    $cart_foods = $stmt_f->fetchAll();
 
-                  // Récupérer les menus du panier
+                    // Récupérer les menus du panier
                   $stmt_m = $pdo->prepare("
                       SELECT m.id as item_id, 'menu' as item_type, m.name, m.price, 'Menu complet' as description, 'images/LOGO.png' as image_path, cm.quantity
                       FROM cart c
@@ -88,16 +95,16 @@ include_once 'get_cart_count.php';
                       JOIN menu m ON cm.menu_id = m.id
                       WHERE c.user_id = ? AND c.payment_status_id = 1
                   ");
-                  $stmt_m->execute([$uid]);
-                  $cart_menus = $stmt_m->fetchAll();
+                    $stmt_m->execute([$uid]);
+                    $cart_menus = $stmt_m->fetchAll();
 
-                  $cart_items = array_merge($cart_foods, $cart_menus);
+                    $cart_items = array_merge($cart_foods, $cart_menus);
 
-                  if (empty($cart_items)) {
-                      echo '<p>Votre panier est vide.</p>';
-                  }
+                    if (empty($cart_items)) {
+                        echo '<p>Votre panier est vide.</p>';
+                    }
 
-                  foreach($cart_items as $item) {
+                    foreach($cart_items as $item) {
                     $name = $item['name'];
                     $description = $item['description'];
                     $quantity = $item['quantity'];
@@ -118,12 +125,14 @@ include_once 'get_cart_count.php';
                       <button class="add-to-cart" type="button" aria-label="Ajouter au panier" onclick="updateCart('. $item_id .', \''. $item_type .'\', \'add\')">+</button>
                     </div>
                     </article>';
-                  }
-                } catch (\PDOException $e) {
-                  echo "Erreur de base de données : " . $e->getMessage();
+                    }
+                  } catch (\PDOException $e) {
+                    echo "Erreur de base de données : " . $e->getMessage();
                 }
-            }
-            ?>
+                }
+              $montant_cybank = number_format($total_price, 2, '.', ''); 
+              $control = md5($api_key . "#" . $transaction . "#" . $montant_cybank . "#" . $vendeur . "#" . $retour_url . "#");
+              ?>
 
             </section>
           </div>
@@ -135,21 +144,29 @@ include_once 'get_cart_count.php';
               if (empty($cart_details)) {
                   echo "Panier vide.";
               } else {
-                  echo "<ul>";
-                  echo implode("<li/>", $cart_details);
-                  echo "</ul>";
+                echo "<ul>";
+                echo implode("<li/>", $cart_details);
+                echo "</ul>";
               }
             ?>
           </p>
           <p>Total: <?php echo number_format($total_price, 2, ","); ?>€</p>
-          <button id="checkout" type="button" class="basic-btn" <?php if($total_price <= 0) echo 'disabled'; ?>>Payer</button>
+          
+          <form action="https://www.plateforme-smc.fr/cybank/index.php" method="POST">
+            <input type="hidden" name="transaction" value="<?php echo $transaction; ?>">
+            <input type="hidden" name="montant" value="<?php echo $montant_cybank; ?>">
+            <input type="hidden" name="vendeur" value="<?php echo $vendeur; ?>">
+            <input type="hidden" name="retour" value="<?php echo $retour_url; ?>">
+            <input type="hidden" name="control" value="<?php echo $control; ?>">
+            <button id="checkout" type="submit" class="basic-btn" <?php if($total_price <= 0) echo 'disabled'; ?>>Payer</button>
+          </form>
         </div>
       </section>
     </main>
 
     <script>
     function updateCart(itemId, itemType, action) {
-        // Create form
+
         const form = document.createElement('form');
         form.method = 'POST';
         form.action = 'update_cart.php';
