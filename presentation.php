@@ -110,7 +110,7 @@ include_once 'get_cart_count.php';
 
                 echo '<article class="description" description="'. $description. '" price="'. $price .'€" style="background-image: url('. $image_path .');">
                 <h3>'. $name .'</h3>
-                <form action="update_cart.php" method="POST" style="margin: 0;">
+                <form action="update_cart.php" method="POST">
                     <input type="hidden" name="item_id" value="'. $id .'">
                     <input type="hidden" name="item_type" value="food">
                     <input type="hidden" name="action" value="add">
