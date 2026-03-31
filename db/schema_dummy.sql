@@ -28,7 +28,14 @@ INSERT INTO cart (user_id, payment_status_id, created_at, coupon_id) VALUES
 (1, 1, '2026-03-28 22:30:00.000000', 1);
 
 INSERT INTO cart_menu (cart_id, menu_id, quantity) VALUES
-(1, 1, 10);
+(1, 1, 9);
+
+INSERT INTO cart_food (cart_id, food_id, quantity) VALUES
+(1, 1, 1),
+(1, 6, 1),
+(1, 7, 1),
+(1, 10, 1),
+(1, 12, 1);
 
 
 ----- REVIEWS -----
