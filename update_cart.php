@@ -40,31 +40,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['item_id'], $_POST['it
         $cart_id = $pdo->lastInsertId();
 }
 
-        // Get current quantity
+        // Get current cart items
         $stmt = $pdo->prepare("SELECT quantity FROM $table_name WHERE cart_id = ? AND $foreign_key = ?");
         $stmt->execute([$cart_id, $item_id]);
         $cart_item = $stmt->fetch();
 
-        if ($action === 'add') {
-            if ($cart_item) {
-                if ((int)$cart_item['quantity'] < 9) { 
-                    $stmt = $pdo->prepare("UPDATE $table_name SET quantity = quantity + 1 WHERE cart_id = ? AND $foreign_key = ?");
+        if ($cart_item) {
+            $current_quantity = (int)$cart_item['quantity'];
+
+            if ($action === 'add' and $current_quantity < 9) {
+                $stmt = $pdo->prepare("UPDATE $table_name SET quantity = quantity + 1 WHERE cart_id = ? AND $foreign_key = ?");
+                $stmt->execute([$cart_id, $item_id]);
+            } elseif ($action === 'remove') {
+                if ($current_quantity > 1) {
+                    $stmt = $pdo->prepare("UPDATE $table_name SET quantity = quantity - 1 WHERE cart_id = ? AND $foreign_key = ?");
+                    $stmt->execute([$cart_id, $item_id]);
+                } else {
+                    // Remove item completely
+                    $stmt = $pdo->prepare("DELETE FROM $table_name WHERE cart_id = ? AND $foreign_key = ?");
                     $stmt->execute([$cart_id, $item_id]);
                 }
-            } else {
-                $stmt = $pdo->prepare("INSERT INTO $table_name (cart_id, $foreign_key, quantity) VALUES (?, ?, 1)");
-                $stmt->execute([$cart_id, $item_id]);
             }
-        } elseif ($action === 'remove' && $cart_item) {
-            $current_quantity = (int)$cart_item['quantity'];
-            if ($current_quantity > 1) {
-                $stmt = $pdo->prepare("UPDATE $table_name SET quantity = quantity - 1 WHERE cart_id = ? AND $foreign_key = ?");
-                $stmt->execute([$cart_id, $item_id]);
-            } else {
-                // Remove item completely
-                $stmt = $pdo->prepare("DELETE FROM $table_name WHERE cart_id = ? AND $foreign_key = ?");
-                $stmt->execute([$cart_id, $item_id]);
-            }
+        } elseif ($action === 'add') {
+            // Create a new entry
+            $stmt = $pdo->prepare("INSERT INTO $table_name (cart_id, $foreign_key, quantity) VALUES (?, ?, 1)");
+            $stmt->execute([$cart_id, $item_id]);
         }
 
         $pdo->commit();
