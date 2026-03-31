@@ -332,3 +332,75 @@ h1 {
 }
 
 /* Fin payement_result */
+
+/* Pour ordre_tracking */
+
+.tracking-container {
+    background: #141414e6;
+    margin: 50px auto;
+    padding: 40px;
+    width: 700px;
+    border-radius: 20px;
+    border: 3px solid var(--solid-gold);
+    box-shadow: 0 0 25px var(--solid-gold);
+}
+
+.stepper {
+    display: flex;
+    margin: 50px 0;
+}
+
+.step {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #555; /* Couleur par défaut avant d'appliquer le gold par dessus */
+}
+
+.circle {
+    width: 50px;
+    height: 50px;
+    background: var(--darkgray);
+    border: 2px solid #555;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.step.active .circle {
+    border-color: var(--solid-gold);
+    background: var(--gold);
+}
+
+.step.active p {
+    color: var(--offwhite);
+    font-weight: bold;
+}
+
+.line {
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    width: 100%;
+    height: 3px;
+    background: #333;
+    z-index: 1;
+}
+
+.step.active .line {
+    background: var(--solid-gold);
+}
+
+.delivery-info {
+    text-align: left;
+    background: #111;
+    padding: 15px;
+    border-left: 4px solid var(--solid-gold);
+    margin-bottom: 30px;
+}
+
+/* Fin order_tracking */
