@@ -144,7 +144,7 @@ $cart_details = [];
               if (empty($cart_details)) {
                   echo "Panier vide.";
               } else {
-                echo "<ul>";
+                echo "<ul><li/>";
                 echo implode("<li/>", $cart_details);
                 echo "</ul>";
               }
