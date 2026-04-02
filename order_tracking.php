@@ -7,6 +7,7 @@ $status = 2; // 1=Reçue, 2=Prépa, 3=En route, 4=Livrée
     <meta charset="UTF-8">
     <title>Suivi - La Brique Dorée</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="order_tracking.css">
 </head>
 <body>
     <header>

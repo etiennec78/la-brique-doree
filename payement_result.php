@@ -14,12 +14,12 @@ $control_check = md5($api_key . "#" . $trans . "#" . $montant . "#" . $vendeur .
 $isSuccess = ($status_bank === 'accepted' && $control_bank === $control_check);
 
 if ($isSuccess) {
-    $title = "COMMANDE VALIDÉE !";
+    $title = "COMMANDE VALIDEE !";
     $message = "Merci pour votre confiance. <br> Vos briques sont en cours d'assemblage.";
     $icon = "./images/favicon.png";
     $statusClass = "payment-success";
 } else {
-    $title = "PAIEMENT ÉCHOUÉ";
+    $title = "PAIEMENT ECHOUE";
     $message = "Mince ! Un problème est survenu lors de la transaction. <br> Aucune brique n'a été prélevée de votre compte.";
     $icon = "./images/cart.svg"; 
     $statusClass = "payment-error";
@@ -34,6 +34,7 @@ if ($isSuccess) {
     <title>Résultat du paiement - La Brique Dorée</title>
     <link rel="icon" type="image/x-icon" href="./images/favicon.png">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="payment_result.css">
 </head>
 <body>
     <header>
@@ -56,8 +57,8 @@ if ($isSuccess) {
                 <?php if ($isSuccess): ?>
                     <a href="index.php" class="basic-btn">RETOURNER À L'ACCUEIL</a>
                 <?php else: ?>
-                    <a href="commands.php" class="basic-btn">RÉESSAYER</a>
-                    <a href="index.php" class="navbarbutton">Annuler</a>
+                    <button onclick="location.href='index.php'" type="button" class="basic-btn" id="cancel">Annuler</button>
+                    <button onclick="location.href='commands.php'" type="button" class="basic-btn" id="retry">Réessayer</button>
                 <?php endif; ?>
             </div>
         </div>
