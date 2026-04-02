@@ -8,7 +8,7 @@ $vendeur = 'MI-4_J';
 $api_key = getAPIKey($vendeur); 
 $transaction = uniqid();
 
-$retour_url = "http://localhost/la-brique-doree/payement_result.php";
+$retour_url = "http://localhost/payement_result.php";
 
 $total_price = 0;
 $cart_details = [];
