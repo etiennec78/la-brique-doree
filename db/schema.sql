@@ -66,7 +66,7 @@ INSERT INTO food (name, food_type, price, description, image_path) VALUES
 ('Coca-Cola', 2, 2.3, 'Boisson fraîche et pétillante, parfaite pour accompagner chaque bouchée.', 'images/food/drink/coke.jpg'),
 ('Jus d''orange', 2, 1.5, 'Jus maison fruité et vitaminé, idéal pour une pause rafraîchissante.', 'images/food/drink/orange_juice.jpg'),
 ('Champagne', 2, 25.9, 'Champagne de la maison de la brique. Bulles fines et élégantes, pour un moment festif et léger.', 'images/food/drink/champaign.png'),
-('Fromages', 3, 8.5, 'Sélection de fromages affinés, à savourer brique par brique… ou tout d’un coup !', 'images/food/dessert/cheese.jpg'),
+('Fromages', 3, 21.5, 'Sélection de fromages affinés, à savourer brique par brique… ou tout d’un coup !', 'images/food/dessert/cheese.jpg'),
 ('Tarte', 3, 4.2, 'Tarte à la framboise. Pâte croustillante et framboises acidulées, douces et fruitées.', 'images/food/dessert/raspberry_pie.jpg'),
 ('Glace', 3, 3.3, 'Boules glacées onctueuses, parfaites pour une pause fraîcheur.', 'images/food/dessert/ice_cream.jpg'),
 ('Gâteau', 3, 4.7, 'Gâteau moelleux et gourmand, un vrai plaisir à chaque bouchée.', 'images/food/dessert/cake.jpg'),
@@ -98,6 +98,8 @@ CREATE TABLE menu (
 INSERT INTO menu (name, price, min_people, time_slot_id) VALUES
 ('Menu enfant', 7.5, 1, NULL),
 ('Partage d''Asie', 32, 3, 1);
+('Menu gourmand', 59.20, 1, NULL);
+('Menu doré', 21.5, 1, 2);
 
 -- Table de liaison entre Menu et Food
 CREATE TABLE menu_food (
@@ -112,15 +114,22 @@ CREATE TABLE menu_food (
 INSERT INTO menu_food (menu_id, food_id, quantity) VALUES
 -- Menu enfant
 (1, 6, 1), -- Burger enfant
-(1, 12, 1), -- Coca
-(1, 22, 1), -- Cupcake
+(1, 14, 1), -- Jus d'orange (ID corrigé selon l'ordre d'insertion)
+(1, 20, 1), -- Cupcake (ID corrigé selon l'ordre d'insertion)
 -- Partage d'Asie
 (2, 11, 1), -- Crevettes
 (2, 4, 1), -- Sashimi
 (2, 3, 1), -- Sushi
-(2, 17, 2), -- Ice cream (x2)
+(2, 18, 2), -- Ice cream (x2)
 (2, 19, 1); -- Cake
-
+-- Menu gourmand
+(3, , 1) -- Bacon & Oeufs
+(3, , 1) -- Burger frites
+(3, 13, 1) -- Coca-Cola
+-- Menu doré
+(4, 1, 1) -- Crabe
+(4, 15, 1) -- Champagne
+(4, 16, 1) -- Plateau de fromages
 
 ----- ROLES et USERS -----
 
