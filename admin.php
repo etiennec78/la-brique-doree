@@ -3,7 +3,28 @@ session_start();
 include_once 'db_connect.php';
 
 // Obtenir les infos des utilisateurs dans la base de données
-$stmt = $pdo->prepare("SELECT u.id, u.email, u.first_name, u.last_name, r.name as role, COALESCE(m.quantity, 0) as quantity FROM users u JOIN role r ON u.role_id = r.id LEFT JOIN cart c ON u.id = c.user_id LEFT JOIN cart_menu m ON c.id = m.cart_id");
+$stmt = $pdo->prepare("
+SELECT u.id, u.email, u.first_name, u.last_name, r.name AS role,
+(
+COALESCE(SUM(CASE WHEN ps.name = 'pending' THEN m.total_menu_quantity ELSE 0 END), 0) +
+COALESCE(SUM(CASE WHEN ps.name = 'pending' THEN cf.total_food_quantity ELSE 0 END), 0)
+) AS total_quantity
+FROM users u
+LEFT JOIN role r ON u.role_id = r.id
+LEFT JOIN cart c ON u.id = c.user_id
+LEFT JOIN payment_status ps ON c.payment_status_id = ps.id
+LEFT JOIN (
+    SELECT cart_id, SUM(quantity) AS total_menu_quantity
+    FROM cart_menu
+    GROUP BY cart_id
+) m ON c.id = m.cart_id
+LEFT JOIN (
+    SELECT cart_id, SUM(quantity) AS total_food_quantity
+    FROM cart_food
+    GROUP BY cart_id
+) cf ON c.id = cf.cart_id
+GROUP BY u.id, u.email, u.first_name, u.last_name, r.name;
+");
 $stmt->execute();
 $users_data = $stmt->fetchAll();
 if (!$users_data) {
@@ -88,7 +109,7 @@ if (!$users_data) {
                             <td>'. $user_data['id'] .'</td>
                             <td><strong>'. $user_data['first_name'] .' '. $user_data['last_name'] .'</strong></td>
                             <td>'. $user_data['email'] .'</td>
-                            <td>'. $user_data['quantity'] .'</td>
+                            <td>'. $user_data['total_quantity'] .'</td>
                             <td><span class="tag gold">'. $user_data['role'] .'</span></td>
                             <td><a href="profile.php" class="action-link">Gérer</a></td>
                         </tr>';
