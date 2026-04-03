@@ -106,7 +106,7 @@ include_once 'get_cart_count.php';
                             <h3>'. $name .'</h3>
                             <form action="update_cart.php" method="POST">
                               <input type="hidden" name="item_id" value="'. $id .'">
-                              <input type="hidden" name="item_type" value="food">
+                              <input type="hidden" name="item_type" value="menu">
                               <input type="hidden" name="action" value="add">
                               <button class="add-to-cart" type="submit" aria-label="Ajouter au panier">+</button>
                             </form>
