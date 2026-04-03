@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <section id="navbar-header">
             <a href="index.php" class="navbarbutton">Accueil</a>
             <a href="presentation.php" class="navbarbutton">Nos produits</a>
-            <a href="avis.php" class="navbarbutton">Avis</a>
+            <a href="reviews.php" class="navbarbutton">Avis</a>
 
             <?php if (isset($_SESSION['user'])): ?>
                 <a href="profile.php" class="navbarbutton">Mon Profil</a>
