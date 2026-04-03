@@ -111,7 +111,6 @@ $cart_details = [];
 
                   // Boucler pour chaque menu + 1 (plats individuels)
                   for($i = 0; $i < count($cart_menus) + 1; $i++) {
-                    $menu = $cart_menus[$i];
                     $individual = $i == count($cart_menus);
                     echo '<div>';
 
@@ -121,6 +120,7 @@ $cart_details = [];
                     } else {
 
                       // Ajouter le menu dans la liste de paiements
+                      $menu = $cart_menus[$i];
                       $name = $menu['name'];
                       $price_val = floatval($menu['price']);
                       $price_str = number_format($price_val, 2, ",");
@@ -144,16 +144,17 @@ $cart_details = [];
 
                     echo '<h2>'. htmlspecialchars($menu_name) .'</h2>';
                     echo '<div class="items-grid">';
+
                     foreach($foods as $food) {
                       $name = $food['name'];
                       $description = $food['description'];
-                      $quantity = $food['quantity'];
                       $price_val = floatval($food['price']);
                       $price_str = number_format($price_val, 2, ",");
                       $image_path = $food['image_path'];
                       $food_id = $food['item_id'];
 
                       if ($individual) {
+                        $quantity = $food['quantity'];
                         $total_price += $price_val * $quantity;
                         $cart_details[] = "$name (".$price_str."€) x$quantity";
                       }
@@ -163,9 +164,9 @@ $cart_details = [];
 
                       if ($individual) {
                         echo '<div class="nb-selector">
-                        <button class="remove-from-cart" type="button" aria-label="Retirer du panier" onclick="updateCart('. $food_id .', \''. $food_type .'\', \'remove\')">-</button>
+                        <button class="remove-from-cart" type="button" aria-label="Retirer du panier" onclick="updateCart('. $food_id .', \'food\', \'remove\')">-</button>
                         <input type="number" class="amount" min="0" max="9" value="'. $quantity .'"/>
-                        <button class="add-to-cart" type="button" aria-label="Ajouter au panier" onclick="updateCart('. $food_id .', \''. $food_type .'\', \'add\')">+</button>
+                        <button class="add-to-cart" type="button" aria-label="Ajouter au panier" onclick="updateCart('. $food_id .', \'food\', \'add\')">+</button>
                         </div>';
                       }
                       echo '</article>';
