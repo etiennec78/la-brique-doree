@@ -86,9 +86,35 @@ include_once 'get_cart_count.php';
 
       <section class="menu-content">
         <?php
-          include_once 'db_connect.php';
-
           try {
+              echo '<div class="food-section" name="Menus">
+                      <h2>~ Nos Menus ~</h2>
+                      <section class="bento">';
+
+                $stmtMenu = $pdo->prepare("SELECT id, name, price, description FROM menu ORDER BY id ASC");
+                $stmtMenu->execute();
+                $menus = $stmtMenu->fetchAll();
+
+                foreach($menus as $menu) {
+                    $id = $menu['id'];
+                    $name = ($menu['name']);
+                    $price = number_format($menu['price'], 2, ",");
+                    $description = ($menu['description']);
+                    $image_path = "./images/LeRestaurantPhoto1.jpg";
+
+                    echo '<article class="description" description="'. $description . '" price="'. $price .'€" style="background-image: url('. $image_path .');">
+                            <h3>'. $name .'</h3>
+                            <form action="update_cart.php" method="POST">
+                              <input type="hidden" name="item_id" value="'. $id .'">
+                              <input type="hidden" name="item_type" value="food">
+                              <input type="hidden" name="action" value="add">
+                              <button class="add-to-cart" type="submit" aria-label="Ajouter au panier">+</button>
+                            </form>
+                            </article>';
+                }
+                echo '</section>
+                      </div>'; 
+
             $stmt = $pdo->prepare("SELECT id, name FROM food_type ORDER BY id ASC");
             $stmt->execute();
             $food_types = $stmt->fetchAll();

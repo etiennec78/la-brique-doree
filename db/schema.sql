@@ -1,4 +1,4 @@
------ ALLERGENES -----
+-- ------- ALLERGENES -------
 
 CREATE TABLE allergen (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -9,7 +9,7 @@ INSERT INTO allergen (name) VALUES
 ('crustacean'), ('fish'), ('gluten'), ('milk'), ('sesame'), ('egg'), ('soy'), ('nut'), ('sulfite');
 
 
------ NUTRISCORE, TIME_SLOT et FOOD_TYPE -----
+-- ------- NUTRISCORE, TIME_SLOT et FOOD_TYPE -------
 
 CREATE TABLE nutriscore (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -36,7 +36,7 @@ INSERT INTO food_type (name) VALUES
 ('Plats'), ('Boissons'), ('Desserts');
 
 
------ FOOD -----
+-- ------- FOOD -------
 
 CREATE TABLE food (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -84,7 +84,7 @@ CREATE TABLE food_allergen (
 );
 
 
------ MENU -----
+-- ------- MENU -------
 
 CREATE TABLE menu (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -100,7 +100,7 @@ INSERT INTO menu (name, description, price, min_people, time_slot_id) VALUES
 ('Menu enfant', 'Un menu pour les futurs petits minis micro prochains constructeurs !' , 7.5, 1, NULL),
 ('Partage d''Asie', 'Un menu qui vous fera voyager dans un autre continent', 32, 3, 1),
 ('Menu gourmand', 'Un menu pour les gourmands, arriverez-vous à le terminer ?', 59.20, 1, NULL),
-('Menu doré', 'Un menu pour les palais les plus fins', 21.5, 1, 2),
+('Menu doré', 'Un menu pour les palais les plus fins', 21.5, 1, 2);
 
 -- Table de liaison entre Menu et Food
 CREATE TABLE menu_food (
@@ -115,24 +115,24 @@ CREATE TABLE menu_food (
 INSERT INTO menu_food (menu_id, food_id, quantity) VALUES
 -- Menu enfant
 (1, 6, 1), -- Burger enfant
-(1, 14, 1), -- Jus d'orange (ID corrigé selon l'ordre d'insertion)
-(1, 20, 1), -- Cupcake (ID corrigé selon l'ordre d'insertion)
+(1, 14, 1), -- Jus d'orange
+(1, 20, 1), -- Cupcake
 -- Partage d'Asie
 (2, 11, 1), -- Crevettes
 (2, 4, 1), -- Sashimi
 (2, 3, 1), -- Sushi
 (2, 18, 2), -- Ice cream (x2)
-(2, 19, 1); -- Cake
+(2, 19, 1), -- Cake
 -- Menu gourmand
-(3, , 1) -- Bacon & Oeufs
-(3, , 1) -- Burger frites
-(3, 13, 1) -- Coca-Cola
+(3, 12, 1), -- Bacon & Oeufs
+(3, 8, 1), -- Burger frites
+(3, 13, 1), -- Coca Cola
 -- Menu doré
-(4, 1, 1) -- Crabe
-(4, 15, 1) -- Champagne
-(4, 16, 1) -- Plateau de fromages
+(4, 1, 1), -- Crabe
+(4, 15, 1), -- Champagne
+(4, 16, 1); -- Plateau de fromages
 
------ ROLES et USERS -----
+-- ------- ROLES et USERS -------
 
 CREATE TABLE role (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -163,7 +163,7 @@ CREATE TABLE users (
 );
 
 
------ COUPONS -----
+-- ------- COUPONS -------
 
 CREATE TABLE coupon (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -173,7 +173,7 @@ CREATE TABLE coupon (
 );
 
 
------ PANIER / COMMANDE -----
+-- ------- PANIER / COMMANDE -------
 
 
 CREATE TABLE payment_status (
@@ -218,7 +218,7 @@ CREATE TABLE cart_food (
 );
 
 
------ PAIEMENT -----
+-- ------- PAIEMENT -------
 
 CREATE TABLE payment (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -233,7 +233,7 @@ CREATE TABLE payment (
 
 
 
------ AVIS -----
+-- ------- AVIS -------
 
 CREATE TABLE reviews (
     id INT PRIMARY KEY AUTO_INCREMENT,
