@@ -8,7 +8,15 @@ $vendeur = 'MI-4_J';
 $api_key = getAPIKey($vendeur); 
 $transaction = uniqid();
 
-$retour_url = "http://localhost/payment_result.php";
+$current_cart_id = 0;
+if (isset($_SESSION['user'])) {
+    $stmt_c = $pdo->prepare("SELECT id FROM cart WHERE user_id = ? AND payment_status_id = 1 LIMIT 1");
+    $stmt_c->execute([$_SESSION['user']['id']]);
+    $res_c = $stmt_c->fetch();
+    $current_cart_id = $res_c ? $res_c['id'] : 0;
+}
+
+$retour_url = "http://localhost/payment_result.php?cart_id=" . $current_cart_id;
 
 $total_price = 0;
 $cart_details = [];

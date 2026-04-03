@@ -2,6 +2,22 @@
 session_start();
 include_once 'db_connect.php';
 include_once 'get_cart_count.php';
+
+// Les commandes en attente (Statut 1 ou 2)
+$stmt_waiting = $pdo->prepare("SELECT o.id, u.first_name FROM orders o JOIN users u ON o.customer_id = u.id WHERE o.order_status_id IN (1, 2)");
+$stmt_waiting->execute();
+$waiting_orders = $stmt_waiting->fetchAll();
+
+// les commandes déjà parties (Statut 3 ou 4)
+$stmt_delivery = $pdo->prepare("SELECT o.id, u.first_name FROM orders o JOIN users u ON o.customer_id = u.id WHERE o.order_status_id IN (3, 4)");
+$stmt_delivery->execute();
+$delivery_orders = $stmt_delivery->fetchAll();
+
+// La liste des livreurs
+$stmt_users = $pdo->prepare("SELECT id, first_name FROM users WHERE role_id = 4");
+$stmt_users->execute();
+$deliverers = $stmt_users->fetchAll();
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -35,17 +51,17 @@ include_once 'get_cart_count.php';
             <?php if (isset($_SESSION['user'])): ?>
                 <a href="profile.php" class="navbarbutton">Mon Profil</a>
 
-            <?php if ($_SESSION['user']['role'] === 'administrator'): ?>
-                <a href="admin.php" class="navbarbutton">Panel Admin</a>
-                
-            <?php elseif ($_SESSION['user']['role'] === 'restaurateur'): ?>
-                <a href="restaurateur.php" class="navbarbutton">Gestion Commandes</a>
-                
-            <?php elseif ($_SESSION['user']['role'] === 'delivery_person'): ?>
-                <a href="delivery.php" class="navbarbutton">Mes Livraisons</a>
-            <?php endif; ?>
+                <?php if ($_SESSION['user']['role'] === 'administrator'): ?>
+                    <a href="admin.php" class="navbarbutton">Panel Admin</a>
+                    
+                <?php elseif ($_SESSION['user']['role'] === 'restaurateur'): ?>
+                    <a href="restaurateur.php" class="navbarbutton">Gestion Commandes</a>
+                    
+                <?php elseif ($_SESSION['user']['role'] === 'delivery_person'): ?>
+                    <a href="delivery.php" class="navbarbutton">Mes Livraisons</a>
+                <?php endif; ?>
 
-            <a href="logout.php" class="navbarbutton alert">Déconnexion</a>
+                <a href="logout.php" class="navbarbutton alert">Déconnexion</a>
 
             <?php else: ?>
                 <a href="login.php" class="navbarbutton">Connexion</a>
@@ -56,6 +72,11 @@ include_once 'get_cart_count.php';
 
     <main>
         <h2>~ Commandes ~</h2>
+        
+        <?php if(isset($_GET['success'])): ?>
+            <p style="text-align: center; font-weight: bold;">Commande mise à jour avec succès !</p>
+        <?php endif; ?>
+
         <div class="tabs">  
             <nav class="tabs-nav">
                 <label class="tab-item">
@@ -73,50 +94,35 @@ include_once 'get_cart_count.php';
                 <table>
                     <tr>
                         <td><h3>COMMANDE</h3></td>
-                        <td><h3 id="state">ETAT</h3></td>
+                        <td><h3 id="state">ETAT / LIVREUR</h3></td>
                     </tr>
 
-                    <tr>
-                        <td><span>Commande 1</span></td>
-                        <td>
-                            <label class="selection">
-                                <span>Préparation</span>
-                                <input type="radio" name="state-1" value="waiting" checked/> 
-                            </label>                            
-                            <label class="selection">
-                                <span>Livraison</span>
-                                <input type="radio" name="state-1" value="delivery"/>                                
-                            </label>
-                        </td>
-                    </tr>
+                    <?php if (empty($waiting_orders)): ?>
+                        <tr><td colspan="2" style="text-align:center;">Aucune commande en attente.</td></tr>
+                    <?php endif; ?>
 
+                    <?php foreach ($waiting_orders as $order): ?>
                     <tr>
-                        <td><span>Commande 2</span></td>
+                        <td><span>Commande #<?php echo $order['id']; ?> (<?php echo $order['first_name']; ?>)</span></td>
                         <td>
-                            <label class="selection">
-                                <span>Préparation</span>
-                                <input type="radio" name="state-2" value="waiting" checked/>                               
-                            </label>
-                            <label class="selection">
-                                <span>Livraison</span>
-                                <input type="radio" name="state-2" value="delivery"/>                               
-                            </label>
-                        </td>
-                    </tr>
+                            <form action="assign_order.php" method="POST" style="display: flex; align-items: center; gap: 10px;">
+                                <input type="hidden" name="order_id" value="<?php echo $order['id']; ?>">
+                                
+                                <select name="delivery_person_id" required style="padding: 5px; border-radius: 5px; border: 1px solid #FFD700; background: #000; color: #fff;">
+                                    <option value="">-- Choisir Livreur --</option>
+                                    <?php foreach ($deliverers as $d): ?>
+                                        <option value="<?php echo $d['id']; ?>"><?php echo ($d['first_name']); ?></option>
+                                    <?php endforeach; ?>
+                                </select>
 
-                    <tr>
-                        <td><span>Commande 3</span></td>
-                        <td>
-                            <label class="selection">
-                                <span>Préparation</span>
-                                <input type="radio" name="state-3" value="waiting" checked/>                                
-                            </label>
-                            <label class="selection">
-                                <span>Livraison</span>
-                                <input type="radio" name="state-3" value="delivery"/>                                 
-                            </label>
+                                <label class="selection">
+                                    <span>Prêt !</span>
+                                    <input type="radio" name="confirm" onchange="this.form.submit()"/> 
+                                </label>
+                            </form>
                         </td>
                     </tr>
+                    <?php endforeach; ?>
                 </table>
             </div>
 
@@ -127,35 +133,21 @@ include_once 'get_cart_count.php';
                         <td><h3 id="state">ETAT</h3></td>
                     </tr>
 
-                    <tr>
-                        <td><span>Commande 1</span></td>
-                        <td>
-                            <label class="selection">
-                                <span>Livrée</span>
-                                <input type="checkbox" name="state-1" value="delivered"/> 
-                            </label>
-                        </td>
-                    </tr>
+                    <?php if (empty($delivery_orders)): ?>
+                        <tr><td colspan="2" style="text-align:center;">Aucune livraison en cours.</td></tr>
+                    <?php endif; ?>
 
+                    <?php foreach ($delivery_orders as $order): ?>
                     <tr>
-                        <td><span>Commande 2</span></td>
+                        <td><span>Commande #<?php echo $order['id']; ?> (<?php echo ($order['first_name']); ?>)</span></td>
                         <td>
                             <label class="selection">
-                                <span>Livrée</span>
-                                <input type="checkbox" name="state-2" value="delivered"/> 
+                                <span>En route...</span>
+                                <input type="checkbox" checked disabled/> 
                             </label>
                         </td>
                     </tr>
-
-                    <tr>
-                        <td><span>Commande 3</span></td>
-                        <td>
-                            <label class="selection">
-                                <span>Livrée</span>
-                                <input type="checkbox" name="state-3" value="delivered"/> 
-                            </label>
-                        </td>
-                    </tr>
+                    <?php endforeach; ?>
                 </table>
             </div>
         </div>
