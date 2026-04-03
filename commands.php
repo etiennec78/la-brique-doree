@@ -163,11 +163,15 @@ $cart_details = [];
                       <h3>'. htmlspecialchars($name) .'</h3>';
 
                       if ($individual) {
-                        echo '<div class="nb-selector">
-                        <button class="remove-from-cart" type="button" aria-label="Retirer du panier" onclick="updateCart('. $food_id .', \'food\', \'remove\')">-</button>
-                        <input type="number" class="amount" min="0" max="9" value="'. $quantity .'"/>
-                        <button class="add-to-cart" type="button" aria-label="Ajouter au panier" onclick="updateCart('. $food_id .', \'food\', \'add\')">+</button>
-                        </div>';
+                        echo '<form method="POST" action="update_cart.php" style="display:inline; margin:0; padding:0;">
+                        <input type="hidden" name="item_id" value="'. $food_id .'">
+                        <input type="hidden" name="item_type" value="food">
+                        <div class="nb-selector">
+                        <button class="remove-from-cart" type="submit" name="action" value="remove" aria-label="Retirer du panier">-</button>
+                        <input type="number" class="amount" name="amount" min="0" max="9" value="'. $quantity .'"/>
+                        <button class="add-to-cart" type="submit" name="action" value="add" aria-label="Ajouter au panier">+</button>
+                        </div>
+                        </form>';
                       }
                       echo '</article>';
                     }
@@ -208,39 +212,6 @@ $cart_details = [];
         </div>
       </section>
     </main>
-
-    <script>
-    function updateCart(itemId, itemType, action) {
-
-        const form = document.createElement('form');
-        form.method = 'POST';
-        form.action = 'update_cart.php';
-        
-        // Add item_id
-        const idInput = document.createElement('input');
-        idInput.type = 'hidden';
-        idInput.name = 'item_id';
-        idInput.value = itemId;
-        form.appendChild(idInput);
-        
-        // Add item_type
-        const typeInput = document.createElement('input');
-        typeInput.type = 'hidden';
-        typeInput.name = 'item_type';
-        typeInput.value = itemType;
-        form.appendChild(typeInput);
-
-        // Add action
-        const actionInput = document.createElement('input');
-        actionInput.type = 'hidden';
-        actionInput.name = 'action';
-        actionInput.value = action;
-        form.appendChild(actionInput);
-        
-        document.body.appendChild(form);
-        form.submit();
-    }
-    </script>
 
     <footer>
         <div id="contact">
