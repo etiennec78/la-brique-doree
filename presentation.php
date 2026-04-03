@@ -87,9 +87,9 @@ include_once 'get_cart_count.php';
       <section class="menu-content">
         <?php
           try {
-              echo '<div class="food-section" name="Menus">
-                      <h2>~ Nos Menus ~</h2>
-                      <section class="bento">';
+            echo '<div class="food-section" name="Menus">
+              <h2>~ Nos Menus ~</h2>
+              <section class="bento">';
 
                 $stmtMenu = $pdo->prepare("SELECT id, name, price, description FROM menu ORDER BY id ASC");
                 $stmtMenu->execute();
@@ -97,12 +97,29 @@ include_once 'get_cart_count.php';
 
                 foreach($menus as $menu) {
                     $id = $menu['id'];
-                    $name = ($menu['name']);
+                    $name = $menu['name'];
                     $price = number_format($menu['price'], 2, ",");
-                    $description = ($menu['description']);
-                    $image_path = "./images/LeRestaurantPhoto1.jpg";
+                    $description = $menu['description'];
 
-                    echo '<article class="description" description="'. $description . '" price="'. $price .'€" style="background-image: url('. $image_path .');">
+                    // On récupère les images spécifiquement pour ce menu
+                    $stmtImages = $pdo->prepare("
+                      SELECT f.image_path 
+                      FROM food f
+                      JOIN menu_food mf ON f.id = mf.food_id
+                      WHERE mf.menu_id = ?
+                    ");
+                    
+                    $stmtImages->execute([$id]);
+                    $images = $stmtImages->fetchAll(PDO::FETCH_COLUMN);
+
+                    echo '<article class="description" description="'. $description . '" price="'. $price .'€">
+                            <div class="menu-grid">';
+                                
+                                foreach($images as $img_path) {
+                                    echo '<div style="flex: 1; background-image: url('. $img_path .'); background-size: cover; background-position: center;"></div>';
+                                }
+
+                    echo '  </div>
                             <h3>'. $name .'</h3>
                             <form action="update_cart.php" method="POST">
                               <input type="hidden" name="item_id" value="'. $id .'">
@@ -110,7 +127,7 @@ include_once 'get_cart_count.php';
                               <input type="hidden" name="action" value="add">
                               <button class="add-to-cart" type="submit" aria-label="Ajouter au panier">+</button>
                             </form>
-                            </article>';
+                          </article>';
                 }
                 echo '</section>
                       </div>'; 
