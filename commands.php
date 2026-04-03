@@ -104,13 +104,13 @@ $cart_details = [];
                 $stmt->execute([$uid]);
                 $cart_foods = $stmt->fetchAll();
 
-                $cart_size = count($cart_menus) + count($cart_foods);
-                if ($cart_size == 0) {
+                $cart_has_food = count($cart_foods) > 0;
+                if (count($cart_menus) <= 0 and !$cart_has_food) {
                   echo '<p>Votre panier est vide.</p>';
                 } else {
 
                   // Boucler pour chaque menu + 1 (plats individuels)
-                  for($i = 0; $i < count($cart_menus) + 1; $i++) {
+                  for($i = 0; $i < count($cart_menus) + $cart_has_food; $i++) {
                     $individual = $i == count($cart_menus);
                     echo '<div>';
 
