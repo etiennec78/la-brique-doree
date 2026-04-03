@@ -83,6 +83,53 @@ CREATE TABLE food_allergen (
     FOREIGN KEY (allergen_id) REFERENCES allergen(id) ON DELETE CASCADE
 );
 
+INSERT INTO food_allergen (food_id, allergen_id) VALUES
+(1, 1), -- Crab: crustacean
+(2, 1), -- Bento: crustacean
+(3, 2), -- Sushis: fish
+(4, 2), -- Sashimi: fish
+ -- Kid burger: gluten, milk, sesame
+(6, 3),
+(6, 4),
+(6, 5),
+-- Veggy burger: gluten, sesame, soy
+(7, 3),
+(7, 5),
+(7, 7),
+-- Burger fries: gluten, milk, sesame
+(8, 3),
+(8, 4),
+(8, 5),
+(10, 6), -- Egg & Steak: egg
+(11, 1), -- Shrimp: crustacean
+ -- Bacon & Eggs: gluten, egg
+(12, 3),
+(12, 6),
+(15, 9), -- Champaign: sulfite
+(16, 4), -- Chese: milk
+-- Raspberry pie: gluten, milk, egg
+(17, 3),
+(17, 4),
+(17, 6),
+-- Ice Cream: milk, soy, nut
+(18, 4),
+(18, 7),
+(18, 8),
+-- Cake: gluten, egg, soy
+(19, 3),
+(19, 6),
+(19, 7),
+-- Cupcake: gluten, milk, egg, soy
+(20, 3),
+(20, 4),
+(20, 6),
+(20, 7),
+-- Cupcake & Ice Cream: gluten, milk, egg, soy
+(21, 3),
+(21, 4),
+(21, 6),
+(21, 7);
+
 
 -- ------- MENU -------
 

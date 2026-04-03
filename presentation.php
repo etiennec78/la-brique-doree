@@ -144,6 +144,7 @@ include_once 'get_cart_count.php';
               $stmt = $pdo->prepare("SELECT id, name, price, description, image_path FROM food f WHERE f.food_type = ?");
               $stmt->execute([$food_type['id']]);
               $food_items = $stmt->fetchAll();
+
               foreach($food_items as $food) {
                 $id = $food['id'];
                 $name = $food['name'];
@@ -151,7 +152,16 @@ include_once 'get_cart_count.php';
                 $price = number_format($food['price'], 2, ",");
                 $image_path = $food['image_path'];
 
-                echo '<article class="description" description="'. $description. '" price="'. $price .'€" style="background-image: url('. $image_path .');">
+                $stmt = $pdo->prepare("
+                SELECT a.name
+                FROM allergen a
+                JOIN food_allergen fa ON fa.allergen_id = a.id
+                JOIN food f ON fa.food_id = f.id WHERE f.id = ?
+                ");
+                $stmt->execute([$id]);
+                $allergens = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+                echo '<article class="description '. implode(' ', $allergens) .'" description="'. $description. '" price="'. $price .'€" style="background-image: url('. $image_path .');">
                 <h3>'. $name .'</h3>
                 <form action="update_cart.php" method="POST">
                     <input type="hidden" name="item_id" value="'. $id .'">
