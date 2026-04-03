@@ -12,6 +12,11 @@
   padding: 12px;
   border-radius: 1rem;
   background: var(--darkgray);
+  font-size: 20px;
+}
+
+#cart-bar p {
+  font-size: 25px;
 }
 
 .bento {
@@ -108,7 +113,11 @@
 }
 
 ul {
-  padding: 10px;
+  padding: 25px;
+}
+
+li {
+  padding-bottom: 10px;
 }
 
 /* Hide arrow keys in number inputs (otherwise they hide the number) */

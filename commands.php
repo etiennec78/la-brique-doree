@@ -127,7 +127,7 @@ $cart_details = [];
                       $quantity = $menu['quantity'];
 
                       $total_price += $price_val * $quantity;
-                      $cart_details[] = "$name ($price_str €) x$quantity";
+                      $cart_details[] = "$name (".$price_str."€) x$quantity";
 
                       // Récupérer les plats de chaque menu dans le panier
                       $stmt = $pdo->prepare("
@@ -155,7 +155,7 @@ $cart_details = [];
 
                       if ($individual) {
                         $total_price += $price_val * $quantity;
-                        $cart_details[] = "$name ($price_str €) x$quantity";
+                        $cart_details[] = "$name (".$price_str."€) x$quantity";
                       }
 
                       echo '<article class="description" description="'. htmlspecialchars($description). '" price="'. $price_str .'€" style="background-image: url('. htmlspecialchars($image_path) .');">
@@ -185,17 +185,15 @@ $cart_details = [];
         </div>
         <div id="cart-bar">
           <h2>Votre panier</h2>
-          <p>
-            <?php 
-              if (empty($cart_details)) {
-                  echo "Panier vide.";
-              } else {
-                echo "<ul><li/>";
-                echo implode("<li/>", $cart_details);
-                echo "</ul>";
-              }
-            ?>
-          </p>
+          <?php
+            if (empty($cart_details)) {
+                echo "Panier vide.";
+            } else {
+              echo "<ul><li/>";
+              echo implode("<li/>", $cart_details);
+              echo "</ul>";
+            }
+          ?>
           <p>Total: <?php echo number_format($total_price, 2, ","); ?>€</p>
           
           <form action="https://www.plateforme-smc.fr/cybank/index.php" method="POST">
