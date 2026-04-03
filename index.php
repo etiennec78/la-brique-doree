@@ -59,7 +59,7 @@ include_once 'get_cart_count.php';
         <div id="slideshow-frame">
             <div id="slideshow">
                 <div class="slide">
-                    <img src="./images/LeRestaurantPhoto1.jpg" alt="Une photo de l'intérieur du restaurant">
+                    <img src="./images/RestaurantPhoto1.jpg" alt="Une photo de l'intérieur du restaurant">
                     <div class="rectangle">
                         <h2> RESERVEZ DES MAINTENANT </h2>
                         <p>
@@ -75,7 +75,7 @@ include_once 'get_cart_count.php';
                     </div>
                 </div>
                 <div class="slide">
-                    <img src="./images/LeRestaurantPhoto2.jpg" alt="Une photo de l'intérieur du restaurant">
+                    <img src="./images/RestaurantPhoto2.jpg" alt="Une photo de l'intérieur du restaurant">
                     <div class="rectangle">
                         <h2> COMMANDEZ DES MAINTENANT </h2>
                         <p>Envie d’un délicieux repas 100% briques ? Commandez dès maintenant vos plats préférés directement depuis notre site ! Rendez-vous dans la section Nos produits pour découvrir toutes nos spécialités colorées et gourmandes. En quelques clics, votre commande sera prête à être dégustée !</p>
