@@ -89,17 +89,18 @@ CREATE TABLE food_allergen (
 CREATE TABLE menu (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(30) NOT NULL,
+    description VARCHAR(255) NOT NULL,
     price FLOAT NOT NULL,
     min_people INT,
     time_slot_id INT,
     FOREIGN KEY(time_slot_id) REFERENCES time_slot(id)
 );
 
-INSERT INTO menu (name, price, min_people, time_slot_id) VALUES
-('Menu enfant', 7.5, 1, NULL),
-('Partage d''Asie', 32, 3, 1);
-('Menu gourmand', 59.20, 1, NULL);
-('Menu doré', 21.5, 1, 2);
+INSERT INTO menu (name, description, price, min_people, time_slot_id) VALUES
+('Menu enfant', 'Un menu pour les futurs petits minis micro prochains constructeurs !' , 7.5, 1, NULL),
+('Partage d''Asie', 'Un menu qui vous fera voyager dans un autre continent', 32, 3, 1),
+('Menu gourmand', 'Un menu pour les gourmands, arriverez-vous à le terminer ?', 59.20, 1, NULL),
+('Menu doré', 'Un menu pour les palais les plus fins', 21.5, 1, 2),
 
 -- Table de liaison entre Menu et Food
 CREATE TABLE menu_food (
