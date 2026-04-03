@@ -75,75 +75,113 @@ $cart_details = [];
     <main>
       <section class="cart-page">
         <div id="cart-content">
-          <div class="food-section" name="Éléments du panier">
-            <h2>~ Éléments du panier ~</h2>
-            <section class="bento">
-              <?php
-          
-              if (isset($_SESSION['user'])) {
-                  try {
-                    $uid = $_SESSION['user']['id'];
-                    
-                    // Récupérer les plats du panier
-                    $stmt_f = $pdo->prepare("
-                      SELECT f.id as item_id, 'food' as item_type, f.name, f.price, f.description, f.image_path, cf.quantity
-                      FROM cart c
-                      JOIN cart_food cf ON c.id = cf.cart_id
-                      JOIN food f ON cf.food_id = f.id
-                      WHERE c.user_id = ? AND c.payment_status_id = 1
-                  ");
-                    $stmt_f->execute([$uid]);
-                    $cart_foods = $stmt_f->fetchAll();
+          <h2>~ Éléments du panier ~</h2>
+          <section class="bento">
+            <?php
+            if (isset($_SESSION['user'])) {
+              try {
+                $uid = $_SESSION['user']['id'];
 
-                    // Récupérer les menus du panier
-                  $stmt_m = $pdo->prepare("
-                      SELECT m.id as item_id, 'menu' as item_type, m.name, m.price, 'Menu complet' as description, 'images/LOGO.png' as image_path, cm.quantity
-                      FROM cart c
-                      JOIN cart_menu cm ON c.id = cm.cart_id
-                      JOIN menu m ON cm.menu_id = m.id
-                      WHERE c.user_id = ? AND c.payment_status_id = 1
-                  ");
-                    $stmt_m->execute([$uid]);
-                    $cart_menus = $stmt_m->fetchAll();
+                // Récupérer les menus du panier
+                $stmt = $pdo->prepare("
+                SELECT m.id, m.name, m.price, cm.quantity
+                FROM cart c
+                JOIN cart_menu cm ON c.id = cm.cart_id
+                JOIN menu m ON cm.menu_id = m.id
+                WHERE c.user_id = ? AND c.payment_status_id = 1
+                ");
+                $stmt->execute([$uid]);
+                $cart_menus = $stmt->fetchAll();
 
-                    $cart_items = array_merge($cart_foods, $cart_menus);
+                // Récupérer les plats du panier
+                $stmt = $pdo->prepare("
+                SELECT f.id as item_id, f.name, f.price, f.description, f.image_path, cf.quantity
+                FROM cart c
+                JOIN cart_food cf ON c.id = cf.cart_id
+                JOIN food f ON cf.food_id = f.id
+                WHERE c.user_id = ? AND c.payment_status_id = 1
+                ");
+                $stmt->execute([$uid]);
+                $cart_foods = $stmt->fetchAll();
 
-                    if (empty($cart_items)) {
-                        echo '<p>Votre panier est vide.</p>';
+                $cart_size = count($cart_menus) + count($cart_foods);
+                if ($cart_size == 0) {
+                  echo '<p>Votre panier est vide.</p>';
+                } else {
+
+                  // Boucler pour chaque menu + 1 (plats individuels)
+                  for($i = 0; $i < count($cart_menus) + 1; $i++) {
+                    $menu = $cart_menus[$i];
+                    $individual = $i == count($cart_menus);
+                    echo '<div>';
+
+                    if ($individual) {
+                      $foods = $cart_foods;
+                      $menu_name = "Plats individuels";
+                    } else {
+
+                      // Ajouter le menu dans la liste de paiements
+                      $name = $menu['name'];
+                      $price_val = floatval($menu['price']);
+                      $price_str = number_format($price_val, 2, ",");
+                      $quantity = $menu['quantity'];
+
+                      $total_price += $price_val * $quantity;
+                      $cart_details[] = "$name ($price_str €) x$quantity";
+
+                      // Récupérer les plats de chaque menu dans le panier
+                      $stmt = $pdo->prepare("
+                      SELECT f.id as item_id, f.name, f.price, f.description, f.image_path
+                      FROM food f
+                      JOIN menu_food mf ON f.id = mf.food_id
+                      WHERE mf.menu_id = ?
+                      ");
+                      $stmt->execute([$menu['id']]);
+                      $foods = $stmt->fetchAll();
+
+                      $menu_name = $menu['name'];
                     }
 
-                    foreach($cart_items as $item) {
-                    $name = $item['name'];
-                    $description = $item['description'];
-                    $quantity = $item['quantity'];
-                    $price_val = floatval($item['price']);
-                    $price_str = number_format($price_val, 2, ",");
-                    $image_path = $item['image_path'];
-                    $item_id = $item['item_id'];
-                    $item_type = $item['item_type'];
+                    echo '<h2>'. htmlspecialchars($menu_name) .'</h2>';
+                    echo '<div class="items-grid">';
+                    foreach($foods as $food) {
+                      $name = $food['name'];
+                      $description = $food['description'];
+                      $quantity = $food['quantity'];
+                      $price_val = floatval($food['price']);
+                      $price_str = number_format($price_val, 2, ",");
+                      $image_path = $food['image_path'];
+                      $food_id = $food['item_id'];
 
-                    $total_price += $price_val * $quantity;
-                    $cart_details[] = "$name ($price_str €) x$quantity";
+                      if ($individual) {
+                        $total_price += $price_val * $quantity;
+                        $cart_details[] = "$name ($price_str €) x$quantity";
+                      }
 
-                    echo '<article class="description" description="'. htmlspecialchars($description). '" price="'. $price_str .'€" style="background-image: url('. htmlspecialchars($image_path) .');">
-                    <h3>'. htmlspecialchars($name) .'</h3>
-                    <div class="nb-selector">
-                      <button class="remove-from-cart" type="button" aria-label="Retirer du panier" onclick="updateCart('. $item_id .', \''. $item_type .'\', \'remove\')">-</button>
-                      <input type="number" class="amount" min="0" max="9" value="'. $quantity .'"/>
-                      <button class="add-to-cart" type="button" aria-label="Ajouter au panier" onclick="updateCart('. $item_id .', \''. $item_type .'\', \'add\')">+</button>
-                    </div>
-                    </article>';
+                      echo '<article class="description" description="'. htmlspecialchars($description). '" price="'. $price_str .'€" style="background-image: url('. htmlspecialchars($image_path) .');">
+                      <h3>'. htmlspecialchars($name) .'</h3>';
+
+                      if ($individual) {
+                        echo '<div class="nb-selector">
+                        <button class="remove-from-cart" type="button" aria-label="Retirer du panier" onclick="updateCart('. $food_id .', \''. $food_type .'\', \'remove\')">-</button>
+                        <input type="number" class="amount" min="0" max="9" value="'. $quantity .'"/>
+                        <button class="add-to-cart" type="button" aria-label="Ajouter au panier" onclick="updateCart('. $food_id .', \''. $food_type .'\', \'add\')">+</button>
+                        </div>';
+                      }
+                      echo '</article>';
                     }
-                  } catch (\PDOException $e) {
-                    echo "Erreur de base de données : " . $e->getMessage();
+                    echo '</div>';
+                    echo '</div>';
+                  }
                 }
-                }
-              $montant_cybank = number_format($total_price, 2, '.', ''); 
-              $control = md5($api_key . "#" . $transaction . "#" . $montant_cybank . "#" . $vendeur . "#" . $retour_url . "#");
-              ?>
-
-            </section>
-          </div>
+              } catch (\PDOException $e) {
+                echo "Erreur de base de données : " . $e->getMessage();
+              }
+            }
+            $montant_cybank = number_format($total_price, 2, '.', '');
+            $control = md5($api_key . "#" . $transaction . "#" . $montant_cybank . "#" . $vendeur . "#" . $retour_url . "#");
+            ?>
+          </section>
         </div>
         <div id="cart-bar">
           <h2>Votre panier</h2>

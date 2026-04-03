@@ -15,7 +15,32 @@
 }
 
 .bento {
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, max(220px, 33%)), 1fr));
+  display: block;
+}
+
+.bento > div {
+  margin-bottom: 2rem;
+  background: var(--darkgray);
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.bento > div > .items-grid {
+  display: grid;
+  grid-auto-rows: 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 1rem;
+}
+
+.bento > div > .items-grid > article {
+  border-radius: 0.5rem;
+  margin: 0;
+}
+
+.bento > div > h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 10px;
 }
 
 .nb-selector {
