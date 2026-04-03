@@ -76,7 +76,7 @@ if ($isSuccess) {
 
             <div class="btn-group">
                 <?php if ($isSuccess): ?>
-                    <a href="index.php" class="basic-btn">RETOURNER À L'ACCUEIL</a>
+                    <button onclick="location.href='index.php'" type="button" class="basic-btn">Retourner à l'accueil</button>
                 <?php else: ?>
                     <button onclick="location.href='index.php'" type="button" class="basic-btn" id="cancel">Annuler</button>
                     <button onclick="location.href='commands.php'" type="button" class="basic-btn" id="retry">Réessayer</button>
