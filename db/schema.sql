@@ -173,8 +173,7 @@ CREATE TABLE coupon (
 );
 
 
--- ------- PANIER / COMMANDE -------
-
+-- ------- STATUTS (PAIEMENT ET LIVRAISON) -------
 
 CREATE TABLE payment_status (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -184,8 +183,17 @@ CREATE TABLE payment_status (
 INSERT INTO payment_status (name) VALUES
 ('pending'), ('paid'), ('failed');
 
+CREATE TABLE order_status (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(20) UNIQUE NOT NULL
+);
 
--- Le panier
+INSERT INTO order_status (name) VALUES
+('paid'), ('preparing'), ('ready'), ('shipping'), ('delivered');
+
+
+-- ------- LE PANIER -------
+
 CREATE TABLE cart (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
@@ -197,7 +205,25 @@ CREATE TABLE cart (
     FOREIGN KEY(coupon_id) REFERENCES coupon(id)
 );
 
--- Table de liaison entre les menus et le panier
+
+-- ------- LA COMMANDE (Lien Resto/Livreur) -------
+
+CREATE TABLE orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cart_id INT NOT NULL,               
+    customer_id INT NOT NULL,           
+    delivery_person_id INT DEFAULT NULL, 
+    order_status_id INT DEFAULT 1, -- Correspond à 'paid' par défaut
+    
+    FOREIGN KEY (cart_id) REFERENCES cart(id) ON DELETE CASCADE,
+    FOREIGN KEY (customer_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (delivery_person_id) REFERENCES users(id) ON DELETE SET NULL,
+    FOREIGN KEY (order_status_id) REFERENCES order_status(id)
+);
+
+
+-- ------- CONTENU DU PANIER (Liaisons) -------
+
 CREATE TABLE cart_menu (
     cart_id INT,
     menu_id INT,
@@ -207,7 +233,6 @@ CREATE TABLE cart_menu (
     FOREIGN KEY (menu_id) REFERENCES menu(id) ON DELETE CASCADE
 );
 
--- Table de liaison entre la nourriture et le panier
 CREATE TABLE cart_food (
     cart_id INT,
     food_id INT,
