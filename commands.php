@@ -140,9 +140,10 @@ $cart_details = [];
                       $foods = $stmt->fetchAll();
 
                       $menu_name = $menu['name'];
+                      $name_suffix = $quantity > 1 ? " (x$quantity)" : "";
                     }
 
-                    echo '<h2>'. htmlspecialchars($menu_name) .'</h2>';
+                    echo '<h2>'. htmlspecialchars($menu_name) . $name_suffix .'</h2>';
                     echo '<div class="items-grid">';
 
                     foreach($foods as $food) {
