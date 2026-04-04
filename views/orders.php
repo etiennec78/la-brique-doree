@@ -1,8 +1,10 @@
 <?php
 global $pdo;
 include_once __DIR__ . '/../src/db_connect.php';
-include_once __DIR__ . '/../src/get_cart_count.php';
 include_once __DIR__ . '/../src/getapikey.php';
+
+
+error_log($cart_count);
 
 $vendeur = 'MI-4_J'; 
 $api_key = getAPIKey($vendeur); 

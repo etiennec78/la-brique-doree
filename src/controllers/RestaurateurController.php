@@ -2,6 +2,10 @@
 
 class RestaurateurController extends Controller {
     public function index() {
-        $this->render('restaurateur');
+        require_once __DIR__ . '/../models/Cart.php';
+
+        $cart_count = Cart::get_cart_count();
+
+        $this->render('restaurateur', ['cart_count' => $cart_count]);
     }
 }
