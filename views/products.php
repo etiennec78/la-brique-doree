@@ -1,8 +1,4 @@
-<?php
-session_start();
-include_once '../src/db_connect.php';
-include_once '../src/get_cart_count.php';
-?>
+<?php include_once __DIR__ . '/../src/get_cart_count.php'; ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -86,6 +82,7 @@ include_once '../src/get_cart_count.php';
 
       <section class="menu-content">
         <?php
+          global $pdo;
           try {
             echo '<div class="food-section" name="Menus">
               <h2>~ Nos Menus ~</h2>
@@ -124,7 +121,7 @@ include_once '../src/get_cart_count.php';
 
                     echo '  </div>
                             <h3>'. $name .'</h3>
-                            <form action="../src/update_cart.php" method="POST">
+                            <form action="/update_cart" method="POST">
                               <input type="hidden" name="item_id" value="'. $id .'">
                               <input type="hidden" name="item_type" value="menu">
                               <input type="hidden" name="action" value="add">
@@ -166,7 +163,7 @@ include_once '../src/get_cart_count.php';
 
                 echo '<article class="description '. implode(' ', $allergens) .'" description="'. $description. '" price="'. $price .'€" style="background-image: url('. $image_path .');">
                 <h3>'. $name .'</h3>
-                <form action="../src/update_cart.php" method="POST">
+                <form action="/update_cart" method="POST">
                     <input type="hidden" name="item_id" value="'. $id .'">
                     <input type="hidden" name="item_type" value="food">
                     <input type="hidden" name="action" value="add">
