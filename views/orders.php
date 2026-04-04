@@ -5,7 +5,7 @@ $vendeur = 'MI-4_J';
 $api_key = getAPIKey($vendeur); 
 $transaction = uniqid();
 
-$retour_url = "http://localhost/payment_result.php?cart_id=" . $cart_id;
+$retour_url = "http://localhost/payment_result?cart_id=" . $cart_id;
 
 $total_price = 0;
 $cart_details = [];
