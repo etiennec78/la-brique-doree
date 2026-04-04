@@ -2,7 +2,7 @@
     session_start();
     include_once '../src/db_connect.php';
     include_once '../src/get_cart_count.php';
-    $target = [$_SESSION['user']['id']];
+    $target = $_SESSION['user']['id'];
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         try {
