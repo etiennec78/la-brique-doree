@@ -12,6 +12,7 @@ $router->add('GET', 'register', 'AuthController', 'showRegister');
 $router->add('POST', 'register', 'AuthController', 'processRegister');
 $router->add('GET', 'logout', 'AuthController', 'logout');
 $router->add('GET', 'orders', 'OrderController', 'index');
+$router->add('GET', 'products', 'ProductsController', 'index');
 
 $url = $_SERVER['REQUEST_URI'];
 $method = $_SERVER['REQUEST_METHOD'];

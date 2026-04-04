@@ -16,7 +16,7 @@
         
          <section id="navbar-header">
             <a href="/" class="navbarbutton">Accueil</a>
-            <a href="/presentation" class="navbarbutton">Nos produits</a>
+            <a href="/products" class="navbarbutton">Nos produits</a>
             <a href="/reviews" class="navbarbutton">Avis</a>
             <a href="/login" class="navbarbutton">Connexion</a>
         </section>

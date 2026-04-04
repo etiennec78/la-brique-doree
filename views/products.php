@@ -12,7 +12,7 @@ include_once '../src/get_cart_count.php';
     <link rel="icon" type="image/x-icon" href="/assets/images/favicon.png">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/food-cards.css">
-    <link rel="stylesheet" href="/css/presentation.css">
+    <link rel="stylesheet" href="/css/products.css">
 </head>
 <body>
     <header>
@@ -30,7 +30,7 @@ include_once '../src/get_cart_count.php';
         
         <section id="navbar-header">
           <a href="/" class="navbarbutton">Accueil</a>
-          <a href="/presentation" class="navbarbutton">Nos produits</a>
+          <a href="/products" class="navbarbutton">Nos produits</a>
           <a href="/reviews" class="navbarbutton">Avis</a>
 
           <?php if (isset($_SESSION['user'])): ?>
