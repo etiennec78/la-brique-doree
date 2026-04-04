@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../db_connect.php';
 
 class Cart {
-    public static function get_cart_count() {
+    public static function getCartCount() {
         global $pdo;
         $cart_count = 0;
         if (isset($_SESSION['user']) && isset($pdo)) {
