@@ -1,9 +1,9 @@
 <?php
 session_start();
-include_once 'db_connect.php';
+include_once './db_connect.php';
 
 if (!isset($_SESSION['user'])) {
-    header('Location: login.php');
+    header('Location: ../views/login.php');
     exit;
 }
 
@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['item_id'], $_POST['it
     $user_id = $_SESSION['user']['id'];
 
     if (!in_array($item_type, ['food', 'menu'])) {
-        header('Location: commands.php');
+        header('Location: ../views/orders.php');
         exit;
     }
 
@@ -74,6 +74,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['item_id'], $_POST['it
     }
 }
 
-$referer = $_SERVER['HTTP_REFERER'] ?? 'commands.php';
+$referer = $_SERVER['HTTP_REFERER'] ?? '../views/orders.php';
 header("Location: $referer");
 exit;

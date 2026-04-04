@@ -13,13 +13,13 @@
 
 @font-face {
     font-family: 'Brix';
-    src: url('fonts/brix.ttf') format('truetype');
+    src: url('../assets/fonts/brix.ttf') format('truetype');
 }
   
 body {
   margin: 0;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  background-image: url('images/background.png');
+  background-image: url('../assets/images/background.png');
   color: var(--offwhite);
 }
 

@@ -1,5 +1,5 @@
 <?php
-include_once 'db_connect.php';
+include_once './db_connect.php';
 
 $cart_count = 0;
 if (isset($_SESSION['user']) && isset($pdo)) {

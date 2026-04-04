@@ -1,7 +1,7 @@
 <?php
 session_start();
-include_once 'db_connect.php';
-include_once 'get_cart_count.php';
+include_once '../src/db_connect.php';
+include_once '../src/get_cart_count.php';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -9,47 +9,47 @@ include_once 'get_cart_count.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Brique Dorée</title>
-    <link rel="icon" type="image/x-icon" href="./images/favicon.png">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="food-cards.css">
-    <link rel="stylesheet" href="presentation.css">
+    <link rel="icon" type="image/x-icon" href="../public/assets/images/favicon.png">
+    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="../public/css/food-cards.css">
+    <link rel="stylesheet" href="../public/css/presentation.css">
 </head>
 <body>
     <header>
         <div id="main-header">
-            <img id="logo" src="./images/LOGO.png" alt="Logo d'une brique LEGO dorée">
+            <img id="logo" src="../public/assets/images/LOGO.png" alt="Logo d'une brique LEGO dorée">
             <h1>NOS PRODUITS</h1>
-            <a href="commands.php">
-                <img id="cart" class="icon" src="./images/cart.svg" alt="Icône de panier de courses">
+            <a href="./orders.php">
+                <img id="cart" class="icon" src="../public/assets/images/cart.svg" alt="Icône de panier de courses">
                 <p id="cart_items" class="bubble"><?php echo $cart_count; ?></p>
             </a>
             <video class="video-background" autoplay muted loop>
-                <source src="./images/header_background.mp4" type="video/mp4">
+                <source src="../public/assets/images/header_background.mp4" type="video/mp4">
             </video>
         </div>
         
         <section id="navbar-header">
-          <a href="index.php" class="navbarbutton">Accueil</a>
-          <a href="presentation.php" class="navbarbutton">Nos produits</a>
-          <a href="reviews.php" class="navbarbutton">Avis</a>
+          <a href="../public/index.php" class="navbarbutton">Accueil</a>
+          <a href="./presentation.php" class="navbarbutton">Nos produits</a>
+          <a href="./reviews.php" class="navbarbutton">Avis</a>
 
           <?php if (isset($_SESSION['user'])): ?>
-              <a href="profile.php" class="navbarbutton">Mon Profil</a>
+              <a href="./profile.php" class="navbarbutton">Mon Profil</a>
 
           <?php if ($_SESSION['user']['role'] === 'administrator'): ?>
-              <a href="admin.php" class="navbarbutton">Panel Admin</a>
+              <a href="./admin.php" class="navbarbutton">Panel Admin</a>
               
           <?php elseif ($_SESSION['user']['role'] === 'restaurateur'): ?>
-              <a href="restaurateur.php" class="navbarbutton">Gestion Commandes</a>
+              <a href="./restaurateur.php" class="navbarbutton">Gestion Commandes</a>
               
           <?php elseif ($_SESSION['user']['role'] === 'delivery_person'): ?>
-              <a href="delivery.php" class="navbarbutton">Mes Livraisons</a>
+              <a href="./delivery.php" class="navbarbutton">Mes Livraisons</a>
           <?php endif; ?>
 
-          <a href="logout.php" class="navbarbutton alert">Déconnexion</a>
+          <a href="../src/logout.php" class="navbarbutton alert">Déconnexion</a>
 
           <?php else: ?>
-              <a href="login.php" class="navbarbutton">Connexion</a>
+              <a href="./login.php" class="navbarbutton">Connexion</a>
           <?php endif; ?>
       </section>
 
@@ -67,7 +67,7 @@ include_once 'get_cart_count.php';
 
       <details class="filters-panel">
         <summary>
-          <img src="./images/filter.svg" alt="Filtres">
+          <img src="../public/assets/images/filter.svg" alt="Filtres">
         </summary>
         <aside class="filters-menu" aria-label="Filtres allergenes">
           <div class="filters-list">
@@ -121,7 +121,7 @@ include_once 'get_cart_count.php';
 
                     echo '  </div>
                             <h3>'. $name .'</h3>
-                            <form action="update_cart.php" method="POST">
+                            <form action="../src/update_cart.php" method="POST">
                               <input type="hidden" name="item_id" value="'. $id .'">
                               <input type="hidden" name="item_type" value="menu">
                               <input type="hidden" name="action" value="add">
@@ -163,7 +163,7 @@ include_once 'get_cart_count.php';
 
                 echo '<article class="description '. implode(' ', $allergens) .'" description="'. $description. '" price="'. $price .'€" style="background-image: url('. $image_path .');">
                 <h3>'. $name .'</h3>
-                <form action="update_cart.php" method="POST">
+                <form action="../src/update_cart.php" method="POST">
                     <input type="hidden" name="item_id" value="'. $id .'">
                     <input type="hidden" name="item_type" value="food">
                     <input type="hidden" name="action" value="add">

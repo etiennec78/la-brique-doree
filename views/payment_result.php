@@ -1,7 +1,7 @@
 <?php
 session_start();
-include_once 'db_connect.php';
-include_once 'getapikey.php';
+include_once '../src/db_connect.php';
+include_once '../src/getapikey.php';
 
 $trans = $_GET['transaction'] ?? 'error';
 $montant = $_GET['montant'] ?? 'error';
@@ -37,12 +37,12 @@ if ($isSuccess) {
 
     $title = "COMMANDE VALIDEE !";
     $message = "Merci pour votre confiance. <br> Vos briques sont en cours d'assemblage.";
-    $icon = "./images/favicon.png";
+    $icon = "../public/assets/images/favicon.png";
     $statusClass = "payment-success";
 } else {
     $title = "PAIEMENT ECHOUE";
     $message = "Mince ! Un problème est survenu lors de la transaction. <br> Aucune brique n'a été prélevée de votre compte.";
-    $icon = "./images/cart.svg"; 
+    $icon = "../public/assets/images/cart.svg"; 
     $statusClass = "payment-error";
 }
 ?>
@@ -53,17 +53,17 @@ if ($isSuccess) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Résultat du paiement - La Brique Dorée</title>
-    <link rel="icon" type="image/x-icon" href="./images/favicon.png">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="payment_result.css">
+    <link rel="icon" type="image/x-icon" href="../public/assets/images/favicon.png">
+    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="../public/css/payment_result.css">
 </head>
 <body>
     <header>
         <div id="main-header">
-            <img id="logo" src="./images/LOGO.png" alt="Logo">
+            <img id="logo" src="../public/assets/images/LOGO.png" alt="Logo">
             <h1>LA BRIQUE DORÉE</h1>
             <video class="video-background" autoplay muted loop>
-                <source src="./images/header_background.mp4" type="video/mp4">
+                <source src="../public/assets/images/header_background.mp4" type="video/mp4">
             </video>
         </div>
     </header>
@@ -76,10 +76,10 @@ if ($isSuccess) {
 
             <div class="btn-group">
                 <?php if ($isSuccess): ?>
-                    <button onclick="location.href='index.php'" type="button" class="basic-btn">Retourner à l'accueil</button>
+                    <button onclick="location.href='../public/index.php'" type="button" class="basic-btn">Retourner à l'accueil</button>
                 <?php else: ?>
-                    <button onclick="location.href='index.php'" type="button" class="basic-btn" id="cancel">Annuler</button>
-                    <button onclick="location.href='commands.php'" type="button" class="basic-btn" id="retry">Réessayer</button>
+                    <button onclick="location.href='../public/index.php'" type="button" class="basic-btn" id="cancel">Annuler</button>
+                    <button onclick="location.href='./orders.php'" type="button" class="basic-btn" id="retry">Réessayer</button>
                 <?php endif; ?>
             </div>
         </div>
