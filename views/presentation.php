@@ -101,23 +101,25 @@ include_once '../src/get_cart_count.php';
                     $price = number_format($menu['price'], 2, ",");
                     $description = $menu['description'];
 
-                    // On récupère les images spécifiquement pour ce menu
-                    $stmtImages = $pdo->prepare("
-                      SELECT f.image_path 
+                    // On récupère les images et la quantité spécifiquement pour ce menu
+                    $stmt = $pdo->prepare("
+                      SELECT f.image_path, mf.quantity
                       FROM food f
                       JOIN menu_food mf ON f.id = mf.food_id
                       WHERE mf.menu_id = ?
                     ");
-                    
-                    $stmtImages->execute([$id]);
-                    $images = $stmtImages->fetchAll(PDO::FETCH_COLUMN);
+
+                    $stmt->execute([$id]);
+                    $menus_data = $stmt->fetchAll();
 
                     echo '<article class="description" description="'. $description . '" price="'. $price .'€">
                             <h3>'. $name .'</h3>
                             <div class="menu-grid">';
-
-                                foreach($images as $img_path) {
-                                    echo '<div style="flex: 1; background-image: url('. $img_path .'); background-size: cover; background-position: center;"></div>';
+                                for($i = 0; $i < count($menus_data); $i++) {
+                                    $menu = $menus_data[$i];
+                                    for($j = 0; $j < $menu['quantity']; $j++) {
+                                        echo '<div style="flex: 1; background-image: url('. $menu['image_path'] .'); background-size: cover; background-position: center;"></div>';
+                                    }
                                 }
 
                     echo '  </div>
