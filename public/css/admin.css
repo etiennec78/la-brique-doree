@@ -59,8 +59,11 @@
     color: var(--solid-gold);
     text-decoration: none;
     font-weight: bold;
+    background: none;
+    border: none;
 }
 
 .action-link:hover {
     text-decoration: underline;
+    cursor: pointer;
 }

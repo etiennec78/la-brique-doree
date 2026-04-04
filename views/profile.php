@@ -2,30 +2,48 @@
     session_start();
     include_once '../src/db_connect.php';
     include_once '../src/get_cart_count.php';
+    $target = [$_SESSION['user']['id']];
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-        // Modifier les données de l'utilisateur dans la base de données
         try {
-            $stmt = $pdo->prepare("UPDATE users SET first_name=?, last_name=?, street_nb=?, street_nb_suf=?, street=?, zip_code=?, phone=?, email=?, intercom_code=?, birth_date=? WHERE id = ?");
+            if (array_key_exists('user_id', $_POST)) {
+                // Vérifier si l'utilisateur actuel est admin
+                $user_id = $_SESSION['user']['id'];
+                $stmt = $pdo->prepare("
+                SELECT r.name
+                FROM users u
+                JOIN role r ON r.id = u.role_id
+                WHERE u.id = ?
+                ");
+                $stmt->execute([$user_id]);
+                $user_role = $stmt->fetch();
 
-            $birth_date = !empty($_POST['birth_date']) ? $_POST['birth_date'] : null;
+                if ($user_role = 'administrator') {
+                    $target = $_POST['user_id'];
+                }
+            }
+            if (array_key_exists('first_name', $_POST)) {
+                // Modifier les données de l'utilisateur dans la base de données
+                $stmt = $pdo->prepare("UPDATE users SET first_name=?, last_name=?, street_nb=?, street_nb_suf=?, street=?, zip_code=?, phone=?, email=?, intercom_code=?, birth_date=? WHERE id = ?");
 
-            $stmt->execute([
-                $_POST['first_name'],
-                $_POST['last_name'],
-                $_POST['street_nb'],
-                $_POST['street_nb_suf'],
-                $_POST['street'],
-                $_POST['zip_code'],
-                $_POST['phone'],
-                $_POST['email'],
-                $_POST['intercom_code'],
-                $birth_date,
-                $_SESSION['user']['id']
-            ]);
+                $birth_date = !empty($_POST['birth_date']) ? $_POST['birth_date'] : null;
 
-            $_SESSION['user'] = array_merge($_SESSION['user'], $_POST);
+                $stmt->execute([
+                    $_POST['first_name'],
+                    $_POST['last_name'],
+                    $_POST['street_nb'],
+                    $_POST['street_nb_suf'],
+                    $_POST['street'],
+                    $_POST['zip_code'],
+                    $_POST['phone'],
+                    $_POST['email'],
+                    $_POST['intercom_code'],
+                    $birth_date,
+                    $target
+                ]);
+
+                $_SESSION['user'] = array_merge($_SESSION['user'], $_POST);
+            }
         } catch (\PDOException $e) {
             $erreur = "Erreur lors de la mise à jour : " . $e->getMessage();
         }
@@ -33,7 +51,7 @@
 
     // Obtenir les infos de l'utilisateur dans la base de données
     $stmt = $pdo->prepare("SELECT email, first_name, last_name, phone, birth_date, street_nb, street_nb_suf, street, town, zip_code, intercom_code FROM users u WHERE u.id = ?");
-    $stmt->execute([$_SESSION['user']['id']]);
+    $stmt->execute([$target]);
     $user_data = $stmt->fetch();
     if (!$user_data) {
         $user_data = [];
@@ -94,6 +112,7 @@
         <div class="form-page">
             <h2>Profil</h2>
             <form action="./profile.php" method="post">
+                <input type="hidden" name="user_id" value="<?php echo $target; ?>">
                 <div class="input-group">
                     <label for="first_name">Prénom</label>
                     <input type="text" id="first_name" name="first_name" value="<?php echo $user_data['first_name']; ?>" required>

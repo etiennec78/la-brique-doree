@@ -111,7 +111,12 @@ if (!$users_data) {
                             <td>'. $user_data['email'] .'</td>
                             <td>'. $user_data['total_quantity'] .'</td>
                             <td><span class="tag gold">'. $user_data['role'] .'</span></td>
-                            <td><a href="./profile.php" class="action-link">Gérer</a></td>
+                            <td>
+                                <form action="./profile.php" method="POST">
+                                    <input type="hidden" name="user_id" value="'. $user_data['id'] .'">
+                                    <button id="manage" type="submit" class="action-link">Gérer</button>
+                                </form>
+                            </td>
                         </tr>';
                     }
                     ?>
