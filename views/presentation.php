@@ -113,8 +113,9 @@ include_once '../src/get_cart_count.php';
                     $images = $stmtImages->fetchAll(PDO::FETCH_COLUMN);
 
                     echo '<article class="description" description="'. $description . '" price="'. $price .'€">
-                            <div class="menu-grid" style="display: flex; height: 100px; gap: 2px;">';
-                                
+                            <h3>'. $name .'</h3>
+                            <div class="menu-grid">';
+
                                 foreach($images as $img_path) {
                                     echo '<div style="flex: 1; background-image: url('. $img_path .'); background-size: cover; background-position: center;"></div>';
                                 }

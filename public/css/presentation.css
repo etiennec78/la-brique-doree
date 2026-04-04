@@ -97,3 +97,16 @@
   transition: opacity .25s ease, transform .25s ease;
   z-index: 2;
 }
+
+.menu-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  border-radius: inherit;
+  overflow: hidden;
+  display: flex;
+  gap: 2px;
+}
