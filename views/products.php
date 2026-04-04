@@ -120,7 +120,6 @@
                                 }
 
                     echo '  </div>
-                            <h3>'. $name .'</h3>
                             <form action="/update_cart" method="POST">
                               <input type="hidden" name="item_id" value="'. $id .'">
                               <input type="hidden" name="item_type" value="menu">
