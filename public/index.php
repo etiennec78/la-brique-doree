@@ -16,7 +16,7 @@ $router->add('GET', 'products', 'ProductsController', 'index');
 $router->add('GET', 'admin', 'AdminController', 'index');
 $router->add('GET', 'delivery', 'DeliveryController', 'index');
 $router->add('GET', 'order_tracking', 'OrderTrackingController', 'index');
-$router->add('GET', 'orders', 'Orders', 'index');
+$router->add('POST', 'update_cart', 'OrdersController', 'updateCart');
 $router->add('GET', 'payment_result', 'PaymentResultController', 'index');
 $router->add('GET', 'profile', 'ProfileController', 'index');
 $router->add('GET', 'restaurateur', 'RestaurateurController', 'index');

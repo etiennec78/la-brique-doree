@@ -129,7 +129,7 @@ $cart_details = [];
                     <h3>'. htmlspecialchars($name) .'</h3>';
 
                     if ($individual) {
-                      echo '<form method="POST" action="../src/update_cart.php" style="display:inline; margin:0; padding:0;">
+                      echo '<form method="POST" action="/update_cart" style="display:inline; margin:0; padding:0;">
                       <input type="hidden" name="item_id" value="'. $food_id .'">
                       <input type="hidden" name="item_type" value="food">
                       <div class="nb-selector">
