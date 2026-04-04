@@ -4,19 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Livreur - La Brique Dorée</title>
-    <link rel="stylesheet" href="../public/css/style.css">
-    <link rel="stylesheet" href="../public/css/delivery.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/delivery.css">
 </head>
 <body>
     <header>
         <div id="main-header">
-            <img id="logo" src="../public/assets/images/LOGO.png" alt="Logo">
+            <img id="logo" src="/assets/images/LOGO.png" alt="Logo">
             <h1>LIVRAISON</h1>
         </div>
         <nav id="navbar-header">
-            <a href="./home.php" class="navbarbutton">Accueil</a>
-            <a href="./reviews.php" class="navbarbutton">Avis</a>
-            <a href="./delivery.php" class="navbarbutton">Livraison</a>
+            <a href="/" class="navbarbutton">Accueil</a>
+            <a href="/reviews" class="navbarbutton">Avis</a>
+            <a href="/delivery" class="navbarbutton">Livraison</a>
         </nav>
     </header>
 

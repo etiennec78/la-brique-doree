@@ -9,47 +9,47 @@ include_once '../src/get_cart_count.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Brique Dorée</title>
-    <link rel="icon" type="image/x-icon" href="../public/assets/images/favicon.png">
-    <link rel="stylesheet" href="../public/css/style.css">
-    <link rel="stylesheet" href="../public/css/food-cards.css">
-    <link rel="stylesheet" href="../public/css/presentation.css">
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.png">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/food-cards.css">
+    <link rel="stylesheet" href="/css/presentation.css">
 </head>
 <body>
     <header>
         <div id="main-header">
-            <img id="logo" src="../public/assets/images/LOGO.png" alt="Logo d'une brique LEGO dorée">
+            <img id="logo" src="/assets/images/LOGO.png" alt="Logo d'une brique LEGO dorée">
             <h1>NOS PRODUITS</h1>
-            <a href="./orders.php">
-                <img id="cart" class="icon" src="../public/assets/images/cart.svg" alt="Icône de panier de courses">
+            <a href="/orders">
+                <img id="cart" class="icon" src="/assets/images/cart.svg" alt="Icône de panier de courses">
                 <p id="cart_items" class="bubble"><?php echo $cart_count; ?></p>
             </a>
             <video class="video-background" autoplay muted loop>
-                <source src="../public/assets/images/header_background.mp4" type="video/mp4">
+                <source src="/assets/images/header_background.mp4" type="video/mp4">
             </video>
         </div>
         
         <section id="navbar-header">
-          <a href="./home.php" class="navbarbutton">Accueil</a>
-          <a href="./presentation.php" class="navbarbutton">Nos produits</a>
-          <a href="./reviews.php" class="navbarbutton">Avis</a>
+          <a href="/" class="navbarbutton">Accueil</a>
+          <a href="/presentation" class="navbarbutton">Nos produits</a>
+          <a href="/reviews" class="navbarbutton">Avis</a>
 
           <?php if (isset($_SESSION['user'])): ?>
-              <a href="./profile.php" class="navbarbutton">Mon Profil</a>
+              <a href="/profile" class="navbarbutton">Mon Profil</a>
 
           <?php if ($_SESSION['user']['role'] === 'administrator'): ?>
-              <a href="./admin.php" class="navbarbutton">Panel Admin</a>
+              <a href="/admin" class="navbarbutton">Panel Admin</a>
               
           <?php elseif ($_SESSION['user']['role'] === 'restaurateur'): ?>
-              <a href="./restaurateur.php" class="navbarbutton">Gestion Commandes</a>
+              <a href="/restaurateur" class="navbarbutton">Gestion Commandes</a>
               
           <?php elseif ($_SESSION['user']['role'] === 'delivery_person'): ?>
-              <a href="./delivery.php" class="navbarbutton">Mes Livraisons</a>
+              <a href="/delivery" class="navbarbutton">Mes Livraisons</a>
           <?php endif; ?>
 
-          <a href="../src/logout.php" class="navbarbutton alert">Déconnexion</a>
+          <a href="/logout" class="navbarbutton alert">Déconnexion</a>
 
           <?php else: ?>
-              <a href="./login.php" class="navbarbutton">Connexion</a>
+              <a href="/login" class="navbarbutton">Connexion</a>
           <?php endif; ?>
       </section>
 
@@ -67,7 +67,7 @@ include_once '../src/get_cart_count.php';
 
       <details class="filters-panel">
         <summary>
-          <img src="../public/assets/images/filter.svg" alt="Filtres">
+          <img src="/assets/images/filter.svg" alt="Filtres">
         </summary>
         <aside class="filters-menu" aria-label="Filtres allergenes">
           <div class="filters-list">

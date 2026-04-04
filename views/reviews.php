@@ -38,46 +38,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avis - La Brique Dorée</title>
-    <link rel="icon" type="image/x-icon" href="../public/assets/images/favicon.png">
-    <link rel="stylesheet" href="../public/css/style.css">
-    <link rel="stylesheet" href="../public/css/reviews.css">
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.png">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/reviews.css">
 </head>
 <body>
     <header>
         <div id="main-header">
-            <img id="logo" src="../public/assets/images/LOGO.png" alt="Logo">
+            <img id="logo" src="/assets/images/LOGO.png" alt="Logo">
             <h1>NOS AVIS</h1>
-            <a href="./orders.php">
-                <img id="cart" class="icon" src="../public/assets/images/cart.svg">
+            <a href="/orders">
+                <img id="cart" class="icon" src="/assets/images/cart.svg">
                 <p id="cart_items" class="bubble"><?php echo $cart_count; ?></p>
             </a>
             <video class="video-background" autoplay muted loop>
-                <source src="../public/assets/images/header_background.mp4" type="video/mp4">
+                <source src="/assets/images/header_background.mp4" type="video/mp4">
             </video>
         </div>
        
         <section id="navbar-header">
-            <a href="./home.php" class="navbarbutton">Accueil</a>
-            <a href="./presentation.php" class="navbarbutton">Nos produits</a>
-            <a href="./reviews.php" class="navbarbutton">Avis</a>
+            <a href="/" class="navbarbutton">Accueil</a>
+            <a href="/presentation" class="navbarbutton">Nos produits</a>
+            <a href="/reviews" class="navbarbutton">Avis</a>
 
             <?php if (isset($_SESSION['user'])): ?>
-                <a href="./profile.php" class="navbarbutton">Mon Profil</a>
+                <a href="/profile" class="navbarbutton">Mon Profil</a>
 
             <?php if ($_SESSION['user']['role'] === 'administrator'): ?>
-                <a href="./admin.php" class="navbarbutton">Panel Admin</a>
+                <a href="/admin" class="navbarbutton">Panel Admin</a>
                 
             <?php elseif ($_SESSION['user']['role'] === 'restaurateur'): ?>
-                <a href="./restaurateur.php" class="navbarbutton">Gestion Commandes</a>
+                <a href="/restaurateur" class="navbarbutton">Gestion Commandes</a>
                 
             <?php elseif ($_SESSION['user']['role'] === 'delivery_person'): ?>
-                <a href="./delivery.php" class="navbarbutton">Mes Livraisons</a>
+                <a href="/delivery" class="navbarbutton">Mes Livraisons</a>
             <?php endif; ?>
 
-            <a href="../src/logout.php" class="navbarbutton alert">Déconnexion</a>
+            <a href="/logout" class="navbarbutton alert">Déconnexion</a>
 
             <?php else: ?>
-                <a href="./login.php" class="navbarbutton">Connexion</a>
+                <a href="/login" class="navbarbutton">Connexion</a>
             <?php endif; ?>
         </section>
 
@@ -142,7 +142,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     ?>
 
     <?php if ($can_review): ?>
-    <form action="./reviews.php" method="post">
+    <form action="/reviews" method="post">
         <table class="review-block">
             <tr>
                 <th class="user-name">LAISSER UN AVIS</th>
@@ -190,7 +190,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <td id="review-unavailable">
                     <h3>Vous ne pouvez pas encorer laisser d'avis.</h3>
                     <p>Veuillez renseigner votre prénom et votre nom dans votre profil pour pouvoir écrire un avis.</p>
-                    <button onclick="location.href='./profile.php'" type="button" class="basic-btn">Compléter mon profil</button>
+                    <button onclick="location.href='/profile'" type="button" class="basic-btn">Compléter mon profil</button>
                 </td>
             </tr>
         </table>
@@ -200,7 +200,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <td id="review-unavailable">
                     <h3>Connectez-vous pour laisser un avis !</h3>
                     <p>Vous devez avoir un compte et le compléter pour laisser un avis sur nos produits et la livraison.</p>
-                    <button onclick="location.href='./login.php'" type="button" class="basic-btn">Me connecter</button>
+                    <button onclick="location.href='/login'" type="button" class="basic-btn">Me connecter</button>
                 </td>
             </tr>
         </table>

@@ -1,6 +1,4 @@
 <?php
-session_start();
-include_once '../src/db_connect.php';
 include_once '../src/get_cart_count.php';
 ?>
 <!DOCTYPE html>
@@ -10,46 +8,46 @@ include_once '../src/get_cart_count.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Brique Dorée</title>
-    <link rel="icon" type="image/x-icon" href="../public/assets/images/favicon.png">
-    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.png">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
     <header>
         <div id="main-header">
-            <img id="logo" src="../public/assets/images/LOGO.png" alt="Logo d'une brique LEGO dorée">
+            <img id="logo" src="/assets/images/LOGO.png" alt="Logo d'une brique LEGO dorée">
             <h1>LA BRIQUE DOREE</h1>
-            <a href="./orders.php">
-                <img id="cart" class="icon" src="../public/assets/images/cart.svg" alt="Icône de panier de courses">
+            <a href="/orders">
+                <img id="cart" class="icon" src="/assets/images/cart.svg" alt="Icône de panier de courses">
                 <p id="cart_items" class="bubble"><?php echo $cart_count; ?></p>
             </a>
             <video class="video-background" autoplay muted loop>
-                <source src="../public/assets/images/header_background.mp4" type="video/mp4">
+                <source src="/assets/images/header_background.mp4" type="video/mp4">
             </video>
         </div>
        
         <section id="navbar-header">
-            <a href="./home.php" class="navbarbutton">Accueil</a>
-            <a href="./presentation.php" class="navbarbutton">Nos produits</a>
-            <a href="./reviews.php" class="navbarbutton">Avis</a>
+            <a href="/" class="navbarbutton">Accueil</a>
+            <a href="/presentation" class="navbarbutton">Nos produits</a>
+            <a href="/reviews" class="navbarbutton">Avis</a>
 
             <?php if (isset($_SESSION['user'])): ?>
-                <a href="./profile.php" class="navbarbutton">Mon Profil</a>
+                <a href="/profile" class="navbarbutton">Mon Profil</a>
 
             <?php if ($_SESSION['user']['role'] === 'administrator'): ?>
-                <a href="./admin.php" class="navbarbutton">Panel Admin</a>
+                <a href="/admin" class="navbarbutton">Panel Admin</a>
                 
             <?php elseif ($_SESSION['user']['role'] === 'restaurateur'): ?>
-                <a href="./restaurateur.php" class="navbarbutton">Gestion Commandes</a>
+                <a href="/restaurateur" class="navbarbutton">Gestion Commandes</a>
                 
             <?php elseif ($_SESSION['user']['role'] === 'delivery_person'): ?>
-                <a href="./delivery.php" class="navbarbutton">Mes Livraisons</a>
+                <a href="/delivery" class="navbarbutton">Mes Livraisons</a>
             <?php endif; ?>
 
-            <a href="../src/logout.php" class="navbarbutton alert">Déconnexion</a>
+            <a href="/logout" class="navbarbutton alert">Déconnexion</a>
 
             <?php else: ?>
-                <a href="./login.php" class="navbarbutton">Connexion</a>
+                <a href="/login" class="navbarbutton">Connexion</a>
             <?php endif; ?>
         </section>
 
@@ -59,7 +57,7 @@ include_once '../src/get_cart_count.php';
         <div id="slideshow-frame">
             <div id="slideshow">
                 <div class="slide">
-                    <img src="../public/assets/images/RestaurantPhoto1.jpg" alt="Une photo de l'intérieur du restaurant">
+                    <img src="/assets/images/RestaurantPhoto1.jpg" alt="Une photo de l'intérieur du restaurant">
                     <div class="rectangle">
                         <h2> RESERVEZ DES MAINTENANT </h2>
                         <p>
@@ -68,21 +66,21 @@ include_once '../src/get_cart_count.php';
                     </div>
                 </div>
                 <div class="slide">
-                    <img src="../public/assets/images/food/dish/ramen.webp" alt="Une photo d'un bol de ramen.">
+                    <img src="/assets/images/food/dish/ramen.webp" alt="Une photo d'un bol de ramen.">
                     <div class="rectangle">
                         <h2> NOTRE PLAT LE PLUS CONNU </h2>
                         <p> Notre plat le plus célèbre est sans aucun doute notre incroyable ramen LEGO ! Préparé avec des briques soigneusement assemblées, il est aussi beau que délicieux. Ses couleurs vives et ses nombreux détails en font le favori de nos clients. Une création unique qui fait la renommée de notre restaurant !</p>
                     </div>
                 </div>
                 <div class="slide">
-                    <img src="../public/assets/images/RestaurantPhoto2.jpg" alt="Une photo de l'intérieur du restaurant">
+                    <img src="/assets/images/RestaurantPhoto2.jpg" alt="Une photo de l'intérieur du restaurant">
                     <div class="rectangle">
                         <h2> COMMANDEZ DES MAINTENANT </h2>
                         <p>Envie d’un délicieux repas 100% briques ? Commandez dès maintenant vos plats préférés directement depuis notre site ! Rendez-vous dans la section Nos produits pour découvrir toutes nos spécialités colorées et gourmandes. En quelques clics, votre commande sera prête à être dégustée !</p>
                     </div>
                 </div>
                 <div class="slide">
-                    <img src="../public/assets/images/food/dish/burger.png" alt="Une photo d'un burger avec des frites.">
+                    <img src="/assets/images/food/dish/burger.png" alt="Une photo d'un burger avec des frites.">
                     <div class="rectangle">
                         <h2> NOTRE PLAT DU JOUR </h2>
                         <p> Aujourd’hui, découvrez notre plat du jour : un savoureux burger LEGO accompagné de ses frites croustillantes. Un classique revisité façon briques, parfait pour les petits comme pour les grands constructeurs affamés !</p>

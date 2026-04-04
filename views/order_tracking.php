@@ -6,8 +6,8 @@ $status = 2; // 1=Reçue, 2=Prépa, 3=En route, 4=Livrée
 <head>
     <meta charset="UTF-8">
     <title>Suivi - La Brique Dorée</title>
-    <link rel="stylesheet" href="../public/css/style.css">
-    <link rel="stylesheet" href="../public/css/order_tracking.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/order_tracking.css">
 </head>
 <body>
     <header>
@@ -48,7 +48,7 @@ $status = 2; // 1=Reçue, 2=Prépa, 3=En route, 4=Livrée
         </div>
 
 
-        <a href="./home.php" class="navbarbutton basic-btn">Retour à l'accueil</a>
+        <a href="/" class="navbarbutton basic-btn">Retour à l'accueil</a>
 
     </main>
 
