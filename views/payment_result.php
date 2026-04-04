@@ -76,9 +76,9 @@ if ($isSuccess) {
 
             <div class="btn-group">
                 <?php if ($isSuccess): ?>
-                    <button onclick="location.href='../public/index.php'" type="button" class="basic-btn">Retourner à l'accueil</button>
+                    <button onclick="location.href='./home.php'" type="button" class="basic-btn">Retourner à l'accueil</button>
                 <?php else: ?>
-                    <button onclick="location.href='../public/index.php'" type="button" class="basic-btn" id="cancel">Annuler</button>
+                    <button onclick="location.href='./home.php'" type="button" class="basic-btn" id="cancel">Annuler</button>
                     <button onclick="location.href='./orders.php'" type="button" class="basic-btn" id="retry">Réessayer</button>
                 <?php endif; ?>
             </div>

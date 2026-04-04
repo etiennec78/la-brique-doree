@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
        
         <section id="navbar-header">
-            <a href="../public/index.php" class="navbarbutton">Accueil</a>
+            <a href="./home.php" class="navbarbutton">Accueil</a>
             <a href="./presentation.php" class="navbarbutton">Nos produits</a>
             <a href="./reviews.php" class="navbarbutton">Avis</a>
 

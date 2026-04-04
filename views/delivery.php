@@ -14,7 +14,7 @@
             <h1>LIVRAISON</h1>
         </div>
         <nav id="navbar-header">
-            <a href="../public/index.php" class="navbarbutton">Accueil</a>
+            <a href="./home.php" class="navbarbutton">Accueil</a>
             <a href="./reviews.php" class="navbarbutton">Avis</a>
             <a href="./delivery.php" class="navbarbutton">Livraison</a>
         </nav>

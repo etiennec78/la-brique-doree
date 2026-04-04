@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } elseif ($user_found['role'] === 'delivery_person') {
                 header("Location: ./delivery.php");
             } else {
-                header("Location: ../public/index.php");
+                header("Location: ./home.php");
             }
             exit(); 
         } else {
@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         
          <section id="navbar-header">
-            <a href="../public/index.php" class="navbarbutton">Accueil</a>
+            <a href="./home.php" class="navbarbutton">Accueil</a>
             <a href="./presentation.php" class="navbarbutton">Nos produits</a>
             <a href="./reviews.php" class="navbarbutton">Avis</a>
             <a href="./login.php" class="navbarbutton">Connexion</a>

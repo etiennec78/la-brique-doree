@@ -48,7 +48,7 @@ $status = 2; // 1=Reçue, 2=Prépa, 3=En route, 4=Livrée
         </div>
 
 
-        <a href="../public/index.php" class="navbarbutton basic-btn">Retour à l'accueil</a>
+        <a href="./home.php" class="navbarbutton basic-btn">Retour à l'accueil</a>
 
     </main>
 

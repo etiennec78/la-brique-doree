@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ];
 
         $_SESSION['user'] = $newUser;
-        header("Location: ../public/index.php");
+        header("Location: ./home.php");
         exit();
     } catch (\PDOException $e) {
         $erreur = "Erreur lors de l'inscription : " . $e->getMessage();
@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         
         <section id="navbar-header">
-            <a href="../public/index.php" class="navbarbutton">Accueil</a>
+            <a href="./home.php" class="navbarbutton">Accueil</a>
             <a href="./presentation.php" class="navbarbutton">Nos produits</a>
             <a href="./reviews.php" class="navbarbutton">Avis</a>
 
