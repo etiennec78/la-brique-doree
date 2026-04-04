@@ -1,5 +1,5 @@
 <?php
-include_once './db_connect.php';
+include_once 'db_connect.php';
 
 $cart_count = 0;
 if (isset($_SESSION['user']) && isset($pdo)) {
@@ -23,4 +23,3 @@ if (isset($_SESSION['user']) && isset($pdo)) {
         error_log("Cart error: " . $e->getMessage());
     }
 }
-?>

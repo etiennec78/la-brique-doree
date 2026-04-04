@@ -1,28 +1,30 @@
 <?php
 
 class Router {
-    $routes = [];
+    private $routes = [];
 
-    function add($method, $path, $controller, $action) {
+    public function add($method, $path, $controller, $action) {
         $path = trim($path, '/');
-        
+
         $this->routes[] = ['method' => $method, 'path' => $path, 'controller' => $controller, 'action' => $action];
     }
 
-    function dispatch($requestedUrl, $requestMethod) {
+    public function dispatch($requestedUrl, $requestMethod) {
         $requestedUrl = trim(parse_url($requestedUrl, PHP_URL_PATH), '/');
+
+        require_once __DIR__ . '/controllers/Controller.php';
 
         foreach ($this->routes as $route) {
             if ($route['path'] === $requestedUrl && $route['method'] === $requestMethod) {
-                
+
                 $controllerName = $route['controller'];
                 $actionName = $route['action'];
 
-                require_once "../src/controllers/" . $controllerName . ".php";
+                require_once __DIR__ . '/controllers/' . $controllerName . '.php';
 
                 $controller = new $controllerName();
                 $controller->$actionName();
-                
+
                 return;
             }
         }

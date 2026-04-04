@@ -1,37 +1,3 @@
-<?php 
-session_start(); 
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    include_once '../src/db_connect.php';
-
-    $email = $_POST['email'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-
-    // Obtenir l'id du rôle "client" dans la base de données
-    $stmtRole = $pdo->prepare("SELECT id FROM role WHERE name = 'client'");
-    $stmtRole->execute();
-    $role = $stmtRole->fetch();
-    $role_id = $role ? $role['id'] : 1;
-
-    // Ajouter l'utilisateur à la base de données
-    try {
-        $stmt = $pdo->prepare("INSERT INTO users (email, password_hash, role_id, inscription_date) VALUES (?, ?, ?, NOW())");
-        $stmt->execute([$email, $password, $role_id]);
-        
-        $newUser = [
-            "id" => $pdo->lastInsertId(),
-            "email" => $email,
-            "role" => "client"
-        ];
-
-        $_SESSION['user'] = $newUser;
-        header("Location: ./home.php");
-        exit();
-    } catch (\PDOException $e) {
-        $erreur = "Erreur lors de l'inscription : " . $e->getMessage();
-    }
-}
-?>
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -79,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <main>
         <div class="form-page">
             <h2>Inscription</h2>
-            <form action="./register.php" method="post">
+            <form action="/register" method="post">
                 <div class="input-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" required>
