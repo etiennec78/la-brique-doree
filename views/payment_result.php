@@ -1,7 +1,7 @@
 <?php
-session_start();
-include_once '../src/db_connect.php';
-include_once '../src/getapikey.php';
+global $pdo;
+include_once __DIR__ . '/../src/db_connect.php';
+include_once __DIR__ . '/../src/getapikey.php';
 
 $trans = $_GET['transaction'] ?? 'error';
 $montant = $_GET['montant'] ?? 'error';

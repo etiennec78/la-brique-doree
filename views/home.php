@@ -1,5 +1,6 @@
 <?php
-include_once '../src/get_cart_count.php';
+global $pdo;
+include_once __DIR__ . '/../src/get_cart_count.php';
 ?>
 <!DOCTYPE html>
 <html lang="fr">

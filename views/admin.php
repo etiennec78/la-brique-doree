@@ -1,6 +1,6 @@
 <?php
-session_start();
-include_once '../src/db_connect.php';
+global $pdo;
+include_once __DIR__ . '/../src/db_connect.php';
 
 // Obtenir les infos des utilisateurs dans la base de données
 $stmt = $pdo->prepare("

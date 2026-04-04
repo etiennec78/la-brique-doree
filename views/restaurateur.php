@@ -1,7 +1,7 @@
 <?php
-session_start();
-include_once '../src/db_connect.php';
-include_once '../src/get_cart_count.php';
+global $pdo;
+include_once __DIR__ . '/../src/db_connect.php';
+include_once __DIR__ . '/../src/get_cart_count.php';
 
 // Les commandes en attente (Statut 1 ou 2)
 $stmt_waiting = $pdo->prepare("SELECT o.id, u.first_name FROM orders o JOIN users u ON o.customer_id = u.id WHERE o.order_status_id IN (1, 2)");
