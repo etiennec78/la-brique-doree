@@ -89,6 +89,7 @@ $cart_details = [];
                   if ($individual) {
                     $foods = $cart_foods;
                     $menu_name = "Plats individuels";
+                    $name_suffix = "";
                   } else {
 
                     // Ajouter le menu dans la liste de paiements
