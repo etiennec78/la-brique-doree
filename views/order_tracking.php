@@ -1,6 +1,3 @@
-<?php
-$status = 2; // 1=Reçue, 2=Prépa, 3=En route, 4=Livrée
-?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -15,36 +12,36 @@ $status = 2; // 1=Reçue, 2=Prépa, 3=En route, 4=Livrée
     </header>
 
     <div class="tracking-container">
-        <h2>Commande #1111</h2>
+        <h2>Commande #<?php echo $order['id'] ?></h2>
         
         <div class="stepper">
-            <div class="step <?php if ($status >= 1) { echo 'active'; } ?>">
+            <div class="step <?php if ($order['status'] >= 1) { echo 'active'; } ?>">
                 <div class="circle">📩</div>
                 <p>Reçue</p>
                 <div class="line"></div>
             </div>
 
-            <div class="step <?php if ($status >= 2) { echo 'active'; } ?>">
+            <div class="step <?php if ($order['status'] >= 2) { echo 'active'; } ?>">
                 <div class="circle">🍳</div>
                 <p>En préparation</p>
                 <div class="line"></div>
             </div>
 
-            <div class="step <?php if ($status >= 3) { echo 'active'; } ?>">
+            <div class="step <?php if ($order['status'] >= 3) { echo 'active'; } ?>">
                 <div class="circle">🚴</div>
                 <p>En route</p>
                 <div class="line"></div>
             </div>
 
-            <div class="step <?php if ($status >= 4) { echo 'active'; } ?>">
+            <div class="step <?php if ($order['status'] >= 4) { echo 'active'; } ?>">
                 <div class="circle">😋</div>
                 <p>Livrée</p>
             </div>
         </div>
 
         <div class="delivery-info">
-            <p>Livreur : Jean le livreur</p>
-            <p>Arrivée : 15 min</p>
+            <p>Livreur : <?php echo $order['first_name'] . ' ' . $order['last_name']; ?></p>
+            <p>Arrivée : XX min</p>
         </div>
 
 
