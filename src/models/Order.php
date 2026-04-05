@@ -9,6 +9,8 @@ class Order {
         FROM order_status os
         JOIN orders o on o.order_status_id = os.id
         WHERE o.customer_id = ?
+        ORDER BY o.id DESC
+        LIMIT 1
         ");
         $stmt->execute([$uid]);
         return $stmt->fetch();
