@@ -10,6 +10,7 @@
     border-collapse: collapse;
     transition: 0.3s;
     border-radius: 0.5rem;
+    position: relative;
 }
 
 .review-block:hover {
@@ -56,6 +57,12 @@
 .edit-review-actions {
     display: flex;
     gap: 10px;
+    font-style: normal;
+}
+
+.edit-review-actions .basic-btn {
+    font-style: normal;
+    font-size: 14px;
 }
 
 .btn-cancel {
