@@ -5,7 +5,7 @@ class Order {
     public static function getUserRunningOrder($uid) {
         global $pdo;
         $stmt = $pdo->prepare("
-        SELECT o.id, os.id as status, o.cook_id, o.delivery_person_id
+        SELECT o.id, os.id as status, o.cook_id, o.delivery_person_id, o.is_takeaway
         FROM order_status os
         JOIN orders o on o.order_status_id = os.id
         WHERE o.customer_id = ?
@@ -14,11 +14,18 @@ class Order {
         return $stmt->fetch();
     }
 
+    public static function getOrderById($id) {
+        global $pdo;
+        $stmt = $pdo->prepare("SELECT * FROM orders WHERE id = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch();
+    }
+
     public static function getOrdersFromState($order_names) {
         global $pdo;
         $placeholders = implode(',', array_fill(0, count($order_names), '?'));
         $stmt = $pdo->prepare("
-            SELECT o.id, u.first_name, u.last_name
+            SELECT o.id, u.first_name, u.last_name, o.is_takeaway
             FROM orders o
             JOIN users u ON o.customer_id = u.id
             JOIN order_status os ON o.order_status_id = os.id
@@ -54,6 +61,16 @@ class Order {
             WHERE id = ?
         ");
         $stmt->execute([$delivery_person_id, $order_id]);
+    }
+
+    public static function setReadyStatus($order_id) {
+        global $pdo;
+        $stmt = $pdo->prepare("
+            UPDATE orders
+            SET order_status_id = 3
+            WHERE id = ?
+        ");
+        $stmt->execute([$order_id]);
     }
 
     public static function setDeliveredStatus($order_id) {

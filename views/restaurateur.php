@@ -109,10 +109,17 @@
                     <tr>
                         <td><span>Commande #<?= $order['id'] ?> (<?= getName($order) ?>)</span></td>
                         <td>
-                            <label class="selection">
-                                <span>En route</span>
-                                <input type="checkbox" checked disabled/> 
-                            </label>
+                            <?php if (isset($order['is_takeaway']) && $order['is_takeaway']): ?>
+                                <form action="/finish_takeaway" method="POST">
+                                    <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
+                                    <button type="submit" class="basic-btn" style="padding:5px 10px; cursor:pointer;">Récupéré !</button>
+                                </form>
+                            <?php else: ?>
+                                <label class="selection">
+                                    <span>En route</span>
+                                    <input type="checkbox" checked disabled/> 
+                                </label>
+                            <?php endif; ?>
                         </td>
                     </tr>
                     <?php endforeach; ?>

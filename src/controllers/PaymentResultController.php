@@ -29,8 +29,9 @@ class PaymentResultController extends Controller {
             $checkOrder->execute([$cart_id]);
             
             if (!$checkOrder->fetch()) {
-                $insertOrder = $pdo->prepare("INSERT INTO orders (cart_id, customer_id, order_status_id) VALUES (?, ?, 1)");
-                $insertOrder->execute([$cart_id, $user_id]);
+                $is_takeaway = isset($_GET['is_takeaway']) ? (int)$_GET['is_takeaway'] : 0;
+                $insertOrder = $pdo->prepare("INSERT INTO orders (cart_id, customer_id, order_status_id, is_takeaway) VALUES (?, ?, 1, ?)");
+                $insertOrder->execute([$cart_id, $user_id, $is_takeaway]);
             }
         } catch (PDOException $e) {
             $erreur = "Erreur de base de données : " . $e->getMessage();

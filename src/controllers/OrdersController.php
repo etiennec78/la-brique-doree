@@ -127,4 +127,12 @@ class OrdersController extends Controller {
         }
         header("Location: /orders");
     }
+
+    public function setDeliveryType() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['is_takeaway'])) {
+            $_SESSION['is_takeaway'] = $_POST['is_takeaway'] === '1';
+        }
+        header("Location: /orders");
+        exit;
+    }
 }

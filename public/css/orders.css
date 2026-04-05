@@ -138,3 +138,29 @@ input::-webkit-inner-spin-button {
   cursor: pointer;
   font-size: 0.8rem;
 }
+
+.delivery-options {
+  display: flex;
+  background: var(--darkgray);
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid var(--lightgray);
+}
+
+.delivery-options button {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  background: none;
+  color: var(--offwhite);
+}
+
+.delivery-options button.selected {
+  background: var(--solid-gold);
+}
+
+.delivery-options button:not(.selected):hover {
+  background: var(--lightgray);
+}

@@ -5,7 +5,8 @@ $vendeur = 'MI-4_J';
 $api_key = getAPIKey($vendeur); 
 $transaction = uniqid();
 
-$retour_url = "http://localhost/payment_result?cart_id=" . $cart_id;
+$is_takeaway = isset($_SESSION['is_takeaway']) && $_SESSION['is_takeaway'] ? 1 : 0;
+$retour_url = "http://localhost/payment_result?cart_id=" . $cart_id . "&is_takeaway=" . $is_takeaway;
 
 $total_price = 0;
 $reduction = 0;
@@ -177,6 +178,11 @@ $cart_details = [];
             <p class="alert">Coupon expiré: <?= $coupon['code'] ?></p>
           <?php endif ?>
           <p class="total-price">Total: <?= number_format($total_price, 2, ",") ?>€</p>
+          
+          <form class="delivery-options" action="/set_delivery_type" method="POST">
+            <button type="submit" name="is_takeaway" value="0" class="<?= !$is_takeaway ? 'selected' : '' ?>">À domicile</button>
+            <button type="submit" name="is_takeaway" value="1" class="<?= $is_takeaway ? 'selected' : '' ?>">À emporter</button>
+          </form>
           
           <form action="https://www.plateforme-smc.fr/cybank/index.php" method="POST">
             <input type="hidden" name="transaction" value="<?= $transaction ?>">

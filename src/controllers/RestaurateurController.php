@@ -33,11 +33,34 @@ class RestaurateurController extends Controller {
         }
 
         if (isset($_POST['order_id'])) {
-            $order_id = $_POST['order_id'];
-            $delivery_person = Order::getAvailableDeliveryPerson();
-            Order::setDeliveryStatus($order_id, $delivery_person);
+            $order_id = (int)$_POST['order_id'];
+            $order = Order::getOrderById($order_id);
+            if ($order && $order['is_takeaway']) {
+                Order::setReadyStatus($order_id);
+            } else {
+                $delivery_person = Order::getAvailableDeliveryPerson();
+                Order::setDeliveryStatus($order_id, $delivery_person);
+            }
 
             header('Location: /restaurateur?success=assigned');
+        } else {
+            header('Location: /restaurateur');
+            exit();
+        }
+    }
+
+    public function finishTakeaway() {
+        require_once __DIR__ . '/../models/Order.php';
+
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role_id'] != 2) {
+            header('Location: /login');
+            exit();
+        }
+
+        if (isset($_POST['order_id'])) {
+            $order_id = (int)$_POST['order_id'];
+            Order::setDeliveredStatus($order_id);
+            header('Location: /restaurateur?success=finished');
         } else {
             header('Location: /restaurateur');
             exit();
