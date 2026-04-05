@@ -16,7 +16,7 @@
 
 .delivery-card {
     width: 95%;
-    margin: 20px auto;
+    margin: 20px auto 150px;
     background: var(--darkgray);
     border-radius: 0.5rem;
     font-weight: bold;
