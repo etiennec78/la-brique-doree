@@ -9,13 +9,25 @@ class OrdersController extends Controller {
         $cart_count = Cart::getCartCount();
         $cart_id = Cart::getUserCartId($uid);
         $coupon = Coupon::getCouponFromUser($uid);
+        $expired_coupon = (
+            !empty($coupon)
+            and isset($coupon['expiration_date'])
+            and strtotime($coupon['expiration_date']) < time()
+        );
+        error_log(!empty($coupon));
+        error_log(isset($coupon['expiration_date']));
+        error_log(strtotime($coupon['expiration_date']) < time());
+        error_log(strtotime($coupon['expiration_date']));
+        error_log(time());
+        error_log($expired_coupon === false);
 
         $this->render(
             'orders',
             [
                 'cart_count' => $cart_count,
                 'cart_id' => $cart_id,
-                'coupon' => $coupon
+                'coupon' => $coupon,
+                'expired_coupon' => $expired_coupon
             ]
         );
     }

@@ -145,7 +145,7 @@ $cart_details = [];
                   echo '</div>';
                   echo '</div>';
                 }
-                if ($coupon !== false) {
+                if ($coupon !== false and !$expired_coupon) {
                   $reduction = $coupon['discount_percent'];
                   $coupon_code = $coupon['code'];
                   $cart_details[] = "Code: $coupon_code (-". number_format($total_price * $reduction, 2, '.', '') ."€)";
@@ -169,6 +169,9 @@ $cart_details = [];
               echo "</ul>";
             }
           ?>
+          <?php if ($expired_coupon): ?>
+            <p class="alert">Coupon expiré: <?= $coupon['code'] ?></p>
+          <?php endif ?>
           <p class="total-price">Total: <?= number_format($total_price, 2, ",") ?>€</p>
           
           <form action="https://www.plateforme-smc.fr/cybank/index.php" method="POST">

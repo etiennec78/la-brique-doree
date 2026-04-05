@@ -19,7 +19,8 @@ INSERT INTO users (email, password_hash, first_name, last_name, role_id, phone, 
 
 INSERT INTO coupon (code, discount_percent, expiration_date) VALUES
 ('GRIGNON75', 0.75, '2027-01-01 00:00:00.000000'),
-('LEBRETON75', 0.75, '2027-01-01 00:00:00.000000');
+('LEBRETON75', 0.75, '2027-01-01 00:00:00.000000'),
+('INVALID', 0.75, '2023-01-01 00:00:00.000000');
 
 
 ----- CART -----
