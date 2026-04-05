@@ -9,4 +9,13 @@ class AdminController extends Controller {
 
         $this->render('admin', ['users_data' => $users_data, 'get_name' => 'getName']);
     }
+
+    public function applyGlobalReduction() {
+        require_once __DIR__ . '/../models/User.php';
+
+        if (isset($_POST['user_id']) and isset($_POST['reduction']))
+            $users_data = User::applyGlobalReduction($_POST['user_id'], $_POST['reduction']/100);
+
+        header('Location: /admin');
+    }
 }

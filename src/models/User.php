@@ -82,4 +82,14 @@ class User {
         $stmt->execute([$uid]);
         return $stmt->fetch(PDO::FETCH_COLUMN);
     }
+
+    public static function applyGlobalReduction($uid, $reduction) {
+        global $pdo;
+        $stmt = $pdo->prepare("
+            UPDATE users
+            SET global_reduction = $reduction
+            WHERE id = ?
+        ");
+        $stmt->execute([$uid]);
+    }
 }

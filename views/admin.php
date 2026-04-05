@@ -66,7 +66,7 @@
                         <th>Utilisateur</th>
                         <th>Adresse Email</th>
                         <th>Commandes</th>
-                        <th>Réduction globale</th>
+                        <th>Réduction globale (%)</th>
                         <th>Rôle</th>
                         <th>Action</th>
                     </tr>
@@ -78,7 +78,13 @@
                             <td><strong><?= getName($user_data) ?></strong></td>
                             <td><?= $user_data['email'] ?></td>
                             <td><?= $user_data['total_quantity'] ?></td>
-                            <td><?= $user_data['global_reduction'] ?></td>
+                            <td>
+                                <form action="/global_reduction" method="POST">
+                                    <input type="hidden" name="user_id" value="<?= $user_data['id'] ?>">
+                                    <input type="text" name="reduction" maxlength=3 size=3 value="<?= $user_data['global_reduction'] * 100 ?>">
+                                    <button id="manage" type="submit" class="action-link">Appliquer</button>
+                                </form>
+                            </td>
                             <td><span class="tag gold"><?= $user_data['role'] ?></span></td>
                             <td>
                                 <form action="/profile" method="POST">
