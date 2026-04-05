@@ -56,6 +56,12 @@
 .edit-review-actions {
     display: flex;
     gap: 10px;
+    font-style: normal;
+}
+
+.edit-review-actions .basic-btn {
+    font-style: normal;
+    font-size: 14px;
 }
 
 .btn-cancel {
