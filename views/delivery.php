@@ -41,6 +41,9 @@
                     </div>
                     <div class="card-body">
                         <p class="address">📍 <?= getAddress($delivery) ?></p>
+                        <a href="https://www.google.com/maps/search/?api=1&query=<?= urlencode(getAddress($delivery)) ?>" target="_blank">
+                            <input id="redirect" type="button" value="Voir l'adresse sur maps.." />
+                        </a>
                         <?php if (isset($delivery['intercom_code'])): ?>
                             <p class="access">🔑 Code <?= $delivery['intercom_code'] ?></p>
                         <?php endif; ?>
