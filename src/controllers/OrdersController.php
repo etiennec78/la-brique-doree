@@ -14,12 +14,6 @@ class OrdersController extends Controller {
             and isset($coupon['expiration_date'])
             and strtotime($coupon['expiration_date']) < time()
         );
-        error_log(!empty($coupon));
-        error_log(isset($coupon['expiration_date']));
-        error_log(strtotime($coupon['expiration_date']) < time());
-        error_log(strtotime($coupon['expiration_date']));
-        error_log(time());
-        error_log($expired_coupon === false);
 
         $this->render(
             'orders',
