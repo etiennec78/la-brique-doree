@@ -2,6 +2,11 @@
 
 class ProfileController extends Controller {
     public function index($uid = NULL) {
+        if (!isset($_SESSION['user'])) {
+            header('Location: /login');
+            exit();
+        }
+
         require_once __DIR__ . '/../models/Cart.php';
         require_once __DIR__ . '/../models/User.php';
 
@@ -24,15 +29,20 @@ class ProfileController extends Controller {
     }
 
     public function updateProfile() {
+        if (!isset($_SESSION['user'])) {
+            header('Location: /login');
+            exit();
+        }
+
         global $pdo;
         require_once __DIR__ . '/../db_connect.php';
         require_once __DIR__ . '/../models/User.php';
 
         $target = $_SESSION['user']['id'];
+        $user_role = User::getUserRole($_SESSION['user']['id']);
         try {
             if (array_key_exists('user_id', $_POST)) {
                 // Vérifier si l'utilisateur actuel est admin
-                $user_role = User::getUserRole($_SESSION['user']['id']);
                 if ($user_role == 'administrator')
                     $target = $_POST['user_id'];
             }

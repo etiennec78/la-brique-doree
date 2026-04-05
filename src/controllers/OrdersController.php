@@ -2,6 +2,11 @@
 
 class OrdersController extends Controller {
     public function index() {
+        if (!isset($_SESSION['user'])) {
+            header('Location: /login');
+            exit();
+        }
+
         require_once __DIR__ . '/../models/Cart.php';
         require_once __DIR__ . '/../models/Coupon.php';
         require_once __DIR__ . '/../models/User.php';
@@ -111,6 +116,11 @@ class OrdersController extends Controller {
     }
 
     public function applyCoupon() {
+        if (!isset($_SESSION['user'])) {
+            header('Location: /login');
+            exit();
+        }
+
         global $pdo;
         require_once __DIR__ . '/../db_connect.php';
         require_once __DIR__ . '/../models/Cart.php';

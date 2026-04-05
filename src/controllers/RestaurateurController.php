@@ -2,6 +2,11 @@
 
 class RestaurateurController extends Controller {
     public function index() {
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role_id'] != 2) {
+            header('Location: /login');
+            exit();
+        }
+
         require_once __DIR__ . '/../models/Cart.php';
         require_once __DIR__ . '/../models/Order.php';
         require_once __DIR__ . '/../models/User.php';

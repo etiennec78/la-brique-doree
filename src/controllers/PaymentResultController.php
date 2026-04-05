@@ -2,6 +2,11 @@
 
 class PaymentResultController extends Controller {
   public function index() {
+    if (!isset($_SESSION['user'])) {
+        header('Location: /login');
+        exit();
+    }
+
     global $pdo;
     include_once __DIR__ . '/../db_connect.php';
     include_once __DIR__ . '/../getapikey.php';

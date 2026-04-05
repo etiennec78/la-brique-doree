@@ -2,6 +2,11 @@
 
 class DeliveryController extends Controller {
     public function index() {
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role_id'] != 4) {
+            header('Location: /login');
+            exit();
+        }
+
         include_once __DIR__ . '/../format_data.php';
         require_once __DIR__ . '/../models/Delivery.php';
 

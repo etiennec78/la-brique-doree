@@ -2,6 +2,11 @@
 
 class OrderTrackingController extends Controller {
   public function index() {
+    if (!isset($_SESSION['user'])) {
+        header('Location: /login');
+        exit();
+    }
+
     require_once __DIR__ . '/../models/Order.php';
     require_once __DIR__ . '/../models/User.php';
     include_once __DIR__ . '/../format_data.php';
