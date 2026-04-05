@@ -26,29 +26,21 @@
 
         <h2 class="section-title">Commandes à livrer</h2>
 
-        <div class="delivery-card">
-            <div class="card-header">
-                <span class="order-id">#402</span>
-                <span class="client-name">MARC ANTOINE</span>
+        <?php foreach($deliveries as $delivery): ?>
+            <div class="delivery-card">
+                <div class="card-header">
+                    <span class="order-id">#<?php echo $delivery['id']; ?></span>
+                    <span class="client-name"><?php echo getName($delivery); ?></span>
+                </div>
+                <div class="card-body">
+                    <p class="address">📍 <?php echo getAddress($delivery); ?></p>
+                    <?php if (isset($delivery['intercom_code'])): ?>
+                        <p class="access">🔑 Code <?php echo $delivery['intercom_code'] ?></p>
+                    <?php endif; ?>
+                </div>
+                <button class="basic-btn action-btn"> CONFIRMER LIVRAISON</button>
             </div>
-            <div class="card-body">
-                <p class="address">📍 15 AVE DES CHAMPS, CERGY</p>
-                <p class="access">🔑 ÉTAGE 3 - CODE: 123</p>
-            </div>
-            <button class="basic-btn action-btn"> CONFIRMER LIVRAISON</button>
-        </div>
-
-        <div class="delivery-card">
-            <div class="card-header">
-                <span class="order-id">#405</span>
-                <span class="client-name">LUCIE BERNARD</span>
-            </div>
-            <div class="card-body">
-                <p class="address">📍 3 RUE DU PORT, PONTOISE</p>
-                <p class="access">🔑 RDC - SONNER "BERNARD"</p>
-            </div>
-            <button class="basic-btn action-btn">CONFIRMER LIVRAISON</button>
-        </div>
+        <?php endforeach; ?>
     </main>
 </body>
 </html>

@@ -5,7 +5,7 @@ class RestaurateurController extends Controller {
         require_once __DIR__ . '/../models/Cart.php';
         require_once __DIR__ . '/../models/Order.php';
         require_once __DIR__ . '/../models/User.php';
-        include_once __DIR__ . '/../get_name.php';
+        include_once __DIR__ . '/../format_data.php';
 
         $cart_count = Cart::getCartCount();
         $pending_orders = Order::getOrdersFromState(array('paid', 'preparing'));

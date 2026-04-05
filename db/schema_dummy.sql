@@ -45,3 +45,9 @@ INSERT INTO reviews (user_id, product_stars, delivery_stars, comment) VALUES
 (2, 1, 5, 'Livraison parfaite, mais la nourriture laisse à désirer...'),
 (3, 3, 1, 'Il y avait un cheveu dans ma soupe.'),
 (4, 5, 2, 'Très bon, mais la livraison était assez moyenne...');
+
+
+---- DELIVERIES ----
+
+INSERT INTO orders (cart_id, customer_id, cook_id, delivery_person_id) VALUES
+(1, 1, 2, 4)
