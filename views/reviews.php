@@ -51,30 +51,22 @@
 
     <main>
         <h2 id="reviews-title">~ Avis Clients ~</h2>
-        <?php
-          foreach($reviews as $review) {
-            $first_name = $review['first_name'];
-            $last_name = $review['last_name'];
-            $product = $review['product_stars'];
-            $delivery = $review['delivery_stars'];
-            $comment = $review['comment'];
-
-            echo '<table class="review-block">
+        <?php foreach($reviews as $review): ?>
+            <table class="review-block">
             <tr>
-              <th class="user-name">'. "$first_name $last_name" .'</th>
+              <th class="user-name"><?php echo getName($review); ?></th>
               <td class="user-ratings">
-                <p>Produits : </p><p class="stars">'. str_repeat('★', $product) .'</p>
-                <p>Livraison : </p><p class="stars">'. str_repeat('★', $delivery) .'</p>
+                <p>Produits : </p><p class="stars"><?php echo str_repeat('★', $review['product_stars']); ?></p>
+                <p>Livraison : </p><p class="stars"><?php echo str_repeat('★', $review['delivery_stars']); ?></p>
               </td>
             </tr>
             <tr>
               <td colspan="2" class="review-text">
-                <p>'. $comment .'</p>
+                <p><?php echo $review['comment']; ?></p>
               </td>
             </tr>
-          </table>';
-          }
-        ?>
+          </table>
+        <?php endforeach; ?>
 
     <?php if ($logged_in): ?>
     <form action="/reviews" method="post">

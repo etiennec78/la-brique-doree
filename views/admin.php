@@ -70,23 +70,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    foreach($users_data as $user_data) {
-                        echo '<tr>
-                            <td>'. $user_data['id'] .'</td>
-                            <td><strong>'. getName($user_data) .'</strong></td>
-                            <td>'. $user_data['email'] .'</td>
-                            <td>'. $user_data['total_quantity'] .'</td>
-                            <td><span class="tag gold">'. $user_data['role'] .'</span></td>
+                    <?php foreach($users_data as $user_data): ?>
+                        <tr>
+                            <td><?php echo $user_data['id']; ?></td>
+                            <td><strong><?php echo getName($user_data); ?></strong></td>
+                            <td><?php echo $user_data['email']; ?></td>
+                            <td><?php echo $user_data['total_quantity']; ?></td>
+                            <td><span class="tag gold"><?php echo $user_data['role']; ?></span></td>
                             <td>
                                 <form action="/profile" method="POST">
-                                    <input type="hidden" name="user_id" value="'. $user_data['id'] .'">
+                                    <input type="hidden" name="user_id" value="<?php echo $user_data['id']; ?>">
                                     <button id="manage" type="submit" class="action-link">Gérer</button>
                                 </form>
                             </td>
-                        </tr>';
-                    }
-                    ?>
+                        </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
