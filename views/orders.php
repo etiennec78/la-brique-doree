@@ -66,10 +66,22 @@ include __DIR__ . '/../includes/header.php';
                     $foods = Menu::getMenuFoods($menu['id']);
 
                     $menu_name = $menu['name'];
-                    $name_suffix = $quantity > 1 ? " (x$quantity)" : "";
                   }
 
-                  echo '<h2>'. htmlspecialchars($menu_name) . $name_suffix .'</h2>';
+                  echo '<div class="menu-header">';
+                  echo '<h2>'. htmlspecialchars($menu_name) .'</h2>';
+                  if (!$individual) {
+                    echo '<form method="POST" action="/update_cart" style="display:inline; margin:0; padding:0;">
+                    <input type="hidden" name="item_id" value="'. $menu['id'] .'">
+                    <input type="hidden" name="item_type" value="menu">
+                    <div class="nb-selector">
+                    <button class="remove-from-cart" type="submit" name="action" value="remove" aria-label="Retirer du panier">-</button>
+                    <input type="number" class="amount" name="amount" min="0" max="9" value="'. $quantity .'"/>
+                    <button class="add-to-cart" type="submit" name="action" value="add" aria-label="Ajouter au panier">+</button>
+                    </div>
+                    </form>';
+                  }
+                  echo '</div>';
                   echo '<div class="items-grid">';
 
                   foreach($foods as $food) {

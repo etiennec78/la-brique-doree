@@ -48,6 +48,24 @@
   margin: 10px;
 }
 
+.menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.menu-header h2 {
+  margin: 0;
+}
+
+.menu-header .nb-selector {
+  position: static;
+  opacity: 1;
+  transform: none;
+}
+
 .nb-selector {
   position: absolute;
   bottom: 12px;
@@ -96,8 +114,11 @@
 .amount {
   border-radius: 0px;
   border: 0px;
+  -moz-appearance: textfield;
   appearance: textfield;
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 .add-to-cart:hover,
@@ -121,8 +142,10 @@ li {
 }
 
 /* Hide arrow keys in number inputs (otherwise they hide the number) */
+input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
+  margin: 0;
 }
 
 .coupon-form button {
