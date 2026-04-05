@@ -43,4 +43,15 @@ class User {
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+    public static function getUserData($uid) {
+        global $pdo;
+        $stmt = $pdo->prepare("
+            SELECT email, first_name, last_name, phone, birth_date, street_nb, street_nb_suf, street, town, zip_code, intercom_code
+            FROM users u
+            WHERE u.id = ?
+        ");
+        $stmt->execute([$uid]);
+        return $stmt->fetch();
+    }
 }

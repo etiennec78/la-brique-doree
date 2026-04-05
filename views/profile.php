@@ -47,14 +47,6 @@
             $erreur = "Erreur lors de la mise à jour : " . $e->getMessage();
         }
     }
-
-    // Obtenir les infos de l'utilisateur dans la base de données
-    $stmt = $pdo->prepare("SELECT email, first_name, last_name, phone, birth_date, street_nb, street_nb_suf, street, town, zip_code, intercom_code FROM users u WHERE u.id = ?");
-    $stmt->execute([$target]);
-    $user_data = $stmt->fetch();
-    if (!$user_data) {
-        $user_data = [];
-    }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
