@@ -49,10 +49,20 @@ class Order {
             UPDATE orders
             SET
                 delivery_person_id = ?,
-                order_status_id = 3,
+                order_status_id = 4,
                 delivery_person_assigned_at = NOW()
             WHERE id = ?
         ");
         $stmt->execute([$delivery_person_id, $order_id]);
+    }
+
+    public static function setDeliveredStatus($order_id) {
+        global $pdo;
+        $stmt = $pdo->prepare("
+        UPDATE orders
+        SET order_status_id = 5
+        WHERE id = ?
+        ");
+        $stmt->execute([$order_id]);
     }
 }

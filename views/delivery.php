@@ -38,7 +38,10 @@
                         <p class="access">🔑 Code <?php echo $delivery['intercom_code'] ?></p>
                     <?php endif; ?>
                 </div>
-                <button class="basic-btn action-btn"> CONFIRMER LIVRAISON</button>
+                <form action="/confirm_delivery" method="POST">
+                    <input type="hidden" name="order_id" value="<?php echo $delivery['id']; ?>">
+                    <button id="confirm" type="submit" class="basic-btn action-btn">CONFIRMER LIVRAISON</button>
+                </form>
             </div>
         <?php endforeach; ?>
     </main>
