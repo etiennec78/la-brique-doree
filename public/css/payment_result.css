@@ -1,11 +1,3 @@
-#cancel {
-  background: var(--input-color);
-}
-
-#cancel:hover {
-  background: var(--darkgray);
-}
-
 .result-container {
   display: flex;
   flex-direction: column;

@@ -271,6 +271,14 @@ h1 {
   background: var(--solid-dark-gold);
 }
 
+.gray-btn {
+  background: var(--input-color);
+}
+
+.gray-btn:hover {
+  background: var(--darkgray);
+}
+
 .alert {
   color: var(--red);
 }

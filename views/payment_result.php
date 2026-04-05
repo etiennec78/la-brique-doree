@@ -29,7 +29,7 @@
                 <?php if ($isSuccess): ?>
                     <button onclick="location.href='/'" type="button" class="basic-btn">Retourner à l'accueil</button>
                 <?php else: ?>
-                    <button onclick="location.href='/'" type="button" class="basic-btn" id="cancel">Annuler</button>
+                    <button onclick="location.href='/'" type="button" class="basic-btn grey-btn" id="cancel">Annuler</button>
                     <button onclick="location.href='/orders'" type="button" class="basic-btn" id="retry">Réessayer</button>
                 <?php endif; ?>
             </div>

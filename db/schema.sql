@@ -259,11 +259,13 @@ CREATE TABLE orders (
     id INT AUTO_INCREMENT PRIMARY KEY,
     cart_id INT NOT NULL,               
     customer_id INT NOT NULL,           
-    delivery_person_id INT DEFAULT NULL, 
+    cook_id INT DEFAULT NULL,
+    delivery_person_id INT DEFAULT NULL,
     order_status_id INT DEFAULT 1, -- Correspond à 'paid' par défaut
     
     FOREIGN KEY (cart_id) REFERENCES cart(id) ON DELETE CASCADE,
     FOREIGN KEY (customer_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (cook_id) REFERENCES users(id) ON DELETE SET NULL,
     FOREIGN KEY (delivery_person_id) REFERENCES users(id) ON DELETE SET NULL,
     FOREIGN KEY (order_status_id) REFERENCES order_status(id)
 );
