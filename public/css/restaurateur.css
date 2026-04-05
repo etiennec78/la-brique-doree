@@ -6,16 +6,12 @@ table {
     border-radius: 15px;
     padding-bottom: 5%;
     padding-left: 15%;
-    padding-right: auto;
+    padding-right: 15%;
     border-spacing: 20px;
 }
 
 table h3 {
     font-size: 32px;
-}
-
-h3#state {
-    margin-left: 7%;
 }
 
 table span {
