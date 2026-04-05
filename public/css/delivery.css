@@ -1,6 +1,5 @@
 .section-title {
-    margin-top: 50px;
-    padding-top: 50px;
+    margin-top: 30px;
 }
 
 .map-box {
@@ -19,47 +18,29 @@
     width: 95%;
     margin: 20px auto;
     background: var(--darkgray);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
     border-radius: 0.5rem;
+    font-weight: bold;
 }
 
 .card-header {
     background: var(--input-color);
     padding: 15px;
     border-radius: 0.5rem 0.5rem 0 0;
+    font-size: 40px;
 }
 
 .order-id {
     color: var(--solid-gold);
-    font-weight: bold;
-    font-size: 40px;
-}
-
-.client-name {
-    color: var(--offwhite);
-    font-weight: bold;
 }
 
 .card-body {
     padding: 20px;
-}
-
-.address {
-    color: var(--offwhite);
-    font-size: 20px;
-    font-weight: bold;
-    margin: 0;
-}
-
-.access {
-    color: var(--solid-gold);
-    margin: 10px;
-    font-size: 15px
+    font-size: 30px;
 }
 
 .action-btn {
     width: calc(100% - 20px);
     height: 100px;
-    font-size: 30px;
+    font-size: 40px;
     margin: 10px;
 }

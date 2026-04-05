@@ -20,12 +20,12 @@
     </header>
 
     <main>
+        <h2 class="section-title">Carte</h2>
         <div class="map-box">
             <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=2.067717435883694%2C49.03406993317959%2C2.0714322953693203%2C49.03570705430734&amp;layer=mapnik"></iframe>
         </div>
 
         <h2 class="section-title">Commandes à livrer</h2>
-
         <?php foreach($deliveries as $delivery): ?>
             <div class="delivery-card">
                 <div class="card-header">
@@ -34,9 +34,7 @@
                 </div>
                 <div class="card-body">
                     <p class="address">📍 <?php echo getAddress($delivery); ?></p>
-                    <?php if (isset($delivery['intercom_code'])): ?>
                         <p class="access">🔑 Code <?php echo $delivery['intercom_code'] ?></p>
-                    <?php endif; ?>
                 </div>
                 <button class="basic-btn action-btn"> CONFIRMER LIVRAISON</button>
             </div>
