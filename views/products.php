@@ -80,104 +80,63 @@
       </details>
 
       <section class="menu-content">
-        <?php
-          global $pdo;
-          try {
-            echo '<div class="food-section" name="Menus">
-              <h2>~ Nos Menus ~</h2>
-              <section class="bento">';
-
-                $stmtMenu = $pdo->prepare("SELECT id, name, price, description FROM menu ORDER BY id ASC");
-                $stmtMenu->execute();
-                $menus = $stmtMenu->fetchAll();
-
-                foreach($menus as $menu) {
+        <div class="food-section" name="Menus">
+          <h2>~ Nos Menus ~</h2>
+          <section class="bento">
+            <?php foreach($menus as $menu): ?>
+                <?php
                     $id = $menu['id'];
-                    $name = $menu['name'];
+                    $name = htmlspecialchars($menu['name']);
                     $price = number_format($menu['price'], 2, ",");
-                    $description = $menu['description'];
-
-                    // On récupère les images et la quantité spécifiquement pour ce menu
-                    $stmt = $pdo->prepare("
-                      SELECT f.image_path, mf.quantity
-                      FROM food f
-                      JOIN menu_food mf ON f.id = mf.food_id
-                      WHERE mf.menu_id = ?
-                    ");
-
-                    $stmt->execute([$id]);
-                    $menus_data = $stmt->fetchAll();
-
-                    echo '<article class="description" description="'. $description . '" price="'. $price .'€">
-                            <h3>'. $name .'</h3>
-                            <div class="menu-grid">';
-                                for($i = 0; $i < count($menus_data); $i++) {
-                                    $menu = $menus_data[$i];
-                                    for($j = 0; $j < $menu['quantity']; $j++) {
-                                        echo '<div style="flex: 1; background-image: url(assets/' . $menu['image_path'] .'); background-size: cover; background-position: center;"></div>';
-                                    }
-                                }
-
-                    echo '  </div>
-                            <form action="/update_cart" method="POST">
-                              <input type="hidden" name="item_id" value="'. $id .'">
-                              <input type="hidden" name="item_type" value="menu">
-                              <input type="hidden" name="action" value="add">
-                              <button class="add-to-cart" type="submit" aria-label="Ajouter au panier">+</button>
-                            </form>
-                          </article>';
-                }
-                echo '</section>
-                      </div>'; 
-
-            $stmt = $pdo->prepare("SELECT id, name FROM food_type ORDER BY id ASC");
-            $stmt->execute();
-            $food_types = $stmt->fetchAll();
-
-            foreach($food_types as $food_type) {
-              echo '<div class="food-section" name="'. $food_type['name'] .'">
-              <h2>~ '. $food_type['name'] .' ~</h2>
-              <section class="bento">';
-
-              $stmt = $pdo->prepare("SELECT id, name, price, description, image_path FROM food f WHERE f.food_type = ?");
-              $stmt->execute([$food_type['id']]);
-              $food_items = $stmt->fetchAll();
-
-              foreach($food_items as $food) {
-                $id = $food['id'];
-                $name = $food['name'];
-                $description = $food['description'];
-                $price = number_format($food['price'], 2, ",");
-                $image_path = 'assets/' . $food['image_path'];
-
-                $stmt = $pdo->prepare("
-                SELECT a.name
-                FROM allergen a
-                JOIN food_allergen fa ON fa.allergen_id = a.id
-                JOIN food f ON fa.food_id = f.id WHERE f.id = ?
-                ");
-                $stmt->execute([$id]);
-                $allergens = $stmt->fetchAll(PDO::FETCH_COLUMN);
-
-                echo '<article class="description '. implode(' ', $allergens) .'" description="'. $description. '" price="'. $price .'€" style="background-image: url('. $image_path .');">
-                <h3>'. $name .'</h3>
-                <form action="/update_cart" method="POST">
-                    <input type="hidden" name="item_id" value="'. $id .'">
-                    <input type="hidden" name="item_type" value="food">
+                    $description = htmlspecialchars($menu['description']);
+                    $menus_data = $menu['foods'];
+                ?>
+                <article class="description" description="<?php echo $description; ?>" price="<?php echo $price; ?>€">
+                  <h3><?php echo $name; ?></h3>
+                  <div class="menu-grid">
+                    <?php foreach($menus_data as $menu_item): ?>
+                        <?php for($j = 0; $j < $menu_item['quantity']; $j++): ?>
+                            <div style="flex: 1; background-image: url(/assets/<?php echo htmlspecialchars($menu_item['image_path']); ?>); background-size: cover; background-position: center;"></div>
+                        <?php endfor; ?>
+                    <?php endforeach; ?>
+                  </div>
+                  <form action="/update_cart" method="POST">
+                    <input type="hidden" name="item_id" value="<?php echo $id; ?>">
+                    <input type="hidden" name="item_type" value="menu">
                     <input type="hidden" name="action" value="add">
                     <button class="add-to-cart" type="submit" aria-label="Ajouter au panier">+</button>
-                </form>
-                </article>';
-              }
+                  </form>
+                </article>
+            <?php endforeach; ?>
+          </section>
+        </div>
 
-              echo "</section>
-              </div>";
-            }
-
-          } catch (\PDOException $e) {
-            $erreur = "Erreur de base de données : " . $e->getMessage();
-          }
-        ?>
+        <?php foreach($food_types as $food_type): ?>
+            <div class="food-section" name="<?php echo htmlspecialchars($food_type['name']); ?>">
+                <h2>~ <?php echo htmlspecialchars($food_type['name']); ?> ~</h2>
+                <section class="bento">
+                    <?php foreach($food_type['foods'] as $food): ?>
+                        <?php
+                            $id = $food['id'];
+                            $name = htmlspecialchars($food['name']);
+                            $description = htmlspecialchars($food['description']);
+                            $price = number_format($food['price'], 2, ",");
+                            $image_path = '/assets/' . htmlspecialchars($food['image_path']);
+                            $allergens_classes = implode(' ', array_map('htmlspecialchars', $food['allergens']));
+                        ?>
+                        <article class="description <?php echo $allergens_classes; ?>" description="<?php echo $description; ?>" price="<?php echo $price; ?>€" style="background-image: url('<?php echo $image_path; ?>');">
+                            <h3><?php echo $name; ?></h3>
+                            <form action="/update_cart" method="POST">
+                                <input type="hidden" name="item_id" value="<?php echo $id; ?>">
+                                <input type="hidden" name="item_type" value="food">
+                                <input type="hidden" name="action" value="add">
+                                <button class="add-to-cart" type="submit" aria-label="Ajouter au panier">+</button>
+                            </form>
+                        </article>
+                    <?php endforeach; ?>
+                </section>
+            </div>
+        <?php endforeach; ?>
       </section>
     </main>
 
