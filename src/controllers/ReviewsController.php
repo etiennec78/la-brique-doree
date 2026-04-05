@@ -31,7 +31,9 @@ class ReviewsController extends Controller {
 
     public function addReview() {
         require_once __DIR__ . '/../models/Review.php';
+        require_once __DIR__ . '/../models/User.php';
 
+        $error = NULL;
         if (isset($_SESSION['user'])) {
             $user_id = $_SESSION['user']['id'];
 
@@ -40,13 +42,13 @@ class ReviewsController extends Controller {
                 $product = $_POST['product'];
                 $delivery = $_POST['delivery'];
 
-                Review::addReview($comment, $product, $delivery);
+                Review::addReview($user_id, $product, $delivery, $comment);
             } else {
                 $error = "Vous devez renseigner votre prénom et nom dans votre profil pour laisser un avis.";
             }
         } else {
             $error = "Vous devez être connecté pour laisser un avis.";
         }
-        this->render($error);
+        $this->index($error);
     }
 }
