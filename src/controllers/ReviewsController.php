@@ -52,12 +52,7 @@ class ReviewsController extends Controller {
                 } else {
                     Review::addReview($user_id, $product, $delivery, $comment);
                 }
-            } else {
-                $error = "Vous devez renseigner votre prénom et nom dans votre profil, et avoir passé au moins une commande pour laisser un avis.";
             }
-        } else {
-            $error = "Vous devez être connecté pour laisser un avis.";
         }
-        $this->index($error);
     }
 }
