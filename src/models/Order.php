@@ -25,11 +25,12 @@ class Order {
         global $pdo;
         $placeholders = implode(',', array_fill(0, count($order_names), '?'));
         $stmt = $pdo->prepare("
-            SELECT o.id, u.first_name, u.last_name, o.is_takeaway
+            SELECT o.id, u.first_name, u.last_name, o.is_takeaway, o.takeaway_time
             FROM orders o
             JOIN users u ON o.customer_id = u.id
             JOIN order_status os ON o.order_status_id = os.id
             WHERE os.name IN ($placeholders)
+            ORDER BY COALESCE(o.takeaway_time, '1000-01-01 00:00:00') ASC, o.id ASC
         ");
         $stmt->execute($order_names);
         return $stmt->fetchAll();

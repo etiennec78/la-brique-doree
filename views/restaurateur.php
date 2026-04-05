@@ -82,7 +82,14 @@
 
                     <?php foreach ($pending_orders as $order): ?>
                     <tr>
-                        <td><span>Commande #<?= $order['id'] ?> (<?= getName($order) ?>)</span></td>
+                        <td>
+                            <span>Commande #<?= $order['id'] ?> (<?= getName($order) ?>)</span>
+                            <?php if (isset($order['is_takeaway']) && $order['is_takeaway']): ?>
+                                <br><small>Retrait : <?= $order['takeaway_time'] ? date('H\hi', strtotime($order['takeaway_time'])) : 'Au plus vite' ?></small>
+                            <?php else: ?>
+                                <br><small>Livraison</small>
+                            <?php endif; ?>
+                        </td>
                         <td>
                             <form action="/assign_order" method="POST">
                                 <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
@@ -107,12 +114,19 @@
 
                     <?php foreach ($delivery_orders as $order): ?>
                     <tr>
-                        <td><span>Commande #<?= $order['id'] ?> (<?= getName($order) ?>)</span></td>
+                        <td>
+                            <span>Commande #<?= $order['id'] ?> (<?= getName($order) ?>)</span>
+                            <?php if (isset($order['is_takeaway']) && $order['is_takeaway']): ?>
+                                <br><small>Retrait : <?= $order['takeaway_time'] ? date('H\hi', strtotime($order['takeaway_time'])) : 'Au plus vite' ?></small>
+                            <?php else: ?>
+                                <br><small>Livraison</small>
+                            <?php endif; ?>
+                        </td>
                         <td>
                             <?php if (isset($order['is_takeaway']) && $order['is_takeaway']): ?>
                                 <form action="/finish_takeaway" method="POST">
                                     <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
-                                    <button type="submit" class="basic-btn" style="padding:5px 10px; cursor:pointer;">Récupéré !</button>
+                                    <button type="submit" class="basic-btn">Récupéré !</button>
                                 </form>
                             <?php else: ?>
                                 <label class="selection">

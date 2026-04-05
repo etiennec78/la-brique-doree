@@ -129,8 +129,17 @@ class OrdersController extends Controller {
     }
 
     public function setDeliveryType() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['is_takeaway'])) {
-            $_SESSION['is_takeaway'] = $_POST['is_takeaway'] === '1';
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_POST['is_takeaway'])) {
+                $_SESSION['is_takeaway'] = $_POST['is_takeaway'] === '1';
+                // Reset time if user switches back to delivery
+                if (!$_SESSION['is_takeaway']) {
+                    unset($_SESSION['takeaway_time']);
+                }
+            }
+            if (isset($_POST['takeaway_time']) && !empty($_POST['takeaway_time'])) {
+                $_SESSION['takeaway_time'] = $_POST['takeaway_time'];
+            }
         }
         header("Location: /orders");
         exit;

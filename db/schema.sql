@@ -265,6 +265,7 @@ CREATE TABLE orders (
     delivery_person_id INT DEFAULT NULL,
     order_status_id INT DEFAULT 1, -- Correspond à 'paid' par défaut
     is_takeaway BOOLEAN NOT NULL DEFAULT FALSE,
+    takeaway_time DATETIME DEFAULT NULL,
     cook_assigned_at DATETIME DEFAULT NULL,
     delivery_person_assigned_at DATETIME DEFAULT NULL,
     

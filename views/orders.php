@@ -6,7 +6,9 @@ $api_key = getAPIKey($vendeur);
 $transaction = uniqid();
 
 $is_takeaway = isset($_SESSION['is_takeaway']) && $_SESSION['is_takeaway'] ? 1 : 0;
-$retour_url = "http://localhost/payment_result?cart_id=" . $cart_id . "&is_takeaway=" . $is_takeaway;
+$takeaway_time = isset($_SESSION['takeaway_time']) ? $_SESSION['takeaway_time'] : '';
+
+$retour_url = "http://localhost/payment_result?cart_id=" . $cart_id . "&is_takeaway=" . $is_takeaway . "&takeaway_time=" . urlencode($takeaway_time);
 
 $total_price = 0;
 $reduction = 0;
@@ -183,6 +185,15 @@ $cart_details = [];
             <button type="submit" name="is_takeaway" value="0" class="<?= !$is_takeaway ? 'selected' : '' ?>">À domicile</button>
             <button type="submit" name="is_takeaway" value="1" class="<?= $is_takeaway ? 'selected' : '' ?>">À emporter</button>
           </form>
+
+          <?php if ($is_takeaway): ?>
+          <form id="delivery-type" action="/set_delivery_type" method="POST">
+            <label id="takeway" for="takeaway_time">Heure de retrait</label>
+            <input type="time" id="takeaway_time" name="takeaway_time" value="<?= htmlspecialchars($takeaway_time) ?>" required>
+            <br>
+            <button id="takeaway" type="submit" class="basic-btn">Confirmer l'heure</button>
+          </form>
+          <?php endif; ?>
           
           <form action="https://www.plateforme-smc.fr/cybank/index.php" method="POST">
             <input type="hidden" name="transaction" value="<?= $transaction ?>">
@@ -190,7 +201,9 @@ $cart_details = [];
             <input type="hidden" name="vendeur" value="<?= $vendeur ?>">
             <input type="hidden" name="retour" value="<?= $retour_url ?>">
             <input type="hidden" name="control" value="<?= $control ?>">
-            <button id="checkout" type="submit" class="basic-btn checkout-btn" <?php if($total_price <= 0) echo 'disabled'; ?>>Payer</button>
+            <button id="checkout" type="submit" class="basic-btn checkout-btn" <?php if($total_price <= 0 || ($is_takeaway && empty($takeaway_time))) echo 'disabled'; ?>>
+                <?= ($is_takeaway && empty($takeaway_time)) ? "Veuillez confirmer l'heure" : 'Payer' ?>
+            </button>
           </form>
 
           <details class="coupon-details">
