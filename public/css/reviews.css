@@ -10,6 +10,7 @@
     border-collapse: collapse;
     transition: 0.3s;
     border-radius: 0.5rem;
+    position: relative;
 }
 
 .review-block:hover {
