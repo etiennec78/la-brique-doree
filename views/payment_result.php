@@ -26,12 +26,8 @@
             <p><?php echo $message; ?></p>
 
             <div class="btn-group">
-                <?php if ($isSuccess): ?>
-                    <button onclick="location.href='/'" type="button" class="basic-btn">Retourner à l'accueil</button>
-                <?php else: ?>
-                    <button onclick="location.href='/'" type="button" class="basic-btn grey-btn" id="cancel">Annuler</button>
-                    <button onclick="location.href='/orders'" type="button" class="basic-btn" id="retry">Réessayer</button>
-                <?php endif; ?>
+                <button onclick="location.href='/'" type="button" class="basic-btn gray-btn" id="cancel"><?php echo $isSuccess ? "Retourner à l'accueil" : 'Annuler'; ?></button>
+                <button onclick="location.href='/order<?php echo $isSuccess ? '_tracking' : 's'; ?>'" type="button" class="basic-btn" id="retry"><?php echo $isSuccess ? 'Suivre ma commande' : 'Réessayer'; ?></button>
             </div>
         </div>
     </main>
