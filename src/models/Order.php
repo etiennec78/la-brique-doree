@@ -27,4 +27,32 @@ class Order {
         $stmt->execute($order_names);
         return $stmt->fetchAll();
     }
+
+    public static function getAvailableDeliveryPerson() {
+        global $pdo;
+        $stmt = $pdo->prepare("
+            SELECT u.id
+            FROM users u
+            JOIN role r ON u.role_id = r.id
+            LEFT JOIN orders o ON o.delivery_person_id = u.id
+            WHERE r.name = 'delivery_person'
+            GROUP BY u.id
+            ORDER BY MAX(o.delivery_person_assigned_at) ASC
+        ");
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_COLUMN);
+    }
+
+    public static function setDeliveryStatus($order_id, $delivery_person_id) {
+        global $pdo;
+        $stmt = $pdo->prepare("
+            UPDATE orders
+            SET
+                delivery_person_id = ?,
+                order_status_id = 3,
+                delivery_person_assigned_at = NOW()
+            WHERE id = ?
+        ");
+        $stmt->execute([$delivery_person_id, $order_id]);
+    }
 }

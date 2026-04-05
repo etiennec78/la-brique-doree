@@ -73,7 +73,7 @@
                 <table>
                     <tr>
                         <td><h3>COMMANDE</h3></td>
-                        <td><h3 id="state">ETAT / LIVREUR</h3></td>
+                        <td><h3 id="state">ETAT</h3></td>
                     </tr>
 
                     <?php if (empty($pending_orders)): ?>
@@ -84,20 +84,9 @@
                     <tr>
                         <td><span>Commande #<?php echo $order['id']; ?> (<?php echo getName($order); ?>)</span></td>
                         <td>
-                            <form action="/assign_order" method="POST" style="display: flex; align-items: center; gap: 10px;">
+                            <form action="/assign_order" method="POST">
                                 <input type="hidden" name="order_id" value="<?php echo $order['id']; ?>">
-                                
-                                <select name="delivery_person_id" required style="padding: 5px; border-radius: 5px; border: 1px solid #FFD700; background: #000; color: #fff;">
-                                    <option value="">-- Choisir Livreur --</option>
-                                    <?php foreach ($deliverers as $d): ?>
-                                        <option value="<?php echo $d['id']; ?>"><?php echo getName($order); ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-
-                                <label class="selection">
-                                    <span>Prêt !</span>
-                                    <input type="radio" name="confirm" onchange="this.form.submit()"/> 
-                                </label>
+                                <button id="manage" type="submit" class="basic-btn">Prêt !</button>
                             </form>
                         </td>
                     </tr>

@@ -262,6 +262,8 @@ CREATE TABLE orders (
     cook_id INT DEFAULT NULL,
     delivery_person_id INT DEFAULT NULL,
     order_status_id INT DEFAULT 1, -- Correspond à 'paid' par défaut
+    cook_assigned_at DATETIME DEFAULT NULL,
+    delivery_person_assigned_at DATETIME DEFAULT NULL,
     
     FOREIGN KEY (cart_id) REFERENCES cart(id) ON DELETE CASCADE,
     FOREIGN KEY (customer_id) REFERENCES users(id) ON DELETE CASCADE,

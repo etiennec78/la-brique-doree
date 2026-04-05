@@ -43,19 +43,6 @@ table span {
     font-size: 20px;
 }
 
-.selection {
-    background: var(--darkgray);
-    padding: 4px 7%;
-    border-radius: 15px;
-    margin: auto;
-    color: var(--offwhite);
-    cursor: pointer;
-}
-
-.selection:has(input:checked) {
-    background: var(--solid-gold);
-}
-
 .tab-item input {
     display: none;
 }
