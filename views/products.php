@@ -90,8 +90,9 @@
                     $price = number_format($menu['price'], 2, ",");
                     $description = htmlspecialchars($menu['description']);
                     $menus_data = $menu['foods'];
+                    $menu_allergens_classes = implode(' ', array_map('htmlspecialchars', $menu['allergens']));
                 ?>
-                <article class="description" description="<?= $description ?>" price="<?= $price ?>€">
+                <article class="description <?= $menu_allergens_classes ?>" description="<?= $description ?>" price="<?= $price ?>€">
                   <h3><?= $name ?></h3>
                   <div class="menu-grid">
                     <?php foreach($menus_data as $menu_item): ?>

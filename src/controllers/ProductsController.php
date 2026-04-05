@@ -11,6 +11,12 @@ class ProductsController extends Controller {
         $menus = Menu::getMenus();
         foreach($menus as &$menu) {
             $menu['foods'] = Menu::getMenuFoods($menu['id']);
+            $menu_allergens = [];
+            foreach($menu['foods'] as $food) {
+                $food_allergens = Food::getAllergens($food['item_id']);
+                $menu_allergens = array_merge($menu_allergens, $food_allergens);
+            }
+            $menu['allergens'] = array_unique($menu_allergens);
         }
 
         $food_types = Food::getTypes();
