@@ -52,20 +52,69 @@
     <main>
         <h2 id="reviews-title">~ Avis Clients ~</h2>
         <?php foreach($reviews as $review): ?>
-            <table class="review-block">
-            <tr>
-              <th class="user-name"><?= getName($review) ?></th>
-              <td class="user-ratings">
-                <p>Produits : </p><p class="stars"><?= str_repeat('★', $review['product_stars']) ?></p>
-                <p>Livraison : </p><p class="stars"><?= str_repeat('★', $review['delivery_stars']) ?></p>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2" class="review-text">
-                <p><?= $review['comment'] ?></p>
-              </td>
-            </tr>
-          </table>
+            <?php if (isset($_GET['edit']) && $_GET['edit'] == $review['id'] && isset($_SESSION['user']) && ($_SESSION['user']['id'] == $review['user_id'] || $is_admin)): ?>
+                <form action="/reviews" method="post" class="review-block">
+                    <input type="hidden" name="review_id" value="<?= $review['id'] ?>">
+                    <table class="review-block edit-review-table">
+                        <tr>
+                            <th class="user-name">MODIFIER VOTRE AVIS</th>
+                            <td class="user-ratings">
+                                <div class="rating-group">
+                                    <label for="product-<?= $review['id'] ?>">Produit :</label>
+                                    <select name="product" id="product-<?= $review['id'] ?>" class="select-note" required>
+                                        <option value="5" <?= $review['product_stars'] == 5 ? 'selected' : '' ?>>★★★★★</option>
+                                        <option value="4" <?= $review['product_stars'] == 4 ? 'selected' : '' ?>>★★★★</option>
+                                        <option value="3" <?= $review['product_stars'] == 3 ? 'selected' : '' ?>>★★★</option>
+                                        <option value="2" <?= $review['product_stars'] == 2 ? 'selected' : '' ?>>★★</option>
+                                        <option value="1" <?= $review['product_stars'] == 1 ? 'selected' : '' ?>>★</option>
+                                    </select>
+                                </div>
+                                <div class="rating-group">
+                                    <label for="delivery-<?= $review['id'] ?>">Livraison :</label>
+                                    <select name="delivery" id="delivery-<?= $review['id'] ?>" class="select-note" required>
+                                        <option value="5" <?= $review['delivery_stars'] == 5 ? 'selected' : '' ?>>★★★★★</option>
+                                        <option value="4" <?= $review['delivery_stars'] == 4 ? 'selected' : '' ?>>★★★★</option>
+                                        <option value="3" <?= $review['delivery_stars'] == 3 ? 'selected' : '' ?>>★★★</option>
+                                        <option value="2" <?= $review['delivery_stars'] == 2 ? 'selected' : '' ?>>★★</option>
+                                        <option value="1" <?= $review['delivery_stars'] == 1 ? 'selected' : '' ?>>★</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="review-text">
+                                <textarea name="comment" required><?= htmlspecialchars($review['comment']) ?></textarea>
+                                <div class="edit-review-actions">
+                                    <button type="submit" name="submit_avis" class="basic-btn btn-send">Mettre à jour</button>
+                                    <a href="/reviews" class="basic-btn gray-btn btn-cancel">Annuler</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            <?php else: ?>
+                <table class="review-block">
+                <tr>
+                  <th class="user-name">
+                      <?= getName($review) ?>
+                  </th>
+                  <td class="user-ratings">
+                    <p>Produits : </p><p class="stars"><?= str_repeat('★', $review['product_stars']) ?></p>
+                    <p>Livraison : </p><p class="stars"><?= str_repeat('★', $review['delivery_stars']) ?></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2" class="review-text">
+                    <p><?= htmlspecialchars($review['comment']) ?></p>
+                    <?php if (isset($_SESSION['user']) && ($_SESSION['user']['id'] == $review['user_id'] || $is_admin)): ?>
+                        <a href="?edit=<?= $review['id'] ?>" title="Modifier" class="edit-icon-link">
+                            <img src="/assets/images/pencil.svg" alt="Modifier" class="edit-icon">
+                        </a>
+                    <?php endif; ?>
+                  </td>
+                </tr>
+              </table>
+            <?php endif; ?>
         <?php endforeach; ?>
 
     <?php if ($logged_in): ?>

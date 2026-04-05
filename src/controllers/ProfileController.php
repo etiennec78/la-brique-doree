@@ -10,9 +10,7 @@ class ProfileController extends Controller {
 
         $cart_count = Cart::getCartCount();
         $user_data = User::getUserData($uid);
-
-        $user_role = User::getUserRole($_SESSION['user']['id']);
-        $is_admin = $user_role == 'administrator';
+        $is_admin = User::isAdmin($_SESSION['user']['id']);
 
         $this->render(
             'profile',

@@ -66,7 +66,6 @@ class User {
         $stmt_users->execute([$role]);
         return $stmt_users->fetchAll();
     }
-
     public static function userHasName($uid) {
         $user_data = self::getUserData($uid);
         return (
@@ -133,4 +132,10 @@ class User {
         $result = $stmt->fetch();
         return $result ? $result['name'] : null;
     }
+
+    public static function isAdmin($uid) {
+        $role = self::getUserRole($uid);
+        return $role === 'administrator';
+    }
+
 }

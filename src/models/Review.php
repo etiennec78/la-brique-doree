@@ -11,12 +11,33 @@ class Review {
         $stmt->execute([$user_id, $product, $delivery, $comment]);
     }
 
+    public static function updateReview($id, $user_id, $is_admin, $product, $delivery, $comment) {
+        global $pdo;
+        
+        if ($is_admin) {
+            $stmt = $pdo->prepare("
+              UPDATE reviews 
+              SET product_stars = ?, delivery_stars = ?, comment = ? 
+              WHERE id = ?
+            ");
+            $stmt->execute([$product, $delivery, $comment, $id]);
+        } else {
+            $stmt = $pdo->prepare("
+              UPDATE reviews 
+              SET product_stars = ?, delivery_stars = ?, comment = ? 
+              WHERE id = ? AND user_id = ?
+            ");
+            $stmt->execute([$product, $delivery, $comment, $id, $user_id]);
+        }
+    }
+
     public static function getReviews() {
         global $pdo;
         $stmt = $pdo->prepare("
-            SELECT u.first_name, u.last_name, r.product_stars, r.delivery_stars, r.comment
+            SELECT r.id, r.user_id, u.first_name, u.last_name, r.product_stars, r.delivery_stars, r.comment
             FROM reviews r
             JOIN users u ON r.user_id = u.id
+            ORDER BY r.id DESC
         ");
         $stmt->execute();
         return $stmt->fetchAll();
