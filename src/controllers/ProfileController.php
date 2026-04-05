@@ -11,12 +11,16 @@ class ProfileController extends Controller {
         $cart_count = Cart::getCartCount();
         $user_data = User::getUserData($uid);
 
+        $user_role = User::getUserRole($_SESSION['user']['id']);
+        $is_admin = $user_role == 'administrator';
+
         $this->render(
             'profile',
             [
                 'cart_count' => $cart_count,
                 'user_data' => $user_data,
-                'target' => $uid
+                'target' => $uid,
+                'is_admin' => $is_admin,
             ]
         );
     }
@@ -24,26 +28,25 @@ class ProfileController extends Controller {
     public function updateProfile() {
         global $pdo;
         require_once __DIR__ . '/../db_connect.php';
+        require_once __DIR__ . '/../models/User.php';
 
         $target = $_SESSION['user']['id'];
         try {
             if (array_key_exists('user_id', $_POST)) {
                 // Vérifier si l'utilisateur actuel est admin
-                $user_id = $_SESSION['user']['id'];
-                $stmt = $pdo->prepare("
-                SELECT r.name
-                FROM users u
-                JOIN role r ON r.id = u.role_id
-                WHERE u.id = ?
-                ");
-                $stmt->execute([$user_id]);
-                $user_role = $stmt->fetch();
-
-                if ($user_role = 'administrator') {
+                $user_role = User::getUserRole($_SESSION['user']['id']);
+                if ($user_role == 'administrator')
                     $target = $_POST['user_id'];
-                }
             }
-            if (array_key_exists('first_name', $_POST)) {
+            if (isset($_POST['action']) && $_POST['action'] === 'ban' && $user_role == 'administrator') {
+                $stmt = $pdo->prepare("UPDATE users SET banned = 1 WHERE id = ?");
+                $stmt->execute([$target]);
+            }
+            else if (isset($_POST['action']) && $_POST['action'] === 'unban' && $user_role == 'administrator') {
+                $stmt = $pdo->prepare("UPDATE users SET banned = 0 WHERE id = ?");
+                $stmt->execute([$target]);
+            }
+            else if (array_key_exists('first_name', $_POST)) {
                 // Modifier les données de l'utilisateur dans la base de données
                 $stmt = $pdo->prepare("UPDATE users SET first_name=?, last_name=?, street_nb=?, street_nb_suf=?, street=?, zip_code=?, phone=?, email=?, intercom_code=?, birth_date=? WHERE id = ?");
 

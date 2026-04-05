@@ -67,3 +67,8 @@
     text-decoration: underline;
     cursor: pointer;
 }
+
+.banned {
+    text-decoration: line-through;
+    opacity: 0.6;
+}

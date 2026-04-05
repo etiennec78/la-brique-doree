@@ -73,7 +73,7 @@
                 </thead>
                 <tbody>
                     <?php foreach($users_data as $user_data): ?>
-                        <tr>
+                        <tr class="<?= !empty($user_data['banned']) ? 'banned' : '' ?>">
                             <td><?= $user_data['id'] ?></td>
                             <td><strong><?= getName($user_data) ?></strong></td>
                             <td><?= $user_data['email'] ?></td>

@@ -19,7 +19,7 @@ class User {
     public static function getAllUsersInfo() {
         global $pdo;
         $stmt = $pdo->prepare("
-            SELECT u.id, u.email, u.first_name, u.last_name, u.global_reduction, r.name AS role,
+            SELECT u.id, u.email, u.first_name, u.last_name, u.global_reduction, u.banned, r.name AS role,
             (
                 COALESCE(SUM(CASE WHEN ps.name = 'pending' THEN m.total_menu_quantity ELSE 0 END), 0)
                 + COALESCE(SUM(CASE WHEN ps.name = 'pending' THEN cf.total_food_quantity ELSE 0 END), 0)
@@ -47,7 +47,7 @@ class User {
     public static function getUserData($uid) {
         global $pdo;
         $stmt = $pdo->prepare("
-            SELECT email, first_name, last_name, phone, birth_date, street_nb, street_nb_suf, street, town, zip_code, intercom_code
+            SELECT email, first_name, last_name, phone, birth_date, street_nb, street_nb_suf, street, town, zip_code, intercom_code, banned, id
             FROM users u
             WHERE u.id = ?
         ");
@@ -91,5 +91,18 @@ class User {
             WHERE id = ?
         ");
         $stmt->execute([$uid]);
+    }
+
+    public static function getUserRole($uid) {
+        global $pdo;
+        $stmt = $pdo->prepare("
+            SELECT r.name
+            FROM users u
+            JOIN role r ON r.id = u.role_id
+            WHERE u.id = ?
+        ");
+        $stmt->execute([$uid]);
+        $result = $stmt->fetch();
+        return $result ? $result['name'] : null;
     }
 }

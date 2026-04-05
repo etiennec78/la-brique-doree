@@ -10,3 +10,11 @@
 #street_nb, #street_nb_suf {
   width: 75px;
 }
+
+.alert-btn {
+  background: var(--red);
+}
+
+.alert-btn:hover {
+  background: var(--darkred);
+}

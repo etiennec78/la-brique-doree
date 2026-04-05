@@ -22,6 +22,11 @@ class AuthController extends Controller
     $user_found = User::findByEmail($email);
 
     if ($user_found && password_verify($password, $user_found['password_hash'])) {
+      if (!empty($user_found['banned'])) {
+        $this->render('login', ['error' => 'Votre compte a été banni.']);
+        return;
+      }
+      
       $user_found['role'] = $user_found['role_name'];
       
       $_SESSION['user'] = $user_found;

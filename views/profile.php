@@ -98,6 +98,13 @@
                     <input type="date" id="birth_date" name="birth_date" value="<?= $user_data['birth_date'] ?>">
                 </div>
                 <button type="submit" class="basic-btn">Mettre à jour les informations</button>
+                <?php if ($is_admin): ?>
+                    <?php if (!empty($user_data['banned'])): ?>
+                        <button type="submit" name="action" value="unban" class="basic-btn" style="background-color: green;">Débannir l'utilisateur</button>
+                    <?php else: ?>
+                        <button type="submit" name="action" value="ban" class="basic-btn alert-btn">Bannir l'utilisateur</button>
+                    <?php endif; ?>
+                <?php endif; ?>
             </form>
         </div>
     </main>
