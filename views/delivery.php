@@ -36,17 +36,17 @@
             <?php foreach($deliveries as $delivery): ?>
                 <div class="delivery-card">
                     <div class="card-header">
-                        <span class="order-id">#<?php echo $delivery['id']; ?></span>
-                        <span class="client-name"><?php echo getName($delivery); ?></span>
+                        <span class="order-id">#<?= $delivery['id'] ?></span>
+                        <span class="client-name"><?= getName($delivery) ?></span>
                     </div>
                     <div class="card-body">
-                        <p class="address">📍 <?php echo getAddress($delivery); ?></p>
+                        <p class="address">📍 <?= getAddress($delivery) ?></p>
                         <?php if (isset($delivery['intercom_code'])): ?>
-                            <p class="access">🔑 Code <?php echo $delivery['intercom_code'] ?></p>
+                            <p class="access">🔑 Code <?= $delivery['intercom_code'] ?></p>
                         <?php endif; ?>
                     </div>
                     <form action="/confirm_delivery" method="POST">
-                        <input type="hidden" name="order_id" value="<?php echo $delivery['id']; ?>">
+                        <input type="hidden" name="order_id" value="<?= $delivery['id'] ?>">
                         <button id="confirm" type="submit" class="basic-btn action-btn">CONFIRMER LIVRAISON</button>
                     </form>
                 </div>

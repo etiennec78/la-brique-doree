@@ -16,7 +16,7 @@
             <h1>LA BRIQUE DOREE</h1>
             <a href="/orders">
                 <img id="cart" class="icon" src="/assets/images/cart.svg" alt="Icône de panier de courses">
-                <p id="cart_items" class="bubble"><?php echo $cart_count; ?></p>
+                <p id="cart_items" class="bubble"><?= $cart_count ?></p>
             </a>
             <video class="video-background" autoplay muted loop>
                 <source src="/assets/images/header_background.mp4" type="video/mp4">

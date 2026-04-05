@@ -15,7 +15,7 @@
             <h1>NOS AVIS</h1>
             <a href="/orders">
                 <img id="cart" class="icon" src="/assets/images/cart.svg">
-                <p id="cart_items" class="bubble"><?php echo $cart_count; ?></p>
+                <p id="cart_items" class="bubble"><?= $cart_count ?></p>
             </a>
             <video class="video-background" autoplay muted loop>
                 <source src="/assets/images/header_background.mp4" type="video/mp4">
@@ -54,15 +54,15 @@
         <?php foreach($reviews as $review): ?>
             <table class="review-block">
             <tr>
-              <th class="user-name"><?php echo getName($review); ?></th>
+              <th class="user-name"><?= getName($review) ?></th>
               <td class="user-ratings">
-                <p>Produits : </p><p class="stars"><?php echo str_repeat('★', $review['product_stars']); ?></p>
-                <p>Livraison : </p><p class="stars"><?php echo str_repeat('★', $review['delivery_stars']); ?></p>
+                <p>Produits : </p><p class="stars"><?= str_repeat('★', $review['product_stars']) ?></p>
+                <p>Livraison : </p><p class="stars"><?= str_repeat('★', $review['delivery_stars']) ?></p>
               </td>
             </tr>
             <tr>
               <td colspan="2" class="review-text">
-                <p><?php echo $review['comment']; ?></p>
+                <p><?= $review['comment'] ?></p>
               </td>
             </tr>
           </table>
@@ -76,7 +76,7 @@
                 <td class="user-ratings">
                     <?php if(isset($error)): ?>
                         <div class="alert">
-                            <?php echo htmlspecialchars($error); ?>
+                            <?= htmlspecialchars($error) ?>
                         </div>
                     <?php endif; ?>
 

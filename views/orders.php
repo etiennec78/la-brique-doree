@@ -28,7 +28,7 @@ $cart_details = [];
             <h1>COMMANDE</h1>
             <a href="/orders">
                 <img id="cart" class="icon" src="/assets/images/cart.svg" alt="Icône de panier de courses">
-                <p id="cart_items" class="bubble"><?php echo $cart_count; ?></p>
+                <p id="cart_items" class="bubble"><?= $cart_count ?></p>
             </a>
             <video class="video-background" autoplay muted loop>
                 <source src="/assets/images/header_background.mp4" type="video/mp4">
@@ -162,14 +162,14 @@ $cart_details = [];
               echo "</ul>";
             }
           ?>
-          <p>Total: <?php echo number_format($total_price, 2, ","); ?>€</p>
+          <p>Total: <?= number_format($total_price, 2, ",") ?>€</p>
           
           <form action="https://www.plateforme-smc.fr/cybank/index.php" method="POST">
-            <input type="hidden" name="transaction" value="<?php echo $transaction; ?>">
-            <input type="hidden" name="montant" value="<?php echo $montant_cybank; ?>">
-            <input type="hidden" name="vendeur" value="<?php echo $vendeur; ?>">
-            <input type="hidden" name="retour" value="<?php echo $retour_url; ?>">
-            <input type="hidden" name="control" value="<?php echo $control; ?>">
+            <input type="hidden" name="transaction" value="<?= $transaction ?>">
+            <input type="hidden" name="montant" value="<?= $montant_cybank ?>">
+            <input type="hidden" name="vendeur" value="<?= $vendeur ?>">
+            <input type="hidden" name="retour" value="<?= $retour_url ?>">
+            <input type="hidden" name="control" value="<?= $control ?>">
             <button id="checkout" type="submit" class="basic-btn" <?php if($total_price <= 0) echo 'disabled'; ?>>Payer</button>
           </form>
         </div>

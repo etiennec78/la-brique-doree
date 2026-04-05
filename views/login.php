@@ -27,7 +27,7 @@
             <h2>Connexion</h2>
 
             <?php if(isset($error)): ?>
-                <p class="alert"><?php echo $error; ?></p>
+                <p class="alert"><?= $error ?></p>
             <?php endif; ?>
 
             <form action="/login" method="post">

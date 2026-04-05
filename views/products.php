@@ -16,7 +16,7 @@
             <h1>NOS PRODUITS</h1>
             <a href="/orders">
                 <img id="cart" class="icon" src="/assets/images/cart.svg" alt="Icône de panier de courses">
-                <p id="cart_items" class="bubble"><?php echo $cart_count; ?></p>
+                <p id="cart_items" class="bubble"><?= $cart_count ?></p>
             </a>
             <video class="video-background" autoplay muted loop>
                 <source src="/assets/images/header_background.mp4" type="video/mp4">
@@ -91,17 +91,17 @@
                     $description = htmlspecialchars($menu['description']);
                     $menus_data = $menu['foods'];
                 ?>
-                <article class="description" description="<?php echo $description; ?>" price="<?php echo $price; ?>€">
-                  <h3><?php echo $name; ?></h3>
+                <article class="description" description="<?= $description ?>" price="<?= $price ?>€">
+                  <h3><?= $name ?></h3>
                   <div class="menu-grid">
                     <?php foreach($menus_data as $menu_item): ?>
                         <?php for($j = 0; $j < $menu_item['quantity']; $j++): ?>
-                            <div style="flex: 1; background-image: url(/assets/<?php echo htmlspecialchars($menu_item['image_path']); ?>); background-size: cover; background-position: center;"></div>
+                            <div style="flex: 1; background-image: url(/assets/<?= htmlspecialchars($menu_item['image_path']) ?>); background-size: cover; background-position: center;"></div>
                         <?php endfor; ?>
                     <?php endforeach; ?>
                   </div>
                   <form action="/update_cart" method="POST">
-                    <input type="hidden" name="item_id" value="<?php echo $id; ?>">
+                    <input type="hidden" name="item_id" value="<?= $id ?>">
                     <input type="hidden" name="item_type" value="menu">
                     <input type="hidden" name="action" value="add">
                     <button class="add-to-cart" type="submit" aria-label="Ajouter au panier">+</button>
@@ -112,8 +112,8 @@
         </div>
 
         <?php foreach($food_types as $food_type): ?>
-            <div class="food-section" name="<?php echo htmlspecialchars($food_type['name']); ?>">
-                <h2>~ <?php echo htmlspecialchars($food_type['name']); ?> ~</h2>
+            <div class="food-section" name="<?= htmlspecialchars($food_type['name']) ?>">
+                <h2>~ <?= htmlspecialchars($food_type['name']) ?> ~</h2>
                 <section class="bento">
                     <?php foreach($food_type['foods'] as $food): ?>
                         <?php
@@ -124,10 +124,10 @@
                             $image_path = '/assets/' . htmlspecialchars($food['image_path']);
                             $allergens_classes = implode(' ', array_map('htmlspecialchars', $food['allergens']));
                         ?>
-                        <article class="description <?php echo $allergens_classes; ?>" description="<?php echo $description; ?>" price="<?php echo $price; ?>€" style="background-image: url('<?php echo $image_path; ?>');">
-                            <h3><?php echo $name; ?></h3>
+                        <article class="description <?= $allergens_classes ?>" description="<?= $description ?>" price="<?= $price ?>€" style="background-image: url('<?= $image_path ?>');">
+                            <h3><?= $name ?></h3>
                             <form action="/update_cart" method="POST">
-                                <input type="hidden" name="item_id" value="<?php echo $id; ?>">
+                                <input type="hidden" name="item_id" value="<?= $id ?>">
                                 <input type="hidden" name="item_type" value="food">
                                 <input type="hidden" name="action" value="add">
                                 <button class="add-to-cart" type="submit" aria-label="Ajouter au panier">+</button>

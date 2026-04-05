@@ -15,7 +15,7 @@
             <h1>RESTAURATEUR</h1>
             <a href="/orders">
                 <img id="cart" class="icon" src="/assets/images/cart.svg">
-                <p id="cart_items" class="bubble"><?php echo $cart_count; ?></p>
+                <p id="cart_items" class="bubble"><?= $cart_count ?></p>
             </a>
             <video class="video-background" autoplay muted loop>
                 <source src="/assets/images/header_background.mp4" type="video/mp4">
@@ -82,10 +82,10 @@
 
                     <?php foreach ($pending_orders as $order): ?>
                     <tr>
-                        <td><span>Commande #<?php echo $order['id']; ?> (<?php echo getName($order); ?>)</span></td>
+                        <td><span>Commande #<?= $order['id'] ?> (<?= getName($order) ?>)</span></td>
                         <td>
                             <form action="/assign_order" method="POST">
-                                <input type="hidden" name="order_id" value="<?php echo $order['id']; ?>">
+                                <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
                                 <button id="manage" type="submit" class="basic-btn">Prêt !</button>
                             </form>
                         </td>
@@ -107,7 +107,7 @@
 
                     <?php foreach ($delivery_orders as $order): ?>
                     <tr>
-                        <td><span>Commande #<?php echo $order['id']; ?> (<?php echo getName($order); ?>)</span></td>
+                        <td><span>Commande #<?= $order['id'] ?> (<?= getName($order) ?>)</span></td>
                         <td>
                             <label class="selection">
                                 <span>En route</span>

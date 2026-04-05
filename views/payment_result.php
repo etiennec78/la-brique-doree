@@ -20,14 +20,14 @@
     </header>
 
     <main>
-        <div class="result-container <?php echo $statusClass; ?>">
-            <img src="<?php echo $icon; ?>" alt="Icône" class="result-icon">
-            <h2><?php echo $title; ?></h2>
-            <p><?php echo $message; ?></p>
+        <div class="result-container <?= $statusClass ?>">
+            <img src="<?= $icon ?>" alt="Icône" class="result-icon">
+            <h2><?= $title ?></h2>
+            <p><?= $message ?></p>
 
             <div class="btn-group">
-                <button onclick="location.href='/'" type="button" class="basic-btn gray-btn" id="cancel"><?php echo $isSuccess ? "Retourner à l'accueil" : 'Annuler'; ?></button>
-                <button onclick="location.href='/order<?php echo $isSuccess ? '_tracking' : 's'; ?>'" type="button" class="basic-btn" id="retry"><?php echo $isSuccess ? 'Suivre ma commande' : 'Réessayer'; ?></button>
+                <button onclick="location.href='/'" type="button" class="basic-btn gray-btn" id="cancel"><?= $isSuccess ? "Retourner à l'accueil" : 'Annuler' ?></button>
+                <button onclick="location.href='/order<?= $isSuccess ? '_tracking' : 's' ?>'" type="button" class="basic-btn" id="retry"><?= $isSuccess ? 'Suivre ma commande' : 'Réessayer' ?></button>
             </div>
         </div>
     </main>

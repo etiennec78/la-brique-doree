@@ -12,7 +12,7 @@
     </header>
 
     <div class="tracking-container">
-        <h2>Commande #<?php echo $order['id'] ?></h2>
+        <h2>Commande #<?= $order['id'] ?></h2>
         
         <div class="stepper">
             <div class="step active">
@@ -42,9 +42,9 @@
         <?php if ($order['status'] != 1): ?>
         <div class="delivery-info">
             <?php if ($order['status'] == 2): ?>
-                <p>Cuisinier : <?php echo $get_name($cook); ?></p>
+                <p>Cuisinier : <?= $get_name($cook) ?></p>
             <?php elseif ($order['status'] == 3): ?>
-                <p>Livreur : <?php echo $get_name($delivery_person); ?></p>
+                <p>Livreur : <?= $get_name($delivery_person) ?></p>
                 <p>Arrivée : XX min</p>
                 <iframe id="map" src="https://www.openstreetmap.org/export/embed.html?bbox=9.113277196884157%2C55.72994659971866%2C9.11605328321457%2C55.73135269752343&marker=55.730662,9.114866&amp;layer=mapnik"></iframe>
             <?php else: ?>
