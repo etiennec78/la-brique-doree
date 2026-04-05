@@ -48,15 +48,16 @@
         <div class="panel">
             <div class="panel-header">
                 <h2>Gestion des comptes utilisateurs</h2>
-                <div class="controls">
-                    <input type="text" placeholder="Rechercher un nom ou ID..." class="search-bar">
-                    <select class="filter-select">
-                        <option>Tous les profils</option>
-                        <option>Clients actifs</option>
-                        <option>Livreurs</option>
-                        <option>Restaurateurs</option>
+                <form method="GET" action="" class="controls">
+                    <input type="text" name="search" placeholder="Rechercher un nom ou ID..." class="search-bar" value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
+                    <select name="role" class="filter-select">
+                        <option value="">Tous les profils</option>
+                        <option value="user" <?= (($_GET['role'] ?? '') === 'user') ? 'selected' : '' ?>>Clients actifs</option>
+                        <option value="delivery_person" <?= (($_GET['role'] ?? '') === 'delivery_person') ? 'selected' : '' ?>>Livreurs</option>
+                        <option value="restaurateur" <?= (($_GET['role'] ?? '') === 'restaurateur') ? 'selected' : '' ?>>Restaurateurs</option>
                     </select>
-                </div>
+                    <button type="submit" class="action-link" style="margin-left: 10px; cursor: pointer;">Filtrer</button>
+                </form>
             </div>
 
             <table class="admin-table">
@@ -72,7 +73,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($users_data as $user_data): ?>
+                    <?php 
+                    $search = strtolower(trim($_GET['search'] ?? ''));
+                    $role_filter = $_GET['role'] ?? '';
+                    
+                    foreach($users_data as $user_data): 
+                        $user_name = strtolower(getName($user_data));
+                        $user_id = strtolower((string)$user_data['id']);
+                        $user_role = $user_data['role'];
+                        
+                        // Application des filtres
+                        if ($search !== '' && !str_contains($user_name, $search) && !str_contains($user_id, $search)) {
+                            continue;
+                        }
+                        if ($role_filter !== '' && $user_role !== $role_filter) {
+                            continue;
+                        }
+                    ?>
                         <tr class="<?= !empty($user_data['banned']) ? 'banned' : '' ?>">
                             <td><?= $user_data['id'] ?></td>
                             <td><strong><?= getName($user_data) ?></strong></td>
