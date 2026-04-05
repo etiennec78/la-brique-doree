@@ -34,7 +34,7 @@ class OrdersController extends Controller {
         require_once __DIR__ . '/../db_connect.php';
 
         if (!isset($_SESSION['user'])) {
-            header('Location: /login.php');
+            header('Location: /login');
             exit;
         }
 
@@ -45,7 +45,7 @@ class OrdersController extends Controller {
             $user_id = $_SESSION['user']['id'];
 
             if (!in_array($item_type, ['food', 'menu'])) {
-                header('Location: /orders.php');
+                header('Location: /orders');
                 exit;
             }
 
