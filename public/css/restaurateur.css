@@ -43,10 +43,6 @@ table span {
     font-size: 20px;
 }
 
-.tab-item input {
-    display: none;
-}
-
 .tab-item:has(input:checked) {
     background: var(--solid-dark-gold);
 }

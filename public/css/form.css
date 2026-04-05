@@ -23,11 +23,6 @@
 
 .input-group input {
     width: 100%;
-    padding: 8px;
-    border: 0px;
-    border-radius: 3px;
-    color: var(--offwhite);
-    background: var(--input-color);
 }
 
 .input-group select {

@@ -282,3 +282,11 @@ h1 {
 .alert {
   color: var(--red);
 }
+
+input {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--input-color);
+  color: var(--offwhite);
+}
