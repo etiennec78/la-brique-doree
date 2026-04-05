@@ -45,7 +45,7 @@
         </div>
 
 
-        <a href="/" class="navbarbutton basic-btn">Retour à l'accueil</a>
+        <button onclick="location.href='/'" class="basic-btn">Retour à l'accueil</button>
 
     </main>
 
