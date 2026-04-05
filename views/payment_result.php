@@ -1,25 +1,12 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Résultat du paiement - La Brique Dorée</title>
-    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.png">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/payment_result.css">
-</head>
-<body>
-    <header>
-        <div id="main-header">
-            <img id="logo" src="/assets/images/LOGO.png" alt="Logo">
-            <h1>LA BRIQUE DORÉE</h1>
-            <video class="video-background" autoplay muted loop>
-                <source src="/assets/images/header_background.mp4" type="video/mp4">
-            </video>
-        </div>
-    </header>
-
-    <main>
+<?php
+$title = "Résultat du paiement - La Brique Dorée";
+$h1 = "LA BRIQUE DORÉE";
+$show_cart = false;
+$show_video = true;
+$css_files = ['/css/payment_result.css'];
+include __DIR__ . '/../includes/header.php';
+?>
+<main>
         <div class="result-container <?= $statusClass ?>">
             <img src="<?= $icon ?>" alt="Icône" class="result-icon">
             <h2><?= $title ?></h2>
@@ -31,5 +18,4 @@
             </div>
         </div>
     </main>
-</body>
-</html>
+<?php include __DIR__ . '/../includes/footer.php'; ?>

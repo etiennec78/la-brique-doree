@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Suivi - La Brique Dorée</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/order_tracking.css">
-</head>
-<body>
-    <header>
-        <h1>SUIVI DE COMMANDE</h1>
-    </header>
-
+<?php
+$title = "Suivi - La Brique Dorée";
+$h1 = "SUIVI DE COMMANDE";
+$show_cart = false;
+$show_video = false;
+$css_files = ['/css/order_tracking.css'];
+include __DIR__ . '/../includes/header.php';
+?>
+    <main>
     <div class="tracking-container">
         <h2>Commande #<?= $order['id'] ?></h2>
         <?php $is_takeaway = isset($order['is_takeaway']) && $order['is_takeaway']; ?>
@@ -64,7 +60,7 @@
             <?php endif; ?>
         </div>
 
+    </div>
     </main>
 
-    </body>
-</html>
+<?php include __DIR__ . '/../includes/footer.php'; ?>

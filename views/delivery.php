@@ -1,25 +1,12 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Livreur - La Brique Dorée</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/delivery.css">
-</head>
-<body>
-    <header>
-        <div id="main-header">
-            <img id="logo" src="/assets/images/LOGO.png" alt="Logo">
-            <h1>LIVRAISON</h1>
-        </div>
-        <nav id="navbar-header">
-            <a href="/" class="navbarbutton">Accueil</a>
-            <a href="/reviews" class="navbarbutton">Avis</a>
-            <a href="/delivery" class="navbarbutton">Livraison</a>
-        </nav>
-    </header>
-
-    <main>
+<?php
+$title = "Livreur - La Brique Dorée";
+$h1 = "LIVRAISON";
+$show_cart = false;
+$show_video = false;
+$css_files = ['/css/delivery.css'];
+include __DIR__ . '/../includes/header.php';
+?>
+<main>
         <h2 class="section-title">Carte</h2>
         <div class="map-box">
             <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=2.067717435883694%2C49.03406993317959%2C2.0714322953693203%2C49.03570705430734&amp;layer=mapnik"></iframe>
@@ -60,5 +47,4 @@
             <?php endforeach; ?>
         <?php endif; ?>
     </main>
-</body>
-</html>
+<?php include __DIR__ . '/../includes/footer.php'; ?>

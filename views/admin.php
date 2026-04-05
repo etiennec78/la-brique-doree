@@ -1,50 +1,12 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - La Brique Dorée</title>
-    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.png">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/admin.css">
-</head>
-<body>
-    <header>
-        <div id="main-header">
-            <img id="logo" src="/assets/images/LOGO.png" alt="Logo">
-            <h1>ADMINISTRATEUR</h1>
-            <video class="video-background" autoplay muted loop>
-                <source src="/assets/images/header_background.mp4" type="video/mp4">
-            </video>
-        </div>
-        
-        <section id="navbar-header">
-            <a href="/" class="navbarbutton">Accueil</a>
-            <a href="/products" class="navbarbutton">Nos produits</a>
-            <a href="/reviews" class="navbarbutton">Avis</a>
-
-            <?php if (isset($_SESSION['user'])): ?>
-                <a href="/profile" class="navbarbutton">Mon Profil</a>
-
-            <?php if ($_SESSION['user']['role'] === 'administrator'): ?>
-                <a href="/admin" class="navbarbutton">Panel Admin</a>
-                
-            <?php elseif ($_SESSION['user']['role'] === 'restaurateur'): ?>
-                <a href="/restaurateur" class="navbarbutton">Gestion Commandes</a>
-                
-            <?php elseif ($_SESSION['user']['role'] === 'delivery_person'): ?>
-                <a href="/delivery" class="navbarbutton">Mes Livraisons</a>
-            <?php endif; ?>
-
-            <a href="/logout" class="navbarbutton alert">Déconnexion</a>
-
-            <?php else: ?>
-                <a href="/login" class="navbarbutton">Connexion</a>
-            <?php endif; ?>
-        </section>
-
-    </header>
-    <main class="admin-main">
+<?php
+$title = "Admin - La Brique Dorée";
+$h1 = "ADMINISTRATEUR";
+$show_cart = false;
+$show_video = true;
+$css_files = ['/css/admin.css'];
+include __DIR__ . '/../includes/header.php';
+?>
+<main class="admin-main">
         <div class="panel">
             <div class="panel-header">
                 <h2>Gestion des comptes utilisateurs</h2>
@@ -115,5 +77,4 @@
             </table>
         </div>
     </main>
-</body>
-</html>
+<?php include __DIR__ . '/../includes/footer.php'; ?>
