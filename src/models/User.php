@@ -19,7 +19,7 @@ class User {
     public static function getAllUsersInfo() {
         global $pdo;
         $stmt = $pdo->prepare("
-            SELECT u.id, u.email, u.first_name, u.last_name, r.name AS role,
+            SELECT u.id, u.email, u.first_name, u.last_name, u.global_reduction, r.name AS role,
             (
                 COALESCE(SUM(CASE WHEN ps.name = 'pending' THEN m.total_menu_quantity ELSE 0 END), 0)
                 + COALESCE(SUM(CASE WHEN ps.name = 'pending' THEN cf.total_food_quantity ELSE 0 END), 0)
@@ -74,5 +74,12 @@ class User {
             and !empty($user_data['first_name'])
             and !empty($user_data['last_name'])
         );
+    }
+
+    public static function getGlobalReduction($uid) {
+        global $pdo;
+        $stmt = $pdo->prepare("SELECT global_reduction FROM users u WHERE u.id = ?");
+        $stmt->execute([$uid]);
+        return $stmt->fetch(PDO::FETCH_COLUMN);
     }
 }

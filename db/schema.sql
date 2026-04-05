@@ -206,6 +206,7 @@ CREATE TABLE users (
     town VARCHAR(50),
     zip_code INT,
     intercom_code VARCHAR(50),
+    global_reduction FLOAT NOT NULL DEFAULT 0,
     FOREIGN KEY(role_id) REFERENCES role(id)
 );
 

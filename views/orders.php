@@ -151,6 +151,10 @@ $cart_details = [];
                   $cart_details[] = "Code: $coupon_code ". $reduction * 100 . "% (-". number_format($total_price * $reduction, 2, '.', '') ."€)";
                   $total_price *= (1 - $reduction);
                 }
+                if ($global_reduction != 0) {
+                  $cart_details[] = "Réduction globale ". $global_reduction * 100 . "% (-". number_format($total_price * $global_reduction, 2, '.', '') ."€)";
+                  $total_price *= (1 - $global_reduction);
+                }
               }
             }
             $montant_cybank = number_format($total_price, 2, '.', '');

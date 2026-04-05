@@ -4,11 +4,13 @@ class OrdersController extends Controller {
     public function index() {
         require_once __DIR__ . '/../models/Cart.php';
         require_once __DIR__ . '/../models/Coupon.php';
+        require_once __DIR__ . '/../models/User.php';
 
         $uid = $_SESSION['user']['id'];
         $cart_count = Cart::getCartCount();
         $cart_id = Cart::getUserCartId($uid);
         $coupon = Coupon::getCouponFromUser($uid);
+        $global_reduction = User::getGlobalReduction($uid);
         $expired_coupon = (
             !empty($coupon)
             and isset($coupon['expiration_date'])
@@ -21,7 +23,8 @@ class OrdersController extends Controller {
                 'cart_count' => $cart_count,
                 'cart_id' => $cart_id,
                 'coupon' => $coupon,
-                'expired_coupon' => $expired_coupon
+                'expired_coupon' => $expired_coupon,
+                'global_reduction' => $global_reduction
             ]
         );
     }
