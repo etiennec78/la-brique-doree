@@ -34,7 +34,9 @@
                 </div>
                 <div class="card-body">
                     <p class="address">📍 <?php echo getAddress($delivery); ?></p>
+                    <?php if (isset($delivery['intercom_code'])): ?>
                         <p class="access">🔑 Code <?php echo $delivery['intercom_code'] ?></p>
+                    <?php endif; ?>
                 </div>
                 <button class="basic-btn action-btn"> CONFIRMER LIVRAISON</button>
             </div>
