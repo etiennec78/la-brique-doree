@@ -76,6 +76,34 @@ class User {
         );
     }
 
+    public static function userHasOrders($uid) {
+        global $pdo;
+        $stmt = $pdo->prepare("
+            SELECT (
+                COALESCE(SUM(CASE WHEN ps.name = 'pending' THEN m.total_menu_quantity ELSE 0 END), 0)
+                + COALESCE(SUM(CASE WHEN ps.name = 'pending' THEN cf.total_food_quantity ELSE 0 END), 0)
+            ) AS total_quantity
+            FROM users u
+            LEFT JOIN cart c ON u.id = c.user_id
+            LEFT JOIN payment_status ps ON c.payment_status_id = ps.id
+            LEFT JOIN (
+                SELECT cart_id, SUM(quantity) AS total_menu_quantity
+                FROM cart_menu
+                GROUP BY cart_id
+            ) m ON c.id = m.cart_id
+            LEFT JOIN (
+                SELECT cart_id, SUM(quantity) AS total_food_quantity
+                FROM cart_food
+                GROUP BY cart_id
+            ) cf ON c.id = cf.cart_id
+            WHERE u.id = ?
+            GROUP BY u.id;
+        ");
+        $stmt->execute([$uid]);
+        $total_quantity = $stmt->fetch(PDO::FETCH_COLUMN);
+        return $total_quantity > 0;
+    }
+
     public static function getGlobalReduction($uid) {
         global $pdo;
         $stmt = $pdo->prepare("SELECT global_reduction FROM users u WHERE u.id = ?");

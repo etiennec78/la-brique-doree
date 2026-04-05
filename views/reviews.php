@@ -116,7 +116,7 @@
             <tr>
                 <td id="review-unavailable">
                     <h3>Vous ne pouvez pas encorer laisser d'avis.</h3>
-                    <p>Veuillez renseigner votre prénom et votre nom dans votre profil pour pouvoir écrire un avis.</p>
+                    <p>Vous devez renseigner votre prénom et votre nom dans votre profil, et avoir passé au moins une commande pour pouvoir écrire un avis.</p>
                     <button onclick="location.href='/profile'" type="button" class="basic-btn">Compléter mon profil</button>
                 </td>
             </tr>

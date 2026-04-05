@@ -13,7 +13,7 @@ class ReviewsController extends Controller {
         $user_can_review = false;
         if ($logged_in) {
             $user_id = $_SESSION['user']['id'];
-            $user_can_review = User::userHasName($user_id);
+            $user_can_review = User::userHasName($user_id) && User::userHasOrders($user_id);
         }
 
         $this->render(
@@ -37,14 +37,14 @@ class ReviewsController extends Controller {
         if (isset($_SESSION['user'])) {
             $user_id = $_SESSION['user']['id'];
 
-            if (User::userHasName($user_id)) {
+            if (User::userHasName($user_id) && User::userHasOrders($user_id)) {
                 $comment = $_POST['comment'];
                 $product = $_POST['product'];
                 $delivery = $_POST['delivery'];
 
                 Review::addReview($user_id, $product, $delivery, $comment);
             } else {
-                $error = "Vous devez renseigner votre prénom et nom dans votre profil pour laisser un avis.";
+                $error = "Vous devez renseigner votre prénom et nom dans votre profil, et avoir passé au moins une commande pour laisser un avis.";
             }
         } else {
             $error = "Vous devez être connecté pour laisser un avis.";
