@@ -148,7 +148,7 @@ $cart_details = [];
                 if ($coupon !== false and !$expired_coupon) {
                   $reduction = $coupon['discount_percent'];
                   $coupon_code = $coupon['code'];
-                  $cart_details[] = "Code: $coupon_code (-". number_format($total_price * $reduction, 2, '.', '') ."€)";
+                  $cart_details[] = "Code: $coupon_code ". $reduction * 100 . "% (-". number_format($total_price * $reduction, 2, '.', '') ."€)";
                   $total_price *= (1 - $reduction);
                 }
               }
