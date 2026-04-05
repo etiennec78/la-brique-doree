@@ -54,4 +54,16 @@ class User {
         $stmt->execute([$uid]);
         return $stmt->fetch();
     }
+
+    public static function getUsersFromRole($role) {
+        global $pdo;
+        $stmt_users = $pdo->prepare("
+            SELECT u.id, u.first_name, u.last_name
+            FROM users u
+            JOIN role r on u.role_id = r.id
+            WHERE r.name = ?
+        ");
+        $stmt_users->execute([$role]);
+        return $stmt_users->fetchAll();
+    }
 }

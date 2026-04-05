@@ -1,23 +1,3 @@
-<?php
-global $pdo;
-include_once __DIR__ . '/../src/db_connect.php';
-
-// Les commandes en attente (Statut 1 ou 2)
-$stmt_waiting = $pdo->prepare("SELECT o.id, u.first_name, u.last_name FROM orders o JOIN users u ON o.customer_id = u.id WHERE o.order_status_id IN (1, 2)");
-$stmt_waiting->execute();
-$waiting_orders = $stmt_waiting->fetchAll();
-
-// les commandes déjà parties (Statut 3 ou 4)
-$stmt_delivery = $pdo->prepare("SELECT o.id, u.first_name, u.last_name FROM orders o JOIN users u ON o.customer_id = u.id WHERE o.order_status_id IN (3, 4)");
-$stmt_delivery->execute();
-$delivery_orders = $stmt_delivery->fetchAll();
-
-// La liste des livreurs
-$stmt_users = $pdo->prepare("SELECT id, first_name, last_name FROM users WHERE role_id = 4");
-$stmt_users->execute();
-$deliverers = $stmt_users->fetchAll();
-
-?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -80,7 +60,7 @@ $deliverers = $stmt_users->fetchAll();
             <nav class="tabs-nav">
                 <label class="tab-item">
                     <span>EN ATTENTE</span>
-                    <input type="radio" id="waiting-toggle" name="tabs-toggle" checked>
+                    <input type="radio" id="pending-toggle" name="tabs-toggle" checked>
                 </label>
 
                 <label class="tab-item">
@@ -89,18 +69,18 @@ $deliverers = $stmt_users->fetchAll();
                 </label>
             </nav>
 
-            <div class="tab-content" id="waiting-content">
+            <div class="tab-content" id="pending-content">
                 <table>
                     <tr>
                         <td><h3>COMMANDE</h3></td>
                         <td><h3 id="state">ETAT / LIVREUR</h3></td>
                     </tr>
 
-                    <?php if (empty($waiting_orders)): ?>
+                    <?php if (empty($pending_orders)): ?>
                         <tr><td colspan="2" style="text-align:center;">Aucune commande en attente.</td></tr>
                     <?php endif; ?>
 
-                    <?php foreach ($waiting_orders as $order): ?>
+                    <?php foreach ($pending_orders as $order): ?>
                     <tr>
                         <td><span>Commande #<?php echo $order['id']; ?> (<?php echo getName($order); ?>)</span></td>
                         <td>

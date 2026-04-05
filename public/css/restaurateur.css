@@ -64,7 +64,7 @@ table span {
     background: var(--solid-dark-gold);
 }
 
-.tabs:has(#waiting-toggle:checked) #waiting-content {
+.tabs:has(#pending-toggle:checked) #pending-content {
     display: block;
 }
 

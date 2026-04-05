@@ -3,11 +3,25 @@
 class RestaurateurController extends Controller {
     public function index() {
         require_once __DIR__ . '/../models/Cart.php';
+        require_once __DIR__ . '/../models/Order.php';
+        require_once __DIR__ . '/../models/User.php';
         include_once __DIR__ . '/../get_name.php';
 
         $cart_count = Cart::getCartCount();
+        $pending_orders = Order::getOrdersFromState(array('paid', 'preparing'));
+        $delivery_orders = Order::getOrdersFromState(array('ready', 'shipping'));
+        $deliverers = User::getUsersFromRole('delivery_person');
 
-        $this->render('restaurateur', ['cart_count' => $cart_count, 'get_name' => 'getName']);
+        $this->render(
+            'restaurateur',
+            [
+                'cart_count' => $cart_count,
+                'get_name' => 'getName',
+                'pending_orders' => $pending_orders,
+                'delivery_orders' => $delivery_orders,
+                'deliverers' => $deliverers
+            ]
+        );
     }
 
     public function assignOrder() {
