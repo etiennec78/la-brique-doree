@@ -40,7 +40,7 @@
         </div>
 
         <div class="delivery-info">
-            <p>Livreur : <?php echo $order['first_name'] . ' ' . $order['last_name']; ?></p>
+            <p>Livreur : <?php echo $get_name($order); ?></p>
             <p>Arrivée : XX min</p>
         </div>
 

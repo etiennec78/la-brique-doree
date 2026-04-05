@@ -3,17 +3,17 @@ global $pdo;
 include_once __DIR__ . '/../src/db_connect.php';
 
 // Les commandes en attente (Statut 1 ou 2)
-$stmt_waiting = $pdo->prepare("SELECT o.id, u.first_name FROM orders o JOIN users u ON o.customer_id = u.id WHERE o.order_status_id IN (1, 2)");
+$stmt_waiting = $pdo->prepare("SELECT o.id, u.first_name, u.last_name FROM orders o JOIN users u ON o.customer_id = u.id WHERE o.order_status_id IN (1, 2)");
 $stmt_waiting->execute();
 $waiting_orders = $stmt_waiting->fetchAll();
 
 // les commandes déjà parties (Statut 3 ou 4)
-$stmt_delivery = $pdo->prepare("SELECT o.id, u.first_name FROM orders o JOIN users u ON o.customer_id = u.id WHERE o.order_status_id IN (3, 4)");
+$stmt_delivery = $pdo->prepare("SELECT o.id, u.first_name, u.last_name FROM orders o JOIN users u ON o.customer_id = u.id WHERE o.order_status_id IN (3, 4)");
 $stmt_delivery->execute();
 $delivery_orders = $stmt_delivery->fetchAll();
 
 // La liste des livreurs
-$stmt_users = $pdo->prepare("SELECT id, first_name FROM users WHERE role_id = 4");
+$stmt_users = $pdo->prepare("SELECT id, first_name, last_name FROM users WHERE role_id = 4");
 $stmt_users->execute();
 $deliverers = $stmt_users->fetchAll();
 
@@ -102,7 +102,7 @@ $deliverers = $stmt_users->fetchAll();
 
                     <?php foreach ($waiting_orders as $order): ?>
                     <tr>
-                        <td><span>Commande #<?php echo $order['id']; ?> (<?php echo $order['first_name']; ?>)</span></td>
+                        <td><span>Commande #<?php echo $order['id']; ?> (<?php echo getName($order); ?>)</span></td>
                         <td>
                             <form action="../src/assign_order.php" method="POST" style="display: flex; align-items: center; gap: 10px;">
                                 <input type="hidden" name="order_id" value="<?php echo $order['id']; ?>">
@@ -110,7 +110,7 @@ $deliverers = $stmt_users->fetchAll();
                                 <select name="delivery_person_id" required style="padding: 5px; border-radius: 5px; border: 1px solid #FFD700; background: #000; color: #fff;">
                                     <option value="">-- Choisir Livreur --</option>
                                     <?php foreach ($deliverers as $d): ?>
-                                        <option value="<?php echo $d['id']; ?>"><?php echo ($d['first_name']); ?></option>
+                                        <option value="<?php echo $d['id']; ?>"><?php echo getName($order); ?></option>
                                     <?php endforeach; ?>
                                 </select>
 
@@ -138,7 +138,7 @@ $deliverers = $stmt_users->fetchAll();
 
                     <?php foreach ($delivery_orders as $order): ?>
                     <tr>
-                        <td><span>Commande #<?php echo $order['id']; ?> (<?php echo ($order['first_name']); ?>)</span></td>
+                        <td><span>Commande #<?php echo $order['id']; ?> (<?php echo getName($order); ?>)</span></td>
                         <td>
                             <label class="selection">
                                 <span>En route...</span>

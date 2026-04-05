@@ -74,7 +74,7 @@
                     foreach($users_data as $user_data) {
                         echo '<tr>
                             <td>'. $user_data['id'] .'</td>
-                            <td><strong>'. $user_data['first_name'] .' '. $user_data['last_name'] .'</strong></td>
+                            <td><strong>'. getName($user_data) .'</strong></td>
                             <td>'. $user_data['email'] .'</td>
                             <td>'. $user_data['total_quantity'] .'</td>
                             <td><span class="tag gold">'. $user_data['role'] .'</span></td>
