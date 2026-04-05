@@ -1,36 +1,3 @@
-<?php
-global $pdo;
-include_once __DIR__ . '/../src/db_connect.php';
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  if (isset($_SESSION['user'])) {
-    $user_id = $_SESSION['user']['id'];
-    
-    // Vérifier si l'utilisateur a un prénom et un nom
-    $stmt_check = $pdo->prepare("SELECT first_name, last_name FROM users WHERE id = ?");
-    $stmt_check->execute([$user_id]);
-    $user_data = $stmt_check->fetch();
-    
-    if ($user_data && !empty($user_data['first_name']) && !empty($user_data['last_name'])) {
-      $comment = $_POST['comment'];
-      $product = $_POST['product'];
-      $delivery = $_POST['delivery'];
-
-      // Ajouter l'avis à la base de données
-      try {
-        $stmt = $pdo->prepare("INSERT INTO reviews (user_id, product_stars, delivery_stars, comment) VALUES (?, ?, ?, ?)");
-        $stmt->execute([$user_id, $product, $delivery, $comment]);
-      } catch (\PDOException $e) {
-        $error = "Erreur lors de l'insertion : " . $e->getMessage();
-      }
-    } else {
-      $error = "Vous devez renseigner votre prénom et nom dans votre profil pour laisser un avis.";
-    }
-  } else {
-    $error = "Vous devez être connecté pour laisser un avis.";
-  }
-}
-?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -85,12 +52,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <main>
         <h2 id="reviews-title">~ Avis Clients ~</h2>
         <?php
-        include_once '../src/db_connect.php';
-
-        try {
-          $stmt = $pdo->prepare("SELECT u.first_name, u.last_name, r.product_stars, r.delivery_stars, r.comment FROM reviews r JOIN users u ON r.user_id = u.id");
-          $stmt->execute();
-          $reviews = $stmt->fetchAll();
           foreach($reviews as $review) {
             $first_name = $review['first_name'];
             $last_name = $review['last_name'];
@@ -113,34 +74,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </tr>
           </table>';
           }
-        } catch (\PDOException $e) {
-          $error = "Erreur de base de données : " . $e->getMessage();
-        }
         ?>
 
-    <?php
-    $can_review = false;
-    $missing_info = false;
-    $not_connected = true;
-
-    if (isset($_SESSION['user']['id'])) {
-        $not_connected = false;
-        try {
-            $stmt_check = $pdo->prepare("SELECT first_name, last_name FROM users WHERE id = ?");
-            $stmt_check->execute([$_SESSION['user']['id']]);
-            $current_user = $stmt_check->fetch();
-            if ($current_user && !empty($current_user['first_name']) && !empty($current_user['last_name'])) {
-                $can_review = true;
-            } else {
-                $missing_info = true;
-            }
-        } catch (\PDOException $e) {
-            $error = "Erreur : " . $e->getMessage();
-        }
-    }
-    ?>
-
-    <?php if ($can_review): ?>
+    <?php if ($logged_in): ?>
     <form action="/reviews" method="post">
         <table class="review-block">
             <tr>
@@ -183,7 +119,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </tr>
         </table>
     </form>
-    <?php elseif ($missing_info): ?>
+    <?php elseif ($user_can_review): ?>
         <table class="review-block">
             <tr>
                 <td id="review-unavailable">

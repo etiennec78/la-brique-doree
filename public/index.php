@@ -23,6 +23,7 @@ $router->add('POST', 'profile', 'ProfileController', 'updateProfile');
 $router->add('GET', 'restaurateur', 'RestaurateurController', 'index');
 $router->add('POST', 'assign_order', 'RestaurateurController', 'assignOrder');
 $router->add('GET', 'reviews', 'ReviewsController', 'index');
+$router->add('POST', 'reviews', 'ReviewsController', 'addReview');
 
 $url = $_SERVER['REQUEST_URI'];
 $method = $_SERVER['REQUEST_METHOD'];

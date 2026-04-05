@@ -66,4 +66,13 @@ class User {
         $stmt_users->execute([$role]);
         return $stmt_users->fetchAll();
     }
+
+    public static function userHasName($uid) {
+        $user_data = self::getUserData($uid);
+        return (
+            $user_data
+            and !empty($user_data['first_name'])
+            and !empty($user_data['last_name'])
+        );
+    }
 }
