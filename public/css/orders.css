@@ -124,3 +124,25 @@ li {
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
+
+.coupon-form input {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--input-color);
+  color: var(--offwhite);
+}
+
+.coupon-form button {
+  border: none;
+}
+
+.coupon-details {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.coupon-details summary {
+  cursor: pointer;
+  font-size: 0.8rem;
+}

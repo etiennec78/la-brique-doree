@@ -8,6 +8,7 @@ $transaction = uniqid();
 $retour_url = "http://localhost/payment_result?cart_id=" . $cart_id;
 
 $total_price = 0;
+$reduction = 0;
 $cart_details = [];
 ?>
 <!DOCTYPE html>
@@ -144,6 +145,12 @@ $cart_details = [];
                   echo '</div>';
                   echo '</div>';
                 }
+                if ($coupon !== false) {
+                  $reduction = $coupon['discount_percent'];
+                  $coupon_code = $coupon['code'];
+                  $cart_details[] = "Code: $coupon_code (-". number_format($total_price * $reduction, 2, '.', '') ."€)";
+                  $total_price *= (1 - $reduction);
+                }
               }
             }
             $montant_cybank = number_format($total_price, 2, '.', '');
@@ -162,7 +169,7 @@ $cart_details = [];
               echo "</ul>";
             }
           ?>
-          <p>Total: <?= number_format($total_price, 2, ",") ?>€</p>
+          <p class="total-price">Total: <?= number_format($total_price, 2, ",") ?>€</p>
           
           <form action="https://www.plateforme-smc.fr/cybank/index.php" method="POST">
             <input type="hidden" name="transaction" value="<?= $transaction ?>">
@@ -170,8 +177,16 @@ $cart_details = [];
             <input type="hidden" name="vendeur" value="<?= $vendeur ?>">
             <input type="hidden" name="retour" value="<?= $retour_url ?>">
             <input type="hidden" name="control" value="<?= $control ?>">
-            <button id="checkout" type="submit" class="basic-btn" <?php if($total_price <= 0) echo 'disabled'; ?>>Payer</button>
+            <button id="checkout" type="submit" class="basic-btn checkout-btn" <?php if($total_price <= 0) echo 'disabled'; ?>>Payer</button>
           </form>
+
+          <details class="coupon-details">
+            <summary>Code promo ?</summary>
+            <form class="coupon-form" action="/apply_coupon" method="POST">
+              <input type="text" name="coupon" placeholder="Code promo">
+              <button id="submit_coupon" class="basic-btn" type="submit">Appliquer</button>
+            </form>
+          </details>
         </div>
       </section>
     </main>

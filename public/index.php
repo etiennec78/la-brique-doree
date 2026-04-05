@@ -12,6 +12,7 @@ $router->add('GET', 'register', 'AuthController', 'showRegister');
 $router->add('POST', 'register', 'AuthController', 'processRegister');
 $router->add('GET', 'logout', 'AuthController', 'logout');
 $router->add('GET', 'orders', 'OrdersController', 'index');
+$router->add('POST', 'apply_coupon', 'OrdersController', 'applyCoupon');
 $router->add('GET', 'products', 'ProductsController', 'index');
 $router->add('GET', 'admin', 'AdminController', 'index');
 $router->add('GET', 'delivery', 'DeliveryController', 'index');

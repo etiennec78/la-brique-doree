@@ -3,11 +3,21 @@
 class OrdersController extends Controller {
     public function index() {
         require_once __DIR__ . '/../models/Cart.php';
+        require_once __DIR__ . '/../models/Coupon.php';
 
+        $uid = $_SESSION['user']['id'];
         $cart_count = Cart::getCartCount();
         $cart_id = Cart::getUserCartId($uid);
+        $coupon = Coupon::getCouponFromUser($uid);
 
-        $this->render('orders', ['cart_count' => $cart_count, 'cart_id' => $cart_id]);
+        $this->render(
+            'orders',
+            [
+                'cart_count' => $cart_count,
+                'cart_id' => $cart_id,
+                'coupon' => $coupon
+            ]
+        );
     }
 
     public function updateCart() {
@@ -89,5 +99,23 @@ class OrdersController extends Controller {
         $referer = $_SERVER['HTTP_REFERER'] ?? '../views/orders.php';
         header("Location: $referer");
         exit;
+    }
+
+    public function applyCoupon() {
+        global $pdo;
+        require_once __DIR__ . '/../db_connect.php';
+        require_once __DIR__ . '/../models/Cart.php';
+        require_once __DIR__ . '/../models/Coupon.php';
+
+        $coupon_code = $_POST['coupon'];
+        $coupon = Coupon::getCoupon($coupon_code);
+
+        if ($coupon !== false) {
+            $uid = $_SESSION['user']['id'];
+            $cart_id = Cart::getUserCartId($uid);
+
+            Coupon::addCouponToCart($coupon['id'], $cart_id);
+        }
+        header("Location: /orders");
     }
 }
