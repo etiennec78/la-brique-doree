@@ -33,4 +33,20 @@ class DeliveryController extends Controller {
 
         header('Location: /delivery');
     }
+
+    public function cancelDelivery() {
+        require_once __DIR__ . '/../models/Order.php';
+
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role_id'] != 4) {
+            header('Location: /login');
+            exit();
+        }
+
+        if (isset($_POST['order_id'])) {
+            $order_id = $_POST['order_id'];
+            Order::cancelDelivery($order_id);
+        }
+
+        header('Location: /delivery');
+    }
 }

@@ -83,4 +83,16 @@ class Order {
         ");
         $stmt->execute([$order_id]);
     }
+
+    public static function cancelDelivery($order_id) {
+        global $pdo;
+        $stmt = $pdo->prepare("
+            UPDATE orders
+            SET order_status_id = 3,
+                delivery_person_id = NULL,
+                delivery_person_assigned_at = NULL
+            WHERE id = ?
+        ");
+        $stmt->execute([$order_id]);
+    }
 }

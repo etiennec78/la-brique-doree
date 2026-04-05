@@ -46,10 +46,16 @@
                             <p class="access">🔑 Code <?= $delivery['intercom_code'] ?></p>
                         <?php endif; ?>
                     </div>
-                    <form action="/confirm_delivery" method="POST">
-                        <input type="hidden" name="order_id" value="<?= $delivery['id'] ?>">
-                        <button id="confirm" type="submit" class="basic-btn action-btn">Confirmer livraison</button>
-                    </form>
+                    <div class="delivery-actions">
+                        <form action="/confirm_delivery" method="POST">
+                            <input type="hidden" name="order_id" value="<?= $delivery['id'] ?>">
+                            <button type="submit" class="basic-btn action-btn btn-confirm">Confirmer</button>
+                        </form>
+                        <form action="/cancel_delivery" method="POST">
+                            <input type="hidden" name="order_id" value="<?= $delivery['id'] ?>">
+                            <button type="submit" class="basic-btn action-btn btn-cancel">Annuler</button>
+                        </form>
+                    </div>
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>

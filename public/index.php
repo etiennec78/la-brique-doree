@@ -18,6 +18,7 @@ $router->add('GET', 'admin', 'AdminController', 'index');
 $router->add('POST', 'global_reduction', 'AdminController', 'applyGlobalReduction');
 $router->add('GET', 'delivery', 'DeliveryController', 'index');
 $router->add('POST', 'confirm_delivery', 'DeliveryController', 'confirmDelivery');
+$router->add('POST', 'cancel_delivery', 'DeliveryController', 'cancelDelivery');
 $router->add('GET', 'order_tracking', 'OrderTrackingController', 'index');
 $router->add('POST', 'update_cart', 'OrdersController', 'updateCart');
 $router->add('POST', 'set_delivery_type', 'OrdersController', 'setDeliveryType');

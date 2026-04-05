@@ -44,3 +44,25 @@
     font-size: 40px;
     margin: 10px;
 }
+
+.delivery-actions {
+    display: flex;
+}
+
+.delivery-actions form {
+    width: 50%;
+}
+
+.btn-confirm {
+    background: var(--green);
+}
+.btn-confirm:hover {
+    background: var(--darkgreen);
+}
+
+.btn-cancel {
+    background: var(--red);
+}
+.btn-cancel:hover {
+    background: var(--darkred);
+}
