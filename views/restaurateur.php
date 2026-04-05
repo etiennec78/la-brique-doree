@@ -104,7 +104,7 @@ $deliverers = $stmt_users->fetchAll();
                     <tr>
                         <td><span>Commande #<?php echo $order['id']; ?> (<?php echo getName($order); ?>)</span></td>
                         <td>
-                            <form action="../src/assign_order.php" method="POST" style="display: flex; align-items: center; gap: 10px;">
+                            <form action="/assign_order" method="POST" style="display: flex; align-items: center; gap: 10px;">
                                 <input type="hidden" name="order_id" value="<?php echo $order['id']; ?>">
                                 
                                 <select name="delivery_person_id" required style="padding: 5px; border-radius: 5px; border: 1px solid #FFD700; background: #000; color: #fff;">
@@ -141,7 +141,7 @@ $deliverers = $stmt_users->fetchAll();
                         <td><span>Commande #<?php echo $order['id']; ?> (<?php echo getName($order); ?>)</span></td>
                         <td>
                             <label class="selection">
-                                <span>En route...</span>
+                                <span>En route</span>
                                 <input type="checkbox" checked disabled/> 
                             </label>
                         </td>

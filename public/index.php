@@ -21,6 +21,7 @@ $router->add('GET', 'payment_result', 'PaymentResultController', 'index');
 $router->add('GET', 'profile', 'ProfileController', 'index');
 $router->add('POST', 'profile', 'ProfileController', 'updateProfile');
 $router->add('GET', 'restaurateur', 'RestaurateurController', 'index');
+$router->add('POST', 'assign_order', 'RestaurateurController', 'assignOrder');
 $router->add('GET', 'reviews', 'ReviewsController', 'index');
 
 $url = $_SERVER['REQUEST_URI'];
