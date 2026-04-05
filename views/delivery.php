@@ -39,18 +39,16 @@
                         <span class="order-id">#<?= $delivery['id'] ?></span>
                         <span class="client-name"><?= getName($delivery) ?></span>
                     </div>
+                    <button onclick="location.href='https://www.google.com/maps/search/?api=1&query=<?= urlencode(getAddress($delivery)) ?>'" class="basic-btn action-btn">Ouvrir dans Google Maps</button>
                     <div class="card-body">
                         <p class="address">📍 <?= getAddress($delivery) ?></p>
-                        <a href="https://www.google.com/maps/search/?api=1&query=<?= urlencode(getAddress($delivery)) ?>" target="_blank">
-                            <input id="redirect" type="button" value="Voir l'adresse sur maps.." />
-                        </a>
                         <?php if (isset($delivery['intercom_code'])): ?>
                             <p class="access">🔑 Code <?= $delivery['intercom_code'] ?></p>
                         <?php endif; ?>
                     </div>
                     <form action="/confirm_delivery" method="POST">
                         <input type="hidden" name="order_id" value="<?= $delivery['id'] ?>">
-                        <button id="confirm" type="submit" class="basic-btn action-btn">CONFIRMER LIVRAISON</button>
+                        <button id="confirm" type="submit" class="basic-btn action-btn">Confirmer livraison</button>
                     </form>
                 </div>
             <?php endforeach; ?>
