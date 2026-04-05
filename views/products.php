@@ -114,7 +114,7 @@
                                 for($i = 0; $i < count($menus_data); $i++) {
                                     $menu = $menus_data[$i];
                                     for($j = 0; $j < $menu['quantity']; $j++) {
-                                        echo '<div style="flex: 1; background-image: url('. $menu['image_path'] .'); background-size: cover; background-position: center;"></div>';
+                                        echo '<div style="flex: 1; background-image: url(assets/' . $menu['image_path'] .'); background-size: cover; background-position: center;"></div>';
                                     }
                                 }
 
@@ -148,7 +148,7 @@
                 $name = $food['name'];
                 $description = $food['description'];
                 $price = number_format($food['price'], 2, ",");
-                $image_path = $food['image_path'];
+                $image_path = 'assets/' . $food['image_path'];
 
                 $stmt = $pdo->prepare("
                 SELECT a.name

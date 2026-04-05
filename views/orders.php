@@ -116,7 +116,7 @@ $cart_details = [];
                     $description = $food['description'];
                     $price_val = floatval($food['price']);
                     $price_str = number_format($price_val, 2, ",");
-                    $image_path = $food['image_path'];
+                    $image_path = 'assets/' . $food['image_path'];
                     $food_id = $food['item_id'];
 
                     if ($individual) {
