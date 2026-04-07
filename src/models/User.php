@@ -19,26 +19,11 @@ class User {
     public static function getAllUsersInfo() {
         global $pdo;
         $stmt = $pdo->prepare("
-            SELECT u.id, u.email, u.first_name, u.last_name, u.global_reduction, u.banned, r.name AS role,
-            (
-                COALESCE(SUM(CASE WHEN ps.name = 'pending' THEN m.total_menu_quantity ELSE 0 END), 0)
-                + COALESCE(SUM(CASE WHEN ps.name = 'pending' THEN cf.total_food_quantity ELSE 0 END), 0)
-            ) AS total_quantity
+            SELECT u.id, u.email, u.first_name, u.last_name, u.global_reduction, u.banned, r.name AS role, COUNT(o.id) as orders
             FROM users u
+            LEFT JOIN orders o on u.id = o.customer_id
             LEFT JOIN role r ON u.role_id = r.id
-            LEFT JOIN cart c ON u.id = c.user_id
-            LEFT JOIN payment_status ps ON c.payment_status_id = ps.id
-            LEFT JOIN (
-                SELECT cart_id, SUM(quantity) AS total_menu_quantity
-                FROM cart_menu
-                GROUP BY cart_id
-            ) m ON c.id = m.cart_id
-            LEFT JOIN (
-                SELECT cart_id, SUM(quantity) AS total_food_quantity
-                FROM cart_food
-                GROUP BY cart_id
-            ) cf ON c.id = cf.cart_id
-            GROUP BY u.id, u.email, u.first_name, u.last_name, r.name;
+            GROUP BY u.id, u.email, u.first_name, u.last_name, r.name
         ");
         $stmt->execute();
         return $stmt->fetchAll();

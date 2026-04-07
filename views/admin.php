@@ -56,7 +56,7 @@ include __DIR__ . '/../includes/header.php';
                             <td><?= $user_data['id'] ?></td>
                             <td><strong><?= getName($user_data) ?></strong></td>
                             <td><?= $user_data['email'] ?></td>
-                            <td><?= $user_data['total_quantity'] ?></td>
+                            <td><?= $user_data['orders'] ?></td>
                             <td>
                                 <form action="/global_reduction" method="POST">
                                     <input type="hidden" name="user_id" value="<?= $user_data['id'] ?>">
