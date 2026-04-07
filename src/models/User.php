@@ -29,7 +29,7 @@ class User {
         return $stmt->fetchAll();
     }
 
-    public static function getUserData($uid) {
+    public static function getUserInfo($uid) {
         global $pdo;
         $stmt = $pdo->prepare("
             SELECT email, first_name, last_name, phone, birth_date, street_nb, street_nb_suf, street, town, zip_code, intercom_code, banned, id
@@ -52,7 +52,7 @@ class User {
         return $stmt_users->fetchAll();
     }
     public static function userHasName($uid) {
-        $user_data = self::getUserData($uid);
+        $user_data = self::getUserInfo($uid);
         return (
             $user_data
             and !empty($user_data['first_name'])
@@ -105,22 +105,22 @@ class User {
         $stmt->execute([$value, $uid]);
     }
 
-    public static function getUserRole($uid) {
+    public static function getUserData($uid, $key, $default_value = NULL) {
         global $pdo;
         $stmt = $pdo->prepare("
-            SELECT r.name
+            SELECT $key
             FROM users u
             JOIN role r ON r.id = u.role_id
             WHERE u.id = ?
         ");
         $stmt->execute([$uid]);
-        $result = $stmt->fetch();
-        return $result ? $result['name'] : null;
+        $result = $stmt->fetch(PDO::FETCH_COLUMN);
+        return $result ? $result : $default_value;
     }
 
     public static function isAdmin($uid) {
-        $role = self::getUserRole($uid);
-        return $role === 'administrator';
+        $role = self::getUserData($uid, 'r.name');
+        return $role == 'administrator';
     }
 
 }

@@ -16,7 +16,7 @@ class ProfileController extends Controller {
             $target_id = $uid;
 
         $cart_count = Cart::getCartCount();
-        $user_data = User::getUserData($target_id);
+        $user_data = User::getUserInfo($target_id);
         $is_admin = User::isAdmin($uid);
 
         $this->render(
@@ -43,7 +43,7 @@ class ProfileController extends Controller {
         require_once __DIR__ . '/../models/User.php';
 
         $target = $_SESSION['user']['id'];
-        $user_role = User::getUserRole($_SESSION['user']['id']);
+        $user_role = User::getUserData($_SESSION['user']['id'], 'r.name');
         $is_admin = $user_role == 'administrator';
         try {
             if ($is_admin and array_key_exists('user_id', $_POST)) {

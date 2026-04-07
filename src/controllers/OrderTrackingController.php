@@ -13,8 +13,8 @@ class OrderTrackingController extends Controller {
 
     $uid = $_SESSION['user']['id'];
     $order = Order::getUserRunningOrder($uid);
-    $cook = User::getUserData($order['cook_id']);
-    $delivery_person = User::getUserData($order['delivery_person_id']);
+    $cook = User::getUserInfo($order['cook_id']);
+    $delivery_person = User::getUserInfo($order['delivery_person_id']);
 
     $this->render(
       'order_tracking',

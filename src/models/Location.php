@@ -4,7 +4,7 @@ class Location {
     public static function formAddressHasChanged($target, $form_data) {
         require_once __DIR__ . '/../models/User.php';
 
-        $user_data = User::getUserData($target);
+        $user_data = User::getUserInfo($target);
         $location_keys = ['street_nb', 'street_nb_suf', 'street', 'zip_code'];
         $address_has_changed = 0;
 
