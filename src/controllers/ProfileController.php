@@ -39,6 +39,7 @@ class ProfileController extends Controller {
 
         global $pdo;
         require_once __DIR__ . '/../db_connect.php';
+        require_once __DIR__ . '/../models/Location.php';
         require_once __DIR__ . '/../models/User.php';
 
         $target = $_SESSION['user']['id'];
@@ -57,6 +58,14 @@ class ProfileController extends Controller {
                 $stmt->execute([$target]);
             }
             else if (array_key_exists('first_name', $_POST)) {
+                $address_has_changed = Location::formAddressHasChanged($target, $_POST);
+                if ($address_has_changed) {
+                    // Obtenir les coordonées de la livraison
+                    $coordinates = Location::getLocationCoord($_POST);
+                    $users_data = User::setUserData($target, 'latitude', $coordinates['lat']);
+                    $users_data = User::setUserData($target, 'longitude', $coordinates['lng']);
+                }
+
                 // Modifier les données de l'utilisateur dans la base de données
                 $stmt = $pdo->prepare("UPDATE users SET first_name=?, last_name=?, street_nb=?, street_nb_suf=?, street=?, zip_code=?, phone=?, email=?, intercom_code=?, birth_date=? WHERE id = ?");
 
