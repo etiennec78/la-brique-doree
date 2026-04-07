@@ -46,7 +46,6 @@ class ProfileController extends Controller {
         $is_admin = $user_role == 'administrator';
         try {
             if (array_key_exists('user_id', $_POST)) {
-                // Vérifier si l'utilisateur actuel est admin
                 if ($is_admin)
                     $target = $_POST['user_id'];
             }
