@@ -45,9 +45,8 @@ class ProfileController extends Controller {
         $user_role = User::getUserRole($_SESSION['user']['id']);
         $is_admin = $user_role == 'administrator';
         try {
-            if (array_key_exists('user_id', $_POST)) {
-                if ($is_admin)
-                    $target = $_POST['user_id'];
+            if ($is_admin and array_key_exists('user_id', $_POST)) {
+                $target = $_POST['user_id'];
             }
             if (isset($_POST['action']) && $_POST['action'] === 'ban' && $is_admin) {
                 $stmt = $pdo->prepare("UPDATE users SET banned = 1 WHERE id = ?");
