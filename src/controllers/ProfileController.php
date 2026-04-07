@@ -1,7 +1,7 @@
 <?php
 
 class ProfileController extends Controller {
-    public function index($uid = NULL) {
+    public function index($target_id = NULL) {
         if (!isset($_SESSION['user'])) {
             header('Location: /login');
             exit();
@@ -10,20 +10,23 @@ class ProfileController extends Controller {
         require_once __DIR__ . '/../models/Cart.php';
         require_once __DIR__ . '/../models/User.php';
 
-        if ($uid == NULL)
-            $uid = $_SESSION['user']['id'];
+        $uid = $_SESSION['user']['id'];
+
+        if ($target_id == NULL)
+            $target_id = $uid;
 
         $cart_count = Cart::getCartCount();
-        $user_data = User::getUserData($uid);
-        $is_admin = User::isAdmin($_SESSION['user']['id']);
+        $user_data = User::getUserData($target_id);
+        $is_admin = User::isAdmin($uid);
 
         $this->render(
             'profile',
             [
                 'cart_count' => $cart_count,
                 'user_data' => $user_data,
-                'target' => $uid,
+                'target' => $target_id,
                 'is_admin' => $is_admin,
+                'uid' => $uid
             ]
         );
     }
