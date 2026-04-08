@@ -42,8 +42,9 @@ class ProfileController extends Controller {
         require_once __DIR__ . '/../models/Location.php';
         require_once __DIR__ . '/../models/User.php';
 
-        $target = $_SESSION['user']['id'];
-        $user_role = User::getUserData($_SESSION['user']['id'], 'r.name');
+        $uid = $_SESSION['user']['id'];
+        $target = $uid;
+        $user_role = User::getUserData($uid, 'r.name');
         $is_admin = $user_role == 'administrator';
         try {
             if ($is_admin and array_key_exists('user_id', $_POST)) {
@@ -61,9 +62,14 @@ class ProfileController extends Controller {
                 $address_has_changed = Location::formAddressHasChanged($target, $_POST);
                 if ($address_has_changed) {
                     // Obtenir les coordonées de la livraison
-                    $coordinates = Location::getLocationCoord($_POST);
-                    $users_data = User::setUserData($target, 'latitude', $coordinates['lat']);
-                    $users_data = User::setUserData($target, 'longitude', $coordinates['lng']);
+                    $coordinates = Location::getLocationCoord($_POST, $uid);
+                    if (isset($coordinates['error'])) {
+                        $error = $coordinates['error'];
+                        error_log("Coordinates could not be found for user $uid: $error");
+                    } else {
+                        $users_data = User::setUserData($target, 'latitude', $coordinates['lat']);
+                        $users_data = User::setUserData($target, 'longitude', $coordinates['lng']);
+                    }
                 }
 
                 // Modifier les données de l'utilisateur dans la base de données

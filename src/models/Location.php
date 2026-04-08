@@ -30,8 +30,19 @@ class Location {
         return trim($api_key);
     }
 
-    public static function getLocationCoord($location_data) {
+    public static function getAPITimeout($uid) {
+        require_once __DIR__ . '/../models/User.php';
+
+        $last_api_call = new DateTime(User::getUserData($uid, 'last_api_call'));
+        $delay = 5;
+        $last_api_call->add(new DateInterval('PT' . $delay . 'S'));
+        $difference = $last_api_call->getTimestamp() - time();
+        return $difference;
+    }
+
+    public static function getLocationCoord($location_data, $uid) {
         require_once __DIR__ . '/../format_data.php';
+        require_once __DIR__ . '/../models/User.php';
         $DEFAULT_COORD = array(
             'lat' => 55.7259517,
             'lng' => 9.1091171
@@ -42,6 +53,11 @@ class Location {
         if (empty($api_key))
             return $DEFAULT_COORD;
 
+        $timeout = self::getAPITimeout($uid);
+        if ($timeout > 0) {
+            return array('error' => 'timeout remaining: ' . $timeout . 's');
+        }
+
         $delivery_address = getAddress($location_data);
 
         $ENDPOINT = 'geocode';
@@ -50,6 +66,8 @@ class Location {
             'q' => $delivery_address,
             'apiKey' => $api_key
         ];
+
+        User::setUserData($uid, 'last_api_call', date('Y-m-d H:i:s'));
 
         $queryString = http_build_query($params, '', '&');
         $url = $baseUrl . '?' . $queryString;
@@ -60,7 +78,7 @@ class Location {
             or count($response['items']) < 1
             or empty($response['items'][0]['position'])
         )
-            return $DEFAULT_COORD;
+            return array('error' => 'Here API did not return valid values');
 
         return $response['items'][0]['position'];
     }

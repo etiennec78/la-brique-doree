@@ -210,6 +210,7 @@ CREATE TABLE users (
     longitude FLOAT DEFAULT NULL,
     intercom_code VARCHAR(50),
     global_reduction FLOAT NOT NULL DEFAULT 0,
+    last_api_call DATETIME NOT NULL DEFAULT 0,
     FOREIGN KEY(role_id) REFERENCES role(id)
 );
 
