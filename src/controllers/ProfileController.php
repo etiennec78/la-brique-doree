@@ -43,9 +43,15 @@ class ProfileController extends Controller {
         require_once __DIR__ . '/../models/User.php';
 
         $uid = $_SESSION['user']['id'];
+
         $target = $uid;
+        $user_banned = User::getUserData($uid, 'banned');
+        if ($user_banned)
+            return;
+
         $user_role = User::getUserData($uid, 'r.name');
         $is_admin = $user_role == 'administrator';
+
         try {
             if ($is_admin and array_key_exists('user_id', $_POST)) {
                 $target = $_POST['user_id'];

@@ -55,6 +55,8 @@ class Location {
 
         $timeout = self::getAPITimeout($uid);
         if ($timeout > 0) {
+            User::incrementSuccessiveAPICalls($uid);
+
             return array('error' => 'timeout remaining: ' . $timeout . 's');
         }
 

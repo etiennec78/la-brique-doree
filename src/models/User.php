@@ -135,4 +135,13 @@ class User {
         return $role == 'administrator';
     }
 
+    public static function incrementSuccessiveAPICalls($uid) {
+        $successive = User::getUserData($uid, 'successive_api_calls', 0);
+        $successive += 1;
+
+        if ($successive >= 10)
+            User::setUserData($uid, 'banned', 1);
+
+        User::setUserData($uid, 'successive_api_calls', $successive);
+    }
 }
