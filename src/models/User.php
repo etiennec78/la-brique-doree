@@ -95,8 +95,18 @@ class User {
         return $stmt->fetch(PDO::FETCH_COLUMN);
     }
 
+    public static function checkKey($key) {
+        $allowedKeys = ['last_api_call', 'r.name'];
+
+        if (!in_array($key, $allowedKeys)) {
+            throw new InvalidArgumentException("Nom de colonne non autorisé.");
+        }
+    }
+
     public static function setUserData($uid, $key, $value) {
         global $pdo;
+        self::checkKey($key);
+
         $stmt = $pdo->prepare("
             UPDATE users
             SET $key = ?
@@ -107,6 +117,8 @@ class User {
 
     public static function getUserData($uid, $key, $default_value = NULL) {
         global $pdo;
+        self::checkKey($key);
+
         $stmt = $pdo->prepare("
             SELECT $key
             FROM users u
