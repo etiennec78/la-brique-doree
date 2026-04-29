@@ -122,3 +122,15 @@ textarea {
     text-align: center;
     padding: 30px;
 }
+
+.counter-text {
+    text-align: right;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    color: var(--offwhite);
+}
+
+#nb-caracteres {
+    font-weight: bold;
+    color: red;
+}

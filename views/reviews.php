@@ -74,7 +74,7 @@ include __DIR__ . '/../includes/header.php';
             <?php endif; ?>
         <?php endforeach; ?>
 
-    <?php if ($logged_in && $user_can_review): ?>
+    <?php if ($logged_in && $user_can_review): ?> 
     <form action="/reviews" method="post">
         <table class="review-block">
             <tr>
@@ -111,8 +111,9 @@ include __DIR__ . '/../includes/header.php';
             </tr>
             <tr>
                 <td colspan="2" class="review-text">
-                    <textarea name="comment" placeholder="Partagez votre expérience ici..." required></textarea>
-                    <button type="submit" name="submit_avis" class="basic-btn btn-send">Envoyer l'avis</button>
+                    <textarea id="review-comm" placeholder="Partagez votre expérience ici (250 caractères min.)..." oninput="compter()" required></textarea>
+                    <p class="counter-text"><span id="nb-caracteres">0</span> / 250</p>
+                    <button type="submit" id="submit-avis" name="submit_avis" class="basic-btn btn-send" disabled>Envoyer l'avis</button>
                 </td>
             </tr>
         </table>
@@ -140,4 +141,28 @@ include __DIR__ . '/../includes/header.php';
         </table>
     <?php endif; ?>
     </main>
+
+<script>
+    function compter() {
+        let zone = document.getElementById("review-comm");
+        let chiffre = document.getElementById("nb-caracteres");
+        let bouton = document.getElementById("submit-avis");
+        let longueur = zone.value.length;
+        
+        chiffre.innerText = longueur;
+        
+        if (longueur < 250) {
+            chiffre.style.color = "red";
+            bouton.disabled = true;
+            bouton.style.opacity = "0.5";
+            bouton.style.cursor = "not-allowed";
+        } else {
+            chiffre.style.color = "var(--solid-gold)";
+            bouton.disabled = false;
+            bouton.style.opacity = "1";
+            bouton.style.cursor = "pointer";
+        }
+    }
+</script>
+
 <?php include __DIR__ . '/../includes/footer.php'; ?>
