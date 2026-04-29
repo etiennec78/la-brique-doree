@@ -50,3 +50,19 @@ label {
 #postal-code {
   appearance: textfield;
 }
+
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    padding-right: 40px;
+}
+
+#toggleEye {
+    position: absolute;
+    right: 10px;      
+    cursor: pointer;   
+    top: 20%;
+}

@@ -16,11 +16,31 @@ include __DIR__ . '/../includes/header.php';
                 </div>
                 <div class="input-group">
                     <label for="password">Mot de passe</label>
-                    <input type="password" id="password" name="password" required>
+                    <div class="password-wrapper">
+                        <input type="password" id="password" name="password" required>
+                        <span id="toggleEye" onclick="showPwd()">👁️</span>
+                    </div>
                 </div>
                 <button type="submit" class="basic-btn">S'inscrire</button>
             </form>
             <p>Déjà un compte ? <a href="/login">Connexion</a></p>
         </div>
     </main>
+
+<script>
+    function showPwd() {
+        let input = document.getElementById("password");
+        let oeil = document.getElementById("toggleEye");
+
+        if (input.type === "password") {
+
+            input.type = "text";
+            oeil.innerText = "🔒"; 
+        } else {
+            input.type = "password";
+            oeil.innerText = "👁️";
+        }
+    }
+</script>
+
 <?php include __DIR__ . '/../includes/footer.php'; ?>
