@@ -11,18 +11,43 @@
   --darkred: #b32c29;
   --green: #4caf50;
   --darkgreen: #408f43;
+  --bg-image: url('../assets/images/background.png');
+}
+
+body.light-theme {
+  --bg-image: url('../assets/images/background_white.png'); 
+  --gold: linear-gradient(#c0c0c0, #8e8e8e);
+  --solid-gold: #c0c0c0;
+
+  --navbartext: #fffcf5; 
+
+  --darkgray: #e0e0e0;
+  --input-color: #0000001a;
+}
+
+body.light-theme h1 {
+  color: #ffffff ;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+#theme-toggle{
+  background: none;
+  border:none;
+  cursor:pointer;
 }
 
 @font-face {
     font-family: 'Brix';
     src: url('../assets/fonts/brix.ttf') format('truetype');
 }
-  
+
 body {
   margin: 0;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  background-image: url('../assets/images/background.png');
+  background-image: var(--bg-image); 
+  background-size: cover;
   color: var(--offwhite);
+  transition: background-image 0.4s ease;
 }
 
 h1 {
