@@ -40,13 +40,20 @@
 
                 <?php if ($_SESSION['user']['role'] === 'administrator'): ?>
                     <a href="/admin" class="navbarbutton">Panel Admin</a>
-                    
+
                 <?php elseif ($_SESSION['user']['role'] === 'restaurateur'): ?>
                     <a href="/restaurateur" class="navbarbutton">Gestion Commandes</a>
-                    
+
                 <?php elseif ($_SESSION['user']['role'] === 'delivery_person'): ?>
                     <a href="/delivery" class="navbarbutton">Mes Livraisons</a>
                 <?php endif; ?>
+
+                <?php 
+                    require_once '../src/models/Order.php';
+                    if (Order::getUserRunningOrder($_SESSION['user']['id'])) {
+                        echo '<a href="/order_tracking" class="navbarbutton">🕒 Suivre ma commande</a>';
+                    }
+                ?>
 
                 <a href="/logout" class="navbarbutton alert">Déconnexion</a>
             <?php else: ?>
