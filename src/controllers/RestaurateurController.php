@@ -44,7 +44,13 @@ class RestaurateurController extends Controller {
                 Order::setReadyStatus($order_id);
             } else {
                 $delivery_person = Order::getAvailableDeliveryPerson();
-                Order::setDeliveryStatus($order_id, $delivery_person);
+                if ($delivery_person) {
+                    Order::setDeliveryStatus($order_id, $delivery_person);
+                    header('Location: /restaurateur?success=assigned');
+                } else {
+                    header('Location: /restaurateur?error=no_delivery_person_available');
+                }
+                exit();
             }
 
             header('Location: /restaurateur?success=assigned');
