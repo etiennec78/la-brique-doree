@@ -30,7 +30,7 @@ table span {
 }
 
 .tab-item {
-    background: var(--solid-gold);
+    background: var(--solid-dark-gold); 
     padding: 25px 18%;
     border-radius: 1rem;
     margin: auto;
@@ -40,7 +40,8 @@ table span {
 }
 
 .tab-item:has(input:checked) {
-    background: var(--solid-dark-gold);
+    background: var(--solid-gold);
+    box-shadow: 0 0 20px var(--solid-gold); 
 }
 
 .tabs:has(#pending-toggle:checked) #pending-content {
