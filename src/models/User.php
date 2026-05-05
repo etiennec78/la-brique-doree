@@ -96,7 +96,7 @@ class User {
     }
 
     public static function checkKey($key) {
-        $allowedKeys = ['last_api_call', 'r.name', 'global_reduction', 'latitude', 'longitude'];
+        $allowedKeys = ['last_api_call', 'r.name', 'global_reduction', 'latitude', 'longitude', 'banned'];
 
         if (!in_array($key, $allowedKeys)) {
             throw new InvalidArgumentException("Nom de colonne non autorisé.");
