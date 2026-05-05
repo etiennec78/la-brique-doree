@@ -111,7 +111,7 @@ include __DIR__ . '/../includes/header.php';
             </tr>
             <tr>
                 <td colspan="2" class="review-text">
-                    <textarea id="review-comm" placeholder="Partagez votre expérience ici (255 caractères max.)..." oninput="compter()" required></textarea>
+                    <textarea id="review-comm" name="comment" maxlength="255" placeholder="Partagez votre expérience ici (255 caractères max.)..." oninput="compter()" required></textarea>
                     <p class="counter-text"><span id="nb-caracteres">0</span> / 255</p>
                     <button type="submit" id="submit-avis" name="submit_avis" class="basic-btn btn-send" disabled>Envoyer l'avis</button>
                 </td>
