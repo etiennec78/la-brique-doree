@@ -132,5 +132,5 @@ textarea {
 
 #nb-caracteres {
     font-weight: bold;
-    color: red;
+    color:var(--solid-gold);
 }

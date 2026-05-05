@@ -111,8 +111,8 @@ include __DIR__ . '/../includes/header.php';
             </tr>
             <tr>
                 <td colspan="2" class="review-text">
-                    <textarea id="review-comm" placeholder="Partagez votre expérience ici (250 caractères min.)..." oninput="compter()" required></textarea>
-                    <p class="counter-text"><span id="nb-caracteres">0</span> / 250</p>
+                    <textarea id="review-comm" placeholder="Partagez votre expérience ici (255 caractères max.)..." oninput="compter()" required></textarea>
+                    <p class="counter-text"><span id="nb-caracteres">0</span> / 255</p>
                     <button type="submit" id="submit-avis" name="submit_avis" class="basic-btn btn-send" disabled>Envoyer l'avis</button>
                 </td>
             </tr>
@@ -151,13 +151,14 @@ include __DIR__ . '/../includes/header.php';
         
         chiffre.innerText = longueur;
         
-        if (longueur < 250) {
+        if (longueur > 255) {
+            
             chiffre.style.color = "red";
             bouton.disabled = true;
             bouton.style.opacity = "0.5";
             bouton.style.cursor = "not-allowed";
         } else {
-            chiffre.style.color = "var(--solid-gold)";
+            chiffre.style.color = "(--solid-gold)";
             bouton.disabled = false;
             bouton.style.opacity = "1";
             bouton.style.cursor = "pointer";
