@@ -12,11 +12,14 @@ class DeliveryController extends Controller {
 
         $uid = $_SESSION['user']['id'];
         $deliveries = Delivery::getDeliveries($uid);
+        $deliveries_coordinates = Delivery::getDeliveriesCoordinates($uid);
+        $map_url = Delivery::buildMapURL($deliveries_coordinates);
 
         $this->render(
             'delivery',
             [
                 'deliveries' => $deliveries,
+                'map_url' => $map_url,
                 'getName' => 'getName',
                 'getAddress' => 'getAddress'
             ]

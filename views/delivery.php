@@ -4,12 +4,13 @@ $h1 = "LIVRAISON";
 $show_cart = false;
 $show_video = false;
 $css_files = ['/css/delivery.css'];
+$js_files = ['/js/delivery.js'];
 include __DIR__ . '/../includes/header.php';
 ?>
 <main>
         <h2 class="section-title">Carte</h2>
         <div class="map-box">
-            <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=2.067717435883694%2C49.03406993317959%2C2.0714322953693203%2C49.03570705430734&amp;layer=mapnik"></iframe>
+            <iframe id="map" src="<?= $map_url ?>"></iframe>
         </div>
 
         <h2 class="section-title">Commandes à livrer</h2>
