@@ -51,7 +51,7 @@
                 <?php 
                     require_once '../src/models/Order.php';
                     if (Order::getUserRunningOrder($_SESSION['user']['id'])) {
-                        echo '<a href="/order_tracking" class="navbarbutton">🕒 Suivre ma commande</a>';
+                        echo '<a href="/order_tracking" class="navbarbutton">Suivre ma commande</a>';
                     }
                 ?>
 
