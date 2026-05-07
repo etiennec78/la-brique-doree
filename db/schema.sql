@@ -321,9 +321,9 @@ CREATE TABLE payment (
 
 CREATE TABLE reviews (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    user_id INT NOT NULL,
+    order_id INT NOT NULL,
     product_stars TINYINT(3) NOT NULL,
     delivery_stars TINYINT(3) NOT NULL,
     comment VARCHAR(255) NOT NULL,
-    FOREIGN KEY(user_id) REFERENCES users(id)
+    FOREIGN KEY(order_id) REFERENCES orders(id)
 );

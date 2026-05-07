@@ -26,10 +26,16 @@ INSERT INTO coupon (code, discount_percent, expiration_date) VALUES
 ----- CART -----
 
 INSERT INTO cart (user_id, payment_status_id, created_at, coupon_id) VALUES
-(1, 1, '2026-03-28 22:30:00.000000', 1);
+(1, 1, '2026-03-28 22:30:00.000000', 1),
+(2, 1, '2026-03-28 22:30:00.000000', NULL),
+(3, 1, '2026-03-28 22:30:00.000000', NULL),
+(4, 1, '2026-03-28 22:30:00.000000', NULL);
 
 INSERT INTO cart_menu (cart_id, menu_id, quantity) VALUES
-(1, 1, 9);
+(1, 1, 9),
+(2, 3, 1),
+(3, 4, 2),
+(4, 2, 1);
 
 INSERT INTO cart_food (cart_id, food_id, quantity) VALUES
 (1, 1, 1),
@@ -39,16 +45,19 @@ INSERT INTO cart_food (cart_id, food_id, quantity) VALUES
 (1, 12, 1);
 
 
+---- DELIVERIES ----
+
+INSERT INTO orders (cart_id, customer_id, cook_id, delivery_person_id) VALUES
+(1, 1, 2, 4),
+(2, 1, 2, 4),
+(3, 1, 2, 4),
+(4, 1, 2, 4);
+
+
 ----- REVIEWS -----
 
-INSERT INTO reviews (user_id, product_stars, delivery_stars, comment) VALUES
+INSERT INTO reviews (order_id, product_stars, delivery_stars, comment) VALUES
 (1, 5, 5, 'Excellent restaurant !'),
 (2, 1, 5, 'Livraison parfaite, mais la nourriture laisse à désirer...'),
 (3, 3, 1, 'Il y avait un cheveu dans ma soupe.'),
 (4, 5, 2, 'Très bon, mais la livraison était assez moyenne...');
-
-
----- DELIVERIES ----
-
-INSERT INTO orders (cart_id, customer_id, cook_id, delivery_person_id) VALUES
-(1, 1, 2, 4)

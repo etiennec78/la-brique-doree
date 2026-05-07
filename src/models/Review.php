@@ -34,9 +34,10 @@ class Review {
     public static function getReviews() {
         global $pdo;
         $stmt = $pdo->prepare("
-            SELECT r.id, r.user_id, u.first_name, u.last_name, r.product_stars, r.delivery_stars, r.comment
+            SELECT r.id, u.id as user_id, u.first_name, u.last_name, r.product_stars, r.delivery_stars, r.comment
             FROM reviews r
-            JOIN users u ON r.user_id = u.id
+            JOIN orders o ON o.id = r.order_id
+            JOIN users u ON o.customer_id = u.id
             ORDER BY r.id DESC
         ");
         $stmt->execute();

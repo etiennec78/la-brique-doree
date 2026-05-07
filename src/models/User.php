@@ -51,41 +51,19 @@ class User {
         $stmt_users->execute([$role]);
         return $stmt_users->fetchAll();
     }
-    public static function userHasName($uid) {
-        $user_data = self::getUserInfo($uid);
-        return (
-            $user_data
-            and !empty($user_data['first_name'])
-            and !empty($user_data['last_name'])
-        );
-    }
 
-    public static function userHasOrders($uid) {
+    public static function lastOrderHasReview($uid) {
         global $pdo;
         $stmt = $pdo->prepare("
-            SELECT (
-                COALESCE(SUM(CASE WHEN ps.name = 'pending' THEN m.total_menu_quantity ELSE 0 END), 0)
-                + COALESCE(SUM(CASE WHEN ps.name = 'pending' THEN cf.total_food_quantity ELSE 0 END), 0)
-            ) AS total_quantity
-            FROM users u
-            LEFT JOIN cart c ON u.id = c.user_id
-            LEFT JOIN payment_status ps ON c.payment_status_id = ps.id
-            LEFT JOIN (
-                SELECT cart_id, SUM(quantity) AS total_menu_quantity
-                FROM cart_menu
-                GROUP BY cart_id
-            ) m ON c.id = m.cart_id
-            LEFT JOIN (
-                SELECT cart_id, SUM(quantity) AS total_food_quantity
-                FROM cart_food
-                GROUP BY cart_id
-            ) cf ON c.id = cf.cart_id
-            WHERE u.id = ?
-            GROUP BY u.id;
+            SELECT r.id
+            FROM orders o
+            LEFT JOIN reviews r ON r.order_id = o.id
+            WHERE o.customer_id = ?
+            ORDER BY o.id DESC
+            LIMIT 1
         ");
         $stmt->execute([$uid]);
-        $total_quantity = $stmt->fetch(PDO::FETCH_COLUMN);
-        return $total_quantity > 0;
+        return (bool) $stmt->fetch(PDO::FETCH_COLUMN);
     }
 
     public static function getGlobalReduction($uid) {

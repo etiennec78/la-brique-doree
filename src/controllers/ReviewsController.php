@@ -15,7 +15,7 @@ class ReviewsController extends Controller {
         if ($logged_in) {
             $user_id = $_SESSION['user']['id'];
             $is_admin = User::isAdmin($user_id);
-            $user_can_review = User::userHasName($user_id) && User::userHasOrders($user_id);
+            $user_can_review = !User::lastOrderHasReview($user_id);
         }
 
         $this->render(
@@ -41,7 +41,7 @@ class ReviewsController extends Controller {
             $user_id = $_SESSION['user']['id'];
             $is_admin = User::isAdmin($user_id);
 
-            if ($is_admin || (User::userHasName($user_id) && User::userHasOrders($user_id))) {
+            if ($is_admin || !User::lastOrderHasReview($user_id)) {
                 $comment = $_POST['comment'];
                 $product = $_POST['product'];
                 $delivery = $_POST['delivery'];
