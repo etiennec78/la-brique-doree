@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         // Animation on the cart icon to reflect amount update
                         cartItemsBubble.animate([
                             { transform: 'scale(1)' },
-                            { transform: 'scale(2)' },
+                            { transform: 'scale(1.5)' },
                             { transform: 'scale(1)' }
                         ], { duration: 300 });
                     }
