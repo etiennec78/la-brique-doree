@@ -162,7 +162,7 @@ input::-webkit-inner-spin-button {
   font-size: 0.8rem;
 }
 
-.delivery-options {
+#delivery-type {
   display: flex;
   background: var(--darkgray);
   border-radius: 5px;
@@ -170,7 +170,7 @@ input::-webkit-inner-spin-button {
   border: 1px solid var(--lightgray);
 }
 
-.delivery-options button {
+#delivery-type button {
   flex: 1;
   padding: 12px;
   border: none;
@@ -180,15 +180,15 @@ input::-webkit-inner-spin-button {
   color: var(--offwhite);
 }
 
-.delivery-options button.selected {
+#delivery-type button.selected {
   background: var(--solid-gold);
 }
 
-.delivery-options button:not(.selected):hover {
+#delivery-type button:not(.selected):hover {
   background: var(--lightgray);
 }
 
-form#delivery-type {
+form#delivery-time {
   margin: 20px 0px 20px 0px;
   background: var(--darkgray);
   padding: 15px;
@@ -208,4 +208,8 @@ input#takeaway_time {
 
 button#takeaway {
   width: 100%;
+}
+
+.hidden {
+  display: none;
 }

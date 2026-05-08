@@ -20,6 +20,7 @@ $h1 = "COMMANDE";
 $show_cart = true;
 $show_video = true;
 $css_files = ['/css/food-cards.css', '/css/orders.css'];
+$js_files = ['/js/orders.js'];
 include __DIR__ . '/../includes/header.php';
 ?>
 <main>
@@ -150,19 +151,17 @@ include __DIR__ . '/../includes/header.php';
           <?php endif ?>
           <p class="total-price">Total: <?= number_format($total_price, 2, ",") ?>€</p>
           
-          <form class="delivery-options" action="/set_delivery_type" method="POST">
+          <form id="delivery-type" action="/set_delivery_type" method="POST">
             <button type="submit" name="is_takeaway" value="0" class="<?= !$is_takeaway ? 'selected' : '' ?>">À domicile</button>
             <button type="submit" name="is_takeaway" value="1" class="<?= $is_takeaway ? 'selected' : '' ?>">À emporter</button>
           </form>
 
-          <?php if ($is_takeaway): ?>
-          <form id="delivery-type" action="/set_delivery_type" method="POST">
+          <form id="delivery-time" action="/set_delivery_type" method="POST" class="<?= $is_takeaway ? '' : 'hidden' ?>">
             <label id="takeway" for="takeaway_time">Heure de retrait</label>
             <input type="time" id="takeaway_time" name="takeaway_time" value="<?= htmlspecialchars($takeaway_time) ?>" required>
             <br>
             <button id="takeaway" type="submit" class="basic-btn">Confirmer l'heure</button>
           </form>
-          <?php endif; ?>
           
           <form action="https://www.plateforme-smc.fr/cybank/index.php" method="POST">
             <input type="hidden" name="transaction" value="<?= $transaction ?>">
