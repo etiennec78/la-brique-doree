@@ -52,20 +52,6 @@ class User {
         return $stmt_users->fetchAll();
     }
 
-    public static function lastOrderHasReview($uid) {
-        global $pdo;
-        $stmt = $pdo->prepare("
-            SELECT r.id
-            FROM orders o
-            LEFT JOIN reviews r ON r.order_id = o.id
-            WHERE o.customer_id = ?
-            ORDER BY o.id DESC
-            LIMIT 1
-        ");
-        $stmt->execute([$uid]);
-        return (bool) $stmt->fetch(PDO::FETCH_COLUMN);
-    }
-
     public static function getGlobalReduction($uid) {
         global $pdo;
         $stmt = $pdo->prepare("SELECT global_reduction FROM users u WHERE u.id = ?");

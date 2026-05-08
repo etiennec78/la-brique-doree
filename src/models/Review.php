@@ -2,13 +2,13 @@
 require_once __DIR__ . '/../db_connect.php';
 
 class Review {
-    public static function addReview($user_id, $product, $delivery, $comment) {
+    public static function addReview($order_id, $product, $delivery, $comment) {
         global $pdo;
         $stmt = $pdo->prepare("
-          INSERT INTO reviews (user_id, product_stars, delivery_stars, comment)
+          INSERT INTO reviews (order_id, product_stars, delivery_stars, comment)
           VALUES (?, ?, ?, ?)
         ");
-        $stmt->execute([$user_id, $product, $delivery, $comment]);
+        $stmt->execute([$order_id, $product, $delivery, $comment]);
     }
 
     public static function updateReview($id, $user_id, $is_admin, $product, $delivery, $comment) {
@@ -16,15 +16,15 @@ class Review {
         
         if ($is_admin) {
             $stmt = $pdo->prepare("
-              UPDATE reviews 
-              SET product_stars = ?, delivery_stars = ?, comment = ? 
+              UPDATE reviews
+              SET product_stars = ?, delivery_stars = ?, comment = ?
               WHERE id = ?
             ");
             $stmt->execute([$product, $delivery, $comment, $id]);
         } else {
             $stmt = $pdo->prepare("
-              UPDATE reviews 
-              SET product_stars = ?, delivery_stars = ?, comment = ? 
+              UPDATE reviews
+              SET product_stars = ?, delivery_stars = ?, comment = ?
               WHERE id = ? AND user_id = ?
             ");
             $stmt->execute([$product, $delivery, $comment, $id, $user_id]);

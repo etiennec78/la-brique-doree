@@ -97,4 +97,18 @@ class Order {
         ");
         $stmt->execute([$order_id]);
     }
+
+    public static function getLastOrder($uid) {
+        global $pdo;
+        $stmt = $pdo->prepare("
+            SELECT o.id as order_id, r.id as review_id
+            FROM orders o
+            LEFT JOIN reviews r ON r.order_id = o.id
+            WHERE o.customer_id = ?
+            ORDER BY o.id DESC
+            LIMIT 1
+        ");
+        $stmt->execute([$uid]);
+        return $stmt->fetch();
+    }
 }
