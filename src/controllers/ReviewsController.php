@@ -12,6 +12,7 @@ class ReviewsController extends Controller {
         $reviews = Review::getReviews();
         $logged_in = isset($_SESSION['user']['id']);
         $user_can_review = false;
+        $user_has_valid_info = false;
         $is_admin = false;
         if ($logged_in) {
             $user_id = $_SESSION['user']['id'];
@@ -19,6 +20,7 @@ class ReviewsController extends Controller {
 
             $lastOrder = Order::getLastOrder($user_id);
             $user_can_review = $lastOrder != null && $lastOrder['review_id'] == null;
+            $user_has_valid_info = User::hasValidInfo($user_id);
         }
 
         $this->render(
@@ -29,6 +31,7 @@ class ReviewsController extends Controller {
                 'reviews' => $reviews,
                 'logged_in' => $logged_in,
                 'user_can_review' => $user_can_review,
+                'user_has_valid_info' => $user_has_valid_info,
                 'is_admin' => $is_admin,
                 'getName' => 'getName'
             ]

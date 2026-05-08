@@ -73,8 +73,37 @@ include __DIR__ . '/../includes/header.php';
               </table>
             <?php endif; ?>
         <?php endforeach; ?>
-
-    <?php if ($logged_in && $user_can_review): ?> 
+    <?php if (!$logged_in): ?>
+        <table class="review-block">
+            <tr>
+                <td id="review-unavailable">
+                    <h3>Connectez-vous pour laisser un avis !</h3>
+                    <p>Vous devez avoir un compte et le compléter pour laisser un avis sur nos produits et la livraison.</p>
+                    <button onclick="location.href='/login'" type="button" class="basic-btn">Me connecter</button>
+                </td>
+            </tr>
+        </table>
+    <?php elseif (!$user_has_valid_info): ?>
+        <table class="review-block">
+            <tr>
+                <td id="review-unavailable">
+                    <h3>Vous ne pouvez pas laisser d'avis.</h3>
+                    <p>Vous devez remplir votre profil pour laisser un avis.</p>
+                    <button onclick="location.href='/profile'" type="button" class="basic-btn">Remplir votre profil</button>
+                </td>
+            </tr>
+        </table>
+    <?php elseif (!$user_can_review): ?>
+        <table class="review-block">
+            <tr>
+                <td id="review-unavailable">
+                    <h3>Vous ne pouvez pas laisser d'avis.</h3>
+                    <p>Vous devez passer une nouvelle commande pour laisser un avis.</p>
+                    <button onclick="location.href='/products'" type="button" class="basic-btn">Passer une commande</button>
+                </td>
+            </tr>
+        </table>
+    <?php else: ?> 
     <form action="/reviews" method="post">
         <table class="review-block">
             <tr>
@@ -118,26 +147,6 @@ include __DIR__ . '/../includes/header.php';
             </tr>
         </table>
     </form>
-    <?php elseif ($logged_in && (!$user_can_review)): ?>
-        <table class="review-block">
-            <tr>
-                <td id="review-unavailable">
-                    <h3>Vous ne pouvez pas laisser d'avis.</h3>
-                    <p>Vous devez passer une nouvelle commande pour laisser un avis.</p>
-                    <button onclick="location.href='/products'" type="button" class="basic-btn">Passer une commande</button>
-                </td>
-            </tr>
-        </table>
-    <?php else: ?>
-        <table class="review-block">
-            <tr>
-                <td id="review-unavailable">
-                    <h3>Connectez-vous pour laisser un avis !</h3>
-                    <p>Vous devez avoir un compte et le compléter pour laisser un avis sur nos produits et la livraison.</p>
-                    <button onclick="location.href='/login'" type="button" class="basic-btn">Me connecter</button>
-                </td>
-            </tr>
-        </table>
     <?php endif; ?>
     </main>
 
