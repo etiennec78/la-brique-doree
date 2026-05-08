@@ -110,6 +110,13 @@ class OrdersController extends Controller {
             }
         }
 
+        if (isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false) {
+            require_once __DIR__ . '/../models/Cart.php';
+            header('Content-Type: application/json');
+            echo json_encode(['cart_count' => Cart::getCartCount()]);
+            exit;
+        }
+
         $referer = $_SERVER['HTTP_REFERER'] ?? '../views/orders.php';
         header("Location: $referer");
         exit;

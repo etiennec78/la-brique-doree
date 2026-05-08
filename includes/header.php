@@ -9,6 +9,9 @@
     <?php if (isset($css_files)): foreach ($css_files as $css): ?>
         <link rel="stylesheet" href="<?= htmlspecialchars($css) ?>">
     <?php endforeach; endif; ?>
+    <?php if (isset($js_files)): foreach ($js_files as $js): ?>
+        <script src="<?= htmlspecialchars($js) ?>" defer></script>
+    <?php endforeach; endif; ?>
 </head>
 <body>
     <header>

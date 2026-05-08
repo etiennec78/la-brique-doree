@@ -4,6 +4,7 @@ $h1 = "NOS PRODUITS";
 $show_cart = true;
 $show_video = true;
 $css_files = ['/css/food-cards.css', '/css/products.css'];
+$js_files = ['/js/cart.js'];
 include __DIR__ . '/../includes/header.php';
 ?>
 <main>
