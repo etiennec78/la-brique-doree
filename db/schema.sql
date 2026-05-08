@@ -51,27 +51,27 @@ CREATE TABLE food (
 );
 
 INSERT INTO food (name, food_type, price, description, image_path) VALUES
-('Crabe', 1, 21.7, 'Chair de crabe fraîche et délicate, un délice à savourer brique par brique !', 'images/food/dish/crab.jpg'),
-('Bento', 1, 11.5, 'Assortiment coloré de riz, légumes et protéines, un repas complet et joyeux.', 'images/food/dish/bento.jpg'),
-('Sushis', 1, 9.3, 'Riz vinaigré et poisson frais, préparés avec soin pour une bouchée pleine de finesse.', 'images/food/dish/sushi.jpg'),
-('Sashimis', 1, 15.9, 'Tranches de poisson ultra-frais, fondantes et prêtes à être dégustées en une bouchée.', 'images/food/dish/sashimi.webp'),
-('Steak', 1, 13.5, 'Pièce de bœuf juteuse et grillée à la perfection, une vraie brique de gourmandise.', 'images/food/dish/steak.jpg'),
-('Burger enfant', 1, 5, 'Mini-burger tendre et fromage fondant, parfait pour les petits appétits.', 'images/food/dish/kid_burger.jpg'),
-('Burger végé', 1, 10.2, 'Galette de légumes savoureuse et pain moelleux, un burger coloré et fun à manger.', 'images/food/dish/veggy_burger.jpg'),
-('Burger frites', 1, 14.6, 'Burger gourmand avec frites dorées et croustillantes, un classique qui se déguste sans effort.', 'images/food/dish/burger.png'),
-('Pâtes', 1, 4, 'Pâtes al dente nappées d’une sauce riche et parfumée, simples mais toujours délicieuses.', 'images/food/dish/noodles.jpg'),
-('Œuf & Steak', 1, 9.5, 'Œuf coulant sur steak haché tendre, un duo réconfortant et délicieux.', 'images/food/dish/egg.jpg'),
-('Crevettes', 1, 10.8, 'Crevettes sautées, légèrement relevées, pleines de goût et de fraîcheur.', 'images/food/dish/shrimp.jpg'),
-('Bacon & Œufs', 1, 6.5, 'Bacon croustillant et œufs dorés, un petit déjeuner ou dîner plein de gourmandise.', 'images/food/dish/bacon.jpg'),
-('Coca-Cola', 2, 2.3, 'Boisson fraîche et pétillante, parfaite pour accompagner chaque bouchée.', 'images/food/drink/coke.jpg'),
-('Jus d''orange', 2, 1.5, 'Jus maison fruité et vitaminé, idéal pour une pause rafraîchissante.', 'images/food/drink/orange_juice.jpg'),
-('Champagne', 2, 25.9, 'Champagne de la maison de la brique. Bulles fines et élégantes, pour un moment festif et léger.', 'images/food/drink/champaign.png'),
-('Fromages', 3, 21.5, 'Sélection de fromages affinés, à savourer brique par brique… ou tout d’un coup !', 'images/food/dessert/cheese.jpg'),
-('Tarte', 3, 4.2, 'Tarte à la framboise. Pâte croustillante et framboises acidulées, douces et fruitées.', 'images/food/dessert/raspberry_pie.jpg'),
-('Glace', 3, 3.3, 'Boules glacées onctueuses, parfaites pour une pause fraîcheur.', 'images/food/dessert/ice_cream.jpg'),
-('Gâteau', 3, 4.7, 'Gâteau moelleux et gourmand, un vrai plaisir à chaque bouchée.', 'images/food/dessert/cake.jpg'),
-('Cupcake', 3, 2.3, 'Petit gâteau fondant, recouvert d’un glaçage généreux et coloré.', 'images/food/dessert/cupcake.jpg'),
-('Dessert glacé', 3, 4.7, 'Alliance sucrée et rafraîchissante, pour les plus gourmands.', 'images/food/dessert/cupcakes_ice_cream.jpg'),
+('Crabe', 1, 19.9, 'Chair de crabe fraîche et délicate, un délice à savourer brique par brique !', 'images/food/dish/crab.jpg'),
+('Bento', 1, 11.9, 'Assortiment coloré de riz, légumes et protéines, un repas complet et joyeux.', 'images/food/dish/bento.jpg'),
+('Sushis', 1, 8.9, 'Riz vinaigré et poisson frais, préparés avec soin pour une bouchée pleine de finesse.', 'images/food/dish/sushi.jpg'),
+('Sashimis', 1, 14.9, 'Tranches de poisson ultra-frais, fondantes et prêtes à être dégustées en une bouchée.', 'images/food/dish/sashimi.webp'),
+('Steak', 1, 13.9, 'Pièce de bœuf juteuse et grillée à la perfection, une vraie brique de gourmandise.', 'images/food/dish/steak.jpg'),
+('Burger enfant', 1, 4.9, 'Mini-burger tendre et fromage fondant, parfait pour les petits appétits.', 'images/food/dish/kid_burger.jpg'),
+('Burger végé', 1, 9.9, 'Galette de légumes savoureuse et pain moelleux, un burger coloré et fun à manger.', 'images/food/dish/veggy_burger.jpg'),
+('Burger frites', 1, 14.9, 'Burger gourmand avec frites dorées et croustillantes, un classique qui se déguste sans effort.', 'images/food/dish/burger.png'),
+('Pâtes', 1, 3.9, 'Pâtes al dente nappées d’une sauce riche et parfumée, simples mais toujours délicieuses.', 'images/food/dish/noodles.jpg'),
+('Œuf & Steak', 1, 9.9, 'Œuf coulant sur steak haché tendre, un duo réconfortant et délicieux.', 'images/food/dish/egg.jpg'),
+('Crevettes', 1, 9.9, 'Crevettes sautées, légèrement relevées, pleines de goût et de fraîcheur.', 'images/food/dish/shrimp.jpg'),
+('Bacon & Œufs', 1, 5.9, 'Bacon croustillant et œufs dorés, un petit déjeuner ou dîner plein de gourmandise.', 'images/food/dish/bacon.jpg'),
+('Coca-Cola', 2, 2.9, 'Boisson fraîche et pétillante, parfaite pour accompagner chaque bouchée.', 'images/food/drink/coke.jpg'),
+('Jus d''orange', 2, 1.9, 'Jus maison fruité et vitaminé, idéal pour une pause rafraîchissante.', 'images/food/drink/orange_juice.jpg'),
+('Champagne', 2, 24.9, 'Champagne de la maison de la brique. Bulles fines et élégantes, pour un moment festif et léger.', 'images/food/drink/champaign.png'),
+('Fromages', 3, 19.9, 'Sélection de fromages affinés, à savourer brique par brique… ou tout d’un coup !', 'images/food/dessert/cheese.jpg'),
+('Tarte', 3, 4.9, 'Tarte à la framboise. Pâte croustillante et framboises acidulées, douces et fruitées.', 'images/food/dessert/raspberry_pie.jpg'),
+('Glace', 3, 2.9, 'Boules glacées onctueuses, parfaites pour une pause fraîcheur.', 'images/food/dessert/ice_cream.jpg'),
+('Gâteau', 3, 4.9, 'Gâteau moelleux et gourmand, un vrai plaisir à chaque bouchée.', 'images/food/dessert/cake.jpg'),
+('Cupcake', 3, 2.9, 'Petit gâteau fondant, recouvert d’un glaçage généreux et coloré.', 'images/food/dessert/cupcake.jpg'),
+('Dessert glacé', 3, 4.9, 'Alliance sucrée et rafraîchissante, pour les plus gourmands.', 'images/food/dessert/cupcakes_ice_cream.jpg'),
 ('Banane', 3, 0.9, 'Simple et naturellement sucrée, parfaite en dessert ou en encas.', 'images/food/dessert/banana.jpg');
 
 -- Table de liaison pour les allergènes
@@ -144,10 +144,10 @@ CREATE TABLE menu (
 );
 
 INSERT INTO menu (name, description, price, min_people, time_slot_id) VALUES
-('Menu enfant', 'Un menu pour les futurs petits minis micro prochains constructeurs !' , 7.5, 1, NULL),
-('Partage d''Asie', 'Un menu qui vous fera voyager dans un autre continent', 32, 3, 1),
-('Menu gourmand', 'Un menu pour les gourmands, arriverez-vous à le terminer ?', 59.20, 1, NULL),
-('Menu doré', 'Un menu pour les palais les plus fins', 21.5, 1, 2);
+('Menu enfant', 'Un menu pour les futurs petits minis micro prochains constructeurs !' , 7.9, 1, NULL),
+('Partage d''Asie', 'Un menu qui vous fera voyager dans un autre continent', 37.9, 3, 1),
+('Menu gourmand', 'Un menu pour les gourmands, arriverez-vous à le terminer ?', 19.9, 1, NULL),
+('Menu doré', 'Un menu pour les palais les plus fins', 54.9, 1, 2);
 
 -- Table de liaison entre Menu et Food
 CREATE TABLE menu_food (

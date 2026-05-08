@@ -75,4 +75,6 @@ sudo mariadb "$DB_NAME" < "$SQL_DUMMY_FILE"
 if [ $? -ne 0 ]; then
     echo "Error: Dummy values could not be added !"
     exit 7
+else
+    echo "Dummy values were added successfully !"
 fi
