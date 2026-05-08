@@ -40,6 +40,26 @@ class User {
         return $stmt->fetch();
     }
 
+    public static function hasValidInfo($uid) {
+        global $pdo;
+        $stmt = $pdo->prepare("
+            SELECT email, first_name, last_name, phone, street_nb, street, town, zip_code
+            FROM users
+            WHERE id = ?
+        ");
+        $stmt->execute([$uid]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (!$user) {
+            return false;
+        }
+        foreach ($user as $value) {
+            if ($value === null || $value === '') {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static function getUsersFromRole($role) {
         global $pdo;
         $stmt_users = $pdo->prepare("
