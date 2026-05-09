@@ -234,7 +234,7 @@ CREATE TABLE payment_status (
 );
 
 INSERT INTO payment_status (name) VALUES
-('pending'), ('paid'), ('failed');
+('pending'), ('paid');
 
 CREATE TABLE order_status (
     id INT PRIMARY KEY AUTO_INCREMENT,
