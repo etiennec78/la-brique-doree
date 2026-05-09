@@ -38,7 +38,6 @@ class PaymentResultController extends Controller {
 
                 $order_status = 1; // default: paid
                 $cook_id = Order::getAvailableStaff("cook");
-                error_log($cook_id);
                 if ($cook_id != null) {
                     $order_status = 2; // preparing
                 }
