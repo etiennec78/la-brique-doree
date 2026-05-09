@@ -344,3 +344,7 @@ input {
   background-color: var(--input-color);
   color: var(--offwhite);
 }
+
+.hidden {
+  display: none;
+}

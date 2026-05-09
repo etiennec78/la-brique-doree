@@ -4,6 +4,7 @@ $h1 = "SUIVI DE COMMANDE";
 $show_cart = false;
 $show_video = false;
 $css_files = ['/css/order_tracking.css'];
+$js_files = ['js/order_tracking.js'];
 include __DIR__ . '/../includes/header.php';
 ?>
     <main>
@@ -55,9 +56,7 @@ include __DIR__ . '/../includes/header.php';
 
         <div class="tracking-actions">
             <button onclick="location.href='/'" class="basic-btn <?php if ($order['status'] >= 5) echo 'gray-btn'; ?>">Retour à l'accueil</button>
-            <?php if ($order['status'] >= 5): ?>
-                <button onclick="location.href='/reviews'" class="basic-btn">Laisser un avis</button>
-            <?php endif; ?>
+            <button onclick="location.href='/reviews'" class="basic-btn <?= ($order['status'] >= 5) ? '' : 'hidden' ?>">Laisser un avis</button>
         </div>
 
     </div>
