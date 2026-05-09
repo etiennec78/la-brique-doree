@@ -37,27 +37,31 @@ class CookController extends Controller {
             exit();
         }
 
-        if (isset($_POST['order_id'])) {
-            $order_id = (int)$_POST['order_id'];
-            $order = Order::getOrderById($order_id);
-            if ($order && $order['is_takeaway']) {
-                Order::setReadyStatus($order_id);
-            } else {
-                $delivery_person = Order::getAvailableStaff("delivery_person");
-                if ($delivery_person) {
-                    Order::setDeliveryStatus($order_id, $delivery_person);
-                    header('Location: /cook?success=assigned');
-                } else {
-                    header('Location: /cook?error=no_delivery_person_available');
-                }
-                exit();
-            }
-
-            header('Location: /cook?success=assigned');
-        } else {
-            header('Location: /cook');
+        if (!isset($_POST['order_id'])) {
+            header('Location: /cook?error=missing_order_id');
             exit();
         }
+
+        $order_id = (int)$_POST['order_id'];
+        $order = Order::getOrderById($order_id);
+
+        if (!$order) {
+            header('Location: /cook?error=order_not_found');
+            exit();
+        }
+
+        if ($order['is_takeaway']) {
+            Order::setReadyStatus($order_id);
+        } else {
+            // Try to find an available delivery person and attach it, or else set the status to "ready"
+            $delivery_person = Order::getAvailableStaff("delivery_person");
+            if ($delivery_person == null) {
+                Order::setReadyStatus($order_id);
+            } else {
+                Order::setShippingStatus($order_id, $delivery_person);
+            }
+        }
+        header('Location: /cook');
     }
 
     public function finishTakeaway() {

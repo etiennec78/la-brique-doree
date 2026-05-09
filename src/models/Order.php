@@ -76,7 +76,7 @@ class Order {
         return $staff_id !== false ? $staff_id : null; // Return null if false
     }
 
-    public static function setDeliveryStatus($order_id, $delivery_person_id) {
+    public static function setShippingStatus($order_id, $delivery_person_id) {
         global $pdo;
         $stmt = $pdo->prepare("
             UPDATE orders
