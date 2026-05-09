@@ -14,7 +14,7 @@ $router->add('GET', 'delivery', 'DeliveryController', 'index');
 $router->add('GET', '', 'HomeController', 'index');
 $router->add('GET', 'orders', 'OrdersController', 'index');
 $router->add('GET', 'order_tracking', 'OrderTrackingController', 'index');
-$router->add('GET', 'stream_order', 'OrderTrackingController', 'streamOrder');
+$router->add('GET', 'api_order_status', 'OrderTrackingController', 'apiOrderStatus');
 $router->add('GET', 'payment_result', 'PaymentResultController', 'index');
 $router->add('GET', 'products', 'ProductsController', 'index');
 $router->add('GET', 'profile', 'ProfileController', 'index');

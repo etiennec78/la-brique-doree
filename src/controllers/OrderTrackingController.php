@@ -27,31 +27,22 @@ class OrderTrackingController extends Controller {
     );
   }
 
-  public function streamOrder() {
+  public function apiOrderStatus() {
+    if (!isset($_SESSION['user'])) {
+        http_response_code(401);
+        echo json_encode(['error' => 'Unauthorized']);
+        return;
+    }
+
     require_once __DIR__ . '/../models/Order.php';
+    $uid = $_SESSION['user']['id'];
+    $order = Order::getUserRunningOrder($uid);
 
-    ob_clean();
-    header('Content-Type: text/event-stream');
-    header('Cache-Control: no-cache');
-    header('Connection: keep-alive');
-
-    $user_id = $_SESSION['user']['id'];
-    session_write_close();
-
-    $prevStatus = null;
-    while (true) {
-      $order = Order::getUserRunningOrder($user_id);
-      $status = $order["status"];
-      if ($status != $prevStatus) {
-        echo "data: " . json_encode(['status' => $status]) . "\n\n";
-      }
-      $prevStatus = $status;
-
-      ob_flush();
-      flush();
-
-      if (connection_aborted()) break;
-      sleep(2);
+    header('Content-Type: application/json');
+    if ($order) {
+        echo json_encode(['status' => $order['status']]);
+    } else {
+        echo json_encode(['status' => null]);
     }
   }
 }
