@@ -13,6 +13,12 @@ class OrderTrackingController extends Controller {
 
     $uid = $_SESSION['user']['id'];
     $order = Order::getUserRunningOrder($uid);
+
+    if (!$order) {
+        header('Location: /products');
+        exit();
+    }
+
     $cook = User::getUserInfo($order['cook_id']);
     $delivery_person = User::getUserInfo($order['delivery_person_id']);
 
