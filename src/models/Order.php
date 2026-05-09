@@ -72,7 +72,8 @@ class Order {
         ");
         $stmt->execute([$role_name, $busy_status_id]);
 
-        return $stmt->fetch(PDO::FETCH_COLUMN);
+        $staff_id = $stmt->fetch(PDO::FETCH_COLUMN);
+        return $staff_id !== false ? $staff_id : null; // Return null if false
     }
 
     public static function setDeliveryStatus($order_id, $delivery_person_id) {
@@ -148,9 +149,9 @@ class Order {
 
         $stmt = $pdo->prepare("
             INSERT INTO orders (cart_id, customer_id, cook_id, order_status_id, is_takeaway, takeaway_time, cook_assigned_at)
-            VALUES (?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, $cook_assigned_at)
         ");
-        $stmt->execute([$cart_id, $customer_id, $cook_id, $order_status_id, $is_takeaway, $takeaway_time, $cook_assigned_at]);
+        $stmt->execute([$cart_id, $customer_id, $cook_id, $order_status_id, $is_takeaway, $takeaway_time]);
         return $pdo->lastInsertId();
     }
 
