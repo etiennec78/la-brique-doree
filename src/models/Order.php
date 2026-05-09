@@ -41,14 +41,14 @@ class Order {
     public static function getAvailableStaff($role_name) {
         global $pdo;
 
-        $allowed_roles = ['restaurateur', 'delivery_person'];
+        $allowed_roles = ['cook', 'delivery_person'];
         if (!in_array($role_name, $allowed_roles, true)) {
             return null;
         }
 
         // Return false if the staff member has an order with this status
         $busy_status_map = [
-            'restaurateur' => 2, // 2 = preparing
+            'cook' => 2, // 2 = preparing
             'delivery_person' => 4 // 4 = shipping
         ];
         $busy_status_id = $busy_status_map[$role_name];

@@ -4,7 +4,7 @@ INSERT INTO users (email, password_hash, first_name, last_name, role_id, phone, 
 -- Passwords: root
 -- 5 clients, 1 restaurateur, 3 administrateurs, 1 livreur
 ('client@gmail.com', '$2y$12$0FEsdSyYSTrC0713vB2KzuoXFnZldB0v1Wr8JxUmMTmoHow07bDwe', 'Etienne', 'Coriou', 1, '+33712345678', '2006-03-27', '2026-03-28 22:00:00.000000', '2026-03-28 23:00:00.000000', 2, NULL, 'Rue de la Brique', 'Paris', 75000, NULL),
-('restaurateur@gmail.com', '$2y$12$0FEsdSyYSTrC0713vB2KzuoXFnZldB0v1Wr8JxUmMTmoHow07bDwe', 'Alice', 'La Restauratrice', 2, '+33712345678', '2006-03-27', '2026-03-28 22:00:00.000000', '2026-03-28 23:00:00.000000', 2, 'bis', 'Rue de la Brique', 'Paris', 75000, '012345'),
+('cook@gmail.com', '$2y$12$0FEsdSyYSTrC0713vB2KzuoXFnZldB0v1Wr8JxUmMTmoHow07bDwe', 'Alice', 'La Restauratrice', 2, '+33712345678', '2006-03-27', '2026-03-28 22:00:00.000000', '2026-03-28 23:00:00.000000', 2, 'bis', 'Rue de la Brique', 'Paris', 75000, '012345'),
 ('administrator@gmail.com', '$2y$12$0FEsdSyYSTrC0713vB2KzuoXFnZldB0v1Wr8JxUmMTmoHow07bDwe', 'Patrice', 'L''Administratrice', 3, '+33712345678', '2006-03-27', '2026-03-28 22:00:00.000000', '2026-03-28 23:00:00.000000', 2, 'ter', 'Rue de la Brique', 'Paris', 75000, '012345'),
 ('delivery_person@gmail.com', '$2y$12$0FEsdSyYSTrC0713vB2KzuoXFnZldB0v1Wr8JxUmMTmoHow07bDwe', 'Peter', 'Le Livreur', 4, '+33712345678', '2006-03-27', '2026-03-28 22:00:00.000000', '2026-03-28 23:00:00.000000', 2, NULL, 'Rue de la Brique', 'Paris', 75000, '012345'),
 ('john@gmail.com', '$2y$12$0FEsdSyYSTrC0713vB2KzuoXFnZldB0v1Wr8JxUmMTmoHow07bDwe', 'John', 'Doe', 1, '+33712345678', '2006-03-27', '2026-03-28 22:00:00.000000', '2026-03-28 23:00:00.000000', 2, NULL, 'Rue de la Brique', 'Paris', 75000, '012345'),

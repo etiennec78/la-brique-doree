@@ -44,8 +44,8 @@
                 <?php if ($_SESSION['user']['role'] === 'administrator'): ?>
                     <a href="/admin" class="navbarbutton">Panel Admin</a>
 
-                <?php elseif ($_SESSION['user']['role'] === 'restaurateur'): ?>
-                    <a href="/restaurateur" class="navbarbutton">Gestion Commandes</a>
+                <?php elseif ($_SESSION['user']['role'] === 'cook'): ?>
+                    <a href="/cook" class="navbarbutton">Gestion Commandes</a>
 
                 <?php elseif ($_SESSION['user']['role'] === 'delivery_person'): ?>
                     <a href="/delivery" class="navbarbutton">Mes Livraisons</a>

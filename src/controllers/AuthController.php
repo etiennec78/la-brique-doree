@@ -33,8 +33,8 @@ class AuthController extends Controller
 
       if ($user_found['role'] === 'administrator') {
           header("Location: /admin");
-      } elseif ($user_found['role'] === 'restaurateur') {
-          header("Location: /restaurateur");
+      } elseif ($user_found['role'] === 'cook') {
+          header("Location: /cook");
       } elseif ($user_found['role'] === 'delivery_person') {
           header("Location: /delivery");
       } else {

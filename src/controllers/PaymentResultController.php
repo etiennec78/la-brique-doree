@@ -37,7 +37,7 @@ class PaymentResultController extends Controller {
                 $takeaway_time = $takeaway_time_str ? date('Y-m-d ') . $takeaway_time_str . ':00' : null;
 
                 $order_status = 1; // default: paid
-                $cook_id = Order::getAvailableStaff("restaurateur");
+                $cook_id = Order::getAvailableStaff("cook");
                 error_log($cook_id);
                 if ($cook_id != null) {
                     $order_status = 2; // preparing

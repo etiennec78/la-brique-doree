@@ -1,6 +1,6 @@
 <?php
 
-class RestaurateurController extends Controller {
+class CookController extends Controller {
     public function index() {
         if (!isset($_SESSION['user']) || $_SESSION['user']['role_id'] != 2) {
             header('Location: /login');
@@ -18,7 +18,7 @@ class RestaurateurController extends Controller {
         $deliverers = User::getUsersFromRole('delivery_person');
 
         $this->render(
-            'restaurateur',
+            'cook',
             [
                 'cart_count' => $cart_count,
                 'get_name' => 'getName',
@@ -46,16 +46,16 @@ class RestaurateurController extends Controller {
                 $delivery_person = Order::getAvailableStaff("delivery_person");
                 if ($delivery_person) {
                     Order::setDeliveryStatus($order_id, $delivery_person);
-                    header('Location: /restaurateur?success=assigned');
+                    header('Location: /cook?success=assigned');
                 } else {
-                    header('Location: /restaurateur?error=no_delivery_person_available');
+                    header('Location: /cook?error=no_delivery_person_available');
                 }
                 exit();
             }
 
-            header('Location: /restaurateur?success=assigned');
+            header('Location: /cook?success=assigned');
         } else {
-            header('Location: /restaurateur');
+            header('Location: /cook');
             exit();
         }
     }
@@ -71,9 +71,9 @@ class RestaurateurController extends Controller {
         if (isset($_POST['order_id'])) {
             $order_id = (int)$_POST['order_id'];
             Order::setDeliveredStatus($order_id);
-            header('Location: /restaurateur?success=finished');
+            header('Location: /cook?success=finished');
         } else {
-            header('Location: /restaurateur');
+            header('Location: /cook');
             exit();
         }
     }

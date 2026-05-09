@@ -18,7 +18,7 @@ $router->add('GET', 'api_order_status', 'OrderTrackingController', 'apiOrderStat
 $router->add('GET', 'payment_result', 'PaymentResultController', 'index');
 $router->add('GET', 'products', 'ProductsController', 'index');
 $router->add('GET', 'profile', 'ProfileController', 'index');
-$router->add('GET', 'restaurateur', 'RestaurateurController', 'index');
+$router->add('GET', 'cook', 'CookController', 'index');
 $router->add('GET', 'reviews', 'ReviewsController', 'index');
 
 // POST
@@ -31,8 +31,8 @@ $router->add('POST', 'set_delivery_type', 'OrdersController', 'setDeliveryType')
 $router->add('POST', 'update_cart', 'OrdersController', 'updateCart');
 $router->add('POST', 'apply_coupon', 'OrdersController', 'applyCoupon');
 $router->add('POST', 'profile', 'ProfileController', 'updateProfile');
-$router->add('POST', 'assign_order', 'RestaurateurController', 'assignOrder');
-$router->add('POST', 'finish_takeaway', 'RestaurateurController', 'finishTakeaway');
+$router->add('POST', 'assign_order', 'CookController', 'assignOrder');
+$router->add('POST', 'finish_takeaway', 'CookController', 'finishTakeaway');
 $router->add('POST', 'reviews', 'ReviewsController', 'addReview');
 
 $url = $_SERVER['REQUEST_URI'];

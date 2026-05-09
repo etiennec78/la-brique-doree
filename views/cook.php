@@ -3,7 +3,7 @@ $title = "Restaurateur - La Brique Dorée";
 $h1 = "RESTAURATEUR";
 $show_cart = true;
 $show_video = true;
-$css_files = ['/css/restaurateur.css'];
+$css_files = ['/css/cook.css'];
 include __DIR__ . '/../includes/header.php';
 ?>
 <main>

@@ -187,7 +187,7 @@ CREATE TABLE role (
 );
 
 INSERT INTO role (name) VALUES
-('client'), ('restaurateur'), ('administrator'), ('delivery_person');
+('client'), ('cook'), ('administrator'), ('delivery_person');
 
 CREATE TABLE users (
     id INT PRIMARY KEY AUTO_INCREMENT,

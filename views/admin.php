@@ -16,7 +16,7 @@ include __DIR__ . '/../includes/header.php';
                         <option value="">Tous les profils</option>
                         <option value="user" <?= (($_GET['role'] ?? '') === 'user') ? 'selected' : '' ?>>Clients actifs</option>
                         <option value="delivery_person" <?= (($_GET['role'] ?? '') === 'delivery_person') ? 'selected' : '' ?>>Livreurs</option>
-                        <option value="restaurateur" <?= (($_GET['role'] ?? '') === 'restaurateur') ? 'selected' : '' ?>>Restaurateurs</option>
+                        <option value="cook" <?= (($_GET['role'] ?? '') === 'cook') ? 'selected' : '' ?>>Restaurateurs</option>
                     </select>
                     <button type="submit" class="action-link" style="margin-left: 10px; cursor: pointer;">Filtrer</button>
                 </form>
