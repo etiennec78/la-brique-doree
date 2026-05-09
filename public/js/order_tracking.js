@@ -6,7 +6,6 @@ function checkOrderStatus() {
     .then(response => response.json())
     .then(data => {
       const status = data["status"];
-      console.log(status, oldStatus);
       if (status === null || status == oldStatus) return;
 
       oldStatus = status;
