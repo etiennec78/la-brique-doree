@@ -55,7 +55,7 @@ class CookController extends Controller {
         } else {
             // Try to find an available delivery person and attach it, or else set the status to "ready"
             $delivery_person = Order::getAvailableStaff("delivery_person");
-            if ($delivery_person == null) {
+            if ($delivery_person == null || Order::deliveryCanceled($order_id, $delivery_person)) {
                 Order::setReadyStatus($order_id);
             } else {
                 Order::setShippingStatus($order_id, $delivery_person);

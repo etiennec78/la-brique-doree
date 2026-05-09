@@ -327,3 +327,13 @@ CREATE TABLE reviews (
     comment VARCHAR(255) NOT NULL,
     FOREIGN KEY(order_id) REFERENCES orders(id)
 );
+
+-- ------- ANNULATIONS LIVRAISON -------
+
+CREATE TABLE delivery_cancellation (
+    order_id INT,
+    delivery_person_id INT,
+    PRIMARY KEY (order_id, delivery_person_id),
+    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
+    FOREIGN KEY (delivery_person_id) REFERENCES users(id) ON DELETE CASCADE
+);

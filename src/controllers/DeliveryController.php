@@ -43,7 +43,7 @@ class DeliveryController extends Controller {
             
             $deliveries = Delivery::getDeliveries($uid);
             if (empty($deliveries)) {
-                $next_orders = Order::getNextDeliveries(3);
+                $next_orders = Order::getNextDeliveries($uid, 3);
                 foreach ($next_orders as $next_order) {
                     Order::setShippingStatus($next_order['id'], $uid);
                 }
@@ -66,11 +66,11 @@ class DeliveryController extends Controller {
             $order_id = $_POST['order_id'];
             $uid = $_SESSION['user']['id'];
             
-            Order::cancelDelivery($order_id);
+            Order::cancelDelivery($order_id, $uid);
             
             $deliveries = Delivery::getDeliveries($uid);
             if (empty($deliveries)) {
-                $next_orders = Order::getNextDeliveries(3);
+                $next_orders = Order::getNextDeliveries($uid, 3);
                 foreach ($next_orders as $next_order) {
                     Order::setShippingStatus($next_order['id'], $uid);
                 }

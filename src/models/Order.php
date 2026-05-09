@@ -109,8 +109,15 @@ class Order {
         $stmt->execute([$order_id]);
     }
 
-    public static function cancelDelivery($order_id) {
+    public static function cancelDelivery($order_id, $uid) {
         global $pdo;
+        
+        $stmt_cancel = $pdo->prepare("
+            INSERT IGNORE INTO delivery_cancellation (order_id, delivery_person_id)
+            VALUES (?, ?)
+        ");
+        $stmt_cancel->execute([$order_id, $uid]);
+        
         $stmt = $pdo->prepare("
             UPDATE orders
             SET order_status_id = 3,
@@ -155,15 +162,27 @@ class Order {
         return $pdo->lastInsertId();
     }
 
-    public static function getNextDeliveries($limit = 3) {
+    public static function deliveryCanceled($order_id, $uid) {
         global $pdo;
         $stmt = $pdo->prepare("
-            SELECT * FROM orders
-            WHERE order_status_id = 3 AND is_takeaway = 0
-            ORDER BY id ASC
+            SELECT o.* FROM orders o
+            JOIN delivery_cancellation dc ON dc.order_id = o.id AND dc.delivery_person_id = ?
+            WHERE o.id = ? AND o.order_status_id = 3 AND o.is_takeaway = 0
+        ");
+        $stmt->execute([$uid, $order_id]);
+        return (bool) $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function getNextDeliveries($uid, $limit = 3) {
+        global $pdo;
+        $stmt = $pdo->prepare("
+            SELECT o.* FROM orders o
+            LEFT JOIN delivery_cancellation dc ON dc.order_id = o.id AND dc.delivery_person_id = ?
+            WHERE o.order_status_id = 3 AND o.is_takeaway = 0 AND dc.order_id IS NULL
+            ORDER BY o.id ASC
             LIMIT " . (int)$limit . "
         ");
-        $stmt->execute();
+        $stmt->execute([$uid]);
         return $stmt->fetchAll();
     }
 }
