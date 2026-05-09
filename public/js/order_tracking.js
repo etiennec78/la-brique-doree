@@ -1,4 +1,5 @@
 let oldStatus = null;
+let statusInterval = null;
 
 function checkOrderStatus() {
   fetch('/api_order_status')
@@ -9,6 +10,9 @@ function checkOrderStatus() {
       if (status === null || status == oldStatus) return;
 
       oldStatus = status;
+      if (status == 5 && statusInterval) {
+        clearInterval(statusInterval);
+      }
 
       // Update the stepper based on the new status
       let elements = document.getElementsByClassName("step");
@@ -52,4 +56,4 @@ function checkOrderStatus() {
 
 // Check immediately, then every 5 seconds
 checkOrderStatus();
-setInterval(checkOrderStatus, 5000);
+statusInterval = setInterval(checkOrderStatus, 5000);
