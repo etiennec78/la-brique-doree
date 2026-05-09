@@ -37,12 +37,9 @@ class PaymentResultController extends Controller {
                 $takeaway_time = $takeaway_time_str ? date('Y-m-d ') . $takeaway_time_str . ':00' : null;
 
                 $order_status = 1; // default: paid
-                $cook_id = null;
-                if ($is_takeaway) {
-                    $cook_id = Order::getAvailableStaff("restaurateur");
-                    if ($cook_id != null) {
-                        $order_status = 2; // preparing
-                    }
+                $cook_id = Order::getAvailableStaff("restaurateur");
+                if ($cook_id != null) {
+                    $order_status = 2; // preparing
                 }
                 
                 Order::createOrder($cart_id, $user_id, $order_status, $cook_id, $is_takeaway, $takeaway_time);
