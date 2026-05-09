@@ -28,6 +28,7 @@ class DeliveryController extends Controller {
 
     public function confirmDelivery() {
         require_once __DIR__ . '/../models/Order.php';
+        require_once __DIR__ . '/../models/Delivery.php';
 
         if (!isset($_SESSION['user']) || $_SESSION['user']['role_id'] != 4) {
             header('Location: /login');
@@ -39,9 +40,13 @@ class DeliveryController extends Controller {
             $uid = $_SESSION['user']['id'];
 
             Order::setDeliveredStatus($order_id);
-            $next_order = Order::getNextDelivery();
-            if ($next_order) {
-                Order::setShippingStatus($next_order['id'], $uid);
+            
+            $deliveries = Delivery::getDeliveries($uid);
+            if (empty($deliveries)) {
+                $next_orders = Order::getNextDeliveries(3);
+                foreach ($next_orders as $next_order) {
+                    Order::setShippingStatus($next_order['id'], $uid);
+                }
             }
         }
 
@@ -50,6 +55,7 @@ class DeliveryController extends Controller {
 
     public function cancelDelivery() {
         require_once __DIR__ . '/../models/Order.php';
+        require_once __DIR__ . '/../models/Delivery.php';
 
         if (!isset($_SESSION['user']) || $_SESSION['user']['role_id'] != 4) {
             header('Location: /login');
@@ -58,7 +64,17 @@ class DeliveryController extends Controller {
 
         if (isset($_POST['order_id'])) {
             $order_id = $_POST['order_id'];
+            $uid = $_SESSION['user']['id'];
+            
             Order::cancelDelivery($order_id);
+            
+            $deliveries = Delivery::getDeliveries($uid);
+            if (empty($deliveries)) {
+                $next_orders = Order::getNextDeliveries(3);
+                foreach ($next_orders as $next_order) {
+                    Order::setShippingStatus($next_order['id'], $uid);
+                }
+            }
         }
 
         header('Location: /delivery');
