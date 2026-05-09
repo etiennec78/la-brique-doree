@@ -9,8 +9,8 @@ include __DIR__ . '/../includes/header.php';
 <main>
         <h2>~ Commandes ~</h2>
         
-        <?php if(isset($_GET['success'])): ?>
-            <p style="text-align: center; font-weight: bold;">Commande mise à jour avec succès !</p>
+        <?php if(isset($_GET['error'])): ?>
+            <p style="text-align: center; font-weight: bold;"><?= $_GET['error'] ?></p>
         <?php endif; ?>
 
         <div class="tabs">  
