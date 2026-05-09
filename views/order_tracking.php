@@ -45,7 +45,7 @@ include __DIR__ . '/../includes/header.php';
                     <p>Votre commande est prête à être récupérée au restaurant !</p>
                 <?php else: ?>
                     <p>Livreur : <?= $get_name($delivery_person) ?></p>
-                    <p>Arrivée : XX min</p>
+                    <p>Arrivée : 10 min</p>
                     <iframe id="map" src="https://www.openstreetmap.org/export/embed.html?bbox=9.113277196884157%2C55.72994659971866%2C9.11605328321457%2C55.73135269752343&marker=55.730662,9.114866&amp;layer=mapnik"></iframe>
                 <?php endif; ?>
             <?php else: ?>
