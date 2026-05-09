@@ -28,6 +28,7 @@ class PaymentResultController extends Controller {
             $user_id = $_SESSION['user']['id'];
             require_once __DIR__ . '/../models/Cart.php';
             require_once __DIR__ . '/../models/Order.php';
+            require_once __DIR__ . '/../models/Restaurateur.php';
 
             Cart::markCartAsPaid($cart_id, $user_id);
 
@@ -35,8 +36,17 @@ class PaymentResultController extends Controller {
                 $is_takeaway = isset($_GET['is_takeaway']) ? (int)$_GET['is_takeaway'] : 0;
                 $takeaway_time_str = isset($_GET['takeaway_time']) && !empty($_GET['takeaway_time']) ? $_GET['takeaway_time'] : null;
                 $takeaway_time = $takeaway_time_str ? date('Y-m-d ') . $takeaway_time_str . ':00' : null;
+
+                $order_status = 1; // default: paid
+                $cook_id = null;
+                if ($is_takeaway) {
+                    $cook_id = Order::getAvailableStaff("restaurateur");
+                    if ($cook_id != null) {
+                        $order_status = 2; // preparing
+                    }
+                }
                 
-                Order::createOrder($cart_id, $user_id, $is_takeaway, $takeaway_time);
+                Order::createOrder($cart_id, $user_id, $order_status, $cook_id, $is_takeaway, $takeaway_time);
             }
         } catch (Exception $e) {
             $erreur = "Erreur de base de données : " . $e->getMessage();

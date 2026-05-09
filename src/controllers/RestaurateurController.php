@@ -43,7 +43,7 @@ class RestaurateurController extends Controller {
             if ($order && $order['is_takeaway']) {
                 Order::setReadyStatus($order_id);
             } else {
-                $delivery_person = Order::getAvailableDeliveryPerson();
+                $delivery_person = Order::getAvailableStaff("delivery_person");
                 if ($delivery_person) {
                     Order::setDeliveryStatus($order_id, $delivery_person);
                     header('Location: /restaurateur?success=assigned');

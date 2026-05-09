@@ -38,18 +38,40 @@ class Order {
         return $stmt->fetchAll();
     }
 
-    public static function getAvailableDeliveryPerson() {
+    public function getAvailableStaff($role_name) {
         global $pdo;
+
+        $allowed_roles = ['restaurateur', 'delivery_person'];
+        if (!in_array($role_name, $allowed_roles, true)) {
+            return null;
+        }
+
+        // Return false if the staff member has an order with this status
+        $busy_status_map = [
+            'restaurateur' => 2, // 2 = preparing
+            'delivery_person' => 4 // 4 = shipping
+        ];
+        $busy_status_id = $busy_status_map[$role_name];
+
+        // Get the staff member assigned a long time ago, that is currently not busy
         $stmt = $pdo->prepare("
             SELECT u.id
             FROM users u
             JOIN role r ON u.role_id = r.id
-            LEFT JOIN orders o ON o.delivery_person_id = u.id
-            WHERE r.name = 'delivery_person'
+            LEFT JOIN orders o ON o.{$role_name}_id = u.id
+            WHERE r.name = ?
+            AND NOT EXISTS (
+                SELECT 1
+                FROM orders active_o
+                WHERE active_o.{$role_name}_id = u.id
+                AND active_o.order_status_id = ?
+            )
             GROUP BY u.id
-            ORDER BY MAX(o.delivery_person_assigned_at) ASC
+            ORDER BY MAX(o.{$role_name}_assigned_at) ASC
+            LIMIT 1
         ");
-        $stmt->execute();
+        $stmt->execute([$role_name, $busy_status_id]);
+
         return $stmt->fetch(PDO::FETCH_COLUMN);
     }
 
@@ -120,10 +142,15 @@ class Order {
         return $stmt->fetch();
     }
 
-    public static function createOrder($cart_id, $customer_id, $is_takeaway, $takeaway_time) {
+    public static function createOrder($cart_id, $customer_id, $order_status_id, $cook_id, $is_takeaway, $takeaway_time) {
         global $pdo;
-        $stmt = $pdo->prepare("INSERT INTO orders (cart_id, customer_id, order_status_id, is_takeaway, takeaway_time) VALUES (?, ?, 1, ?, ?)");
-        $stmt->execute([$cart_id, $customer_id, $is_takeaway, $takeaway_time]);
+        $cook_assigned_at = $cook_id == null ? "NULL" : "NOW()";
+
+        $stmt = $pdo->prepare("
+            INSERT INTO orders (cart_id, customer_id, cook_id, order_status_id, is_takeaway, takeaway_time, cook_assigned_at)
+            VALUES (?, ?, ?, ?, ?)
+        ");
+        $stmt->execute([$cart_id, $customer_id, $cook_id, $order_status_id, $is_takeaway, $takeaway_time, $cook_assigned_at]);
         return $pdo->lastInsertId();
     }
 
