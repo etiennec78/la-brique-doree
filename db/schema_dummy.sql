@@ -49,9 +49,9 @@ INSERT INTO cart_food (cart_id, food_id, quantity) VALUES
 
 INSERT INTO orders (cart_id, customer_id, cook_id, delivery_person_id) VALUES
 (1, 1, 2, 4),
-(2, 1, 2, 4),
-(3, 1, 2, 4),
-(4, 1, 2, 4);
+(2, 2, 2, 4),
+(3, 3, 2, 4),
+(4, 4, 2, 4);
 
 
 ----- REVIEWS -----
