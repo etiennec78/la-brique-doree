@@ -36,7 +36,13 @@ class DeliveryController extends Controller {
 
         if (isset($_POST['order_id'])) {
             $order_id = $_POST['order_id'];
+            $uid = $_SESSION['user']['id'];
+
             Order::setDeliveredStatus($order_id);
+            $next_order = Order::getNextDelivery();
+            if ($next_order) {
+                Order::setShippingStatus($next_order['id'], $uid);
+            }
         }
 
         header('Location: /delivery');

@@ -155,4 +155,15 @@ class Order {
         return $pdo->lastInsertId();
     }
 
+    public static function getNextDelivery() {
+        global $pdo;
+        $stmt = $pdo->prepare("
+            SELECT * FROM orders
+            WHERE order_status_id = 3 AND is_takeaway = 0
+            ORDER BY id ASC
+            LIMIT 1
+        ");
+        $stmt->execute();
+        return $stmt->fetch();
+    }
 }
