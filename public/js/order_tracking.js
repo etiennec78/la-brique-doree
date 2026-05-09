@@ -9,13 +9,13 @@ function checkOrderStatus() {
       if (status === null || status == oldStatus) return;
 
       oldStatus = status;
-      if (status == 4 && statusInterval) {
+      if (status == 5 && statusInterval) {
         clearInterval(statusInterval);
       }
 
       // Update the stepper based on the new status
       let elements = document.getElementsByClassName("step");
-      for (let i = 0; i < Math.min(status, elements.length); i++) {
+      for (let i = 0; i < Math.min(status - 1, elements.length); i++) {
         elements[i].classList.add("active");
       }
 
