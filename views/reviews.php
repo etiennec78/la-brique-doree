@@ -4,6 +4,7 @@ $h1 = "NOS AVIS";
 $show_cart = true;
 $show_video = true;
 $css_files = ['/css/reviews.css'];
+$js_files = ['/js/count_characters.js'];
 include __DIR__ . '/../includes/header.php';
 ?>
 <main>
@@ -140,7 +141,7 @@ include __DIR__ . '/../includes/header.php';
             </tr>
             <tr>
                 <td colspan="2" class="review-text">
-                    <textarea id="review-comm" name="comment" maxlength="255" placeholder="Partagez votre expérience ici (255 caractères max.)..." oninput="compter()" required></textarea>
+                    <textarea id="review-comm" name="comment" maxlength="255" placeholder="Partagez votre expérience ici..." oninput="count_char()" required></textarea>
                     <p class="counter-text"><span id="nb-caracteres">0</span> / 255</p>
                     <button type="submit" id="submit-avis" name="submit_avis" class="basic-btn btn-send" disabled>Envoyer l'avis</button>
                 </td>
@@ -149,29 +150,5 @@ include __DIR__ . '/../includes/header.php';
     </form>
     <?php endif; ?>
     </main>
-
-<script>
-    function compter() {
-        let zone = document.getElementById("review-comm");
-        let chiffre = document.getElementById("nb-caracteres");
-        let bouton = document.getElementById("submit-avis");
-        let longueur = zone.value.length;
-        
-        chiffre.innerText = longueur;
-        
-        if (longueur > 255) {
-            
-            chiffre.style.color = "red";
-            bouton.disabled = true;
-            bouton.style.opacity = "0.5";
-            bouton.style.cursor = "not-allowed";
-        } else {
-            chiffre.style.color = "(--solid-gold)";
-            bouton.disabled = false;
-            bouton.style.opacity = "1";
-            bouton.style.cursor = "pointer";
-        }
-    }
-</script>
 
 <?php include __DIR__ . '/../includes/footer.php'; ?>

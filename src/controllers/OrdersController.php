@@ -10,6 +10,8 @@ class OrdersController extends Controller {
         require_once __DIR__ . '/../models/Cart.php';
         require_once __DIR__ . '/../models/Coupon.php';
         require_once __DIR__ . '/../models/User.php';
+        require_once __DIR__ . '/../models/Menu.php';
+        require_once __DIR__ . '/../getapikey.php';
 
         $uid = $_SESSION['user']['id'];
         $cart_count = Cart::getCartCount();
@@ -22,6 +24,58 @@ class OrdersController extends Controller {
             and strtotime($coupon['expiration_date']) < time()
         );
 
+        $vendeur = 'MI-4_J'; 
+        $api_key = getAPIKey($vendeur); 
+        $transaction = uniqid();
+
+        $is_takeaway = isset($_SESSION['is_takeaway']) && $_SESSION['is_takeaway'] ? 1 : 0;
+        $takeaway_time = isset($_SESSION['takeaway_time']) ? $_SESSION['takeaway_time'] : '';
+
+        $retour_url = "http://localhost/payment_result?cart_id=" . $cart_id . "&is_takeaway=" . $is_takeaway . "&takeaway_time=" . urlencode($takeaway_time);
+
+        $total_price = 0;
+        $reduction = 0;
+        $cart_details = [];
+
+        $cart_menus = Cart::getCartMenus($uid);
+        $cart_foods = Cart::getCartFoods($uid);
+        $cart_has_food = count($cart_foods) > 0;
+
+        foreach ($cart_menus as &$menu) {
+            $menu['foods'] = Menu::getMenuFoods($menu['id']);
+            $price_val = floatval($menu['price']);
+            $quantity = $menu['quantity'];
+            $total_price += $price_val * $quantity;
+            $price_str = number_format($price_val, 2, ",");
+            $cart_details[] = "{$menu['name']} ({$price_str}€) x$quantity";
+        }
+        unset($menu);
+
+        if ($cart_has_food) {
+            foreach ($cart_foods as $food) {
+                $price_val = floatval($food['price']);
+                $quantity = $food['quantity'];
+                $total_price += $price_val * $quantity;
+                $price_str = number_format($price_val, 2, ",");
+                $cart_details[] = "{$food['name']} ({$price_str}€) x$quantity";
+            }
+        }
+
+        if ($coupon !== false and !$expired_coupon) {
+            $reduction = $coupon['discount_percent'];
+            $coupon_code = $coupon['code'];
+            $cart_details[] = "Code: $coupon_code ". ($reduction * 100) . "% (-". number_format($total_price * $reduction, 2, '.', '') ."€)";
+            $total_price *= (1 - $reduction);
+        }
+
+        if ($global_reduction != 0) {
+            $cart_details[] = "Réduction globale ". ($global_reduction * 100) . "% (-". number_format($total_price * $global_reduction, 2, '.', '') ."€)";
+            $total_price *= (1 - $global_reduction);
+        }
+
+        $montant_cybank = number_format($total_price, 2, '.', '');
+        $control = md5($api_key . "#" . $transaction . "#" . $montant_cybank . "#" . $vendeur . "#" . $retour_url . "#");
+
         $this->render(
             'orders',
             [
@@ -29,15 +83,24 @@ class OrdersController extends Controller {
                 'cart_id' => $cart_id,
                 'coupon' => $coupon,
                 'expired_coupon' => $expired_coupon,
-                'global_reduction' => $global_reduction
+                'global_reduction' => $global_reduction,
+                'vendeur' => $vendeur,
+                'transaction' => $transaction,
+                'is_takeaway' => $is_takeaway,
+                'takeaway_time' => $takeaway_time,
+                'retour_url' => $retour_url,
+                'total_price' => $total_price,
+                'cart_details' => $cart_details,
+                'cart_menus' => $cart_menus,
+                'cart_foods' => $cart_foods,
+                'cart_has_food' => $cart_has_food,
+                'montant_cybank' => $montant_cybank,
+                'control' => $control
             ]
         );
     }
 
     public function updateCart() {
-        global $pdo;
-        require_once __DIR__ . '/../db_connect.php';
-
         if (!isset($_SESSION['user'])) {
             header('Location: /login');
             exit;
@@ -54,60 +117,8 @@ class OrdersController extends Controller {
                 exit;
             }
 
-            $table_name = $item_type === 'food' ? 'cart_food' : 'cart_menu';
-            $foreign_key = $item_type === 'food' ? 'food_id' : 'menu_id';
-
-            try {
-                $pdo->beginTransaction();
-
-                // Get active cart
-                $stmt = $pdo->prepare("SELECT id FROM cart WHERE user_id = ? AND payment_status_id = 1");
-                $stmt->execute([$user_id]);
-                $cart = $stmt->fetch();
-
-                if ($cart) {
-                    $cart_id = $cart['id'];
-                } else {
-
-                    $creerPanier = $pdo->prepare("INSERT INTO cart (user_id, payment_status_id, created_at) VALUES (?, 1, NOW())");
-
-                    $creerPanier->execute([$user_id]);
-
-                    $cart_id = $pdo->lastInsertId();
-                }
-
-                // Get current cart items
-                $stmt = $pdo->prepare("SELECT quantity FROM $table_name WHERE cart_id = ? AND $foreign_key = ?");
-                $stmt->execute([$cart_id, $item_id]);
-                $cart_item = $stmt->fetch();
-
-                if ($cart_item) {
-                    $current_quantity = (int)$cart_item['quantity'];
-
-                    if ($action === 'add' and $current_quantity < 9) {
-                        $stmt = $pdo->prepare("UPDATE $table_name SET quantity = quantity + 1 WHERE cart_id = ? AND $foreign_key = ?");
-                        $stmt->execute([$cart_id, $item_id]);
-                    } elseif ($action === 'remove') {
-                        if ($current_quantity > 1) {
-                            $stmt = $pdo->prepare("UPDATE $table_name SET quantity = quantity - 1 WHERE cart_id = ? AND $foreign_key = ?");
-                            $stmt->execute([$cart_id, $item_id]);
-                        } else {
-                            // Remove item completely
-                            $stmt = $pdo->prepare("DELETE FROM $table_name WHERE cart_id = ? AND $foreign_key = ?");
-                            $stmt->execute([$cart_id, $item_id]);
-                        }
-                    }
-                } elseif ($action === 'add') {
-                    // Create a new entry
-                    $stmt = $pdo->prepare("INSERT INTO $table_name (cart_id, $foreign_key, quantity) VALUES (?, ?, 1)");
-                    $stmt->execute([$cart_id, $item_id]);
-                }
-
-                $pdo->commit();
-            } catch (\PDOException $e) {
-                $pdo->rollBack();
-                error_log("Cart update error: " . $e->getMessage());
-            }
+            require_once __DIR__ . '/../models/Cart.php';
+            Cart::updateItem($user_id, $item_id, $item_type, $action);
         }
 
         if (isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false) {

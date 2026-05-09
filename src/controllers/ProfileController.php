@@ -67,7 +67,7 @@ class ProfileController extends Controller {
             else if (array_key_exists('first_name', $_POST)) {
                 $address_has_changed = Location::formAddressHasChanged($target, $_POST);
                 if ($address_has_changed) {
-                    // Obtenir les coordonées de la livraison
+                    // Get the coordinates of the delivery address
                     $coordinates = Location::getLocationCoord($_POST, $uid);
                     if (isset($coordinates['error'])) {
                         $error = $coordinates['error'];
@@ -78,24 +78,9 @@ class ProfileController extends Controller {
                     }
                 }
 
-                // Modifier les données de l'utilisateur dans la base de données
-                $stmt = $pdo->prepare("UPDATE users SET first_name=?, last_name=?, street_nb=?, street_nb_suf=?, street=?, zip_code=?, phone=?, email=?, intercom_code=?, birth_date=? WHERE id = ?");
-
                 $birth_date = !empty($_POST['birth_date']) ? $_POST['birth_date'] : null;
 
-                $stmt->execute([
-                    $_POST['first_name'],
-                    $_POST['last_name'],
-                    $_POST['street_nb'],
-                    $_POST['street_nb_suf'],
-                    $_POST['street'],
-                    $_POST['zip_code'],
-                    $_POST['phone'],
-                    $_POST['email'],
-                    $_POST['intercom_code'],
-                    $birth_date,
-                    $target
-                ]);
+                User::setAllUserData($_POST['first_name'], $_POST['last_name'], $_POST['street_nb'], $_POST['street_nb_suf'], $_POST['street'], $_POST['zip_code'], $_POST['phone'], $_POST['email'], $_POST['intercom_code'], $birth_date, $target);
 
                 $_SESSION['user'] = array_merge($_SESSION['user'], $_POST);
             }

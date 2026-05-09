@@ -29,6 +29,16 @@ class User {
         return $stmt->fetchAll();
     }
 
+    public static function setAllUserData($first_name, $last_name, $street_nb, $street_nb_suf, $street, $zip_code, $phone, $email, $intercom, $birth_date, $uid) {
+        global $pdo;
+        $stmt = $pdo->prepare("
+            UPDATE users
+            SET first_name=?, last_name=?, street_nb=?, street_nb_suf=?, street=?, zip_code=?, phone=?, email=?, intercom_code=?, birth_date=?
+            WHERE id = ?
+        ");
+        $stmt->execute([$first_name, $last_name, $street_nb, $street_nb_suf, $street, $zip_code, $phone, $email, $intercom, $birth_date, $uid]);
+    }
+
     public static function getUserInfo($uid) {
         global $pdo;
         $stmt = $pdo->prepare("

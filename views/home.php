@@ -4,6 +4,7 @@ $h1 = "LA BRIQUE DOREE";
 $show_cart = true;
 $show_video = true;
 $css_files = [];
+$js_files = ['/js/slider.js'];
 include __DIR__ . '/../includes/header.php';
 ?>
 <main>
@@ -45,7 +46,5 @@ include __DIR__ . '/../includes/header.php';
         </div>
     </div>
 </main>
-
-<script src="/js/slider.js"></script>
 
 <?php include __DIR__ . '/../includes/footer.php'; ?>

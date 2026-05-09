@@ -111,4 +111,20 @@ class Order {
         $stmt->execute([$uid]);
         return $stmt->fetch();
     }
+
+
+    public static function checkOrderExistsByCartId($cart_id) {
+        global $pdo;
+        $stmt = $pdo->prepare("SELECT id FROM orders WHERE cart_id = ?");
+        $stmt->execute([$cart_id]);
+        return $stmt->fetch();
+    }
+
+    public static function createOrder($cart_id, $customer_id, $is_takeaway, $takeaway_time) {
+        global $pdo;
+        $stmt = $pdo->prepare("INSERT INTO orders (cart_id, customer_id, order_status_id, is_takeaway, takeaway_time) VALUES (?, ?, 1, ?, ?)");
+        $stmt->execute([$cart_id, $customer_id, $is_takeaway, $takeaway_time]);
+        return $pdo->lastInsertId();
+    }
+
 }

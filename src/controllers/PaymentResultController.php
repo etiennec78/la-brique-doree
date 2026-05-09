@@ -26,21 +26,19 @@ class PaymentResultController extends Controller {
     if ($isSuccess) {
         try {
             $user_id = $_SESSION['user']['id'];
+            require_once __DIR__ . '/../models/Cart.php';
+            require_once __DIR__ . '/../models/Order.php';
 
-            $updateCart = $pdo->prepare("UPDATE cart SET payment_status_id = 2 WHERE id = ? AND user_id = ?");
-            $updateCart->execute([$cart_id, $user_id]);
+            Cart::markCartAsPaid($cart_id, $user_id);
 
-            $checkOrder = $pdo->prepare("SELECT id FROM orders WHERE cart_id = ?");
-            $checkOrder->execute([$cart_id]);
-            
-            if (!$checkOrder->fetch()) {
+            if (!Order::checkOrderExistsByCartId($cart_id)) {
                 $is_takeaway = isset($_GET['is_takeaway']) ? (int)$_GET['is_takeaway'] : 0;
                 $takeaway_time_str = isset($_GET['takeaway_time']) && !empty($_GET['takeaway_time']) ? $_GET['takeaway_time'] : null;
                 $takeaway_time = $takeaway_time_str ? date('Y-m-d ') . $takeaway_time_str . ':00' : null;
-                $insertOrder = $pdo->prepare("INSERT INTO orders (cart_id, customer_id, order_status_id, is_takeaway, takeaway_time) VALUES (?, ?, 1, ?, ?)");
-                $insertOrder->execute([$cart_id, $user_id, $is_takeaway, $takeaway_time]);
+                
+                Order::createOrder($cart_id, $user_id, $is_takeaway, $takeaway_time);
             }
-        } catch (PDOException $e) {
+        } catch (Exception $e) {
             $erreur = "Erreur de base de données : " . $e->getMessage();
         }
 

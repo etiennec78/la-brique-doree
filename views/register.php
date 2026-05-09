@@ -4,6 +4,7 @@ $h1 = "INSCRIPTION";
 $show_cart = false;
 $show_video = true;
 $css_files = ['/css/form.css'];
+$js_files = ['/js/show_password.js']
 include __DIR__ . '/../includes/header.php';
 ?>
 <main>
@@ -26,21 +27,5 @@ include __DIR__ . '/../includes/header.php';
             <p>Déjà un compte ? <a href="/login">Connexion</a></p>
         </div>
     </main>
-
-<script>
-    function showPwd() {
-        let input = document.getElementById("password");
-        let oeil = document.getElementById("toggleEye");
-
-        if (input.type === "password") {
-
-            input.type = "text";
-            oeil.innerText = "🔒"; 
-        } else {
-            input.type = "password";
-            oeil.innerText = "👁️";
-        }
-    }
-</script>
 
 <?php include __DIR__ . '/../includes/footer.php'; ?>
