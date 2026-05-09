@@ -28,7 +28,6 @@ class PaymentResultController extends Controller {
             $user_id = $_SESSION['user']['id'];
             require_once __DIR__ . '/../models/Cart.php';
             require_once __DIR__ . '/../models/Order.php';
-            require_once __DIR__ . '/../models/Restaurateur.php';
 
             Cart::markCartAsPaid($cart_id, $user_id);
 
