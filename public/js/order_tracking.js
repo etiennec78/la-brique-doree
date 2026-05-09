@@ -9,7 +9,7 @@ function checkOrderStatus() {
       if (status === null || status == oldStatus) return;
 
       oldStatus = status;
-      if (status == 5 && statusInterval) {
+      if (status == 4 && statusInterval) {
         clearInterval(statusInterval);
       }
 
