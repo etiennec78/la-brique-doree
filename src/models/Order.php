@@ -38,7 +38,7 @@ class Order {
         return $stmt->fetchAll();
     }
 
-    public function getAvailableStaff($role_name) {
+    public static function getAvailableStaff($role_name) {
         global $pdo;
 
         $allowed_roles = ['restaurateur', 'delivery_person'];
