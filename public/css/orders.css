@@ -126,6 +126,11 @@
   background: var(--darkred);
 }
 
+.add-to-cart:active,
+.remove-from-cart:active {
+  background: var(--red);
+}
+
 #checkout {
   background: var(--gold);
   width: 100%;
