@@ -81,4 +81,19 @@ class CookController extends Controller {
             exit();
         }
     }
+
+    public function apiCookGetPending() {
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role_id'] != 2) {
+            http_response_code(403);
+            exit();
+        }
+
+        require_once __DIR__ . '/../models/Order.php';
+        
+        $pending_orders = Order::getOrdersFromState(array('paid', 'preparing'));
+        $delivery_orders = Order::getOrdersFromState(array('ready', 'shipping'));
+
+        header('Content-Type: application/json');
+        echo json_encode(['pending' => $pending_orders, 'delivery' => $delivery_orders]);
+    }
 }

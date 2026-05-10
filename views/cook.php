@@ -4,6 +4,7 @@ $h1 = "RESTAURATEUR";
 $show_cart = true;
 $show_video = true;
 $css_files = ['/css/cook.css'];
+$js_files = ['/js/cook.js'];
 include __DIR__ . '/../includes/header.php';
 ?>
 <main>

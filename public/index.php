@@ -19,6 +19,7 @@ $router->add('GET', 'payment_result', 'PaymentResultController', 'index');
 $router->add('GET', 'products', 'ProductsController', 'index');
 $router->add('GET', 'profile', 'ProfileController', 'index');
 $router->add('GET', 'cook', 'CookController', 'index');
+$router->add('GET', 'api_cook', 'CookController', 'apiCookGetPending');
 $router->add('GET', 'reviews', 'ReviewsController', 'index');
 
 // POST
