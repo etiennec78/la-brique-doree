@@ -79,4 +79,19 @@ class DeliveryController extends Controller {
 
         header('Location: /delivery');
     }
+
+    public function apiDeliveryGetPending() {
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role_id'] != 4) {
+            http_response_code(403);
+            exit();
+        }
+
+        require_once __DIR__ . '/../models/Delivery.php';
+
+        $uid = $_SESSION['user']['id'];
+        $deliveries = Delivery::getDeliveries($uid);
+
+        header('Content-Type: application/json');
+        echo json_encode(['deliveries' => $deliveries]);
+    }
 }

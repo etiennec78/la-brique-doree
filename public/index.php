@@ -11,6 +11,7 @@ $router->add('GET', 'register', 'AuthController', 'showRegister');
 $router->add('GET', 'login', 'AuthController', 'showLogin');
 $router->add('GET', 'logout', 'AuthController', 'logout');
 $router->add('GET', 'delivery', 'DeliveryController', 'index');
+$router->add('GET', 'api_delivery', 'DeliveryController', 'apiDeliveryGetPending');
 $router->add('GET', '', 'HomeController', 'index');
 $router->add('GET', 'orders', 'OrdersController', 'index');
 $router->add('GET', 'order_tracking', 'OrderTrackingController', 'index');
