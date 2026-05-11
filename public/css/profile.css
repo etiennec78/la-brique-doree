@@ -18,3 +18,7 @@
 .alert-btn:hover {
   background: var(--darkred);
 }
+
+option {
+  color: var(--darkgray);
+}

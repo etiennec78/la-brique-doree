@@ -22,7 +22,7 @@ include __DIR__ . '/../includes/header.php';
                 <div class="input-group">
                     <label for="street_nb">Adresse</label>
                     <div id="address-group">
-                        <input type="number" id="street_nb" name="street_nb" value="<?= $user_data['street_nb'] ?>" required>
+                        <input type="number" id="street_nb" name="street_nb" min="1" value="<?= $user_data['street_nb'] ?>" required>
                         <select name="street_nb_suf" id="street_nb_suf" value="<?= $user_data['street_nb_suf'] ?>">
                             <option value=""></option>
                             <option value="bis">Bis</option>
