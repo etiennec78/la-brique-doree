@@ -2,7 +2,7 @@
 
 class DeliveryController extends Controller {
     public function index() {
-        if (!isset($_SESSION['user']) || $_SESSION['user']['role_id'] != 4) {
+        if (!isset($_SESSION['user']) || (($_SESSION['user']['role_id'] != 4) && ($_SESSION['user']['role_id'] != 3))) {
             header('Location: /login');
             exit();
         }

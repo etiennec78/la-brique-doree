@@ -43,6 +43,8 @@
 
                 <?php if ($_SESSION['user']['role'] === 'administrator'): ?>
                     <a href="/admin" class="navbarbutton">Panel Admin</a>
+                    <a href="/cook" class="navbarbutton">Gestion Commandes</a>
+                    <a href="/delivery" class="navbarbutton">Mes Livraisons</a>
 
                 <?php elseif ($_SESSION['user']['role'] === 'cook'): ?>
                     <a href="/cook" class="navbarbutton">Gestion Commandes</a>
