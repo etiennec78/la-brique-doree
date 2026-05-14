@@ -60,7 +60,7 @@ class ReviewsController extends Controller {
             } else {
                 $lastOrder = Order::getLastOrder($user_id);
                 if ($is_admin || $lastOrder != null && $lastOrder['review_id'] == null) {
-                    $order_id = $lastOrder['order_id'] {
+                    $order_id = $lastOrder['order_id'];
                     Review::addReview($order_id, $product, $delivery, $comment);
                 }
             }
