@@ -13,8 +13,8 @@ include __DIR__ . '/../includes/header.php';
             <h2>Aucune commande en cours</h2>
             <p style="text-align: center; margin-bottom: 2rem;">Vous n'avez pas de commande en préparation ou en cours de livraison actuellement.</p>
             <div class="tracking-actions">
+                <button onclick="location.href='/'" class="basic-btn gray-btn">Retour à l'accueil</button>
                 <button onclick="location.href='/order_history'" class="basic-btn">Historique des commandes</button>
-                <button onclick="location.href='/'" class="basic-btn">Retour à l'accueil</button>
             </div>
         <?php else: ?>
             <?php foreach ($orders as $order): ?>
