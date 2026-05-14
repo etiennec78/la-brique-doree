@@ -51,13 +51,18 @@ class ReviewsController extends Controller {
             $product = $_POST['product'];
             $delivery = $_POST['delivery'];
 
-            $lastOrder = Order::getLastOrder($user_id);
             if (!empty($_POST['review_id'])) {
                 $review_id = $_POST['review_id'];
-                Review::updateReview($review_id, $user_id, $is_admin, $product, $delivery, $comment);
-            } elseif ($is_admin || $lastOrder != null && $lastOrder['review_id'] == null) {
-                $order_id = $lastOrder['order_id'];
-                Review::addReview($order_id, $product, $delivery, $comment);
+                $reviewer = Review::getReviewer($review_id);
+                if ($is_admin || $reviewer == $user_id) {
+                    Review::updateReview($review_id, $product, $delivery, $comment);
+                }
+            } else {
+                $lastOrder = Order::getLastOrder($user_id);
+                if ($is_admin || $lastOrder != null && $lastOrder['review_id'] == null) {
+                    $order_id = $lastOrder['order_id'] {
+                    Review::addReview($order_id, $product, $delivery, $comment);
+                }
             }
         }
         header('Location: /reviews');
