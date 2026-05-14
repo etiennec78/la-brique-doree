@@ -9,11 +9,23 @@
                 <a href="mailto:contact@labriquedoree.fr">contact@labriquedoree.fr</a>
                 <br/>
                 <a href="tel:+33134251010">01 34 25 10 10</a>
-                <br/><br/>
-                <a href="https://www.google.com/search?tbm=lcl&kgmid=/g/11bwcc8tz6&rldimm=16393462302552454915#lkt=LocalPoiReviews">Google</a>,
-                <a href="https://www.tripadvisor.fr/Attraction_Review-g189531-d12928696-Reviews-LEGO_House-Billund_South_Jutland_Jutland.html">Tripadvisor</a>,
-                <a href="https://www.instagram.com/legohouse">Insta</a>,
-                <a href="https://www.facebook.com/OfficialLEGOHOUSE">Facebook</a>
+                <br/><br />
+                
+                <a target="_blank" href="https://www.google.com/search?tbm=lcl&kgmid=/g/11bwcc8tz6&rldimm=16393462302552454915#lkt=LocalPoiReviews">
+                    <img width="50" height="50" src="/assets/images/logo_google.png" alt="Google logo">
+                </a>
+
+                <a target="_blank" href="https://www.tripadvisor.fr/Attraction_Review-g189531-d12928696-Reviews-LEGO_House-Billund_South_Jutland_Jutland.html">
+                    <img width="50" height="50" src="/assets/images/logo_tripadvisor.png" alt="Tripadvisor logo">
+                </a>
+
+                <a target="_blank" href="https://www.instagram.com/legohouse">
+                    <img width="50" height="50" src="/assets/images/logo_instagram.png" alt="Instagram logo">
+                </a>
+                
+                <a target="_blank" href="https://www.facebook.com/OfficialLEGOHOUSE">
+                    <img width="50" height="50" src="/assets/images/logo_facebook.png" alt="Facebook logo">
+                </a>
             </p>
         </div>
         <div id="hours">
