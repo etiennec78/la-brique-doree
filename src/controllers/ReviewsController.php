@@ -47,20 +47,17 @@ class ReviewsController extends Controller {
         if (isset($_SESSION['user'])) {
             $user_id = $_SESSION['user']['id'];
             $is_admin = User::isAdmin($user_id);
+            $comment = $_POST['comment'];
+            $product = $_POST['product'];
+            $delivery = $_POST['delivery'];
 
             $lastOrder = Order::getLastOrder($user_id);
-            if ($is_admin || $lastOrder != null && $lastOrder['review_id'] == null) {
-                $comment = $_POST['comment'];
-                $product = $_POST['product'];
-                $delivery = $_POST['delivery'];
-
-                if (!empty($_POST['review_id'])) {
-                    $review_id = $_POST['review_id'];
-                    Review::updateReview($review_id, $user_id, $is_admin, $product, $delivery, $comment);
-                } else {
-                    $order_id = $lastOrder['order_id'];
-                    Review::addReview($order_id, $product, $delivery, $comment);
-                }
+            if (!empty($_POST['review_id'])) {
+                $review_id = $_POST['review_id'];
+                Review::updateReview($review_id, $user_id, $is_admin, $product, $delivery, $comment);
+            } elseif ($is_admin || $lastOrder != null && $lastOrder['review_id'] == null) {
+                $order_id = $lastOrder['order_id'];
+                Review::addReview($order_id, $product, $delivery, $comment);
             }
         }
         header('Location: /reviews');
