@@ -65,7 +65,7 @@ include __DIR__ . '/../includes/header.php';
                 <?php endif; ?>
 
                 <div class="tracking-actions">
-                    <button onclick="location.href='/reviews?order_id=<?= $order['id'] ?>'" class="basic-btn <?= ($order['status'] >= 5) ? '' : 'hidden' ?>">Laisser un avis (Commande #<?= $order['id'] ?>)</button>
+                    <button onclick="location.href='/reviews'" class="basic-btn <?= ($order['status'] >= 5) ? '' : 'hidden' ?>">Laisser un avis</button>
                 </div>
             </div>
             <?php endforeach; ?>
