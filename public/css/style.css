@@ -348,3 +348,7 @@ input {
 .hidden {
   display: none;
 }
+
+.logo {
+  padding: 5px;
+}
