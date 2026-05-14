@@ -12,22 +12,21 @@ class OrderTrackingController extends Controller {
     include_once __DIR__ . '/../format_data.php';
 
     $uid = $_SESSION['user']['id'];
-    $order = Order::getUserRunningOrder($uid);
+    
+    $force_ids = isset($_GET['keep_ids']) ? explode(',', $_GET['keep_ids']) : [];
+    $force_ids = array_filter($force_ids, 'is_numeric');
+    
+    $orders = Order::getUserActiveOrders($uid, $force_ids);
 
-    if (!$order) {
-        header('Location: /products');
-        exit();
+    foreach ($orders as &$order) {
+        $order['cook'] = User::getUserInfo($order['cook_id']);
+        $order['delivery_person'] = User::getUserInfo($order['delivery_person_id']);
     }
-
-    $cook = User::getUserInfo($order['cook_id']);
-    $delivery_person = User::getUserInfo($order['delivery_person_id']);
 
     $this->render(
       'order_tracking',
       [
-        'order' => $order,
-        'cook' => $cook,
-        'delivery_person' => $delivery_person,
+        'orders' => $orders,
         'get_name' => 'getName'
       ]
     );
@@ -42,13 +41,20 @@ class OrderTrackingController extends Controller {
 
     require_once __DIR__ . '/../models/Order.php';
     $uid = $_SESSION['user']['id'];
-    $order = Order::getUserRunningOrder($uid);
-
+    
     header('Content-Type: application/json');
-    if ($order) {
-        echo json_encode(['status' => $order['status']]);
+
+    if (isset($_GET['ids'])) {
+        $ids = explode(',', $_GET['ids']);
+        $ids = array_filter($ids, 'is_numeric');
+        if (empty($ids)) {
+             echo json_encode(['statuses' => []]);
+             return;
+        }
+        $statuses = Order::getOrderStatuses($uid, $ids);
+        echo json_encode(['statuses' => $statuses]);
     } else {
-        echo json_encode(['status' => null]);
+        echo json_encode(['statuses' => []]);
     }
   }
 }

@@ -185,4 +185,44 @@ class Order {
         $stmt->execute([$uid]);
         return $stmt->fetchAll();
     }
+
+    public static function getUserActiveOrders($uid, $force_ids = []) {
+        global $pdo;
+        $params = [$uid];
+        $force_sql = "";
+        
+        if (!empty($force_ids)) {
+            $inQuery = implode(',', array_fill(0, count($force_ids), '?'));
+            $force_sql = " OR o.id IN ($inQuery)";
+            $params = array_merge($params, $force_ids);
+        }
+
+        $stmt = $pdo->prepare("
+            SELECT o.id, os.id as status, o.cook_id, o.delivery_person_id, o.is_takeaway
+            FROM order_status os
+            JOIN orders o on o.order_status_id = os.id
+            WHERE o.customer_id = ? AND (os.id < 5 $force_sql)
+            ORDER BY o.id DESC
+        ");
+        $stmt->execute($params);
+        return $stmt->fetchAll();
+    }
+
+    public static function getOrderStatuses($uid, $order_ids) {
+        global $pdo;
+        $inQuery = implode(',', array_fill(0, count($order_ids), '?'));
+        $stmt = $pdo->prepare("
+            SELECT o.id, os.id as status
+            FROM order_status os
+            JOIN orders o on o.order_status_id = os.id
+            WHERE o.customer_id = ? AND o.id IN ($inQuery)
+        ");
+        $params = array_merge([$uid], $order_ids);
+        $stmt->execute($params);
+        $result = [];
+        foreach($stmt->fetchAll() as $row) {
+             $result[$row['id']] = $row['status'];
+        }
+        return $result;
+    }
 }

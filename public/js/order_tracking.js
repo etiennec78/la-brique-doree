@@ -1,58 +1,54 @@
-let oldStatus = null;
 let statusInterval = null;
 
 function checkOrderStatus() {
-  fetch('/api_order_status')
+  const orderTrackers = document.querySelectorAll('.order-tracker');
+  if (orderTrackers.length === 0) return;
+
+  const orderIds = Array.from(orderTrackers).map(el => el.getAttribute('data-order-id'));
+
+  fetch('/api_order_status?ids=' + orderIds.join(','))
     .then(response => response.json())
     .then(data => {
-      const status = data["status"];
-      if (status === null || status == oldStatus) return;
+      const statuses = data["statuses"] || {};
+      let needsRefresh = false;
 
-      oldStatus = status;
-      if (status == 5 && statusInterval) {
-        clearInterval(statusInterval);
+      orderTrackers.forEach(tracker => {
+        const id = tracker.getAttribute('data-order-id');
+        const oldStatus = tracker.getAttribute('data-status');
+        const newStatus = statuses[id];
+
+        if (newStatus && newStatus != oldStatus) {
+            needsRefresh = true;
+        }
+      });
+
+      if (needsRefresh) {
+        // Fetch the updated page content to reflect changes in delivery info and actions
+        let url = new URL(window.location.href);
+        url.searchParams.set('keep_ids', orderIds.join(','));
+        fetch(url.toString())
+          .then(r => r.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, "text/html");
+
+            orderTrackers.forEach(tracker => {
+                const id = tracker.getAttribute('data-order-id');
+                const newTracker = doc.getElementById('order-' + id);
+                if (newTracker) {
+                    tracker.innerHTML = newTracker.innerHTML;
+                    tracker.setAttribute('data-status', newTracker.getAttribute('data-status'));
+                }
+            });
+          })
+          .catch(err => console.error("Failed to fetch updated page", err));
       }
-
-      // Update the stepper based on the new status
-      let elements = document.getElementsByClassName("step");
-      for (let i = 0; i < Math.min(status - 1, elements.length); i++) {
-        elements[i].classList.add("active");
-      }
-
-      // Fetch the updated page content to reflect changes in delivery info and actions
-      fetch(window.location.href)
-        .then(r => r.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const doc = parser.parseFromString(html, "text/html");
-
-          const newDeliveryInfo = doc.querySelector('.delivery-info');
-          const currentDeliveryInfo = document.querySelector('.delivery-info');
-
-          if (newDeliveryInfo) {
-            if (currentDeliveryInfo) {
-              currentDeliveryInfo.innerHTML = newDeliveryInfo.innerHTML;
-            } else {
-              const trackingActions = document.querySelector('.tracking-actions');
-              if (trackingActions) {
-                trackingActions.insertAdjacentHTML('beforebegin', newDeliveryInfo.outerHTML);
-              }
-            }
-          } else if (currentDeliveryInfo) {
-            currentDeliveryInfo.remove();
-          }
-
-          const newActions = doc.querySelector('.tracking-actions');
-          const currentActions = document.querySelector('.tracking-actions');
-          if (newActions && currentActions) {
-            currentActions.innerHTML = newActions.innerHTML;
-          }
-        })
-        .catch(err => console.error("Failed to fetch updated page", err));
     })
     .catch(err => console.error("Failed to fetch order status", err));
 }
 
 // Check immediately, then every 5 seconds
 checkOrderStatus();
-statusInterval = setInterval(checkOrderStatus, 5000);
+if (!statusInterval) {
+    statusInterval = setInterval(checkOrderStatus, 5000);
+}
