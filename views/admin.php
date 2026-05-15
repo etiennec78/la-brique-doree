@@ -55,7 +55,7 @@ include __DIR__ . '/../includes/header.php';
                         <tr class="<?= !empty($user_data['banned']) ? 'banned' : '' ?>">
                             <td><?= $user_data['id'] ?></td>
                             <td><strong><?= getName($user_data) ?></strong></td>
-                            <td><?= $user_data['email'] ?></td>
+                            <td><a href="mailto:<?= $user_data['email'] ?>" class="action-link"><?= $user_data['email'] ?></a></td>
                             <td><a href="/order_history?user_id=<?= $user_data['id'] ?>" class="action-link"><?= $user_data['orders'] ?></a></td>
                             <td>
                                 <form action="/global_reduction" method="POST">
