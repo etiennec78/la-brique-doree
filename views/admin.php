@@ -64,7 +64,7 @@ include __DIR__ . '/../includes/header.php';
                                     <button id="manage" type="submit" class="action-link">Appliquer</button>
                                 </form>
                             </td>
-                            <td><span class="tag gold"><?= $user_data['role'] ?></span></td>
+                            <td><?= $user_data['role'] ?></td>
                             <td>
                                 <form action="/profile" method="POST">
                                     <input type="hidden" name="user_id" value="<?= $user_data['id'] ?>">

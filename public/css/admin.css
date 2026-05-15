@@ -44,17 +44,6 @@
     border-bottom: 1px solid var(--input-color);
 }
 
-.tag {
-    padding: 3px 8px;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    background: var(--darkgray);
-}
-
-.tag.gold {
-    background: var(--solid-gold);
-}
-
 .action-link {
     color: var(--solid-gold);
     text-decoration: none;
