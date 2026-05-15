@@ -70,7 +70,9 @@ include __DIR__ . '/../includes/header.php';
         </div>
 
         <?php if (empty($all_orders)): ?>
-            <span>Aucune commande.</span>
+            <div class="form-page">
+                <span>Aucune commande.</span>
+            </div>
         <?php endif; ?>
 
         <?php foreach ($all_orders as $order): ?>
