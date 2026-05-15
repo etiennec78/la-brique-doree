@@ -12,6 +12,7 @@
     <?php if (isset($js_files)): foreach ($js_files as $js): ?>
         <script src="<?= htmlspecialchars($js) ?>" defer></script>
     <?php endforeach; endif; ?>
+    <script src="light_mode.js" defer></script>
 </head>
 <body>
     <header>
@@ -68,37 +69,3 @@
             <button id="theme-toggle" class="navbarbutton">🌙</button>
         </section>
     </header>
-
-<script>
-    let btn = document.getElementById("theme-toggle");
-    let body = document.body;
-
-    function majIcone() {
-        if (body.classList.contains("light-theme")) {
-            btn.innerText = "🌙";
-        } else {
-            btn.innerText = "☀️";
-        }
-    }
-
-    window.addEventListener("DOMContentLoaded", () => {
-        if (document.cookie.includes("theme=light")) {
-            body.classList.add("light-theme");
-        }
-        majIcone(); 
-    });
-
-    btn.addEventListener("click", () => {
-        body.classList.toggle("light-theme");
-        majIcone(); 
-
-        let theme;
-        if (body.classList.contains("light-theme")) {
-            theme = "light";
-        } else {
-            theme = "black";
-        }
-
-        document.cookie = "theme=" + theme + "; max-age=2592000; path=/";
-    });
-</script>
