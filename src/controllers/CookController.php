@@ -17,6 +17,11 @@ class CookController extends Controller {
         $delivery_orders = Order::getOrdersFromState(array('ready', 'shipping'));
         $deliverers = User::getUsersFromRole('delivery_person');
 
+      
+        for ($i = 0; $i < count($pending_orders); $i++) {
+            $pending_orders[$i]['items'] = Order::getOrderItems($pending_orders[$i]['id']);
+        }
+
         $this->render(
             'cook',
             [
@@ -92,6 +97,10 @@ class CookController extends Controller {
         
         $pending_orders = Order::getOrdersFromState(array('paid', 'preparing'));
         $delivery_orders = Order::getOrdersFromState(array('ready', 'shipping'));
+
+        for ($i = 0; $i < count($pending_orders); $i++) {
+            $pending_orders[$i]['items'] = Order::getOrderItems($pending_orders[$i]['id']);
+        }
 
         header('Content-Type: application/json');
         echo json_encode(['pending' => $pending_orders, 'delivery' => $delivery_orders]);

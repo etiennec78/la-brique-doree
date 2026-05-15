@@ -31,11 +31,12 @@ include __DIR__ . '/../includes/header.php';
                 <table>
                     <tr>
                         <td><h3>COMMANDE</h3></td>
+                        <td><h3>ITEMS</h3></td>
                         <td><h3 id="state">ETAT</h3></td>
                     </tr>
 
                     <?php if (empty($pending_orders)): ?>
-                        <tr><td colspan="2" style="text-align:center;">Aucune commande en attente.</td></tr>
+                        <tr><td colspan="3" style="text-align:center;">Aucune commande en attente.</td></tr>
                     <?php endif; ?>
 
                     <?php foreach ($pending_orders as $order): ?>
@@ -47,8 +48,18 @@ include __DIR__ . '/../includes/header.php';
                             <?php else: ?>
                                 <br><small>Livraison</small>
                             <?php endif; ?>
-                        </td>
-                        <td>
+                                </td>
+                                    <td class="order-items">
+                                        <ul>
+                                            <?php foreach ($order['items']['menus'] as $menu): ?>
+                                                <li><strong><?= $menu['name'] ?></strong> x<?= $menu['quantity'] ?></li>
+                                            <?php endforeach; ?>
+                                            <?php foreach ($order['items']['foods'] as $food): ?>
+                                                <li><?= $food['name'] ?> x<?= $food['quantity'] ?></li>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    </td>
+                                <td>
                             <form action="/assign_order" method="POST">
                                 <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
                                 <button id="manage" type="submit" class="basic-btn">Prêt !</button>

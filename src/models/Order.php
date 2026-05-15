@@ -225,4 +225,30 @@ class Order {
         }
         return $result;
     }
+    
+    public static function getOrderItems($order_id) {
+        global $pdo;
+
+        $stmt = $pdo->prepare("
+            SELECT f.name, cf.quantity
+            FROM orders o
+            JOIN cart_food cf ON cf.cart_id = o.cart_id
+            JOIN food f ON f.id = cf.food_id
+            WHERE o.id = ?
+        ");
+        $stmt->execute([$order_id]);
+        $foods = $stmt->fetchAll();
+
+        $stmt = $pdo->prepare("
+            SELECT m.name, cm.quantity
+            FROM orders o
+            JOIN cart_menu cm ON cm.cart_id = o.cart_id
+            JOIN menu m ON m.id = cm.menu_id
+            WHERE o.id = ?
+        ");
+        $stmt->execute([$order_id]);
+        $menus = $stmt->fetchAll();
+
+        return ['foods' => $foods, 'menus' => $menus];
+    }
 }

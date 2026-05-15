@@ -6,6 +6,28 @@ function formatTime(datetimeStr) {
     return `${h}h${m}`;
 }
 
+function renderItems(items) {
+    const menusArray = items.menus || [];
+
+    const menusEnHTML = [];
+    for (const m of menusArray) {
+        menusEnHTML.push(`<li><strong>${m.name}</strong> x${m.quantity}</li>`);
+    }
+
+    const menus = menusEnHTML.join('');
+
+    const foodsArray = items.foods || [];
+
+    const foodsEnHTML = [];
+    for (const f of foodsArray) {
+        foodsEnHTML.push(`<li>${f.name} x${f.quantity}</li>`);
+    }
+
+    const foods = foodsEnHTML.join('');
+
+    return `<ul>${menus}${foods}</ul>`;
+}
+
 function checkCookStatus() {
     fetch('/api_cook')
     .then(response => response.json())
@@ -17,11 +39,12 @@ function checkCookStatus() {
             let pendingHTML = `
                 <tr>
                     <td><h3>COMMANDE</h3></td>
+                    <td><h3>ITEMS</h3></td>
                     <td><h3 id="state">ETAT</h3></td>
                 </tr>
             `;
             if (data.pending.length === 0) {
-                pendingHTML += `<tr><td colspan="2" style="text-align:center;">Aucune commande en attente.</td></tr>`;
+                pendingHTML += `<tr><td colspan="3" style="text-align:center;">Aucune commande en attente.</td></tr>`;
             } else {
                 data.pending.forEach(order => {
                     const name = `${order.first_name || ''} ${(order.last_name || '').charAt(0)}.`;
@@ -32,6 +55,9 @@ function checkCookStatus() {
                         <td>
                             <span>Commande #${order.id} (${name.trim()})</span>
                             ${deliveryInfo}
+                        </td>
+                        <td class="order-items">
+                            ${renderItems(order.items)}
                         </td>
                         <td>
                             <form action="/assign_order" method="POST">
@@ -59,7 +85,7 @@ function checkCookStatus() {
                 data.delivery.forEach(order => {
                     const name = `${order.first_name || ''} ${(order.last_name || '').charAt(0)}.`;
                     let deliveryInfo = order.is_takeaway ? `<br><small>Retrait : ${formatTime(order.takeaway_time)}</small>` : `<br><small>Livraison</small>`;
-                    
+
                     let actionHTML = order.is_takeaway ? `
                         <form action="/finish_takeaway" method="POST">
                             <input type="hidden" name="order_id" value="${order.id}">
