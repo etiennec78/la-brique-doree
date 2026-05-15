@@ -1,7 +1,7 @@
 <?php
 
 class OrderHistoryController extends Controller {
-  public function index($target_id = null) {
+  public function index() {
     if (!isset($_SESSION['user'])) {
       header('Location: /login');
       exit();
@@ -13,9 +13,11 @@ class OrderHistoryController extends Controller {
     $uid = $_SESSION['user']['id'];
     $is_admin = User::isAdmin($uid);
 
-    if ($target_id == NULL) {
+    if (!isset($_GET['user_id'])) {
       $target_id = $uid;
-    } elseif (!$is_admin) {
+    } elseif ($is_admin) {
+      $target_id = $_GET['user_id'];
+    } else {
       header('Location: /login');
       exit();
     }
