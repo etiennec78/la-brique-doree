@@ -33,7 +33,7 @@ article::before {
   grid-auto-rows: 1fr;
 }
 
-.bento > * {
+.bento > article {
   margin: 0.5rem;
   border-radius: 0.5rem;
 }

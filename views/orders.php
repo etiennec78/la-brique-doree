@@ -10,7 +10,6 @@ include __DIR__ . '/../includes/header.php';
 <main>
       <section class="cart-page">
         <div id="cart-content">
-          <h2>~ Éléments du panier ~</h2>
           <section class="bento">
           <?php if (count($cart_menus) <= 0 and !$cart_has_food): ?>
             <div class="items-grid">
@@ -20,7 +19,7 @@ include __DIR__ . '/../includes/header.php';
           <?php else: ?>
             <!-- Boucler pour chaque menu + 1 (plats individuels) -->
             <?php for($i = 0; $i < count($cart_menus) + $cart_has_food; $i++): ?>
-                <div>
+                <div class="menu">
                 <?php
                 $individual = $i == count($cart_menus);
                 if ($individual) {

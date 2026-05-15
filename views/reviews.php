@@ -8,7 +8,6 @@ $js_files = ['/js/count_characters.js'];
 include __DIR__ . '/../includes/header.php';
 ?>
 <main>
-        <h2 id="reviews-title">~ Avis Clients ~</h2>
         <?php foreach($reviews as $review): ?>
             <?php if (isset($_GET['edit']) && $_GET['edit'] == $review['id'] && isset($_SESSION['user']) && ($_SESSION['user']['id'] == $review['user_id'] || $is_admin)): ?>
                 <form action="/reviews" method="post" class="review-block">

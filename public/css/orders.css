@@ -55,6 +55,10 @@
   margin: 10px;
 }
 
+.menu {
+  margin: 25px;
+}
+
 .menu-header {
   display: flex;
   align-items: center;
