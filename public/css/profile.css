@@ -22,7 +22,3 @@
 option {
   color: var(--darkgray);
 }
-
-.command_card details[open] summary {
-  border-bottom: 1px solid var(--offwhite);
-}

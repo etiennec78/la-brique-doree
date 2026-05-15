@@ -54,12 +54,12 @@
                     <a href="/delivery" class="navbarbutton">Mes Livraisons</a>
                 <?php endif; ?>
 
-                <?php 
-                    require_once '../src/models/Order.php';
-                    if (!empty(Order::getUserActiveOrders($_SESSION['user']['id']))) {
-                        echo '<a href="/order_tracking" class="navbarbutton">Suivre ma commande</a>';
-                    }
-                ?>
+                <?php require_once '../src/models/Order.php'; ?>
+                <?php if (!empty(Order::getUserActiveOrders($_SESSION['user']['id']))): ?>
+                    <a href="/order_tracking" class="navbarbutton">Suivre ma commande</a>
+                <?php else: ?>
+                    <a href="/order_history" class="navbarbutton">Historique des commandes</a>
+                <?php endif; ?>
 
                 <a href="/logout" class="navbarbutton alert">Déconnexion</a>
             <?php else: ?>
