@@ -9,6 +9,7 @@ class ProfileController extends Controller {
 
         require_once __DIR__ . '/../models/Cart.php';
         require_once __DIR__ . '/../models/User.php';
+        require_once __DIR__ . '/../models/Order.php';
 
         $uid = $_SESSION['user']['id'];
 
@@ -18,6 +19,18 @@ class ProfileController extends Controller {
         $cart_count = Cart::getCartCount();
         $user_data = User::getUserInfo($target_id);
         $is_admin = User::isAdmin($uid);
+        $all_orders = Order::getAllOrdersFromUser($target_id);
+
+        foreach ($all_orders as &$order) {
+            $order['items'] = Order::getOrderItems($order['id']);
+        }
+
+        foreach ($all_orders as &$order) {
+            $order['cook'] = User::getUserInfo($order['cook_id']);
+            $order['cook'] = $order['cook']['first_name'].' '.$order['cook']['last_name'];
+            $order['delivery_person'] = User::getUserInfo($order['delivery_person_id']);
+            $order['delivery_person'] = $order['delivery_person']['first_name'].' '.$order['delivery_person']['last_name'];
+        }
 
         $this->render(
             'profile',
@@ -26,7 +39,8 @@ class ProfileController extends Controller {
                 'user_data' => $user_data,
                 'target' => $target_id,
                 'is_admin' => $is_admin,
-                'uid' => $uid
+                'uid' => $uid,
+                'all_orders' => $all_orders
             ]
         );
     }
