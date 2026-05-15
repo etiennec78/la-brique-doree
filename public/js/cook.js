@@ -63,11 +63,11 @@ function checkCookStatus() {
                     let actionHTML = order.is_takeaway ? `
                         <form action="/finish_takeaway" method="POST">
                             <input type="hidden" name="order_id" value="${order.id}">
-                            <button type="submit" class="basic-btn">Récupéré !</button>
+                            <button type="submit" class="basic-btn">Remis</button>
                         </form>
                     ` : `
                         <label class="selection">
-                            <span>En route</span>
+                            <span>En attente du retour d'un livreur</span>
                             <input type="checkbox" checked disabled/> 
                         </label>
                     `;

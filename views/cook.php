@@ -17,12 +17,12 @@ include __DIR__ . '/../includes/header.php';
         <div class="tabs">  
             <nav class="tabs-nav">
                 <label class="tab-item">
-                    <span>EN ATTENTE</span>
+                    <span>À CUISINER</span>
                     <input type="radio" id="pending-toggle" name="tabs-toggle" checked>
                 </label>
 
                 <label class="tab-item">
-                    <span>EN LIVRAISON</span>
+                    <span>À REMETTRE</span>
                     <input type="radio" id="delivery-toggle" name="tabs-toggle">
                 </label>
             </nav>
@@ -84,11 +84,11 @@ include __DIR__ . '/../includes/header.php';
                             <?php if (isset($order['is_takeaway']) && $order['is_takeaway']): ?>
                                 <form action="/finish_takeaway" method="POST">
                                     <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
-                                    <button type="submit" class="basic-btn">Récupéré !</button>
+                                    <button type="submit" class="basic-btn">Remis</button>
                                 </form>
                             <?php else: ?>
                                 <label class="selection">
-                                    <span>En route</span>
+                                    <span>En attente du retour d'un livreur</span>
                                     <input type="checkbox" checked disabled/> 
                                 </label>
                             <?php endif; ?>
