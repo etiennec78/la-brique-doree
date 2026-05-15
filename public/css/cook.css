@@ -54,6 +54,7 @@ table span {
     color: var(--offwhite);
     cursor: pointer;
     font-size: 20px;
+    margin-top: 25px;
 }
 
 .tab-item:has(input:checked) {
