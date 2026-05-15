@@ -36,7 +36,7 @@ function checkCookStatus() {
                         <td>
                             <form action="/assign_order" method="POST">
                                 <input type="hidden" name="order_id" value="${order.id}">
-                                <button id="manage" type="submit" class="basic-btn">Prêt !</button>
+                                <button id="manage" type="submit" class="basic-btn action-btn">Prêt !</button>
                             </form>
                         </td>
                     </tr>
@@ -63,7 +63,7 @@ function checkCookStatus() {
                     let actionHTML = order.is_takeaway ? `
                         <form action="/finish_takeaway" method="POST">
                             <input type="hidden" name="order_id" value="${order.id}">
-                            <button type="submit" class="basic-btn">Remis</button>
+                            <button type="submit" class="basic-btn action-btn">Remis</button>
                         </form>
                     ` : `
                         <label class="selection">

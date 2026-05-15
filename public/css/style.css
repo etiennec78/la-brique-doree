@@ -340,6 +340,13 @@ h1 {
   background: var(--darkgray);
 }
 
+.action-btn {
+  width: calc(100% - 20px);
+  height: 100px;
+  font-size: 40px;
+  margin: 10px;
+}
+
 .alert {
   color: var(--red);
 }
