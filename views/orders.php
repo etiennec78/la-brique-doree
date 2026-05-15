@@ -12,15 +12,14 @@ include __DIR__ . '/../includes/header.php';
         <div id="cart-content">
           <h2>~ Éléments du panier ~</h2>
           <section class="bento">
-            <?php
-            if (count($cart_menus) <= 0 and !$cart_has_food) {
-              echo '<p>Votre panier est vide.</p>';
-            } else {
-              // Boucler pour chaque menu + 1 (plats individuels)
-              for($i = 0; $i < count($cart_menus) + $cart_has_food; $i++) {
+          <?php if (count($cart_menus) <= 0 and !$cart_has_food): ?>
+            <p>Votre panier est vide.</p>
+          <?php else: ?>
+            <!-- Boucler pour chaque menu + 1 (plats individuels) -->
+            <?php for($i = 0; $i < count($cart_menus) + $cart_has_food; $i++): ?>
+                <div>
+                <?php
                 $individual = $i == count($cart_menus);
-                echo '<div>';
-
                 if ($individual) {
                   $foods = $cart_foods;
                   $menu_name = "Plats individuels";
@@ -31,24 +30,26 @@ include __DIR__ . '/../includes/header.php';
                   $foods = $menu['foods'];
                   $menu_name = $menu['name'];
                 }
+                ?>
 
-                echo '<div class="menu-header">';
-                echo '<h2>'. htmlspecialchars($menu_name) .'</h2>';
-                if (!$individual) {
-                  echo '<form method="POST" action="/update_cart" style="display:inline; margin:0; padding:0;">
-                  <input type="hidden" name="item_id" value="'. $menu['id'] .'">
+                <div class="menu-header">
+                <h2><?= htmlspecialchars($menu_name) ?></h2>
+                <?php if (!$individual): ?>
+                  <form method="POST" action="/update_cart" style="display:inline; margin:0; padding:0;">
+                  <input type="hidden" name="item_id" value="<?= $menu['id'] ?>">
                   <input type="hidden" name="item_type" value="menu">
                   <div class="nb-selector">
                   <button class="remove-from-cart" type="submit" name="action" value="remove" aria-label="Retirer du panier">-</button>
-                  <input type="number" class="amount" name="amount" min="0" max="9" value="'. $quantity .'"/>
+                  <input type="number" class="amount" name="amount" min="0" max="9" value="<?= $quantity ?>"/>
                   <button class="add-to-cart" type="submit" name="action" value="add" aria-label="Ajouter au panier">+</button>
                   </div>
-                  </form>';
-                }
-                echo '</div>';
-                echo '<div class="items-grid">';
+                  </form>
+                <?php endif; ?>
+                </div>
+                <div class="items-grid">
 
-                foreach($foods as $food) {
+                <?php foreach($foods as $food): ?>
+                  <?php
                   $name = $food['name'];
                   $description = $food['description'];
                   $price_val = floatval($food['price']);
@@ -59,29 +60,29 @@ include __DIR__ . '/../includes/header.php';
                   if ($individual) {
                     $quantity = $food['quantity'];
                   }
+                  ?>
 
-                  echo '<article class="description" description="'. htmlspecialchars($description). '" price="'. $price_str .'€" style="background-image: url('. htmlspecialchars($image_path) .');">
-                  <h3>'. htmlspecialchars($name) .'</h3>';
+                  <article class="description" description="<?= htmlspecialchars($description) ?>" price="<?= $price_str ?>€" style="background-image: url(<?= htmlspecialchars($image_path) ?>);">
+                  <h3><?= htmlspecialchars($name) ?></h3>';
 
-                  if ($individual) {
-                    echo '<form method="POST" action="/update_cart" style="display:inline; margin:0; padding:0;">
-                    <input type="hidden" name="item_id" value="'. $food_id .'">
+                  <?php if ($individual): ?>
+                    <form method="POST" action="/update_cart" style="display:inline; margin:0; padding:0;">
+                    <input type="hidden" name="item_id" value="<?= $food_id ?>">
                     <input type="hidden" name="item_type" value="food">
                     <div class="nb-selector">
                     <button class="remove-from-cart" type="submit" name="action" value="remove" aria-label="Retirer du panier">-</button>
-                    <input type="number" class="amount" name="amount" min="0" max="9" value="'. $quantity .'"/>
+                    <input type="number" class="amount" name="amount" min="0" max="9" value="<?= $quantity ?>"/>
                     <button class="add-to-cart" type="submit" name="action" value="add" aria-label="Ajouter au panier">+</button>
                     </div>
-                    </form>';
-                  }
-                  echo '</article>';
-                }
-                echo '</div>';
-                echo '</div>';
-              }
-            }
-            ?>
-          </section>
+                    </form>
+                  <?php endif; ?>
+                  </article>
+                <?php endforeach; ?>
+                </div>
+                </div>
+            <?php endfor; ?>
+          <?php endif; ?>
+      </section>
         </div>
         <div id="cart-bar">
           <h2>Votre panier</h2>
