@@ -131,7 +131,7 @@ class Order {
     public static function getLastOrder($uid) {
         global $pdo;
         $stmt = $pdo->prepare("
-            SELECT o.id as order_id, r.id as review_id
+            SELECT o.id as order_id, r.id as review_id, o.is_takeaway
             FROM orders o
             LEFT JOIN reviews r ON r.order_id = o.id
             WHERE o.customer_id = ?

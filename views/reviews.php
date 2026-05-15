@@ -27,6 +27,7 @@ include __DIR__ . '/../includes/header.php';
                                         <option value="1" <?= $review['product_stars'] == 1 ? 'selected' : '' ?>>★</option>
                                     </select>
                                 </div>
+                                <?php if ($review['delivery_stars'] != null): ?>
                                 <div class="rating-group">
                                     <label for="delivery-<?= $review['id'] ?>">Livraison :</label>
                                     <select name="delivery" id="delivery-<?= $review['id'] ?>" class="select-note" required>
@@ -37,6 +38,7 @@ include __DIR__ . '/../includes/header.php';
                                         <option value="1" <?= $review['delivery_stars'] == 1 ? 'selected' : '' ?>>★</option>
                                     </select>
                                 </div>
+                                <?php endif; ?>
                             </td>
                         </tr>
                         <tr>
@@ -58,7 +60,9 @@ include __DIR__ . '/../includes/header.php';
                   </th>
                   <td class="user-ratings">
                     <p>Produits : </p><p class="stars"><?= str_repeat('★', $review['product_stars']) ?></p>
-                    <p>Livraison : </p><p class="stars"><?= str_repeat('★', $review['delivery_stars']) ?></p>
+                    <?php if ($review['delivery_stars'] != null): ?>
+                        <p>Livraison : </p><p class="stars"><?= str_repeat('★', $review['delivery_stars']) ?></p>
+                    <?php endif; ?>
                   </td>
                 </tr>
                 <tr>
@@ -127,6 +131,7 @@ include __DIR__ . '/../includes/header.php';
                         </select>
                     </div>
 
+                    <?php if ($order_was_takeaway): ?>
                     <div class="rating-group">
                         <label for="delivery">Livraison :</label>
                         <select name="delivery" id="delivery" class="select-note" required>
@@ -137,6 +142,7 @@ include __DIR__ . '/../includes/header.php';
                             <option value="1">★</option>
                         </select>
                     </div>
+                    <?php endif; ?>
                 </td>
             </tr>
             <tr>
