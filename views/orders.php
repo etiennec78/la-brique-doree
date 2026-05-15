@@ -13,7 +13,10 @@ include __DIR__ . '/../includes/header.php';
           <h2>~ Éléments du panier ~</h2>
           <section class="bento">
           <?php if (count($cart_menus) <= 0 and !$cart_has_food): ?>
-            <p>Votre panier est vide.</p>
+            <div class="items-grid">
+              <p>Votre panier est vide.</p>
+              <button onclick="location.href='/products'" class="basic-btn">Explorer la carte</button>
+            </div>
           <?php else: ?>
             <!-- Boucler pour chaque menu + 1 (plats individuels) -->
             <?php for($i = 0; $i < count($cart_menus) + $cart_has_food; $i++): ?>
