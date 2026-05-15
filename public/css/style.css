@@ -59,6 +59,12 @@ h2 {
   text-align: center;
 }
 
+header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
 #main-header {
   display: flex;
   position: relative;
@@ -68,6 +74,7 @@ h2 {
   padding-inline: clamp(10px, 3vw, 30px);
   gap: 12px;
   box-sizing: border-box;
+  background: black;
 }
 
 #main-header h1 {
