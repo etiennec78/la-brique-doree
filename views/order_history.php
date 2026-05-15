@@ -20,8 +20,13 @@ include __DIR__ . '/../includes/header.php';
             <?php endif; ?>
             <h2>Commande #<?= $order['id'] ?></h2>
             <div class="delivery-info">
+                <p>Retrait : <?= $order['is_takeaway'] ? "À emporter" : "À domicile" ?></p>
                 <p>Cuisinier : <?= $order['cook'] ?></p>
-                <p>Livreur : <?= $order['delivery_person'] ?></p>
+                <?php if (!$order['is_takeaway']): ?>
+                    <p>Livreur : <?= $order['delivery_person'] ?></p>
+                <?php else: ?>
+                    <p>Retrait programmé : <?= $order['takeaway_time'] ?></p>
+                <?php endif; ?>
             </div>
         <?php endif; ?>
     </div>
