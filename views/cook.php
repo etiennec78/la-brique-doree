@@ -96,7 +96,7 @@ include __DIR__ . '/../includes/header.php';
                                     <button type="submit" class="basic-btn action-btn">Remis</button>
                                 </form>
                             <?php else: ?>
-                                <button class="waiting-delivery-btn" disabled>En attente du retour d'un livreur</button>
+                                <button class="waiting-delivery-btn" disabled>Attente retour livreur</button>
                             <?php endif; ?>
                         </td>
                     </tr>
