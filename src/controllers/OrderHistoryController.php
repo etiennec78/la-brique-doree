@@ -41,8 +41,8 @@ class OrderHistoryController extends Controller {
       // Get all data about this order
       $order = Order::getOrderById($order_id);
       $order['items'] = Order::getOrderItems($order['id']);
-      $order['cook'] = User::getUserInfo($order['cook_id']);
-      $order['delivery_person'] = User::getUserInfo($order['delivery_person_id']);
+      $order['cook'] = getName(User::getUserInfo($order['cook_id']));
+      $order['delivery_person'] = getName(User::getUserInfo($order['delivery_person_id']));
 
       // Get previous and next order ids
       $index = array_search($order_id, $order_ids);
@@ -59,8 +59,7 @@ class OrderHistoryController extends Controller {
         'order_id' => $order_id,
         'prev_id' => $prev_id,
         'next_id' => $next_id,
-        'order' => $order,
-        'get_name' => 'getName'
+        'order' => $order
       ]
     );
   }

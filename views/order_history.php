@@ -20,8 +20,8 @@ include __DIR__ . '/../includes/header.php';
             <?php endif; ?>
             <h2>Commande #<?= $order['id'] ?></h2>
             <div class="delivery-info">
-                <p>Cuisinier : <?= $get_name($order['cook']) ?></p>
-                <p>Livreur : <?= $get_name($order['delivery_person']) ?></p>
+                <p>Cuisinier : <?= $order['cook'] ?></p>
+                <p>Livreur : <?= $order['delivery_person'] ?></p>
             </div>
         <?php endif; ?>
     </div>
