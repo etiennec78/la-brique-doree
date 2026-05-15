@@ -24,6 +24,9 @@ class OrdersController extends Controller {
             and strtotime($coupon['expiration_date']) < time()
         );
 
+        $user_has_valid_info = false;
+        $user_has_valid_info = User::hasValidInfo($uid);
+
         $vendeur = 'MI-4_J'; 
         $api_key = getAPIKey($vendeur); 
         $transaction = uniqid();
@@ -95,7 +98,8 @@ class OrdersController extends Controller {
                 'cart_foods' => $cart_foods,
                 'cart_has_food' => $cart_has_food,
                 'montant_cybank' => $montant_cybank,
-                'control' => $control
+                'control' => $control,
+                'user_has_valid_info' => $user_has_valid_info
             ]
         );
     }

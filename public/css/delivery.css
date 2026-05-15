@@ -38,13 +38,6 @@
     font-size: 30px;
 }
 
-.action-btn {
-    width: calc(100% - 20px);
-    height: 100px;
-    font-size: 40px;
-    margin: 10px;
-}
-
 .delivery-actions {
     display: flex;
 }

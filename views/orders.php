@@ -102,7 +102,12 @@ include __DIR__ . '/../includes/header.php';
             <p class="alert">Coupon expiré: <?= $coupon['code'] ?></p>
           <?php endif ?>
           <p class="total-price">Total: <?= number_format($total_price, 2, ",") ?>€</p>
-          
+          <?php if (!$user_has_valid_info): ?>
+              <tr>
+                    <h3>Vous ne pouvez pas encore commander.</h3>
+                    <p>Vous devez remplir votre profil pour passer une commande.</p>
+                    <button onclick="location.href='/profile'" type="button" class="basic-btn">Remplir votre profil</button>
+          <?php else: ?>
           <form id="delivery-type" action="/set_delivery_type" method="POST">
             <button type="submit" name="is_takeaway" value="0" class="<?= !$is_takeaway ? 'selected' : '' ?>">À domicile</button>
             <button type="submit" name="is_takeaway" value="1" class="<?= $is_takeaway ? 'selected' : '' ?>">À emporter</button>
@@ -133,6 +138,7 @@ include __DIR__ . '/../includes/header.php';
               <button id="submit_coupon" class="basic-btn" type="submit">Appliquer</button>
             </form>
           </details>
+          <?php endif; ?>
         </div>
       </section>
     </main>

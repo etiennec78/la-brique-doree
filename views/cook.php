@@ -62,7 +62,7 @@ include __DIR__ . '/../includes/header.php';
                                 <td>
                             <form action="/assign_order" method="POST">
                                 <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
-                                <button id="manage" type="submit" class="basic-btn">Prêt !</button>
+                                <button id="manage" type="submit" class="basic-btn action-btn">Prêt !</button>
                             </form>
                         </td>
                     </tr>
@@ -95,7 +95,7 @@ include __DIR__ . '/../includes/header.php';
                             <?php if (isset($order['is_takeaway']) && $order['is_takeaway']): ?>
                                 <form action="/finish_takeaway" method="POST">
                                     <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
-                                    <button type="submit" class="basic-btn">Remis</button>
+                                    <button type="submit" class="basic-btn action-btn">Remis</button>
                                 </form>
                             <?php else: ?>
                                 <label class="selection">
