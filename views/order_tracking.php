@@ -67,7 +67,7 @@ include __DIR__ . '/../includes/header.php';
             <?php endforeach; ?>
         <?php endif; ?>
         <div class="tracking-actions">
-            <?php if ($empty): ?>
+            <?php if (empty($orders)): ?>
                 <button onclick="location.href='/'" class="basic-btn gray-btn">Retour à l'accueil</button>
             <?php endif; ?>
             <button onclick="location.href='/order_history'" class="basic-btn">Historique des commandes</button>
