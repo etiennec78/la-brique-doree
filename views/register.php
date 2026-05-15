@@ -4,7 +4,7 @@ $h1 = "INSCRIPTION";
 $show_cart = false;
 $show_video = true;
 $css_files = ['/css/form.css'];
-$js_files = ['/js/show_password.js']
+$js_files = ['/js/show_password.js'];
 include __DIR__ . '/../includes/header.php';
 ?>
 <main>
