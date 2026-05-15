@@ -131,7 +131,7 @@ include __DIR__ . '/../includes/header.php';
                         </select>
                     </div>
 
-                    <?php if ($order_was_takeaway): ?>
+                    <?php if (!$order_was_takeaway): ?>
                     <div class="rating-group">
                         <label for="delivery">Livraison :</label>
                         <select name="delivery" id="delivery" class="select-note" required>
