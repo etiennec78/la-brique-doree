@@ -12,7 +12,7 @@
     <?php if (isset($js_files)): foreach ($js_files as $js): ?>
         <script src="<?= htmlspecialchars($js) ?>" defer></script>
     <?php endforeach; endif; ?>
-    <script src="light_mode.js" defer></script>
+    <script src="/js/light_mode.js" defer></script>
 </head>
 <body>
     <header>
