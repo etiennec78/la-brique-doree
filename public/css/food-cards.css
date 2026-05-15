@@ -13,6 +13,7 @@ article {
   background-repeat: no-repeat;
   position: relative;
   overflow: hidden;
+  color: var(--offwhite);
 }
 
 article::before {

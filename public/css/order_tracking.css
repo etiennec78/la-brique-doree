@@ -40,7 +40,7 @@
 }
 
 .step.active p {
-  color: var(--offwhite);
+  color: var(--text-on-bg);
   font-weight: bold;
 }
 
