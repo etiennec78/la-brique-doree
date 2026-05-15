@@ -7,12 +7,18 @@ class OrderHistoryController extends Controller {
       exit();
     }
 
+    require_once __DIR__ . '/../format_data.php';
     require_once __DIR__ . '/../models/Order.php';
     require_once __DIR__ . '/../models/User.php';
 
     $uid = $_SESSION['user']['id'];
     $is_admin = User::isAdmin($uid);
+    $order_id = null;
+    $prev_id = null;
+    $next_id = null;
+    $order = [];
 
+    // Get the user id to lookup
     if (!isset($_GET['user_id'])) {
       $target_id = $uid;
     } elseif ($is_admin) {
@@ -22,20 +28,41 @@ class OrderHistoryController extends Controller {
       exit();
     }
 
-    $all_orders = Order::getAllOrdersFromUser($target_id);
+    $order_ids = Order::getAllCompletedOrderIdsFromUser($target_id);
 
-    foreach ($all_orders as &$order) {
+    // Get the order id to display
+    if (isset($_GET['order_id']) && in_array($_GET['order_id'], $order_ids)) {
+      $order_id = $_GET['order_id'];
+    } elseif (!empty($order_ids)) {
+      $order_id = $order_ids[0];
+    }
+
+    if ($order_id != null) {
+      // Get all data about this order
+      $order = Order::getOrderById($order_id);
       $order['items'] = Order::getOrderItems($order['id']);
-    }
-
-    foreach ($all_orders as &$order) {
       $order['cook'] = User::getUserInfo($order['cook_id']);
-      $order['cook'] = $order['cook']['first_name'].' '.$order['cook']['last_name'];
       $order['delivery_person'] = User::getUserInfo($order['delivery_person_id']);
-      $order['delivery_person'] = $order['delivery_person']['first_name'].' '.$order['delivery_person']['last_name'];
+
+      // Get previous and next order ids
+      $index = array_search($order_id, $order_ids);
+      if ($index !== false) {
+        $prev_id = $index > 0 ? $order_ids[$index - 1] : null;
+        $next_id = $index < count($order_ids) - 1 ? $order_ids[$index + 1] : null;
+      }
     }
 
-    $this->render('order_history', ['all_orders' => $all_orders]);
+    $this->render(
+      'order_history',
+      [
+        'target_id' => $target_id,
+        'order_id' => $order_id,
+        'prev_id' => $prev_id,
+        'next_id' => $next_id,
+        'order' => $order,
+        'get_name' => 'getName'
+      ]
+    );
   }
 }
 
