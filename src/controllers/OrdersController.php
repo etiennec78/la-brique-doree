@@ -34,7 +34,8 @@ class OrdersController extends Controller {
         $is_takeaway = isset($_SESSION['is_takeaway']) && $_SESSION['is_takeaway'] ? 1 : 0;
         $takeaway_time = isset($_SESSION['takeaway_time']) ? $_SESSION['takeaway_time'] : '';
 
-        $retour_url = $GLOBALS['config']['host'] . "/payment_result?cart_id=" . $cart_id . "&is_takeaway=" . $is_takeaway . "&takeaway_time=" . urlencode($takeaway_time);
+        $host = $GLOBALS['config']['host'] ?? 'http://localhost';
+        $retour_url = $host . "/payment_result?cart_id=" . $cart_id . "&is_takeaway=" . $is_takeaway . "&takeaway_time=" . urlencode($takeaway_time);
 
         $total_price = 0;
         $reduction = 0;
