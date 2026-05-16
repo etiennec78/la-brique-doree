@@ -8,7 +8,7 @@
 
 .slide-btn {
   position: absolute;
-  top: 50%;
+  top: 150px;
   transform: translateY(-50%);
   background: var(--darkgray);
   color: var(--offwhite);
