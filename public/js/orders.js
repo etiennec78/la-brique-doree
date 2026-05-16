@@ -1,13 +1,15 @@
 // Intercept the form sent when selecting delivery or takeaway, and show/hide the hour of takeaway
 document.addEventListener("DOMContentLoaded", () => {
-  const deliveryTimeForm = document.getElementById("delivery-type");
-  deliveryTimeForm.addEventListener("submit", (e) => {
+  const deliveryTypeForm = document.getElementById("delivery-type");
+  const checkoutBtn = document.getElementById("checkout");
+  const deliveryTimeForm = document.getElementById("delivery-time");
+  const takeawayTimeInput = document.getElementById("takeaway_time");
+
+  deliveryTypeForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
     // Get elements
     const isTakeaway = e.submitter.value === "1";
-    const checkoutBtn = document.getElementById("checkout");
-    const deliveryTimeForm = document.getElementById("delivery-time");
 
     // Update the UI
     document.querySelectorAll('#delivery-type button').forEach(button => {
@@ -30,5 +32,20 @@ document.addEventListener("DOMContentLoaded", () => {
       body: formData
     })
     .catch(error => console.error("Error :", error));
+  });
+
+  takeawayTimeInput.addEventListener("change", (e) => {
+    const formData = new FormData(deliveryTimeForm);
+    fetch(deliveryTimeForm.action, {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => {
+      if (response.ok) {
+        checkoutBtn.textContent = "Payer";
+        checkoutBtn.disabled = false;
+      }
+    })
+    .catch(error => console.error("Error:", error));
   });
 });
