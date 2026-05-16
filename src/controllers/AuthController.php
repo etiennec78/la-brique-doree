@@ -4,6 +4,10 @@ class AuthController extends Controller
 {
   public function showLogin()
   {
+    if (isset($_SESSION['user'])) {
+      header("Location: /");
+      exit();
+    }
     $this->render('login');
   }
 
@@ -48,6 +52,10 @@ class AuthController extends Controller
 
   public function showRegister()
   {
+    if (isset($_SESSION['user'])) {
+      header("Location: /");
+      exit();
+    }
     $this->render('register');
   }
 

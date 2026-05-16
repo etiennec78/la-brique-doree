@@ -3,6 +3,8 @@
 class AdminController extends Controller {
     public function index() {
         if (!isset($_SESSION['user']) || $_SESSION['user']['role_id'] != 3) {
+            session_destroy();
+            unset($_SESSION);
             header('Location: /login');
             exit();
         }
