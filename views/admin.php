@@ -47,37 +47,34 @@ include __DIR__ . '/../includes/header.php';
                     $user_name = strtolower(getName($user_data));
                     $user_id = strtolower((string)$user_data['id']);
                     $user_role = $user_data['role'];
-                    
-                    foreach($users_data as $user_data): 
-                        $user_name = strtolower(getName($user_data));
-                        $user_id = strtolower((string)$user_data['id']);
-                        $user_role = $user_data['role'];
                         
-                        // Application des filtres
-                        if ($search !== '' && !str_contains($user_name, $search) && !str_contains($user_id, $search)) {
-                            continue;
-                        }
-                        if ($role_filter !== '' && $user_role !== $role_filter) {
-                            continue;
-                        }
-                    ?>
-                        <tr class="<?= !empty($user_data['banned']) ? 'banned' : '' ?>">
-                            <td><?= $user_data['id'] ?></td>
-                            <td><strong><?= getName($user_data) ?></strong></td>
-                            <td><a href="mailto:<?= $user_data['email'] ?>" class="action-link"><?= $user_data['email'] ?></a></td>
-                            <td><a href="/order_history?user_id=<?= $user_data['id'] ?>" class="action-link"><?= $user_data['orders'] ?></a></td>
-                            <td>
-                                <form action="/global_reduction" method="POST">
-                                    <input type="hidden" name="user_id" value="<?= $user_data['id'] ?>">
-                                    <input type="text" name="reduction" maxlength=3 size=3 value="<?= $user_data['global_reduction'] * 100 ?>" onchange="this.form.submit()">
-                                    <noscript>
-                                        <button id="manage" type="submit" class="action-link">Appliquer</button>
-                                    </noscript>
-                                </form>
-                            </td>
-                            <td><?= $user_data['role'] ?></td>
-                            <td>
+                    // Application des filtres
+                    if ($search !== '' && !str_contains($user_name, $search) && !str_contains($user_id, $search)) {
+                        continue;
+                    }
+                    if ($role_filter !== '' && $user_role !== $role_filter) {
+                        continue;
+                    }
 
+                    $is_banned = !empty($user_data['banned']);
+                ?>
+                    <tr id="user-row-<?= $user_data['id'] ?>" class="<?= $is_banned ? 'banned' : '' ?>">
+                        <td><?= $user_data['id'] ?></td>
+                        <td><strong><?= getName($user_data) ?></strong></td>
+                        <td><a href="mailto:<?= $user_data['email'] ?>" class="action-link"><?= $user_data['email'] ?></a></td>
+                        <td><a href="/order_history?user_id=<?= $user_data['id'] ?>" class="action-link"><?= $user_data['orders'] ?></a></td>
+                        <td>
+                            <form action="/global_reduction" method="POST">
+                                <input type="hidden" name="user_id" value="<?= $user_data['id'] ?>">
+                                <input type="text" name="reduction" maxlength=3 size=3 value="<?= $user_data['global_reduction'] * 100 ?>" onchange="this.form.submit()">
+                                <noscript>
+                                    <button id="manage" type="submit" class="action-link">Appliquer</button>
+                                </noscript>
+                            </form>
+                        </td>
+                        <td><?= $user_data['role'] ?></td>
+                        <td>
+                            <div>
                                 <form action="/profile" method="POST">
                                     <input type="hidden" name="user_id" value="<?= $user_data['id'] ?>">
                                     <button id="manage" type="submit" class="action-link">Gérer</button>
