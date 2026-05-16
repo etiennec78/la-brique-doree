@@ -1,51 +1,51 @@
-// Intercept the form sent when selecting delivery or takeaway, and show/hide the hour of takeaway
+// Intercept the forms and update the cart-bar UI asynchronously
 document.addEventListener("DOMContentLoaded", () => {
-  const deliveryTypeForm = document.getElementById("delivery-type");
-  const checkoutBtn = document.getElementById("checkout");
-  const deliveryTimeForm = document.getElementById("delivery-time");
-  const takeawayTimeInput = document.getElementById("takeaway_time");
 
-  deliveryTypeForm.addEventListener("submit", (e) => {
-    e.preventDefault();
+  function updateCartBarFromResponse(responsePromise) {
+    responsePromise
+      .then(res => res.text())
+      .then(html => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+        const newCartBar = doc.getElementById("cart-bar");
+        const oldCartBar = document.getElementById("cart-bar");
+        if (newCartBar && oldCartBar) {
+          oldCartBar.innerHTML = newCartBar.innerHTML;
+        }
+      })
+      .catch(error => console.error("Error:", error));
+  }
 
-    // Get elements
-    const isTakeaway = e.submitter.value === "1";
-
-    // Update the UI
-    document.querySelectorAll('#delivery-type button').forEach(button => {
-      button.classList.toggle("selected");
-    });
-    deliveryTimeForm.classList.toggle("hidden", !isTakeaway);
-    if (isTakeaway) {
-      checkoutBtn.textContent = "Veuillez confirmer l'heure";
-      checkoutBtn.disabled = true;
-    } else {
-      checkoutBtn.textContent = "Payer";
-      checkoutBtn.disabled = false;
+  // Use event delegation because elements inside #cart-bar will be replaced
+  document.body.addEventListener("submit", (e) => {
+    if (e.target.id === "delivery-type") {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      formData.append(e.submitter.name, e.submitter.value);
+      updateCartBarFromResponse(fetch(e.target.action, {
+        method: 'POST',
+        body: formData
+      }));
     }
 
-    // Send form data that was intercepted
-    const formData = new FormData(e.target);
-    formData.append(e.submitter.name, e.submitter.value);
-    fetch(e.target.action, {
-      method: 'POST',
-      body: formData
-    })
-    .catch(error => console.error("Error :", error));
+    if (e.target.classList.contains("coupon-form")) {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      updateCartBarFromResponse(fetch(e.target.action, {
+        method: 'POST',
+        body: formData
+      }));
+    }
   });
 
-  takeawayTimeInput.addEventListener("change", (e) => {
-    const formData = new FormData(deliveryTimeForm);
-    fetch(deliveryTimeForm.action, {
-      method: 'POST',
-      body: formData
-    })
-    .then(response => {
-      if (response.ok) {
-        checkoutBtn.textContent = "Payer";
-        checkoutBtn.disabled = false;
-      }
-    })
-    .catch(error => console.error("Error:", error));
+  document.body.addEventListener("change", (e) => {
+    if (e.target.id === "takeaway_time" || e.target.name === "coupon") {
+      const form = e.target.closest("form");
+      const formData = new FormData(form);
+      updateCartBarFromResponse(fetch(form.action, {
+        method: 'POST',
+        body: formData
+      }));
+    }
   });
 });
