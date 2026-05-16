@@ -1,6 +1,6 @@
 <?php
-$host = 'localhost';
-$db   = 'brique_doree';
+$host = $GLOBALS['config']['db_host'] ?? 'localhost';
+$db   = $GLOBALS['config']['db_name'] ?? 'brique_doree';
 $user = 'root';
 $pass = 'root';
 $charset = 'utf8mb4';

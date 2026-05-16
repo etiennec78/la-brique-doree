@@ -18,18 +18,6 @@ class Location {
         return $address_has_changed;
     }
 
-    public static function getHereApiKey() {
-        $PATH = __DIR__ . '/../../conf/here_api_key';
-        if (!file_exists($PATH)) return NULL;
-
-        $file = fopen($PATH,'r');
-        if (!$file) return NULL;
-
-        $api_key = fgets($file);
-        fclose($file);
-        return trim($api_key);
-    }
-
     public static function getAPITimeout($uid) {
         require_once __DIR__ . '/../models/User.php';
 
@@ -48,7 +36,7 @@ class Location {
             'lng' => 9.1091171
         );
 
-        $api_key = self::getHereApiKey();
+        $api_key = $GLOBALS['config']['here_api_key'] ?? "";
 
         if (empty($api_key))
             return $DEFAULT_COORD;

@@ -1,0 +1,6 @@
+{
+  "host": "http://localhost:80",
+  "db_host": "localhost",
+  "db": "brique_doree",
+  "here_api_key": ""
+}

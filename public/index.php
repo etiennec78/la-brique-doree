@@ -1,5 +1,8 @@
 <?php
 session_start();
+
+$GLOBALS['config'] = require_once '../src/config.php';
+
 require_once '../src/db_connect.php';
 require_once '../src/router.php';
 
