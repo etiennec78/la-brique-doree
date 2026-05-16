@@ -52,9 +52,11 @@ include __DIR__ . '/../includes/header.php';
 
           <form id="delivery-time" action="/set_delivery_type" method="POST" class="<?= $is_takeaway ? '' : 'hidden' ?>">
             <label id="takeway" for="takeaway_time">Heure de retrait</label>
-            <input type="time" id="takeaway_time" name="takeaway_time" value="<?= htmlspecialchars($takeaway_time) ?>" required>
+            <input type="time" id="takeaway_time" name="takeaway_time" onchange="this.form.submit()" value="<?= htmlspecialchars($takeaway_time) ?>" required>
             <br>
-            <button id="takeaway" type="submit" class="basic-btn">Confirmer l'heure</button>
+            <noscript>
+              <button id="takeaway" type="submit" class="basic-btn">Confirmer l'heure</button>
+            </noscript>
           </form>
           
           <form action="https://www.plateforme-smc.fr/cybank/index.php" method="POST">
