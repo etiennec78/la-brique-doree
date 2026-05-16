@@ -93,7 +93,7 @@ function checkCookStatus() {
                         </form>
                     ` : `
                         <label class="selection">
-                            <span>En attente du retour d'un livreur</span>
+                            <button class="waiting-delivery-btn" disabled>Attente retour livreur</button>
                             <input type="checkbox" checked disabled/> 
                         </label>
                     `;

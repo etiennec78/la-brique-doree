@@ -1,9 +1,9 @@
 :root {
-  --navbartext: #dbdbdb;
   --gold: linear-gradient(#a58741, #4a3c1d);
   --solid-gold: #a58741;
   --solid-dark-gold: #4a3c1d;
   --offwhite: #fffcf5;
+  --text-on-bg: #fffcf5;
   --lightgray: #555;
   --darkgray: #181818;
   --input-color: #ffffff0d;
@@ -12,22 +12,15 @@
   --green: #4caf50;
   --darkgreen: #408f43;
   --bg-image: url('../assets/images/background.png');
+  --svg-filter: none;
 }
 
 body.light-theme {
-  --bg-image: url('../assets/images/background_white.png'); 
-  --gold: linear-gradient(#c0c0c0, #8e8e8e);
-  --solid-gold: #c0c0c0;
-
-  --navbartext: #fffcf5; 
-
+  --bg-image: url('../assets/images/background_white.png');
   --darkgray: #e0e0e0;
   --input-color: #0000001a;
-}
-
-body.light-theme h1 {
-  color: #ffffff ;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  --text-on-bg: #333333;
+  --svg-filter: brightness(20%);
 }
 
 #theme-toggle{
@@ -45,8 +38,8 @@ body {
   margin: 0;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   background-image: var(--bg-image); 
-  background-size: cover;
-  color: var(--offwhite);
+  background-repeat: repeat;
+  color: var(--text-on-bg);
   transition: background-image 0.4s ease;
 }
 
@@ -55,7 +48,7 @@ h1 {
 }
 
 h2 {
-  color: var(--offwhite);
+  color: var(--text-on-bg);
   text-align: center;
 }
 
@@ -79,6 +72,7 @@ header {
 
 #main-header h1 {
   text-align: left;
+  color: var(--offwhite);
   margin-right: clamp(20px, 9vw, 90px);
 }
 
@@ -93,6 +87,10 @@ header {
 .icon {
   width: clamp(35px, 7vw, 70px);
   transition: transform 0.2s;
+}
+
+img[src$=".svg"]:not(#cart) {
+  filter: var(--svg-filter);
 }
 
 #main-header .icon:hover {
@@ -138,7 +136,7 @@ header {
   text-decoration: none;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bold;
-  color: var(--navbartext);
+  color: var(--offwhite);
 }
 
 .navbarbutton::after {
@@ -161,6 +159,7 @@ header {
 
 footer {
   background: var(--darkgray);
+  color: var(--text-on-bg);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
   gap: 20px;
@@ -186,7 +185,7 @@ footer #map iframe {
 
 footer a {
   text-decoration: none;
-  color: var(--offwhite);
+  color: var(--text-on-bg);
 }
 
 h1 {
@@ -206,114 +205,6 @@ h1 {
     object-fit: cover;  
     z-index: 0;
     filter: brightness(30%);
-}
-
-#slideshow {
-    display: flex;
-    width: 400%;     
-    animation: none;
-    transition: transform 0.5s ease-in-out;
-}
-
-#slideshow-frame {
-    width: 90%;
-    margin: 24px auto;
-    margin-top: 50px;
-    border-radius: 25px;
-    overflow: hidden;
-    clip-path: inset(0 round 25px);
-    position: relative; 
-}
-
-.slide {
-    position: relative;
-    flex: 0 0 25%;
-    display: flex;
-    justify-content: center;  
-}
-
-.slide-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.6);
-    color: var(--offwhite);
-    border: none;
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    z-index: 3;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-}
-
-.slide-btn:hover {
-    background: var(--solid-gold);
-}
-
-#prev { 
-  left: 15px; 
-}
-
-#next { 
-    right: 15px;
-}
-
-.rectangle {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: clamp(100px, 30vw, 200px);
-  filter: saturate(50%);
-  backdrop-filter: blur(5px);
-  text-shadow: 0px 0px 5px black;
-  padding: clamp(5px, 2vw, 15px);
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.rectangle h2{
-  text-align: center;
-  font-weight: bold;
-  font-size: clamp(14px, 3vw, 26px);
-  color: var(--offwhite);
-  margin: 0;
-}
-
-.rectangle p{
-  color: var(--offwhite);
-  font-size: clamp(10px, 2vw, 22px);
-  text-align: center;
-  margin: clamp(5px, 1vw, 10px) 0 0 0;
-}
-
-.slide img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-@keyframes slide-boucle {
-  0%, 20% {
-    transform: translateX(0);
-  }
-  25%, 45% {
-    transform: translateX(-25%);
-  }
-  50%, 65% {
-    transform: translateX(-50%);
-  }
-  70%, 95% {
-    transform: translateX(-75%);
-  }
-  100% {
-    transform: translateX(0);
-  }
 }
 
 .basic-btn {
@@ -356,7 +247,7 @@ input {
   border-radius: 5px;
   border: none;
   background-color: var(--input-color);
-  color: var(--offwhite);
+  color: var(--text-on-bg);
 }
 
 .hidden {

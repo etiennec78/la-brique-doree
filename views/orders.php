@@ -10,7 +10,6 @@ include __DIR__ . '/../includes/header.php';
 <main>
       <section class="cart-page">
         <div id="cart-content">
-          <h2>~ Éléments du panier ~</h2>
           <section class="bento">
           <?php if (count($cart_menus) <= 0 and !$cart_has_food): ?>
             <div class="items-grid">
@@ -18,72 +17,10 @@ include __DIR__ . '/../includes/header.php';
               <button onclick="location.href='/products'" class="basic-btn">Explorer la carte</button>
             </div>
           <?php else: ?>
-            <!-- Boucler pour chaque menu + 1 (plats individuels) -->
-            <?php for($i = 0; $i < count($cart_menus) + $cart_has_food; $i++): ?>
-                <div>
-                <?php
-                $individual = $i == count($cart_menus);
-                if ($individual) {
-                  $foods = $cart_foods;
-                  $menu_name = "Plats individuels";
-                  $name_suffix = "";
-                } else {
-                  $menu = $cart_menus[$i];
-                  $quantity = $menu['quantity'];
-                  $foods = $menu['foods'];
-                  $menu_name = $menu['name'];
-                }
-                ?>
-
-                <div class="menu-header">
-                <h2><?= htmlspecialchars($menu_name) ?></h2>
-                <?php if (!$individual): ?>
-                  <form method="POST" action="/update_cart" style="display:inline; margin:0; padding:0;">
-                  <input type="hidden" name="item_id" value="<?= $menu['id'] ?>">
-                  <input type="hidden" name="item_type" value="menu">
-                  <div class="nb-selector">
-                  <button class="remove-from-cart" type="submit" name="action" value="remove" aria-label="Retirer du panier">-</button>
-                  <input type="number" class="amount" name="amount" min="0" max="9" value="<?= $quantity ?>"/>
-                  <button class="add-to-cart" type="submit" name="action" value="add" aria-label="Ajouter au panier">+</button>
-                  </div>
-                  </form>
-                <?php endif; ?>
-                </div>
-                <div class="items-grid">
-
-                <?php foreach($foods as $food): ?>
-                  <?php
-                  $name = $food['name'];
-                  $description = $food['description'];
-                  $price_val = floatval($food['price']);
-                  $price_str = number_format($price_val, 2, ",");
-                  $image_path = 'assets/' . $food['image_path'];
-                  $food_id = $food['item_id'];
-
-                  if ($individual) {
-                    $quantity = $food['quantity'];
-                  }
-                  ?>
-
-                  <article class="description" description="<?= htmlspecialchars($description) ?>" price="<?= $price_str ?>€" style="background-image: url(<?= htmlspecialchars($image_path) ?>);">
-                  <h3><?= htmlspecialchars($name) ?></h3>';
-
-                  <?php if ($individual): ?>
-                    <form method="POST" action="/update_cart" style="display:inline; margin:0; padding:0;">
-                    <input type="hidden" name="item_id" value="<?= $food_id ?>">
-                    <input type="hidden" name="item_type" value="food">
-                    <div class="nb-selector">
-                    <button class="remove-from-cart" type="submit" name="action" value="remove" aria-label="Retirer du panier">-</button>
-                    <input type="number" class="amount" name="amount" min="0" max="9" value="<?= $quantity ?>"/>
-                    <button class="add-to-cart" type="submit" name="action" value="add" aria-label="Ajouter au panier">+</button>
-                    </div>
-                    </form>
-                  <?php endif; ?>
-                  </article>
-                <?php endforeach; ?>
-                </div>
-                </div>
-            <?php endfor; ?>
+            <?php 
+            $is_editable = true;
+            include __DIR__ . '/../includes/bento_grid.php'; 
+            ?>
           <?php endif; ?>
       </section>
         </div>
@@ -134,8 +71,10 @@ include __DIR__ . '/../includes/header.php';
           <details class="coupon-details">
             <summary>Code promo ?</summary>
             <form class="coupon-form" action="/apply_coupon" method="POST">
-              <input type="text" name="coupon" placeholder="Code promo">
-              <button id="submit_coupon" class="basic-btn" type="submit">Appliquer</button>
+              <input type="text" name="coupon" placeholder="Code promo" onchange="this.form.submit()">
+              <noscript>
+                <button id="submit_coupon" class="basic-btn" type="submit">Appliquer</button>
+              </noscript>
             </form>
           </details>
           <?php endif; ?>

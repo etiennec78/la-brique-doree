@@ -49,27 +49,27 @@ class Cart {
         return 0;
     }
 
-    public static function getCartMenus($uid) {
+    public static function getCartItems($uid, $item_type, $cart_id=-1) {
         global $pdo;
-        $stmt = $pdo->prepare("
-            SELECT m.id, m.name, m.price, cm.quantity
-            FROM cart c
-            JOIN cart_menu cm ON c.id = cm.cart_id
-            JOIN menu m ON cm.menu_id = m.id
-            WHERE c.user_id = ? AND c.payment_status_id = 1
-        ");
-        $stmt->execute([$uid]);
-        return $stmt->fetchAll();
-    }
 
-    public static function getCartFoods($uid) {
-        global $pdo;
+        // Check arguments
+        if (
+            !in_array($item_type, ["menu", "food"])
+            || !is_numeric($cart_id)
+        ) return [];
+
+        // Get the current cart, or the one specified by $cart_id
+        $condition = ($cart_id == -1) ? "c.payment_status_id = 1" : "c.id = $cart_id";
+
+        // Get the image only for food type
+        $select = ($item_type == "food") ? ", mf.image_path" : "";
+
         $stmt = $pdo->prepare("
-            SELECT f.id as item_id, f.name, f.price, f.description, f.image_path, cf.quantity
+            SELECT mf.id, mf.name, mf.price, mf.description, cmf.quantity $select
             FROM cart c
-            JOIN cart_food cf ON c.id = cf.cart_id
-            JOIN food f ON cf.food_id = f.id
-            WHERE c.user_id = ? AND c.payment_status_id = 1
+            JOIN cart_$item_type cmf ON c.id = cmf.cart_id
+            JOIN $item_type mf ON cmf.$item_type"."_id = mf.id
+            WHERE c.user_id = ? AND $condition
         ");
         $stmt->execute([$uid]);
         return $stmt->fetchAll();

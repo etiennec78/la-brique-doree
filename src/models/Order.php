@@ -38,6 +38,31 @@ class Order {
         return $stmt->fetchAll();
     }
 
+    public static function getAllOrdersFromUser($uid) {
+        global $pdo;
+        $stmt = $pdo->prepare("
+        SELECT o.id, o.takeaway_time, o.cook_id, o.delivery_person_id, p.amount
+        FROM orders o
+        LEFT JOIN payment p ON o.cart_id = p.cart_id
+        WHERE o.customer_id = ?
+        ORDER BY o.id DESC
+        ");
+        $stmt->execute([$uid]);
+        return $stmt->fetchAll();
+    }
+
+    public static function getAllCompletedOrderIdsFromUser($uid) {
+        global $pdo;
+        $stmt = $pdo->prepare("
+            SELECT o.id
+            FROM orders o
+            WHERE o.customer_id = ? AND o.order_status_id = 5
+            ORDER BY o.id ASC
+        ");
+        $stmt->execute([$uid]);
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
+
     public static function getAvailableStaff($role_name) {
         global $pdo;
 

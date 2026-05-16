@@ -8,8 +8,6 @@ $js_files = ['/js/cook.js'];
 include __DIR__ . '/../includes/header.php';
 ?>
 <main>
-        <h2>~ Commandes ~</h2>
-        
         <?php if(isset($_GET['error'])): ?>
             <p style="text-align: center; font-weight: bold;"><?= $_GET['error'] ?></p>
         <?php endif; ?>
@@ -98,10 +96,7 @@ include __DIR__ . '/../includes/header.php';
                                     <button type="submit" class="basic-btn action-btn">Remis</button>
                                 </form>
                             <?php else: ?>
-                                <label class="selection">
-                                    <span>En attente du retour d'un livreur</span>
-                                    <input type="checkbox" checked disabled/> 
-                                </label>
+                                <button class="waiting-delivery-btn" disabled>Attente retour livreur</button>
                             <?php endif; ?>
                         </td>
                     </tr>

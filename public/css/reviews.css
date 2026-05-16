@@ -33,14 +33,14 @@
 }
 
 .user-ratings p {
-    color: var(--offwhite);
+    color: var(--text-on-bg);
     font-size: 12px;
     margin: 2px 0;
 }
 
 .review-text {
     padding: 20px;
-    color: var(--offwhite);
+    color: var(--text-on-bg);
     font-style: italic;
 }
 
@@ -110,7 +110,7 @@ textarea {
     height: 80px;
     background: var(--input-color);
     border: 0px;
-    color: var(--offwhite);
+    color: var(--text-on-bg);
     padding: 10px;
     margin-bottom: 10px;
     display: block;
@@ -127,7 +127,7 @@ textarea {
     text-align: right;
     font-size: 0.85rem;
     margin-top: 5px;
-    color: var(--offwhite);
+    color: var(--text-on-bg);
 }
 
 #nb-caracteres {

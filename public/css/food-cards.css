@@ -13,6 +13,7 @@ article {
   background-repeat: no-repeat;
   position: relative;
   overflow: hidden;
+  color: var(--offwhite);
 }
 
 article::before {
@@ -32,7 +33,7 @@ article::before {
   grid-auto-rows: 1fr;
 }
 
-.bento > * {
+.bento > article {
   margin: 0.5rem;
   border-radius: 0.5rem;
 }

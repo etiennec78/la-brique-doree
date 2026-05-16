@@ -21,6 +21,7 @@
 
 .bento {
   display: block;
+  margin-top: 25px;
 }
 
 .bento > div {
@@ -53,6 +54,10 @@
   text-align: center;
   font-size: 1.5rem;
   margin: 10px;
+}
+
+.menu {
+  margin: 25px;
 }
 
 .menu-header {
@@ -189,7 +194,7 @@ input::-webkit-inner-spin-button {
   cursor: pointer;
   font-size: 16px;
   background: none;
-  color: var(--offwhite);
+  color: var(--text-on-bg);
 }
 
 #delivery-type button.selected {

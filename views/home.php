@@ -3,7 +3,7 @@ $title = "La Brique Dorée";
 $h1 = "LA BRIQUE DOREE";
 $show_cart = true;
 $show_video = true;
-$css_files = [];
+$css_files = ['/css/slideshow.css'];
 $js_files = ['/js/slider.js'];
 include __DIR__ . '/../includes/header.php';
 ?>

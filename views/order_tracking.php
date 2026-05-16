@@ -12,10 +12,6 @@ include __DIR__ . '/../includes/header.php';
         <?php if (empty($orders)): ?>
             <h2>Aucune commande en cours</h2>
             <p style="text-align: center; margin-bottom: 2rem;">Vous n'avez pas de commande en préparation ou en cours de livraison actuellement.</p>
-            <div class="tracking-actions">
-                <button onclick="location.href='/'" class="basic-btn gray-btn">Retour à l'accueil</button>
-                <button onclick="location.href='/order_history'" class="basic-btn">Historique des commandes</button>
-            </div>
         <?php else: ?>
             <?php foreach ($orders as $order): ?>
             <div class="order-tracker" id="order-<?= $order['id'] ?>" data-order-id="<?= $order['id'] ?>" data-status="<?= $order['status'] ?>" style="margin-bottom: 4rem; padding-bottom: 2rem; border-bottom: 1px solid #ccc;">
@@ -70,6 +66,12 @@ include __DIR__ . '/../includes/header.php';
             </div>
             <?php endforeach; ?>
         <?php endif; ?>
+        <div class="tracking-actions">
+            <?php if (empty($orders)): ?>
+                <button onclick="location.href='/'" class="basic-btn gray-btn">Retour à l'accueil</button>
+            <?php endif; ?>
+            <button onclick="location.href='/order_history'" class="basic-btn">Historique des commandes</button>
+        </div>
     </div>
     </main>
 

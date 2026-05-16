@@ -40,19 +40,8 @@
 
 .admin-table td {
     padding: 12px;
-    color: var(--offwhite);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.tag {
-    padding: 3px 8px;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    background: var(--darkgray);
-}
-
-.tag.gold {
-    background: var(--solid-gold);
+    color: var(--text-on-bg);
+    border-bottom: 1px solid var(--input-color);
 }
 
 .action-link {
