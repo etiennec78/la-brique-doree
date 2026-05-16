@@ -85,7 +85,7 @@ class ProfileController extends Controller {
                 $_SESSION['user'] = array_merge($_SESSION['user'], $_POST);
             }
         } catch (\PDOException $e) {
-            $erreur = "Erreur lors de la mise à jour : " . $e->getMessage();
+            $error = "Erreur lors de la mise à jour : " . $e->getMessage();
         }
 
         $this->index($target);
