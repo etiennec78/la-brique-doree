@@ -14,10 +14,6 @@ class OrderHistoryController extends Controller {
 
     $uid = $_SESSION['user']['id'];
     $is_admin = User::isAdmin($uid);
-    $order_id = null;
-    $prev_id = null;
-    $next_id = null;
-    $order = [];
 
     // Get the user id to lookup
     if (!isset($_GET['user_id'])) {
@@ -65,10 +61,10 @@ class OrderHistoryController extends Controller {
       'order_history',
       [
         'target_id' => $target_id,
-        'order_id' => $order_id,
-        'prev_id' => $prev_id,
-        'next_id' => $next_id,
-        'order' => $order
+        'order_id' => $order_id ?? null,
+        'prev_id' => $prev_id ?? null,
+        'next_id' => $next_id ?? null,
+        'order' => $order ?? []
       ]
     );
   }
