@@ -18,7 +18,9 @@ include __DIR__ . '/../includes/header.php';
                         <option value="delivery_person" <?= (($_GET['role'] ?? '') === 'delivery_person') ? 'selected' : '' ?>>Livreurs</option>
                         <option value="cook" <?= (($_GET['role'] ?? '') === 'cook') ? 'selected' : '' ?>>Restaurateurs</option>
                     </select>
-                    <button type="submit" class="action-link" style="margin-left: 10px; cursor: pointer;">Filtrer</button>
+                    <noscript>
+                        <button type="submit" class="action-link" onchange="this.form.submit()" style="margin-left: 10px; cursor: pointer;">Filtrer</button>
+                    </noscript>
                 </form>
             </div>
 
@@ -60,8 +62,10 @@ include __DIR__ . '/../includes/header.php';
                             <td>
                                 <form action="/global_reduction" method="POST">
                                     <input type="hidden" name="user_id" value="<?= $user_data['id'] ?>">
-                                    <input type="text" name="reduction" maxlength=3 size=3 value="<?= $user_data['global_reduction'] * 100 ?>">
-                                    <button id="manage" type="submit" class="action-link">Appliquer</button>
+                                    <input type="text" name="reduction" maxlength=3 size=3 value="<?= $user_data['global_reduction'] * 100 ?>" onchange="this.form.submit()">
+                                    <noscript>
+                                        <button id="manage" type="submit" class="action-link">Appliquer</button>
+                                    </noscript>
                                 </form>
                             </td>
                             <td><?= $user_data['role'] ?></td>

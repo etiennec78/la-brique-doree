@@ -71,8 +71,10 @@ include __DIR__ . '/../includes/header.php';
           <details class="coupon-details">
             <summary>Code promo ?</summary>
             <form class="coupon-form" action="/apply_coupon" method="POST">
-              <input type="text" name="coupon" placeholder="Code promo">
-              <button id="submit_coupon" class="basic-btn" type="submit">Appliquer</button>
+              <input type="text" name="coupon" placeholder="Code promo" onchange="this.form.submit()">
+              <noscript>
+                <button id="submit_coupon" class="basic-btn" type="submit">Appliquer</button>
+              </noscript>
             </form>
           </details>
           <?php endif; ?>
