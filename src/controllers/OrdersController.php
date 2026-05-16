@@ -150,14 +150,21 @@ class OrdersController extends Controller {
         require_once __DIR__ . '/../models/Coupon.php';
 
         $coupon_code = $_POST['coupon'];
+        $uid = $_SESSION['user']['id'];
+        $cart_id = Cart::getUserCartId($uid);
+
+        // Remove coupon if empty
+        if ($coupon_code == "") {
+            Coupon::addCouponToCart(null, $cart_id);
+            header("Location: /orders");
+        }
+
+        // Add coupon if valid
         $coupon = Coupon::getCoupon($coupon_code);
-
         if ($coupon !== false) {
-            $uid = $_SESSION['user']['id'];
-            $cart_id = Cart::getUserCartId($uid);
-
             Coupon::addCouponToCart($coupon['id'], $cart_id);
         }
+
         header("Location: /orders");
     }
 
