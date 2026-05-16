@@ -57,7 +57,7 @@ class Order {
             SELECT o.id
             FROM orders o
             WHERE o.customer_id = ? AND o.order_status_id = 5
-            ORDER BY o.id ASC
+            ORDER BY o.id DESC
         ");
         $stmt->execute([$uid]);
         return $stmt->fetchAll(PDO::FETCH_COLUMN);

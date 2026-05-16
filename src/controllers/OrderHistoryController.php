@@ -9,6 +9,7 @@ class OrderHistoryController extends Controller {
 
     require_once __DIR__ . '/../format_data.php';
     require_once __DIR__ . '/../models/Cart.php';
+    require_once __DIR__ . '/../models/Coupon.php';
     require_once __DIR__ . '/../models/Menu.php';
     require_once __DIR__ . '/../models/Order.php';
     require_once __DIR__ . '/../models/User.php';
@@ -56,6 +57,13 @@ class OrderHistoryController extends Controller {
       $cart_items = array_merge($cart_foods, $cart_menus);
       foreach($cart_items as $item) {
         $order['total_price'] += $item['price'] * $item['quantity'];
+      }
+
+      // Get the associated coupon
+      $order['coupon'] = Coupon::getCouponFromCart($order['cart_id']);
+      if ($order['coupon'] != null) {
+        $reduction = $order['coupon']['discount_percent'];
+        $order['total_price'] *= (1 - $reduction);
       }
 
       // Get previous and next order ids

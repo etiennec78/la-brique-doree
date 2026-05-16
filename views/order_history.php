@@ -28,6 +28,9 @@ include __DIR__ . '/../includes/header.php';
                     <p>Retrait programmé : <?= $order['takeaway_time'] ?></p>
                 <?php endif; ?>
             </div>
+            <?php if ($order['coupon'] != null): ?>
+                <p>Code utilisé : <?= $order['coupon']['code'] ?> (-<?= $order['coupon']['discount_percent'] ?>%)</p>
+            <?php endif; ?>
             <p>Prix total : <?= number_format($order['total_price'], 2, ",") ?>€</p>
 
             <section class="bento">
