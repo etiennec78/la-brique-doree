@@ -1,8 +1,8 @@
 <?php
 $host = $GLOBALS['config']['db_host'] ?? 'localhost';
 $db   = $GLOBALS['config']['db_name'] ?? 'brique_doree';
-$user = 'root';
-$pass = 'root';
+$user = $GLOBALS['config']['db_user'] ?? 'root';
+$pass = $GLOBALS['config']['db_pass'] ?? 'root';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
