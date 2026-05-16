@@ -18,7 +18,7 @@ class OrderHistoryController extends Controller {
     $is_admin = User::isAdmin($uid);
 
     // Get the user id to lookup
-    if (!isset($_GET['user_id'])) {
+    if (!isset($_GET['user_id']) || $_GET['user_id'] == $uid) {
       $target_id = $uid;
     } elseif ($is_admin) {
       $target_id = $_GET['user_id'];
