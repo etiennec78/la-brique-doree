@@ -72,7 +72,7 @@ include __DIR__ . '/../includes/header.php';
           <details class="coupon-details">
             <summary>Code promo ?</summary>
             <form class="coupon-form" action="/apply_coupon" method="POST">
-              <input type="text" name="coupon" placeholder="Code promo">
+              <input type="text" name="coupon" placeholder="Code promo" value="<?= $coupon['code'] ?>">
               <noscript>
                 <button id="submit_coupon" class="basic-btn" type="submit">Appliquer</button>
               </noscript>
