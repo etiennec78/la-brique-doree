@@ -3,7 +3,7 @@ $title = "La Brique Dorée - Historique des commandes";
 $h1 = "HISTORIQUE DES COMMANDES";
 $show_cart = true;
 $show_video = true;
-$css_files = ['/css/order_tracking.css', '/css/order_history.css'];
+$css_files = ['/css/order_tracking.css', '/css/order_history.css', '/css/food-cards.css', '/css/orders.css'];
 include __DIR__ . '/../includes/header.php';
 ?>
 <main>
@@ -29,6 +29,13 @@ include __DIR__ . '/../includes/header.php';
                 <?php endif; ?>
             </div>
             <p>Total price : <?= number_format($order['total_price'], 2, ",") ?>€</p>
+
+            <section class="bento">
+                <?php 
+                $is_editable = false;
+                include __DIR__ . '/../includes/bento_grid.php'; 
+                ?>
+            </section>
         <?php endif; ?>
     </div>
 </main>

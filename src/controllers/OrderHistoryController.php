@@ -9,6 +9,7 @@ class OrderHistoryController extends Controller {
 
     require_once __DIR__ . '/../format_data.php';
     require_once __DIR__ . '/../models/Cart.php';
+    require_once __DIR__ . '/../models/Menu.php';
     require_once __DIR__ . '/../models/Order.php';
     require_once __DIR__ . '/../models/User.php';
 
@@ -44,6 +45,14 @@ class OrderHistoryController extends Controller {
       // Get the total price of the order
       $cart_foods = Cart::getCartItems($target_id, 'food', $order['cart_id']);
       $cart_menus = Cart::getCartItems($target_id, 'menu', $order['cart_id']);
+      $cart_has_food = count($cart_foods) > 0;
+
+      // Add foods to menus
+      foreach ($cart_menus as &$menu) {
+          $menu['foods'] = Menu::getMenuFoods($menu['id']);
+      }
+      unset($menu);
+
       $cart_items = array_merge($cart_foods, $cart_menus);
       foreach($cart_items as $item) {
         $order['total_price'] += $item['price'] * $item['quantity'];
@@ -64,7 +73,10 @@ class OrderHistoryController extends Controller {
         'order_id' => $order_id ?? null,
         'prev_id' => $prev_id ?? null,
         'next_id' => $next_id ?? null,
-        'order' => $order ?? []
+        'order' => $order ?? [],
+        'cart_menus' => $cart_menus ?? [],
+        'cart_foods' => $cart_foods ?? [],
+        'cart_has_food' => $cart_has_food ?? false
       ]
     );
   }
