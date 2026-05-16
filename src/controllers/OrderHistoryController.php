@@ -8,6 +8,7 @@ class OrderHistoryController extends Controller {
     }
 
     require_once __DIR__ . '/../format_data.php';
+    require_once __DIR__ . '/../models/Cart.php';
     require_once __DIR__ . '/../models/Order.php';
     require_once __DIR__ . '/../models/User.php';
 
@@ -40,9 +41,17 @@ class OrderHistoryController extends Controller {
     if ($order_id != null) {
       // Get all data about this order
       $order = Order::getOrderById($order_id);
-      $order['items'] = Order::getOrderItems($order['id']);
       $order['cook'] = getName(User::getUserInfo($order['cook_id']));
       $order['delivery_person'] = getName(User::getUserInfo($order['delivery_person_id']));
+      $order['total_price'] = 0;
+
+      // Get the total price of the order
+      $cart_foods = Cart::getCartItems($target_id, 'food', $order['cart_id']);
+      $cart_menus = Cart::getCartItems($target_id, 'menu', $order['cart_id']);
+      $cart_items = array_merge($cart_foods, $cart_menus);
+      foreach($cart_items as $item) {
+        $order['total_price'] += $item['price'] * $item['quantity'];
+      }
 
       // Get previous and next order ids
       $index = array_search($order_id, $order_ids);

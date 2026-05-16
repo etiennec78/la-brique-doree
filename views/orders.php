@@ -57,7 +57,7 @@ include __DIR__ . '/../includes/header.php';
                   $price_val = floatval($food['price']);
                   $price_str = number_format($price_val, 2, ",");
                   $image_path = 'assets/' . $food['image_path'];
-                  $food_id = $food['item_id'];
+                  $food_id = $food['id'];
 
                   if ($individual) {
                     $quantity = $food['quantity'];

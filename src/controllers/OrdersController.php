@@ -40,8 +40,8 @@ class OrdersController extends Controller {
         $reduction = 0;
         $cart_details = [];
 
-        $cart_menus = Cart::getCartMenus($uid);
-        $cart_foods = Cart::getCartFoods($uid);
+        $cart_menus = Cart::getCartItems($uid, "menu");
+        $cart_foods = Cart::getCartItems($uid, "food");
         $cart_has_food = count($cart_foods) > 0;
 
         foreach ($cart_menus as &$menu) {
