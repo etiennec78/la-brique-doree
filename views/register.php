@@ -1,8 +1,7 @@
 <?php
 $title = "La Brique Dorée - Inscription";
 $h1 = "INSCRIPTION";
-$show_cart = false;
-$show_video = true;
+$staff_page = false;
 $css_files = ['/css/form.css'];
 $js_files = ['/js/show_password.js'];
 include __DIR__ . '/../includes/header.php';

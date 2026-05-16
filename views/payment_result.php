@@ -1,8 +1,7 @@
 <?php
 $title = "Résultat du paiement - La Brique Dorée";
 $h1 = "LA BRIQUE DORÉE";
-$show_cart = false;
-$show_video = true;
+$staff_page = false;
 $css_files = ['/css/payment_result.css'];
 include __DIR__ . '/../includes/header.php';
 ?>

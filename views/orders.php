@@ -1,8 +1,7 @@
 <?php
 $title = "La Brique Dorée";
 $h1 = "COMMANDE";
-$show_cart = true;
-$show_video = true;
+$staff_page = false;
 $css_files = ['/css/food-cards.css', '/css/orders.css'];
 $js_files = ['/js/orders.js'];
 include __DIR__ . '/../includes/header.php';

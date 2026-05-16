@@ -1,8 +1,7 @@
 <?php
 $title = "Restaurateur - La Brique Dorée";
 $h1 = "RESTAURATEUR";
-$show_cart = true;
-$show_video = true;
+$staff_page = true;
 $css_files = ['/css/cook.css'];
 $js_files = ['/js/cook.js'];
 include __DIR__ . '/../includes/header.php';

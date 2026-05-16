@@ -32,14 +32,14 @@ if (isset($_SESSION['user'])) {
             <img id="logo" src="/assets/images/LOGO.png" alt="Logo">
             <h1><?= $h1 ?? 'LA BRIQUE DOREE' ?></h1>
             
-            <?php if (isset($show_cart) && $show_cart): ?>
+            <?php if (isset($staff_page) && !$staff_page): ?>
             <a href="/orders">
                 <img id="cart" class="icon" src="/assets/images/cart.svg" alt="Icône de panier de courses">
                 <p id="cart_items" class="bubble"><?= $cart_count ?? 0 ?></p>
             </a>
             <?php endif; ?>
 
-            <?php if (isset($show_video) && $show_video): ?>
+            <?php if (isset($staff_page) && !$staff_page): ?>
             <video class="video-background" autoplay muted loop>
                 <source src="/assets/images/header_background.mp4" type="video/mp4">
             </video>

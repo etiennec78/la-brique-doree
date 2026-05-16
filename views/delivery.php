@@ -1,8 +1,7 @@
 <?php
 $title = "Livreur - La Brique Dorée";
 $h1 = "LIVRAISON";
-$show_cart = false;
-$show_video = false;
+$staff_page = true;
 $css_files = ['/css/delivery.css'];
 $js_files = ['/js/delivery.js'];
 include __DIR__ . '/../includes/header.php';

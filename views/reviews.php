@@ -1,8 +1,7 @@
 <?php
 $title = "Avis - La Brique Dorée";
 $h1 = "NOS AVIS";
-$show_cart = true;
-$show_video = true;
+$staff_page = false;
 $css_files = ['/css/reviews.css'];
 $js_files = ['/js/count_characters.js'];
 include __DIR__ . '/../includes/header.php';

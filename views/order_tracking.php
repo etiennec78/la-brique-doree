@@ -1,8 +1,7 @@
 <?php
 $title = "Suivi - La Brique Dorée";
 $h1 = "SUIVI DE COMMANDE";
-$show_cart = false;
-$show_video = false;
+$staff_page = false;
 $css_files = ['/css/order_tracking.css'];
 $js_files = ['js/order_tracking.js'];
 include __DIR__ . '/../includes/header.php';

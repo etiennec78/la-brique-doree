@@ -1,8 +1,7 @@
 <?php
 $title = "La Brique Dorée - Connexion";
 $h1 = "CONNEXION";
-$show_cart = false;
-$show_video = false;
+$staff_page = false;
 $css_files = ['/css/form.css'];
 $js_files = ['/js/show_password.js'];
 include __DIR__ . '/../includes/header.php';

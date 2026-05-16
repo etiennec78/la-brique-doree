@@ -1,8 +1,7 @@
 <?php
 $title = "La Brique Dorée - Profil";
 $h1 = "PROFIL";
-$show_cart = true;
-$show_video = true;
+$staff_page = false;
 $css_files = ['/css/form.css', '/css/profile.css'];
 include __DIR__ . '/../includes/header.php';
 ?>

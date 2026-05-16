@@ -1,8 +1,7 @@
 <?php
 $title = "Admin - La Brique Dorée";
 $h1 = "ADMINISTRATEUR";
-$show_cart = false;
-$show_video = true;
+$staff_page = true;
 $css_files = ['/css/admin.css'];
 $js_files = ['/js/admin.js'];
 include __DIR__ . '/../includes/header.php';

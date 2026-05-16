@@ -1,8 +1,7 @@
 <?php
 $title = "La Brique Dorée - Historique des commandes";
 $h1 = "HISTORIQUE DES COMMANDES";
-$show_cart = true;
-$show_video = true;
+$staff_page = false;
 $css_files = ['/css/order_tracking.css', '/css/order_history.css', '/css/food-cards.css', '/css/orders.css'];
 include __DIR__ . '/../includes/header.php';
 ?>
