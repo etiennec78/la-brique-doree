@@ -26,4 +26,16 @@ class Coupon {
       $stmt_c->execute([$uid]);
       return $stmt_c->fetch();
     }
+
+    public static function getCouponFromCart($cart_id) {
+      global $pdo;
+      $stmt = $pdo->prepare("
+        SELECT co.*
+        FROM coupon co
+        JOIN cart ca ON ca.coupon_id = co.id
+        WHERE ca.id = ?
+      ");
+      $stmt->execute([$cart_id]);
+      return $stmt->fetch();
+    }
 }
