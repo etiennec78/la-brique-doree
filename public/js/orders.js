@@ -1,7 +1,7 @@
 // Intercept the forms and update the cart-bar UI asynchronously
 document.addEventListener("DOMContentLoaded", () => {
 
-  function updateCartBarFromResponse(responsePromise) {
+  function updateCartBarFromResponse(responsePromise, openCouponDetails = false) {
     responsePromise
       .then(res => res.text())
       .then(html => {
@@ -11,6 +11,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const oldCartBar = document.getElementById("cart-bar");
         if (newCartBar && oldCartBar) {
           oldCartBar.innerHTML = newCartBar.innerHTML;
+          
+          if (openCouponDetails) {
+            const newDetails = document.querySelector(".coupon-details");
+            if (newDetails) newDetails.open = true;
+          }
         }
       })
       .catch(error => console.error("Error:", error));
@@ -34,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartBarFromResponse(fetch(e.target.action, {
         method: 'POST',
         body: formData
-      }));
+      }), true);
     }
   });
 
@@ -42,10 +47,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target.id === "takeaway_time" || e.target.name === "coupon") {
       const form = e.target.closest("form");
       const formData = new FormData(form);
+      const isCouponUpdate = e.target.name === "coupon";
       updateCartBarFromResponse(fetch(form.action, {
         method: 'POST',
         body: formData
-      }));
+      }), isCouponUpdate);
     }
   });
 });
