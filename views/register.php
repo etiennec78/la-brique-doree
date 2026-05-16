@@ -10,6 +10,11 @@ include __DIR__ . '/../includes/header.php';
 <main>
         <div class="form-page">
             <h2>Inscription</h2>
+
+            <?php if(isset($error)): ?>
+                <p class="alert"><?= $error ?></p>
+            <?php endif; ?>
+            
             <form action="/register" method="post">
                 <div class="input-group">
                     <label for="email">Email</label>

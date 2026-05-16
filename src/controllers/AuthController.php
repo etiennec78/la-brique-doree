@@ -57,9 +57,15 @@ class AuthController extends Controller
 
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
+    $existing_user = User::findByEmail($email);
 
     if (empty($email) || empty($password)) {
       $this->render('register', ['error' => 'Veuillez remplir tous les champs.']);
+      return;
+    }
+
+    elseif (!empty($existing_user)) {
+      $this->render('register', ['error' => 'L\'email est déjà associé à un compte.']);
       return;
     }
 
