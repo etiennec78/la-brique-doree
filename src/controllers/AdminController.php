@@ -28,4 +28,22 @@ class AdminController extends Controller {
 
         header('Location: /admin');
     }
+
+    public function apiBanUser() {
+        if (($_SESSION['user']['role_id'] ?? 0) != 3) {
+            exit(); 
+        }
+
+        require_once __DIR__ . '/../models/User.php';
+
+        $id = $_POST['user_id'];
+        $etat = $_POST['banned'];
+
+        if ($id != $_SESSION['user']['id']) {
+            User::setUserData($id, 'banned', $etat);
+        }
+
+        echo json_encode(['success' => true, 'banned' => $etat]);
+        exit();
+    }
 }

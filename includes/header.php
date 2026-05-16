@@ -15,6 +15,18 @@
     <script src="/js/light_mode.js" defer></script>
 </head>
 <body>
+<?php
+
+if (isset($_SESSION['user'])) {
+    require_once __DIR__ . '/../src/models/User.php';
+
+    if (User::getUserData($_SESSION['user']['id'], 'banned')) {
+        session_destroy();
+        header('Location: /login?banned=1');
+        exit();
+    }
+}
+?>
     <header>
         <div id="main-header">
             <img id="logo" src="/assets/images/LOGO.png" alt="Logo">

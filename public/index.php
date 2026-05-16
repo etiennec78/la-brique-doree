@@ -25,6 +25,7 @@ $router->add('GET', 'reviews', 'ReviewsController', 'index');
 
 // POST
 $router->add('POST', 'global_reduction', 'AdminController', 'applyGlobalReduction');
+$router->add('POST', 'api_ban_user', 'AdminController', 'apiBanUser');
 $router->add('POST', 'register', 'AuthController', 'processRegister');
 $router->add('POST', 'login', 'AuthController', 'processLogin');
 $router->add('POST', 'confirm_delivery', 'DeliveryController', 'confirmDelivery');
