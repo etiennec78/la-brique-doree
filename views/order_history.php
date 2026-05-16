@@ -28,7 +28,7 @@ include __DIR__ . '/../includes/header.php';
                     <p>Retrait programmé : <?= $order['takeaway_time'] ?></p>
                 <?php endif; ?>
             </div>
-            <p>Total price : <?= number_format($order['total_price'], 2, ",") ?>€</p>
+            <p>Prix total : <?= number_format($order['total_price'], 2, ",") ?>€</p>
 
             <section class="bento">
                 <?php 
