@@ -87,7 +87,7 @@ include __DIR__ . '/../includes/header.php';
                             <?php else: ?>
                                 <br><small>Livraison
                                     <?php 
-                                    if (User::isAdmin($_SESSION['user']['id']) && !empty($order['delivery_first_name'])): 
+                                    if ($is_admin && !empty($order['delivery_first_name'])):
                                     ?>
                                         (Livreur : <?= htmlspecialchars($order['delivery_first_name'] . ' ' . $order['delivery_last_name']) ?>)
                                     <?php endif; ?>

@@ -25,6 +25,8 @@ class CookController extends Controller {
         require_once __DIR__ . '/../models/User.php';
         include_once __DIR__ . '/../format_data.php';
 
+        $uid = $_SESSION['user']['id'];
+        $is_admin = User::isAdmin($uid);
         $cart_count = Cart::getCartCount();
         $pending_orders = $this->getEnrichedPendingOrders();
         $delivery_orders = Order::getOrdersFromState(['ready', 'shipping']);
@@ -33,6 +35,7 @@ class CookController extends Controller {
         $this->render(
             'cook',
             [
+                'is_admin' => $is_admin,
                 'cart_count' => $cart_count,
                 'get_name' => 'getName',
                 'pending_orders' => $pending_orders,
