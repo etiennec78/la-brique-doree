@@ -101,7 +101,8 @@ class OrdersController extends Controller {
                 'montant_cybank' => $montant_cybank,
                 'control' => $control,
                 'user_has_valid_info' => $user_has_valid_info,
-                'error' => $_SESSION['error'] ?? null
+                'error' => $_SESSION['error'] ?? null,
+                'error_c' => $_SESSION['error_c'] ?? null
             ]
         );
     }
@@ -150,23 +151,32 @@ class OrdersController extends Controller {
         require_once __DIR__ . '/../models/Cart.php';
         require_once __DIR__ . '/../models/Coupon.php';
 
-        $coupon_code = $_POST['coupon'];
+        $coupon_code = isset($_POST['coupon']) ? trim($_POST['coupon']) : '';
         $uid = $_SESSION['user']['id'];
         $cart_id = Cart::getUserCartId($uid);
 
         // Remove coupon if empty
-        if ($coupon_code == "") {
+        if ($coupon_code === "") {
+            unset($_SESSION['error_c']);
             Coupon::addCouponToCart(null, $cart_id);
             header("Location: /orders");
+            exit();
         }
 
         // Add coupon if valid
         $coupon = Coupon::getCoupon($coupon_code);
-        if ($coupon !== false) {
+
+        if ($coupon == false) {
+            $_SESSION['error_c'] = 'Le coupon utilisé est invalide.';
+        }
+
+        else {
+            unset($_SESSION['error_c']); 
             Coupon::addCouponToCart($coupon['id'], $cart_id);
         }
 
         header("Location: /orders");
+        exit();
     }
 
     public function setDeliveryType() {
