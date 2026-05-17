@@ -276,4 +276,18 @@ class Order {
 
         return ['foods' => $foods, 'menus' => $menus];
     }
+
+    public static function getAllRunningDeliveries() {
+        global $pdo;
+        $stmt = $pdo->prepare("
+            SELECT o.*, os.name AS status, u.first_name, u.last_name
+            FROM orders o
+            JOIN order_status os ON o.order_status_id = os.id
+            LEFT JOIN users u ON o.delivery_person_id = u.id
+            WHERE o.is_takeaway = 0 AND o.order_status_id < 5
+            ORDER BY o.id DESC
+        ");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

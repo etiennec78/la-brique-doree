@@ -10,11 +10,17 @@ class AdminController extends Controller {
         }
 
         require_once __DIR__ . '/../models/User.php';
+        require_once __DIR__ . '/../models/Order.php';
         include_once __DIR__ . '/../format_data.php';
 
         $users_data = User::getAllUsersInfo();
+        $running_deliveries = Order::getAllRunningDeliveries();
 
-        $this->render('admin', ['users_data' => $users_data, 'get_name' => 'getName']);
+        $this->render('admin', [
+            'users_data' => $users_data, 
+            'running_deliveries' => $running_deliveries, 
+            'get_name' => 'getName'
+        ]);
     }
 
     public function applyGlobalReduction() {
