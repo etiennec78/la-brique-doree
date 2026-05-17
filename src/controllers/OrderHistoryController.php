@@ -29,6 +29,8 @@ class OrderHistoryController extends Controller {
 
     $order_ids = Order::getAllCompletedOrderIdsFromUser($target_id);
 
+    $order_id = null; 
+
     // Get the order id to display
     if (isset($_GET['order_id']) && in_array($_GET['order_id'], $order_ids)) {
       $order_id = $_GET['order_id'];
