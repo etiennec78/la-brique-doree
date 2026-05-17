@@ -15,8 +15,8 @@ class CookController extends Controller {
         include_once __DIR__ . '/../format_data.php';
 
         $cart_count = Cart::getCartCount();
-        $pending_orders = Order::getOrdersFromState(array('paid', 'preparing'));
-        $delivery_orders = Order::getOrdersFromState(array('ready', 'shipping'));
+        $pending_orders = Order::getOrdersFromState(['paid', 'preparing']);
+        $delivery_orders = Order::getOrdersFromState(['ready', 'shipping']);
         $deliverers = User::getUsersFromRole('delivery_person');
 
         $pending_orders = array_filter($pending_orders, function($order) {
@@ -101,8 +101,8 @@ class CookController extends Controller {
 
         require_once __DIR__ . '/../models/Order.php';
         
-        $pending_orders = Order::getOrdersFromState(array('paid', 'preparing'));
-        $delivery_orders = Order::getOrdersFromState(array('ready', 'shipping'));
+        $pending_orders = Order::getOrdersFromState(['paid', 'preparing']);
+        $delivery_orders = Order::getOrdersFromState(['ready', 'shipping']);
 
         $pending_orders = array_filter($pending_orders, function($order) {
             return empty($order['delivery_person_id']);
