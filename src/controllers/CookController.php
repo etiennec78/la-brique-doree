@@ -73,6 +73,7 @@ class CookController extends Controller {
             }
         }
         header('Location: /cook');
+        exit();
     }
 
     public function finishTakeaway() {
@@ -87,6 +88,7 @@ class CookController extends Controller {
             $order_id = (int)$_POST['order_id'];
             Order::setDeliveredStatus($order_id);
             header('Location: /cook?success=finished');
+            exit();
         } else {
             header('Location: /cook');
             exit();
@@ -115,5 +117,6 @@ class CookController extends Controller {
 
         header('Content-Type: application/json');
         echo json_encode(['pending' => $pending_orders, 'delivery' => $delivery_orders]);
+        exit();
     }
 }

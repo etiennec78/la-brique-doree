@@ -36,6 +36,7 @@ class AdminController extends Controller {
         }
 
         header('Location: /admin');
+        exit();
     }
 
     public function apiBanUser() {

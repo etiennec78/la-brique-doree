@@ -53,6 +53,7 @@ class DeliveryController extends Controller {
         }
 
         header('Location: /delivery');
+        exit();
     }
 
     public function cancelDelivery() {
@@ -80,6 +81,7 @@ class DeliveryController extends Controller {
         }
 
         header('Location: /delivery');
+        exit();
     }
 
     public function apiDeliveryGetPending() {
@@ -95,5 +97,6 @@ class DeliveryController extends Controller {
 
         header('Content-Type: application/json');
         echo json_encode(['deliveries' => $deliveries]);
+        exit();
     }
 }

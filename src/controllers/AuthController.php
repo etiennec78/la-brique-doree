@@ -44,7 +44,7 @@ class AuthController extends Controller
       } else {
           header("Location: /");
       }
-      exit;
+      exit();
     } else {
       $this->render('login', ['error' => 'Email ou mot de passe incorrect.']);
     }
@@ -88,7 +88,7 @@ class AuthController extends Controller
 
       $_SESSION['user'] = $newUser;
       header("Location: /");
-      exit;
+      exit();
     } catch (\PDOException $error) {
       $pdo->rollBack();
       error_log("Registering error: " . $error->getMessage());
@@ -102,6 +102,6 @@ class AuthController extends Controller
     unset($_SESSION);
 
     header('Location: /login');
-    exit;
+    exit();
   }
 }

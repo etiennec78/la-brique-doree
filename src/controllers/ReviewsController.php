@@ -86,5 +86,6 @@ class ReviewsController extends Controller {
             }
         }
         header('Location: /reviews');
+        exit();
     }
 }

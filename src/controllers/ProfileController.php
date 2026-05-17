@@ -101,5 +101,6 @@ class ProfileController extends Controller {
 
         header('Content-Type: application/json');
         echo json_encode(['success' => false]);
+        exit();
     }
 }

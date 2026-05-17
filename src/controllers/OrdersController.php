@@ -110,7 +110,7 @@ class OrdersController extends Controller {
     public function updateCart() {
         if (!isset($_SESSION['user'])) {
             header('Location: /login');
-            exit;
+            exit();
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['item_id'], $_POST['item_type'], $_POST['action'])) {
@@ -121,7 +121,7 @@ class OrdersController extends Controller {
 
             if (!in_array($item_type, ['food', 'menu'])) {
                 header('Location: /orders');
-                exit;
+                exit();
             }
 
             require_once __DIR__ . '/../models/Cart.php';
@@ -132,12 +132,12 @@ class OrdersController extends Controller {
             require_once __DIR__ . '/../models/Cart.php';
             header('Content-Type: application/json');
             echo json_encode(['cart_count' => Cart::getCartCount()]);
-            exit;
+            exit();
         }
 
         $referer = $_SERVER['HTTP_REFERER'] ?? '../views/orders.php';
         header("Location: $referer");
-        exit;
+        exit();
     }
 
     public function applyCoupon() {
@@ -193,6 +193,6 @@ class OrdersController extends Controller {
             }
         }
         header("Location: /orders");
-        exit;
+        exit();
     }
 }
