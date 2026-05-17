@@ -112,6 +112,7 @@ class Cart {
         
         $table_name = $item_type === 'food' ? 'cart_food' : 'cart_menu';
         $foreign_key = $item_type === 'food' ? 'food_id' : 'menu_id';
+        $_SESSION['error'] = NULL;
 
         try {
             $pdo->beginTransaction();
@@ -125,16 +126,26 @@ class Cart {
             $current_quantity = self::getItemQuantity($table_name, $foreign_key, $cart_id, $item_id);
 
             if ($current_quantity > 0) {
-                if ($action === 'add' && $current_quantity < 9) {
-                    self::incrementItemQuantity($table_name, $foreign_key, $cart_id, $item_id);
-                } elseif ($action === 'remove') {
+                if ($action === 'remove') {
                     if ($current_quantity > 1) {
                         self::decrementItemQuantity($table_name, $foreign_key, $cart_id, $item_id);
-                    } else {
+                    } 
+                    
+                    else {
                         self::removeItem($table_name, $foreign_key, $cart_id, $item_id);
                     }
                 }
-            } elseif ($action === 'add') {
+
+                else if ($action === 'add' && $current_quantity < 9) {
+                    self::incrementItemQuantity($table_name, $foreign_key, $cart_id, $item_id);
+                } 
+
+                elseif ($action === 'add' && $current_quantity >= 9 ) {
+                    $_SESSION['error'] = 'Vous ne pouvez pas ajouter plus de 9 fois le même article dans votre panier.';
+                }
+            } 
+            
+            elseif ($action === 'add') {
                 self::addItem($table_name, $foreign_key, $cart_id, $item_id);
             }
 

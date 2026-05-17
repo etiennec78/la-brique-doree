@@ -100,7 +100,8 @@ class OrdersController extends Controller {
                 'cart_has_food' => $cart_has_food,
                 'montant_cybank' => $montant_cybank,
                 'control' => $control,
-                'user_has_valid_info' => $user_has_valid_info
+                'user_has_valid_info' => $user_has_valid_info,
+                'error' => $_SESSION['error']
             ]
         );
     }

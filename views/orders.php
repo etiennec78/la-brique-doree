@@ -25,6 +25,9 @@ include __DIR__ . '/../includes/header.php';
         </div>
         <div id="cart-bar">
           <h2>Votre panier</h2>
+          <?php if(isset($error)): ?>
+                <p class="alert"><?= $error ?></p>
+            <?php endif; ?>
           <?php
             if (empty($cart_details)) {
                 echo "Panier vide.";
