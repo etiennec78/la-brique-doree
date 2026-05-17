@@ -19,6 +19,10 @@ class CookController extends Controller {
         $delivery_orders = Order::getOrdersFromState(array('ready', 'shipping'));
         $deliverers = User::getUsersFromRole('delivery_person');
 
+        $pending_orders = array_filter($pending_orders, function($order) {
+            return empty($order['delivery_person_id']);
+        });
+        $pending_orders = array_values($pending_orders);
       
         for ($i = 0; $i < count($pending_orders); $i++) {
             $pending_orders[$i]['items'] = Order::getOrderItems($pending_orders[$i]['id']);
@@ -39,7 +43,7 @@ class CookController extends Controller {
     public function assignOrder() {
         require_once __DIR__ . '/../models/Order.php';
 
-        if (!isset($_SESSION['user']) || $_SESSION['user']['role_id'] != 2) {
+        if (!isset($_SESSION['user']) || (($_SESSION['user']['role_id'] != 2) && ($_SESSION['user']['role_id'] != 3))) {
             header('Location: /login');
             exit();
         }
@@ -74,7 +78,7 @@ class CookController extends Controller {
     public function finishTakeaway() {
         require_once __DIR__ . '/../models/Order.php';
 
-        if (!isset($_SESSION['user']) || $_SESSION['user']['role_id'] != 2) {
+        if (!isset($_SESSION['user']) || (($_SESSION['user']['role_id'] != 2) && ($_SESSION['user']['role_id'] != 3))) {
             header('Location: /login');
             exit();
         }
@@ -90,7 +94,7 @@ class CookController extends Controller {
     }
 
     public function apiCookGetPending() {
-        if (!isset($_SESSION['user']) || $_SESSION['user']['role_id'] != 2) {
+        if (!isset($_SESSION['user']) || (($_SESSION['user']['role_id'] != 2) && ($_SESSION['user']['role_id'] != 3))) {
             http_response_code(403);
             exit();
         }
@@ -99,6 +103,11 @@ class CookController extends Controller {
         
         $pending_orders = Order::getOrdersFromState(array('paid', 'preparing'));
         $delivery_orders = Order::getOrdersFromState(array('ready', 'shipping'));
+
+        $pending_orders = array_filter($pending_orders, function($order) {
+            return empty($order['delivery_person_id']);
+        });
+        $pending_orders = array_values($pending_orders);
 
         for ($i = 0; $i < count($pending_orders); $i++) {
             $pending_orders[$i]['items'] = Order::getOrderItems($pending_orders[$i]['id']);
