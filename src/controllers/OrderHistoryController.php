@@ -91,5 +91,3 @@ class OrderHistoryController extends Controller {
     );
   }
 }
-
-?>
