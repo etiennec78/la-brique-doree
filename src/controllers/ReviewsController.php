@@ -14,6 +14,8 @@ class ReviewsController extends Controller {
         $user_can_review = false;
         $user_has_valid_info = false;
         $is_admin = false;
+        $order_was_takeaway = false; 
+
         if ($logged_in) {
             $user_id = $_SESSION['user']['id'];
             $is_admin = User::isAdmin($user_id);
