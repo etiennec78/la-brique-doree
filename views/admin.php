@@ -74,10 +74,7 @@ include __DIR__ . '/../includes/header.php';
                         <td><?= $user_data['role'] ?></td>
                         <td>
                             <div>
-                                <form action="/profile" method="POST">
-                                    <input type="hidden" name="user_id" value="<?= $user_data['id'] ?>">
-                                    <button id="manage" type="submit" class="action-link">Gérer</button>
-                                </form>
+                                <a href="/profile?user_id=<?= $user_data['id'] ?>" class="action-link">Gérer</a>
 
                                 <button class="ban-btn action-link" 
                                         data-user-id="<?= $user_data['id'] ?>" 
