@@ -49,7 +49,7 @@ function checkCookStatus() {
                 data.pending.forEach(order => {
                     const name = `${order.first_name || ''} ${(order.last_name || '').charAt(0)}.`;
                     let deliveryInfo = order.is_takeaway ? `<br><small>Retrait : ${formatTime(order.takeaway_time)}</small>` : `<br><small>Livraison</small>`;
-                    
+
                     pendingHTML += `
                     <tr>
                         <td>
@@ -84,7 +84,15 @@ function checkCookStatus() {
             } else {
                 data.delivery.forEach(order => {
                     const name = `${order.first_name || ''} ${(order.last_name || '').charAt(0)}.`;
-                    let deliveryInfo = order.is_takeaway ? `<br><small>Retrait : ${formatTime(order.takeaway_time)}</small>` : `<br><small>Livraison</small>`;
+                    
+                    let delivererText = '';
+                    if (!order.is_takeaway && order.delivery_first_name) {
+                        delivererText = ` (Livreur : ${order.delivery_first_name} ${order.delivery_last_name})`;
+                    }
+
+                    let deliveryInfo = order.is_takeaway ? 
+                        `<br><small>Retrait : ${formatTime(order.takeaway_time)}</small>` : 
+                        `<br><small>Livraison${delivererText}</small>`;
 
                     let actionHTML = order.is_takeaway ? `
                         <form action="/finish_takeaway" method="POST">
@@ -92,10 +100,7 @@ function checkCookStatus() {
                             <button type="submit" class="basic-btn action-btn">Remis</button>
                         </form>
                     ` : `
-                        <label class="selection">
-                            <button class="waiting-delivery-btn" disabled>Attente retour livreur</button>
-                            <input type="checkbox" checked disabled/> 
-                        </label>
+                        <button class="waiting-delivery-btn" disabled>Attente retour livreur</button>
                     `;
 
                     deliveryHTML += `
