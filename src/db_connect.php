@@ -16,7 +16,7 @@ global $pdo;
 
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
-} catch (\PDOException $e) {
-    die("Erreur de connexion à la base de données : " . $e->getMessage());
+} catch (\PDOException $error) {
+    die("Erreur de connexion à la base de données : " . $error->getMessage());
 }
 ?>
