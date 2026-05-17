@@ -89,8 +89,10 @@ class AuthController extends Controller
       $_SESSION['user'] = $newUser;
       header("Location: /");
       exit;
-    } catch (\PDOException $e) {
-      $this->render('register', ['error' => 'Erreur lors de l\'inscription.']);
+    } catch (\PDOException $error) {
+      $pdo->rollBack();
+      error_log("Registering error: " . $error->getMessage());
+      $this->render('register', ['error' => 'Erreur lors de l\'inscription : ' . $error->getMessage()]);
     }
   }
 

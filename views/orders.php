@@ -27,7 +27,8 @@ include __DIR__ . '/../includes/header.php';
           <h2>Votre panier</h2>
           <?php if(isset($error)): ?>
                 <p class="alert"><?= $error ?></p>
-            <?php endif; ?>
+                <?php unset($_SESSION['error']); ?>
+          <?php endif; ?>
           <?php
             if (empty($cart_details)) {
                 echo "Panier vide.";

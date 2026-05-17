@@ -1,7 +1,7 @@
 <?php
 
 class ReviewsController extends Controller {
-    public function index($error = NULL) {
+    public function index() {
         require_once __DIR__ . '/../models/Cart.php';
         require_once __DIR__ . '/../models/Order.php';
         require_once __DIR__ . '/../models/Review.php';
@@ -26,6 +26,11 @@ class ReviewsController extends Controller {
             $order_was_takeaway = $lastOrder['is_takeaway'];
         }
 
+        $error = NULL;
+        if ($logged_in) {
+            $error = $_SESSION['error'];
+        }
+
         $this->render(
             'reviews',
             [
@@ -47,7 +52,6 @@ class ReviewsController extends Controller {
         require_once __DIR__ . '/../models/Review.php';
         require_once __DIR__ . '/../models/User.php';
 
-        $error = NULL;
         if (isset($_SESSION['user'])) {
             $user_id = $_SESSION['user']['id'];
             $comment = $_POST['comment'];
