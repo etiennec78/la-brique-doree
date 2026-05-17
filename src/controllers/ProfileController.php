@@ -12,6 +12,10 @@ class ProfileController extends Controller {
 
         $uid = $_SESSION['user']['id'];
 
+        if (isset($_GET['user_id']) && User::isAdmin($uid)) {
+            $target_id = (int)$_GET['user_id'];
+        }
+
         if ($target_id == NULL)
             $target_id = $uid;
 
@@ -46,38 +50,28 @@ class ProfileController extends Controller {
         $uid = $_SESSION['user']['id'];
 
         $target = $uid;
-        $user_banned = User::getUserData($uid, 'banned');
-        if ($user_banned) {
-            header('Content-Type: application/json');
-            echo json_encode(['success' => false]);
-            exit();
+        if (isset($_POST['target'])) {
+            $target = $_POST['target'];
         }
 
-        $user_role = User::getUserData($uid, 'r.name');
-        $is_admin = $user_role == 'administrator';
-
         try {
-            if ($is_admin and array_key_exists('user_id', $_POST)) {
-                $target = $_POST['user_id'];
-            }
-            if (isset($_POST['action']) && $_POST['action'] === 'ban' && $is_admin) {
-                $stmt = $pdo->prepare("UPDATE users SET banned = 1 WHERE id = ?");
-                $stmt->execute([$target]);
-                
+            $old_user_data = User::getUserInfo($target);
+
+            $address_has_changed = (
+                $old_user_data['street_nb'] != $_POST['street_nb'] or
+                $old_user_data['street_nb_suf'] != $_POST['street_nb_suf'] or
+                $old_user_data['street'] != $_POST['street'] or
+                $old_user_data['zip_code'] != $_POST['zip_code']
+            );
+
+            $email_has_changed = ($old_user_data['email'] != $_POST['email']);
+
+            if ($email_has_changed and User::mailExists($_POST['email'])) {
+                $_SESSION['error'] = 'L\'adresse email est déjà utilisée.';
                 header('Content-Type: application/json');
-                echo json_encode(['success' => true]);
+                echo json_encode(['success' => false]);
                 exit();
-            }
-            else if (isset($_POST['action']) && $_POST['action'] === 'unban' && $is_admin) {
-                $stmt = $pdo->prepare("UPDATE users SET banned = 0 WHERE id = ?");
-                $stmt->execute([$target]);
-                
-                header('Content-Type: application/json');
-                echo json_encode(['success' => true]);
-                exit();
-            }
-            else if (array_key_exists('first_name', $_POST)) {
-                $address_has_changed = Location::formAddressHasChanged($target, $_POST);
+            } else {
                 if ($address_has_changed) {
                     $coordinates = Location::getLocationCoord($_POST, $uid);
                     if (!isset($coordinates['error'])) {
@@ -90,7 +84,7 @@ class ProfileController extends Controller {
 
                 User::setAllUserData($_POST['first_name'], $_POST['last_name'], $_POST['street_nb'], $_POST['street_nb_suf'], $_POST['street'], $_POST['zip_code'], $_POST['phone'], $_POST['email'], $_POST['intercom_code'], $birth_date, $target);
 
-                $_SESSION['user'] = array_merge($_SESSION['user'], $_POST);
+                    $_SESSION['user'] = array_merge($_SESSION['user'], $_POST);
 
                 header('Content-Type: application/json');
                 echo json_encode(['success' => true]);
@@ -107,6 +101,5 @@ class ProfileController extends Controller {
 
         header('Content-Type: application/json');
         echo json_encode(['success' => false]);
-        exit();
     }
 }
