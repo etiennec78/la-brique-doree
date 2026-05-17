@@ -3,12 +3,13 @@ $title = "La Brique Dorée - Profil";
 $h1 = "PROFIL";
 $staff_page = false;
 $css_files = ['/css/form.css', '/css/profile.css'];
+$js_files = ['/js/profile.js'];
 include __DIR__ . '/../includes/header.php';
 ?>
 <main>
         <div class="form-page">
             <h2>Profil</h2>
-            <form action="/profile" method="post">
+            <form id="profile-form" action="/profile" method="post">
                 <input type="hidden" name="user_id" value="<?= $target ?>">
                 <div class="input-group">
                     <label for="first_name">Prénom</label>

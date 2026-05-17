@@ -33,7 +33,8 @@ class ProfileController extends Controller {
 
     public function updateProfile() {
         if (!isset($_SESSION['user'])) {
-            header('Location: /login');
+            header('Content-Type: application/json');
+            echo json_encode(['success' => false]);
             exit();
         }
 
@@ -46,8 +47,11 @@ class ProfileController extends Controller {
 
         $target = $uid;
         $user_banned = User::getUserData($uid, 'banned');
-        if ($user_banned)
-            return;
+        if ($user_banned) {
+            header('Content-Type: application/json');
+            echo json_encode(['success' => false]);
+            exit();
+        }
 
         $user_role = User::getUserData($uid, 'r.name');
         $is_admin = $user_role == 'administrator';
@@ -59,22 +63,26 @@ class ProfileController extends Controller {
             if (isset($_POST['action']) && $_POST['action'] === 'ban' && $is_admin) {
                 $stmt = $pdo->prepare("UPDATE users SET banned = 1 WHERE id = ?");
                 $stmt->execute([$target]);
+                
+                header('Content-Type: application/json');
+                echo json_encode(['success' => true]);
+                exit();
             }
             else if (isset($_POST['action']) && $_POST['action'] === 'unban' && $is_admin) {
                 $stmt = $pdo->prepare("UPDATE users SET banned = 0 WHERE id = ?");
                 $stmt->execute([$target]);
+                
+                header('Content-Type: application/json');
+                echo json_encode(['success' => true]);
+                exit();
             }
             else if (array_key_exists('first_name', $_POST)) {
                 $address_has_changed = Location::formAddressHasChanged($target, $_POST);
                 if ($address_has_changed) {
-                    // Get the coordinates of the delivery address
                     $coordinates = Location::getLocationCoord($_POST, $uid);
-                    if (isset($coordinates['error'])) {
-                        $error = $coordinates['error'];
-                        error_log("Coordinates could not be found for user $uid: $error");
-                    } else {
-                        $users_data = User::setUserData($target, 'latitude', $coordinates['lat']);
-                        $users_data = User::setUserData($target, 'longitude', $coordinates['lng']);
+                    if (!isset($coordinates['error'])) {
+                        User::setUserData($target, 'latitude', $coordinates['lat']);
+                        User::setUserData($target, 'longitude', $coordinates['lng']);
                     }
                 }
 
@@ -83,11 +91,19 @@ class ProfileController extends Controller {
                 User::setAllUserData($_POST['first_name'], $_POST['last_name'], $_POST['street_nb'], $_POST['street_nb_suf'], $_POST['street'], $_POST['zip_code'], $_POST['phone'], $_POST['email'], $_POST['intercom_code'], $birth_date, $target);
 
                 $_SESSION['user'] = array_merge($_SESSION['user'], $_POST);
+
+                header('Content-Type: application/json');
+                echo json_encode(['success' => true]);
+                exit();
             }
         } catch (\PDOException $e) {
-            $error = "Erreur lors de la mise à jour : " . $e->getMessage();
+            header('Content-Type: application/json');
+            echo json_encode(['success' => false]);
+            exit();
         }
 
-        $this->index($target);
+        header('Content-Type: application/json');
+        echo json_encode(['success' => false]);
+        exit();
     }
 }
