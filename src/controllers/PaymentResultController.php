@@ -44,8 +44,8 @@ class PaymentResultController extends Controller {
                 
                 Order::createOrder($cart_id, $user_id, $order_status, $cook_id, $is_takeaway, $takeaway_time);
             }
-        } catch (Exception $e) {
-            $error = "Erreur de base de données : " . $e->getMessage();
+        } catch (Exception $error) {
+            $_SESSION['error'] = 'Erreur de base de données : ' . $error->getMessage();
         }
 
         $title = "COMMANDE VALIDEE !";

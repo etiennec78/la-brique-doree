@@ -42,8 +42,10 @@ class Cart {
                     $count_menu = self::getMenuCount($cart_id);
                     return (int)$count_food + (int)$count_menu;
                 }
-            } catch (\PDOException $e) {
-                error_log("Cart error: " . $e->getMessage());
+            } catch (\PDOException $error) {
+                $pdo->rollBack();
+                $_SESSION['error'] = "Erreur de panier : " . $error->getMessage();
+                error_log("Cart error : " . $error->getMessage());
             }
         }
         return 0;
@@ -109,10 +111,14 @@ class Cart {
 
     public static function updateItem($user_id, $item_id, $item_type, $action) {
         global $pdo;
+
+        if (!isset($_SESSION['user'])) {
+            header('Location: /login');
+            exit();
+        }
         
         $table_name = $item_type === 'food' ? 'cart_food' : 'cart_menu';
         $foreign_key = $item_type === 'food' ? 'food_id' : 'menu_id';
-        $_SESSION['error'] = NULL;
 
         try {
             $pdo->beginTransaction();
@@ -150,9 +156,10 @@ class Cart {
             }
 
             $pdo->commit();
-        } catch (\PDOException $e) {
+        } catch (\PDOException $error) {
             $pdo->rollBack();
-            error_log("Cart update error: " . $e->getMessage());
+            $_SESSION['error'] = "Erreur de mise à jour du panier : " . $error->getMessage();
+            error_log("Cart update error: " . $error->getMessage());
         }
     }
 

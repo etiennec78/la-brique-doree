@@ -76,6 +76,16 @@ include __DIR__ . '/../includes/header.php';
               </table>
             <?php endif; ?>
         <?php endforeach; ?>
+    <?php if(isset($error)): ?>
+        <table class="review-block">
+            <tr>
+                <td>
+                    <p class="alert"><?= $error ?></p>
+                </td>
+            </tr>
+        </table>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
     <?php if (!$logged_in): ?>
         <table class="review-block">
             <tr>
