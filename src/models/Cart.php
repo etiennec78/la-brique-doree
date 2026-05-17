@@ -18,15 +18,16 @@ class Cart {
     }
 
     public static function getFoodCount($cart_id) {
-        global $pdo;
-        $stmt = $pdo->prepare("SELECT SUM(quantity) FROM cart_food WHERE cart_id = ?");
-        $stmt->execute([$cart_id]);
-        return $stmt->fetchColumn() ?: 0;
+        return self::getItemCount($cart_id, 'cart_food');
     }
 
     public static function getMenuCount($cart_id) {
+        return self::getItemCount($cart_id, 'cart_menu');
+    }
+
+    private static function getItemCount($cart_id, $table) {
         global $pdo;
-        $stmt = $pdo->prepare("SELECT SUM(quantity) FROM cart_menu WHERE cart_id = ?");
+        $stmt = $pdo->prepare("SELECT SUM(quantity) FROM $table WHERE cart_id = ?");
         $stmt->execute([$cart_id]);
         return $stmt->fetchColumn() ?: 0;
     }
@@ -43,7 +44,6 @@ class Cart {
                     return (int)$count_food + (int)$count_menu;
                 }
             } catch (\PDOException $error) {
-                $pdo->rollBack();
                 $_SESSION['error'] = "Erreur de panier : " . $error->getMessage();
                 error_log("Cart error : " . $error->getMessage());
             }
