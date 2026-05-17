@@ -99,7 +99,7 @@ class ProfileController extends Controller {
         } catch (\PDOException $error) {
             $pdo->rollBack();
             error_log("Profile update error: " . $error->getMessage());
-            $_SESSION['error'] = 'Erreur lors de la mise à jour des données du profil : ' . $error->getMessage()]);
+            $_SESSION['error'] = 'Erreur lors de la mise à jour des données du profil : ' . $error->getMessage();
             header('Content-Type: application/json');
             echo json_encode(['success' => false]);
             exit();
