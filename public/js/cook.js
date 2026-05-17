@@ -47,7 +47,7 @@ function checkCookStatus() {
                 pendingHTML += `<tr><td colspan="3" style="text-align:center;">Aucune commande en attente.</td></tr>`;
             } else {
                 data.pending.forEach(order => {
-                    const name = `${order.first_name || ''} ${(order.last_name || '').charAt(0)}.`;
+                    let name = `${order.first_name || ''} ${order.last_name || ''}`;
                     let deliveryInfo = order.is_takeaway ? `<br><small>Retrait : ${formatTime(order.takeaway_time)}</small>` : `<br><small>Livraison</small>`;
 
                     pendingHTML += `
@@ -83,7 +83,7 @@ function checkCookStatus() {
                 deliveryHTML += `<tr><td colspan="2" style="text-align:center;">Aucune livraison en cours.</td></tr>`;
             } else {
                 data.delivery.forEach(order => {
-                    const name = `${order.first_name || ''} ${(order.last_name || '').charAt(0)}.`;
+                    let name = `${order.first_name || ''} ${order.last_name || ''}`;
                     
                     let delivererText = '';
                     if (!order.is_takeaway && order.delivery_first_name) {
