@@ -14,7 +14,7 @@ class AdminController extends Controller {
         include_once __DIR__ . '/../format_data.php';
 
         $users_data = User::getAllUsersInfo();
-        $running_deliveries = Order::getAllRunningDeliveries();
+        $running_deliveries = Order::getOrdersFromState(array('preparing', 'shipping'));
 
         $this->render('admin', [
             'users_data' => $users_data, 
@@ -31,8 +31,9 @@ class AdminController extends Controller {
 
         require_once __DIR__ . '/../models/User.php';
 
-        if (isset($_POST['user_id']) and isset($_POST['reduction']))
-            $users_data = User::setUserData($_POST['user_id'], 'global_reduction', $_POST['reduction']/100);
+        if (isset($_POST['user_id']) and isset($_POST['reduction'])) {
+            User::setUserData($_POST['user_id'], 'global_reduction', $_POST['reduction']/100);
+        }
 
         header('Location: /admin');
     }
