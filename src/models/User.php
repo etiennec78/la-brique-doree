@@ -53,7 +53,7 @@ class User {
     public static function hasValidInfo($uid) {
         global $pdo;
         $stmt = $pdo->prepare("
-            SELECT email, first_name, last_name, phone, street_nb, street, town, zip_code
+            SELECT email, first_name, last_name, phone, street_nb, street, zip_code
             FROM users
             WHERE id = ?
         ");
