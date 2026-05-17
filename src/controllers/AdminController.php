@@ -2,12 +2,7 @@
 
 class AdminController extends Controller {
     public function index() {
-        if (!isset($_SESSION['user']) || $_SESSION['user']['role_id'] != 3) {
-            session_destroy();
-            unset($_SESSION);
-            header('Location: /login');
-            exit();
-        }
+        $this->requireRole(3);
 
         require_once __DIR__ . '/../models/User.php';
         require_once __DIR__ . '/../models/Order.php';
@@ -24,10 +19,7 @@ class AdminController extends Controller {
     }
 
     public function applyGlobalReduction() {
-        if (!isset($_SESSION['user']) || $_SESSION['user']['role_id'] != 3) {
-            header('Location: /login');
-            exit();
-        }
+        $this->requireRole(3);
 
         require_once __DIR__ . '/../models/User.php';
 
@@ -40,9 +32,7 @@ class AdminController extends Controller {
     }
 
     public function apiBanUser() {
-        if (($_SESSION['user']['role_id'] ?? 0) != 3) {
-            exit(); 
-        }
+        $this->requireRole(3, true);
 
         require_once __DIR__ . '/../models/User.php';
 

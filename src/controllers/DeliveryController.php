@@ -1,13 +1,21 @@
 <?php
 
 class DeliveryController extends Controller {
-    public function index() {
-        if (!isset($_SESSION['user']) || (($_SESSION['user']['role_id'] != 4) && ($_SESSION['user']['role_id'] != 3))) {
-            session_destroy();
-            unset($_SESSION);
-            header('Location: /login');
-            exit();
+    private function assignNextDeliveriesIfEmpty($uid) {
+        require_once __DIR__ . '/../models/Order.php';
+        require_once __DIR__ . '/../models/Delivery.php';
+        
+        $deliveries = Delivery::getDeliveries($uid);
+        if (empty($deliveries)) {
+            $next_orders = Order::getNextDeliveries($uid, 3);
+            foreach ($next_orders as $next_order) {
+                Order::setShippingStatus($next_order['id'], $uid);
+            }
         }
+    }
+
+    public function index() {
+        $this->requireRole([3, 4]);
 
         include_once __DIR__ . '/../format_data.php';
         require_once __DIR__ . '/../models/Delivery.php';
@@ -29,27 +37,16 @@ class DeliveryController extends Controller {
     }
 
     public function confirmDelivery() {
+        $this->requireRole(4);
         require_once __DIR__ . '/../models/Order.php';
         require_once __DIR__ . '/../models/Delivery.php';
-
-        if (!isset($_SESSION['user']) || $_SESSION['user']['role_id'] != 4) {
-            header('Location: /login');
-            exit();
-        }
 
         if (isset($_POST['order_id'])) {
             $order_id = $_POST['order_id'];
             $uid = $_SESSION['user']['id'];
 
             Order::setDeliveredStatus($order_id);
-            
-            $deliveries = Delivery::getDeliveries($uid);
-            if (empty($deliveries)) {
-                $next_orders = Order::getNextDeliveries($uid, 3);
-                foreach ($next_orders as $next_order) {
-                    Order::setShippingStatus($next_order['id'], $uid);
-                }
-            }
+            $this->assignNextDeliveriesIfEmpty($uid);
         }
 
         header('Location: /delivery');
@@ -57,27 +54,16 @@ class DeliveryController extends Controller {
     }
 
     public function cancelDelivery() {
+        $this->requireRole(4);
         require_once __DIR__ . '/../models/Order.php';
         require_once __DIR__ . '/../models/Delivery.php';
-
-        if (!isset($_SESSION['user']) || $_SESSION['user']['role_id'] != 4) {
-            header('Location: /login');
-            exit();
-        }
 
         if (isset($_POST['order_id'])) {
             $order_id = $_POST['order_id'];
             $uid = $_SESSION['user']['id'];
             
             Order::cancelDelivery($order_id, $uid);
-            
-            $deliveries = Delivery::getDeliveries($uid);
-            if (empty($deliveries)) {
-                $next_orders = Order::getNextDeliveries($uid, 3);
-                foreach ($next_orders as $next_order) {
-                    Order::setShippingStatus($next_order['id'], $uid);
-                }
-            }
+            $this->assignNextDeliveriesIfEmpty($uid);
         }
 
         header('Location: /delivery');
@@ -85,10 +71,7 @@ class DeliveryController extends Controller {
     }
 
     public function apiDeliveryGetPending() {
-        if (!isset($_SESSION['user']) || $_SESSION['user']['role_id'] != 4) {
-            http_response_code(403);
-            exit();
-        }
+        $this->requireRole(4, true);
 
         require_once __DIR__ . '/../models/Delivery.php';
 
