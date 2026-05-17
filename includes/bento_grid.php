@@ -34,7 +34,7 @@ $is_editable = $is_editable ?? false;
     <div class="items-grid">
 
     <?php foreach($foods as $food): ?>
-        <?php
+        <?php 
         $name = $food['name'];
         $description = $food['description'];
         $price_val = floatval($food['price']);
@@ -44,11 +44,19 @@ $is_editable = $is_editable ?? false;
 
         if ($individual) {
             $quantity = $food['quantity'];
+        } else {
+            $quantity = $food['quantity'] ?? 1;
         }
         ?>
 
         <article class="description" description="<?= htmlspecialchars($description) ?>" price="<?= $price_str ?>€" style="background-image: url(<?= htmlspecialchars($image_path) ?>);">
-        <h3><?= htmlspecialchars($name) ?><?= (!$is_editable && $individual && $quantity > 1) ? " (x$quantity)" : "" ?></h3>
+        
+        <h3>
+            <?= htmlspecialchars($name) ?>
+            <?php if ($quantity > 1 && (!$individual || !$is_editable)): ?>
+                (x<?= $quantity ?>)
+            <?php endif; ?>
+        </h3>
 
         <?php if ($is_editable && $individual): ?>
             <form method="POST" action="/update_cart" style="display:inline; margin:0; padding:0;">
