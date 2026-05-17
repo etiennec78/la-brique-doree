@@ -31,10 +31,10 @@ class Location {
     public static function getLocationCoord($location_data, $uid) {
         require_once __DIR__ . '/../format_data.php';
         require_once __DIR__ . '/../models/User.php';
-        $DEFAULT_COORD = array(
+        $DEFAULT_COORD = [
             'lat' => 55.7259517,
             'lng' => 9.1091171
-        );
+        ];
 
         $api_key = $GLOBALS['config']['here_api_key'] ?? "";
 
@@ -45,7 +45,7 @@ class Location {
         if ($timeout > 0) {
             User::incrementSuccessiveAPICalls($uid);
 
-            return array('error' => 'timeout remaining: ' . $timeout . 's');
+            return ['error' => 'timeout remaining: ' . $timeout . 's'];
         }
 
         $delivery_address = getAddress($location_data);
@@ -68,7 +68,7 @@ class Location {
             or count($response['items']) < 1
             or empty($response['items'][0]['position'])
         )
-            return array('error' => 'Here API did not return valid values');
+            return ['error' => 'Here API did not return valid values'];
 
         return $response['items'][0]['position'];
     }

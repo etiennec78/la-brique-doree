@@ -14,7 +14,7 @@ class AdminController extends Controller {
         include_once __DIR__ . '/../format_data.php';
 
         $users_data = User::getAllUsersInfo();
-        $running_deliveries = Order::getOrdersFromState(array('preparing', 'shipping'));
+        $running_deliveries = Order::getOrdersFromState(['preparing', 'shipping']);
 
         $this->render('admin', [
             'users_data' => $users_data, 
