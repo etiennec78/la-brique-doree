@@ -27,10 +27,18 @@ class Order {
         global $pdo;
         $placeholders = implode(',', array_fill(0, count($order_names), '?'));
         $stmt = $pdo->prepare("
-            SELECT o.id, u.first_name, u.last_name, o.is_takeaway, o.takeaway_time
+            SELECT 
+                o.id, 
+                u.first_name, 
+                u.last_name, 
+                o.is_takeaway, 
+                o.takeaway_time,
+                deliv.first_name AS delivery_first_name,
+                deliv.last_name AS delivery_last_name
             FROM orders o
             JOIN users u ON o.customer_id = u.id
             JOIN order_status os ON o.order_status_id = os.id
+            LEFT JOIN users deliv ON o.delivery_person_id = deliv.id
             WHERE os.name IN ($placeholders)
             ORDER BY COALESCE(o.takeaway_time, '1000-01-01 00:00:00') ASC, o.id ASC
         ");
@@ -275,19 +283,5 @@ class Order {
         $menus = $stmt->fetchAll();
 
         return ['foods' => $foods, 'menus' => $menus];
-    }
-
-    public static function getAllRunningDeliveries() {
-        global $pdo;
-        $stmt = $pdo->prepare("
-            SELECT o.*, os.name AS status, u.first_name, u.last_name
-            FROM orders o
-            JOIN order_status os ON o.order_status_id = os.id
-            LEFT JOIN users u ON o.delivery_person_id = u.id
-            WHERE o.is_takeaway = 0 AND o.order_status_id < 5
-            ORDER BY o.id DESC
-        ");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

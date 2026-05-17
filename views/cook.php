@@ -85,7 +85,13 @@ include __DIR__ . '/../includes/header.php';
                             <?php if (isset($order['is_takeaway']) && $order['is_takeaway']): ?>
                                 <br><small>Retrait : <?= $order['takeaway_time'] ? date('H\hi', strtotime($order['takeaway_time'])) : 'Au plus vite' ?></small>
                             <?php else: ?>
-                                <br><small>Livraison</small>
+                                <br><small>Livraison
+                                    <?php 
+                                    if (User::isAdmin($_SESSION['user']['id']) && !empty($order['delivery_first_name'])): 
+                                    ?>
+                                        (Livreur : <?= htmlspecialchars($order['delivery_first_name'] . ' ' . $order['delivery_last_name']) ?>)
+                                    <?php endif; ?>
+                                </small>
                             <?php endif; ?>
                         </td>
                         <td>
