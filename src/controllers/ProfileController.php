@@ -35,24 +35,24 @@ class ProfileController extends Controller {
         );
     }
 
-    public function updateProfile() {
-        if (!isset($_SESSION['user'])) {
-            header('Content-Type: application/json');
-            echo json_encode(['success' => false]);
-            exit();
-        }
+public function updateProfile() {
+    if (!isset($_SESSION['user'])) {
+        header('Content-Type: application/json');
+        echo json_encode(['success' => false]);
+        exit();
+    }
 
-        global $pdo;
-        require_once __DIR__ . '/../db_connect.php';
-        require_once __DIR__ . '/../models/Location.php';
-        require_once __DIR__ . '/../models/User.php';
+    global $pdo;
+    require_once __DIR__ . '/../db_connect.php';
+    require_once __DIR__ . '/../models/Location.php';
+    require_once __DIR__ . '/../models/User.php';
 
-        $uid = $_SESSION['user']['id'];
+    $uid = $_SESSION['user']['id'];
 
-        $target = $uid;
-        if (isset($_POST['target'])) {
-            $target = $_POST['target'];
-        }
+    $target = $uid;
+    if (isset($_POST['user_id'])) {
+        $target = $_POST['user_id'];
+    }
 
         try {
             $old_user_data = User::getUserInfo($target);
@@ -84,7 +84,9 @@ class ProfileController extends Controller {
 
                 User::setAllUserData($_POST['first_name'], $_POST['last_name'], $_POST['street_nb'], $_POST['street_nb_suf'], $_POST['street'], $_POST['zip_code'], $_POST['phone'], $_POST['email'], $_POST['intercom_code'], $birth_date, $target);
 
+                if ($target == $uid) {
                     $_SESSION['user'] = array_merge($_SESSION['user'], $_POST);
+                }
 
                 header('Content-Type: application/json');
                 echo json_encode(['success' => true]);
