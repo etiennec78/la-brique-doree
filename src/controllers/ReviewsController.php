@@ -23,12 +23,11 @@ class ReviewsController extends Controller {
             $lastOrder = Order::getLastOrder($user_id);
             $user_can_review = $lastOrder != null && $lastOrder['review_id'] == null;
             $user_has_valid_info = User::hasValidInfo($user_id);
-            $order_was_takeaway = $lastOrder['is_takeaway'];
         }
 
         $error = NULL;
         if ($logged_in) {
-            $error = $_SESSION['error'];
+            $error = isset($_SESSION['error']) ? $_SESSION['error'] : NULL;
         }
 
         $this->render(
