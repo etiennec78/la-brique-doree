@@ -6,6 +6,10 @@ $css_files = ['/css/delivery.css'];
 $js_files = ['/js/delivery.js'];
 include __DIR__ . '/../includes/header.php';
 ?>
+<script>
+    window.isAdmin = <?= $is_admin ? 'true' : 'false' ?>;
+</script>
+
 <main>
         <h2 class="section-title">Carte</h2>
         <div class="map-box">
@@ -25,6 +29,11 @@ include __DIR__ . '/../includes/header.php';
                     <div class="card-header">
                         <span class="order-id">#<?= $delivery['id'] ?></span>
                         <span class="client-name"><?= getName($delivery) ?></span>
+                        <?php if ($is_admin): ?>
+                            <span class="delivery-staff">
+                                / Livreur : <?= isset($delivery['driver_first_name']) ? htmlspecialchars($delivery['driver_first_name']) : 'Non assigné' ?>
+                            </span>
+                        <?php endif; ?>
                     </div>
                     <button onclick="location.href='https://www.google.com/maps/search/?api=1&query=<?= urlencode(getAddress($delivery)) ?>'" class="basic-btn action-btn">Ouvrir dans Google Maps</button>
                     <div class="card-body">

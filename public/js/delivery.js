@@ -43,6 +43,8 @@ function checkDeliveryStatus() {
                 const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
                 
                 const intercomHTML = delivery.intercom_code ? `<p class="access">🔑 Code ${delivery.intercom_code}</p>` : '';
+                
+                const driverHTML = window.isAdmin ? `<span class="delivery-staff">  / Livreur : ${delivery.driver_first_name || 'Non assigné'}</span>` : '';
 
                 const card = document.createElement('div');
                 card.className = 'delivery-card';
