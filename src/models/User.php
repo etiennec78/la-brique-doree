@@ -53,7 +53,27 @@ class User {
     public static function hasValidInfo($uid) {
         global $pdo;
         $stmt = $pdo->prepare("
-            SELECT email, first_name, last_name, phone, street_nb, street, zip_code
+            SELECT email, first_name, last_name, phone
+            FROM users
+            WHERE id = ?
+        ");
+        $stmt->execute([$uid]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (!$user) {
+            return false;
+        }
+        foreach ($user as $value) {
+            if ($value === null || $value === '') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static function hasValidAddress($uid) {
+        global $pdo;
+        $stmt = $pdo->prepare("
+            SELECT street_nb, street, zip_code
             FROM users
             WHERE id = ?
         ");

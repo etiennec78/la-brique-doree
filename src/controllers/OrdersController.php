@@ -27,6 +27,9 @@ class OrdersController extends Controller {
         $user_has_valid_info = false;
         $user_has_valid_info = User::hasValidInfo($uid);
 
+        $user_has_valid_address = false;
+        $user_has_valid_address = User::hasValidAddress($uid);
+
         $vendeur = 'MI-4_J'; 
         $api_key = getAPIKey($vendeur); 
         $transaction = uniqid();
@@ -101,6 +104,7 @@ class OrdersController extends Controller {
                 'montant_cybank' => $montant_cybank,
                 'control' => $control,
                 'user_has_valid_info' => $user_has_valid_info,
+                'user_has_valid_address' => $user_has_valid_address,
                 'error' => $_SESSION['error'] ?? null,
                 'error_c' => $_SESSION['error_c'] ?? null
             ]
