@@ -62,6 +62,12 @@ include __DIR__ . '/../includes/header.php';
             </noscript>
           </form>
           
+          <?php if ((!$user_has_valid_address) && (!$is_takeaway)): ?>
+            <tr>
+              <h3>Vous ne pouvez pas encore commander à domicile.</h3>
+              <p>Vous devez remplir votre profile avec votre adresse .</p>
+              <button onclick="location.href='/profile'" type="button" class="basic-btn">Remplir votre profil</button>
+          <?php else: ?>
           <form action="https://www.plateforme-smc.fr/cybank/index.php" method="POST">
             <input type="hidden" name="transaction" value="<?= $transaction ?>">
             <input type="hidden" name="montant" value="<?= $montant_cybank ?>">
@@ -85,6 +91,7 @@ include __DIR__ . '/../includes/header.php';
                 <p class="alert"><?= $error_c ?></p>
             <?php endif; ?>
           </details>
+          <?php endif; ?>
           <?php endif; ?>
         </div>
       </section>
