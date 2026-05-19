@@ -38,13 +38,11 @@ function checkDeliveryStatus() {
             // Need to insert in reverse order to keep them in correct sequence after the header
             const reversedDeliveries = [...data.deliveries].reverse();
             reversedDeliveries.forEach(delivery => {
-                const name = `${delivery.first_name || ''} ${(delivery.last_name || '').charAt(0)}.`;
+                const name = `${delivery.first_name || ''} ${delivery.last_name || ''}`;
                 const address = getAddress(delivery);
                 const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
                 
                 const intercomHTML = delivery.intercom_code ? `<p class="access">🔑 Code ${delivery.intercom_code}</p>` : '';
-                
-                const driverHTML = window.isAdmin ? `<span class="delivery-staff">  / Livreur : ${delivery.driver_first_name || 'Non assigné'}</span>` : '';
 
                 const card = document.createElement('div');
                 card.className = 'delivery-card';
@@ -52,6 +50,7 @@ function checkDeliveryStatus() {
                     <div class="card-header">
                         <span class="order-id">#${delivery.id}</span>
                         <span class="client-name">${name.trim()}</span>
+                        ${window.isAdmin ? `<span class="delivery-staff"> / Livreur : ${delivery.driver_first_name || 'Non assigné'}</span>` : ''}
                     </div>
                     <button onclick="location.href='${googleMapsUrl}'" class="basic-btn action-btn">Ouvrir dans Google Maps</button>
                     <div class="card-body">
