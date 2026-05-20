@@ -1,7 +1,8 @@
 function getAddress(delivery) {
     if (!delivery) return '';
     const nbSuf = delivery.street_nb_suf ? delivery.street_nb_suf : '';
-    return `${delivery.street_nb}${nbSuf} ${delivery.street}, ${delivery.zip_code} ${delivery.town}`;
+    const town = delivery.town ? delivery.town : '';
+    return `${delivery.street}, ${delivery.zip_code} ${town}`;
 }
 
 function checkDeliveryStatus() {

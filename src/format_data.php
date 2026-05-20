@@ -14,7 +14,14 @@ function getName($name_dict) {
 }
 
 function getAddress($address_dict) {
-    $street_part = concatenate($address_dict, ['street_nb', 'street_nb_suf', 'street'], ' ');
+    $street = !empty($address_dict['street']) ? $address_dict['street'] : '';
+    $street_nb = !empty($address_dict['street_nb']) ? $address_dict['street_nb'] : '';
+
+    if (!empty($street_nb) && strpos($street, $street_nb) === 0) { // Check if street already starts with the street number to avoid duplicates
+        $street_part = concatenate($address_dict, ['street_nb_suf', 'street'], ' ');
+    } else {
+        $street_part = concatenate($address_dict, ['street_nb', 'street_nb_suf', 'street'], ' ');
+    }
     $city_part = concatenate($address_dict, ['zip_code', 'town'], ' ');
     
     $parts = [];
