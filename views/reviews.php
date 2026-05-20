@@ -76,16 +76,6 @@ include __DIR__ . '/../includes/header.php';
               </table>
             <?php endif; ?>
         <?php endforeach; ?>
-    <?php if(isset($error)): ?>
-        <table class="review-block">
-            <tr>
-                <td>
-                    <p class="alert"><?= $error ?></p>
-                </td>
-            </tr>
-        </table>
-        <?php unset($_SESSION['error']); ?>
-    <?php endif; ?>
     <?php if (!$logged_in): ?>
         <table class="review-block">
             <tr>
@@ -122,12 +112,6 @@ include __DIR__ . '/../includes/header.php';
             <tr>
                 <th class="user-name">LAISSER UN AVIS</th>
                 <td class="user-ratings">
-                    <?php if(isset($error)): ?>
-                        <div class="alert">
-                            <?= htmlspecialchars($error) ?>
-                        </div>
-                    <?php endif; ?>
-
                     <div class="rating-group">
                         <label for="product">Produit :</label>
                         <select name="product" id="product" class="select-note" required>

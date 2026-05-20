@@ -29,16 +29,10 @@ class ReviewsController extends Controller {
             }
         }
 
-        $error = NULL;
-        if ($logged_in) {
-            $error = isset($_SESSION['error']) ? $_SESSION['error'] : NULL;
-        }
-
         $this->render(
             'reviews',
             [
                 'cart_count' => $cart_count,
-                'error' => $error,
                 'reviews' => $reviews,
                 'logged_in' => $logged_in,
                 'user_can_review' => $user_can_review,
