@@ -15,12 +15,12 @@ include __DIR__ . '/../includes/header.php';
             <nav class="tabs-nav">
                 <label class="tab-item">
                     <span>À CUISINER</span>
-                    <input type="radio" id="pending-toggle" name="tabs-toggle" checked>
+                    <input type="radio" id="pending-toggle" name="tabs-toggle" <?= (isset($_GET['tab']) && $_GET['tab'] === 'delivery') ? '' : 'checked' ?>>
                 </label>
 
                 <label class="tab-item">
                     <span>À REMETTRE</span>
-                    <input type="radio" id="delivery-toggle" name="tabs-toggle">
+                    <input type="radio" id="delivery-toggle" name="tabs-toggle" <?= (isset($_GET['tab']) && $_GET['tab'] === 'delivery') ? 'checked' : '' ?>>
                 </label>
             </nav>
 

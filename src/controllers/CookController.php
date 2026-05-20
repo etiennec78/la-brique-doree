@@ -84,10 +84,10 @@ class CookController extends Controller {
         if (isset($_POST['order_id'])) {
             $order_id = (int)$_POST['order_id'];
             Order::setDeliveredStatus($order_id);
-            header('Location: /cook?success=finished');
+            header('Location: /cook?success=finished&tab=delivery');
             exit();
         } else {
-            header('Location: /cook');
+            header('Location: /cook?tab=delivery');
             exit();
         }
     }
