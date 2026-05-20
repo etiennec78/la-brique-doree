@@ -104,9 +104,7 @@ class OrdersController extends Controller {
                 'montant_cybank' => $montant_cybank,
                 'control' => $control,
                 'user_has_valid_info' => $user_has_valid_info,
-                'user_has_valid_address' => $user_has_valid_address,
-                'error' => $_SESSION['error'] ?? null,
-                'error_c' => $_SESSION['error_c'] ?? null
+                'user_has_valid_address' => $user_has_valid_address
             ]
         );
     }
@@ -161,7 +159,7 @@ class OrdersController extends Controller {
 
         // Remove coupon if empty
         if ($coupon_code === "") {
-            unset($_SESSION['error_c']);
+            unset($_SESSION['error']);
             Coupon::addCouponToCart(null, $cart_id);
             header("Location: /orders");
             exit();
@@ -171,11 +169,11 @@ class OrdersController extends Controller {
         $coupon = Coupon::getCoupon($coupon_code);
 
         if ($coupon == false) {
-            $_SESSION['error_c'] = 'Le coupon utilisé est invalide.';
+            $_SESSION['error'] = 'Le coupon utilisé est invalide.';
         }
 
         else {
-            unset($_SESSION['error_c']); 
+            unset($_SESSION['error']);
             Coupon::addCouponToCart($coupon['id'], $cart_id);
         }
 

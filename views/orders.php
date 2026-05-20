@@ -25,10 +25,6 @@ include __DIR__ . '/../includes/header.php';
         </div>
         <div id="cart-bar">
           <h2>Votre panier</h2>
-          <?php if(isset($error)): ?>
-                <p class="alert"><?= $error ?></p>
-                <?php unset($_SESSION['error']) ?>
-          <?php endif; ?>
           <?php
             if (empty($cart_details)) {
                 echo "Panier vide.";
@@ -87,9 +83,6 @@ include __DIR__ . '/../includes/header.php';
                 <button id="submit_coupon" class="basic-btn" type="submit">Appliquer</button>
               </noscript>
             </form>
-            <?php if(isset($error_c)): ?>
-                <p class="alert"><?= $error_c ?></p>
-            <?php endif; ?>
           </details>
           <?php endif; ?>
           <?php endif; ?>

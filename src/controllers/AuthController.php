@@ -19,7 +19,8 @@ class AuthController extends Controller
     $password = $_POST['password'] ?? '';
 
     if (empty($email) || empty($password)) {
-      $this->render('login', ['error' => 'Veuillez remplir tous les champs.']);
+      $_SESSION['error'] = 'Veuillez remplir tous les champs.';
+      $this->render('login');
       return;
     }
 
@@ -27,7 +28,8 @@ class AuthController extends Controller
 
     if ($user_found && password_verify($password, $user_found['password_hash'])) {
       if (!empty($user_found['banned'])) {
-        $this->render('login', ['error' => 'Votre compte a été banni.']);
+        $_SESSION['error'] = 'Votre compte a été banni.';
+        $this->render('login');
         return;
       }
       
@@ -46,7 +48,8 @@ class AuthController extends Controller
       }
       exit();
     } else {
-      $this->render('login', ['error' => 'Email ou mot de passe incorrect.']);
+      $_SESSION['error'] = 'Email ou mot de passe incorrect.';
+      $this->render('login');
     }
   }
 
@@ -68,12 +71,14 @@ class AuthController extends Controller
     $existing_user = User::findByEmail($email);
 
     if (empty($email) || empty($password)) {
-      $this->render('register', ['error' => 'Veuillez remplir tous les champs.']);
+      $_SESSION['error'] = 'Veuillez remplir tous les champs.';
+      $this->render('register');
       return;
     }
 
     elseif (!empty($existing_user)) {
-      $this->render('register', ['error' => 'L\'email est déjà associé à un compte.']);
+      $_SESSION['error'] = 'L\'email est déjà associé à un compte.';
+      $this->render('register');
       return;
     }
 
@@ -92,7 +97,8 @@ class AuthController extends Controller
     } catch (\PDOException $error) {
       $pdo->rollBack();
       error_log("Registering error: " . $error->getMessage());
-      $this->render('register', ['error' => 'Erreur lors de l\'inscription : ' . $error->getMessage()]);
+      $_SESSION['error'] = 'Erreur lors de l\'inscription : ' . $error->getMessage();
+      $this->render('register');
     }
   }
 

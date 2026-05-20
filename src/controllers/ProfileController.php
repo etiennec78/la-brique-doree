@@ -60,7 +60,7 @@ class ProfileController extends Controller {
             $address_has_changed = (
                 $old_user_data['street_nb'] != $_POST['street_nb'] or
                 $old_user_data['street_nb_suf'] != $_POST['street_nb_suf'] or
-                    $old_user_data['street'] != $_POST['street'] or
+                $old_user_data['street'] != $_POST['street'] or
                 $old_user_data['zip_code'] != $_POST['zip_code']
             );
 
@@ -74,7 +74,9 @@ class ProfileController extends Controller {
             } else {
                 if ($address_has_changed) {
                     $coordinates = Location::getLocationCoord($_POST, $uid);
-                    if (!isset($coordinates['error'])) {
+                    if (isset($coordinates['error'])) {
+                        $_SESSION['error'] = $coordinates['error'];
+                    } else {
                         User::setUserData($target, 'latitude', $coordinates['lat']);
                         User::setUserData($target, 'longitude', $coordinates['lng']);
                     }

@@ -6,6 +6,7 @@
     <title><?= $title ?? 'La Brique Dorée' ?></title>
     <link rel="icon" type="image/x-icon" href="/assets/images/favicon.png">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/toast.css">
     <?php if (isset($css_files)): foreach ($css_files as $css): ?>
         <link rel="stylesheet" href="<?= htmlspecialchars($css) ?>">
     <?php endforeach; endif; ?>
@@ -13,6 +14,7 @@
         <script src="<?= htmlspecialchars($js) ?>" defer></script>
     <?php endforeach; endif; ?>
     <script src="/js/light_mode.js" defer></script>
+    <script src="/js/toast.js" defer></script>
 </head>
 <body>
 <?php
@@ -80,4 +82,11 @@ if (isset($_SESSION['user'])) {
 
             <button id="theme-toggle" class="navbarbutton">🌙</button>
         </section>
+
+        <div id="toast-container">
+            <?php if (isset($_SESSION['error'])): ?>
+                <div id="toast"><?= $_SESSION['error'] ?></div>
+                <?php unset($_SESSION['error']); ?>
+            <?php endif; ?>
+        </div>
     </header>

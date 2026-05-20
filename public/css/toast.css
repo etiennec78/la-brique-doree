@@ -1,0 +1,21 @@
+#toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+}
+
+#toast {
+  background-color: var(--red);
+  padding: 12px;
+  border-radius: 25px;
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#toast.show {
+  opacity: 1;
+  transform: translateX(0);
+}
