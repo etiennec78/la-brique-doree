@@ -65,7 +65,7 @@ include __DIR__ . '/../includes/header.php';
           <?php if ((!$user_has_valid_address) && (!$is_takeaway)): ?>
             <tr>
               <h3>Vous ne pouvez pas encore commander à domicile.</h3>
-              <p>Vous devez remplir votre profile avec votre adresse .</p>
+              <p>Vous devez remplir votre profil avec votre adresse .</p>
               <button onclick="location.href='/profile'" type="button" class="basic-btn">Remplir votre profil</button>
           <?php else: ?>
           <form action="https://www.plateforme-smc.fr/cybank/index.php" method="POST">
