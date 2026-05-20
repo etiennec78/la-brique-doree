@@ -23,6 +23,10 @@ class ReviewsController extends Controller {
             $lastOrder = Order::getLastOrder($user_id);
             $user_can_review = $lastOrder != null && $lastOrder['review_id'] == null;
             $user_has_valid_info = User::hasValidInfo($user_id);
+            
+            if ($lastOrder != null) {
+                $order_was_takeaway = (bool)$lastOrder['is_takeaway'];
+            }
         }
 
         $error = NULL;
@@ -55,25 +59,25 @@ class ReviewsController extends Controller {
             $user_id = $_SESSION['user']['id'];
             $comment = $_POST['comment'];
             $product = $_POST['product'];
-            $delivery = $_POST['delivery'] ? isset($_POST['delivery']) : null;
+            $delivery = !empty($_POST['delivery']) ? $_POST['delivery'] : null;
 
             $new_post = empty($_POST['review_id']);
             $is_admin = User::isAdmin($user_id);
 
             // Get order data
             if ($new_post) {
+                $order = Order::getLastOrder($user_id);
+            } else {
                 $review_id = $_POST['review_id'];
                 $order = Order::getOrderById($review_id);
-            } else {
-                $order = Order::getLastOrder($user_id);
             }
 
             // Check that the received data always contains a product rating, and contains a delivery rating only if the food was delivered
             if ($product != null && $order['is_takeaway'] == ($delivery == null)) {
                 if ($new_post) {
                     // Only authorize if the user is admin or his last order does not have a review attached yet
-                    if ($is_admin || $lastOrder != null && $lastOrder['review_id'] == null) {
-                        $order_id = $lastOrder['order_id'];
+                    if ($is_admin || ($order != null && $order['review_id'] == null)) {
+                        $order_id = $order['order_id'];
                         Review::addReview($order_id, $product, $delivery, $comment);
                     }
                 } else {

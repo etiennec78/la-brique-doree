@@ -142,7 +142,7 @@ include __DIR__ . '/../includes/header.php';
                     <?php if (!$order_was_takeaway): ?>
                     <div class="rating-group">
                         <label for="delivery">Livraison :</label>
-                        <select name="delivery" id="delivery" class="select-note" required>
+                        <select name="delivery" id="delivery" class="select-note">
                             <option value="5">★★★★★</option>
                             <option value="4">★★★★</option>
                             <option value="3">★★★</option>
