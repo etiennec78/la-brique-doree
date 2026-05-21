@@ -2,7 +2,7 @@
 
 INSERT INTO users (email, password_hash, first_name, last_name, role_id, phone, birth_date, inscription_date, last_connection, street_nb, street_nb_suf, street, town, zip_code, intercom_code, latitude, longitude) VALUES
 -- Passwords: root
--- 5 clients, 1 restaurateur, 3 administrateurs, 1 livreur
+-- 5 clients, 1 restaurateur, 3 administrateurs, 2 livreurs
 ('client@gmail.com', '$2y$12$0FEsdSyYSTrC0713vB2KzuoXFnZldB0v1Wr8JxUmMTmoHow07bDwe', 'Etienne', 'Coriou', 1, '+33712345678', '2006-03-27', '2026-03-28 22:00:00.000000', '2026-03-28 23:00:00.000000', 2, NULL, 'Rue de la Brique', 'Paris', 75000, NULL, 55.7259517, 9.1091171),
 ('cook@gmail.com', '$2y$12$0FEsdSyYSTrC0713vB2KzuoXFnZldB0v1Wr8JxUmMTmoHow07bDwe', 'Alice', 'La Restauratrice', 2, '+33712345678', '2006-03-27', '2026-03-28 22:00:00.000000', '2026-03-28 23:00:00.000000', 2, 'bis', 'Rue de la Brique', 'Paris', 75000, '012345', 55.7259517, 9.1091171),
 ('administrator@gmail.com', '$2y$12$0FEsdSyYSTrC0713vB2KzuoXFnZldB0v1Wr8JxUmMTmoHow07bDwe', 'Patrice', 'L''Administratrice', 3, '+33712345678', '2006-03-27', '2026-03-28 22:00:00.000000', '2026-03-28 23:00:00.000000', 2, 'ter', 'Rue de la Brique', 'Paris', 75000, '012345', 55.7259517, 9.1091171),
@@ -12,7 +12,8 @@ INSERT INTO users (email, password_hash, first_name, last_name, role_id, phone, 
 ('martin@gmail.com', '$2y$12$0FEsdSyYSTrC0713vB2KzuoXFnZldB0v1Wr8JxUmMTmoHow07bDwe', 'Martin', 'Jeudy', 1, '+33712345678', '2006-03-27', '2026-03-28 22:00:00.000000', '2026-03-28 23:00:00.000000', 2, NULL, 'Rue de la Brique', 'Paris', 75000, '012345', 55.7259517, 9.1091171),
 ('axel@gmail.com', '$2y$12$0FEsdSyYSTrC0713vB2KzuoXFnZldB0v1Wr8JxUmMTmoHow07bDwe', 'Axel', 'Can', 3, '+33712345678', '2006-03-27', '2026-03-28 22:00:00.000000', '2026-03-28 23:00:00.000000', 2, NULL, 'Rue de la Brique', 'Paris', 75000, '012345', 55.7259517, 9.1091171),
 ('grignon@gmail.com', '$2y$12$0FEsdSyYSTrC0713vB2KzuoXFnZldB0v1Wr8JxUmMTmoHow07bDwe', 'Romuald', 'Grignon', 3, '+33712345678', '2006-03-27', '2026-03-28 22:00:00.000000', '2026-03-28 23:00:00.000000', 2, NULL, 'Rue de la Brique', 'Paris', 75000, '012345', 55.7259517, 9.1091171),
-('lebreton@gmail.com', '$2y$12$0FEsdSyYSTrC0713vB2KzuoXFnZldB0v1Wr8JxUmMTmoHow07bDwe', 'Caryl', 'Le Breton', 1, '+33712345678', '2006-03-27', '2026-03-28 22:00:00.000000', '2026-03-28 23:00:00.000000', 2, NULL, 'Rue de la Brique', 'Paris', 75000, NULL, 55.7259517, 9.1091171);
+('lebreton@gmail.com', '$2y$12$0FEsdSyYSTrC0713vB2KzuoXFnZldB0v1Wr8JxUmMTmoHow07bDwe', 'Caryl', 'Le Breton', 1, '+33712345678', '2006-03-27', '2026-03-28 22:00:00.000000', '2026-03-28 23:00:00.000000', 2, NULL, 'Rue de la Brique', 'Paris', 75000, NULL, 55.7259517, 9.1091171),
+('ali@gmail.com', '$2y$12$0FEsdSyYSTrC0713vB2KzuoXFnZldB0v1Wr8JxUmMTmoHow07bDwe', 'Ali', 'Vraison', 4, '+33712345678', '2006-03-27', '2026-03-28 22:00:00.000000', '2026-03-28 23:00:00.000000', 2, NULL, 'Rue de la Brique', 'Paris', 75000, NULL, 55.7259517, 9.1091171);
 
 
 ----- COUPONS -----
