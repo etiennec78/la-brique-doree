@@ -46,17 +46,17 @@ class OrderHistoryController extends Controller {
       $order['total_price'] = 0;
 
       // Get the total price of the order
-      $cart_foods = Cart::getCartItems($target_id, 'food', $order['cart_id']);
-      $cart_menus = Cart::getCartItems($target_id, 'menu', $order['cart_id']);
-      $cart_has_food = count($cart_foods) > 0;
+      $foods = Cart::getCartItems($target_id, 'food', $order['cart_id']);
+      $menus = Cart::getCartItems($target_id, 'menu', $order['cart_id']);
+      $cart_has_food = count($foods) > 0;
 
       // Add foods to menus
-      foreach ($cart_menus as &$menu) {
+      foreach ($menus as &$menu) {
           $menu['foods'] = Menu::getMenuFoods($menu['id']);
       }
       unset($menu);
 
-      $cart_items = array_merge($cart_foods, $cart_menus);
+      $cart_items = array_merge($foods, $menus);
       foreach($cart_items as $item) {
         $order['total_price'] += $item['price'] * $item['quantity'];
       }
@@ -84,8 +84,8 @@ class OrderHistoryController extends Controller {
         'prev_id' => $prev_id ?? null,
         'next_id' => $next_id ?? null,
         'order' => $order ?? [],
-        'cart_menus' => $cart_menus ?? [],
-        'cart_foods' => $cart_foods ?? [],
+        'menus' => $menus ?? [],
+        'foods' => $foods ?? [],
         'cart_has_food' => $cart_has_food ?? false
       ]
     );

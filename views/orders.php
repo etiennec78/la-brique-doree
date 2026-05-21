@@ -10,7 +10,7 @@ include __DIR__ . '/../includes/header.php';
       <section class="cart-page">
         <div id="cart-content">
           <section class="bento">
-          <?php if (count($cart_menus) <= 0 and !$cart_has_food): ?>
+          <?php if (count($menus) <= 0 and !$cart_has_food): ?>
             <div class="items-grid">
               <p>Votre panier est vide.</p>
               <button onclick="location.href='/products'" class="basic-btn">Explorer la carte</button>
