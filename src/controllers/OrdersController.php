@@ -44,11 +44,11 @@ class OrdersController extends Controller {
         $reduction = 0;
         $cart_details = [];
 
-        $cart_menus = Cart::getCartItems($uid, "menu");
-        $cart_foods = Cart::getCartItems($uid, "food");
-        $cart_has_food = count($cart_foods) > 0;
+        $menus = Cart::getCartItems($uid, "menu");
+        $foods = Cart::getCartItems($uid, "food");
+        $cart_has_food = count($foods) > 0;
 
-        foreach ($cart_menus as &$menu) {
+        foreach ($menus as &$menu) {
             $menu['foods'] = Menu::getMenuFoods($menu['id']);
             $price_val = floatval($menu['price']);
             $quantity = $menu['quantity'];
@@ -59,7 +59,7 @@ class OrdersController extends Controller {
         unset($menu);
 
         if ($cart_has_food) {
-            foreach ($cart_foods as $food) {
+            foreach ($foods as $food) {
                 $price_val = floatval($food['price']);
                 $quantity = $food['quantity'];
                 $total_price += $price_val * $quantity;
@@ -98,8 +98,8 @@ class OrdersController extends Controller {
                 'retour_url' => $retour_url,
                 'total_price' => $total_price,
                 'cart_details' => $cart_details,
-                'cart_menus' => $cart_menus,
-                'cart_foods' => $cart_foods,
+                'menus' => $menus,
+                'foods' => $foods,
                 'cart_has_food' => $cart_has_food,
                 'montant_cybank' => $montant_cybank,
                 'control' => $control,

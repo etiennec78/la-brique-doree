@@ -2,15 +2,15 @@
 $is_editable = $is_editable ?? false;
 ?>
 <!-- Boucler pour chaque menu + 1 (plats individuels) -->
-<?php for($i = 0; $i < count($cart_menus) + $cart_has_food; $i++): ?>
+<?php for($i = 0; $i < count($menus) + $cart_has_food; $i++): ?>
     <div class="menu">
     <?php
-    $individual = $i == count($cart_menus);
+    $individual = $i == count($menus);
     if ($individual) {
-        $foods = $cart_foods;
+        $foods = $foods;
         $menu_name = "Plats individuels";
     } else {
-        $menu = $cart_menus[$i];
+        $menu = $menus[$i];
         $quantity = $menu['quantity'];
         $foods = $menu['foods'];
         $menu_name = $menu['name'] . (!$is_editable ? " (x$quantity)" : "");
