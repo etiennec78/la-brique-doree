@@ -36,7 +36,7 @@ include __DIR__ . '/../includes/header.php';
                 <div class="input-group">
                    
                     <label for="zip_code">Code postal</label>
-                    <input type="number" id="zip_code" name="zip_code" value="<?= $user_data['zip_code'] ?>">
+                    <input type="number" id="zip_code" name="zip_code" min="1" value="<?= $user_data['zip_code'] ?>">
                 </div>
                 <div class="input-group">
                     <label for="phone">Numéro de téléphone</label>
