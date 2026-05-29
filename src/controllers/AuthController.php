@@ -87,12 +87,12 @@ class AuthController extends Controller
     }
 
     else {
-      $error_password = "Votre mot de passe doit contenir au moins";
-      $error_length = ", 8 caractères";
-      $error_upper = ", un caractère majuscule";
-      $error_lower = ", un caractère minuscule";
-      $error_number = ", un chiffre";
-      $error_special = ", un caractère spécial";
+      $error_password = "Votre mot de passe à besoin";
+      $error_length = ", de 8 caractères";
+      $error_upper = ", d'un caractère majuscule";
+      $error_lower = ", d'un caractère minuscule";
+      $error_number = ", d'un chiffre";
+      $error_special = ", d'un caractère spécial";
       $error_string_length = strlen(trim($error_password));
 
       foreach ($password_verification as $key => $value) {
