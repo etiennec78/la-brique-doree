@@ -49,38 +49,97 @@ if (isset($_SESSION['user'])) {
         </div>
         
         <section id="navbar-header">
-            <a href="/" class="navbarbutton">Accueil</a>
-            <a href="/products" class="navbarbutton">Nos produits</a>
-            <a href="/reviews" class="navbarbutton">Avis</a>
+            
+            <?php if (!isset($_SESSION['user'])): ?>
+                <span style="font-size:2vw;">
+                    <a href="/" class="navbarbutton">Accueil</a>
+                    <a href="/products" class="navbarbutton">Nos produits</a>
+                    <a href="/reviews" class="navbarbutton">Avis</a>
+                    <a href="/login" class="navbarbutton">Connexion</a>
+                    <button id="theme-toggle" class="navbarbutton">🌙</button>
+                </span>
 
-            <?php if (isset($_SESSION['user'])): ?>
-                <a href="/profile" class="navbarbutton">Mon Profil</a>
+            <?php else: ?>
+                <?php if ($_SESSION['user']['role'] === 'cook'): ?>
+                    <span style="font-size:1.4vw;">
+                        <a href="/" class="navbarbutton">Accueil</a>
+                        <a href="/products" class="navbarbutton">Nos produits</a>
+                        <a href="/reviews" class="navbarbutton">Avis</a>
+                        <a href="/profile" class="navbarbutton">Mon Profil</a>
+                        <a href="/cook" class="navbarbutton">Gestion Commandes</a>
 
-                <?php if ($_SESSION['user']['role'] === 'administrator'): ?>
-                    <a href="/admin" class="navbarbutton">Panel Admin</a>
-                    <a href="/cook" class="navbarbutton">Gestion Commandes</a>
-                    <a href="/delivery" class="navbarbutton">Mes Livraisons</a>
+                        <?php require_once '../src/models/Order.php'; ?>
+                        <?php if (!empty(Order::getUserActiveOrders($_SESSION['user']['id']))): ?>
+                            <a href="/order_tracking" class="navbarbutton">Suivre ma commande</a>
+                        <?php else: ?>
+                            <a href="/order_history" class="navbarbutton">Historique des commandes</a>
+                        <?php endif; ?>
 
-                <?php elseif ($_SESSION['user']['role'] === 'cook'): ?>
-                    <a href="/cook" class="navbarbutton">Gestion Commandes</a>
+                        <a href="/logout" class="navbarbutton alert">Déconnexion</a>
+                        <button id="theme-toggle" class="navbarbutton">🌙</button>
+                    </span>
 
                 <?php elseif ($_SESSION['user']['role'] === 'delivery_person'): ?>
-                    <a href="/delivery" class="navbarbutton">Mes Livraisons</a>
-                <?php endif; ?>
+                    <span style="font-size:1.5vw;">
+                        <a href="/" class="navbarbutton">Accueil</a>
+                        <a href="/products" class="navbarbutton">Nos produits</a>
+                        <a href="/reviews" class="navbarbutton">Avis</a>
+                        <a href="/profile" class="navbarbutton">Mon Profil</a>
+                        <a href="/delivery" class="navbarbutton">Mes Livraisons</a>
 
-                <?php require_once '../src/models/Order.php'; ?>
-                <?php if (!empty(Order::getUserActiveOrders($_SESSION['user']['id']))): ?>
-                    <a href="/order_tracking" class="navbarbutton">Suivre ma commande</a>
+                        <?php require_once '../src/models/Order.php'; ?>
+                        <?php if (!empty(Order::getUserActiveOrders($_SESSION['user']['id']))): ?>
+                            <a href="/order_tracking" class="navbarbutton">Suivre ma commande</a>
+                        <?php else: ?>
+                            <a href="/order_history" class="navbarbutton">Historique des commandes</a>
+                        <?php endif; ?>
+
+                        <a href="/logout" class="navbarbutton alert">Déconnexion</a>
+                        <button id="theme-toggle" class="navbarbutton">🌙</button>
+                    </span>
+                
+
+                <?php elseif ($_SESSION['user']['role'] === 'administrator'): ?>
+                    <span style="font-size:1.1vw;">
+                        <a href="/" class="navbarbutton">Accueil</a>
+                        <a href="/products" class="navbarbutton">Nos produits</a>
+                        <a href="/reviews" class="navbarbutton">Avis</a>
+                        <a href="/profile" class="navbarbutton">Mon Profil</a>
+                        <a href="/admin" class="navbarbutton">Panel Admin</a>
+                        <a href="/cook" class="navbarbutton">Gestion Commandes</a>
+                        <a href="/delivery" class="navbarbutton">Mes Livraisons</a>
+
+                        <?php require_once '../src/models/Order.php'; ?>
+                        <?php if (!empty(Order::getUserActiveOrders($_SESSION['user']['id']))): ?>
+                            <a href="/order_tracking" class="navbarbutton">Suivre ma commande</a>
+                        <?php else: ?>
+                            <a href="/order_history" class="navbarbutton">Historique des commandes</a>
+                        <?php endif; ?>
+
+                        <a href="/logout" class="navbarbutton alert">Déconnexion</a>
+                        <button id="theme-toggle" class="navbarbutton">🌙</button>
+                    </span>
+                
+
                 <?php else: ?>
-                    <a href="/order_history" class="navbarbutton">Historique des commandes</a>
+                    <span style="font-size:1.7vw;">
+                        <a href="/" class="navbarbutton">Accueil</a>
+                        <a href="/products" class="navbarbutton">Nos produits</a>
+                        <a href="/reviews" class="navbarbutton">Avis</a>
+                        <a href="/profile" class="navbarbutton">Mon Profil</a>
+
+                        <?php require_once '../src/models/Order.php'; ?>
+                        <?php if (!empty(Order::getUserActiveOrders($_SESSION['user']['id']))): ?>
+                            <a href="/order_tracking" class="navbarbutton">Suivre ma commande</a>
+                        <?php else: ?>
+                            <a href="/order_history" class="navbarbutton">Historique des commandes</a>
+                        <?php endif; ?>
+
+                        <a href="/logout" class="navbarbutton alert">Déconnexion</a>
+                        <button id="theme-toggle" class="navbarbutton">🌙</button>
+                    </span>
                 <?php endif; ?>
-
-                <a href="/logout" class="navbarbutton alert">Déconnexion</a>
-            <?php else: ?>
-                <a href="/login" class="navbarbutton">Connexion</a>
             <?php endif; ?>
-
-            <button id="theme-toggle" class="navbarbutton">🌙</button>
         </section>
 
         <div id="toast-container">
