@@ -48,6 +48,7 @@ class AuthController extends Controller
       }
       exit();
     } else {
+      $_SESSION['failed_email'] = $_POST['email'] ?? '';
       $_SESSION['error'] = 'Email ou mot de passe incorrect.';
       $this->render('login');
     }
