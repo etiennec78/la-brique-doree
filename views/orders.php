@@ -70,7 +70,7 @@ include __DIR__ . '/../includes/header.php';
             <input type="hidden" name="vendeur" value="<?= $vendeur ?>">
             <input type="hidden" name="retour" value="<?= $retour_url ?>">
             <input type="hidden" name="control" value="<?= $control ?>">
-            <button id="checkout" type="submit" class="basic-btn checkout-btn" <?php if($total_price <= 0 || ($is_takeaway && empty($takeaway_time))) echo 'disabled'; ?>>
+            <button style="font-size:15px;" id="checkout" type="submit" class="basic-btn checkout-btn" <?php if($total_price <= 0 || ($is_takeaway && empty($takeaway_time))) echo 'disabled'; ?>>
                 <?= ($is_takeaway && empty($takeaway_time)) ? "Veuillez confirmer l'heure" : 'Payer' ?>
             </button>
           </form>
