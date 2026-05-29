@@ -70,17 +70,11 @@ class AuthController extends Controller
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
     $existing_user = User::findByEmail($email);
+    $password_verification = User::passwordVerification($password);
 
     if (empty($email) || empty($password)) {
       $_SESSION['failed_email'] = $email;
       $_SESSION['error'] = 'Veuillez remplir tous les champs.';
-      $this->render('register');
-      return;
-    }
-
-    if (!preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/', $password)) {
-      $_SESSION['failed_email'] = $email;
-      $_SESSION['error'] = 'Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.';
       $this->render('register');
       return;
     }
@@ -90,6 +84,64 @@ class AuthController extends Controller
       $_SESSION['error'] = 'L\'email est déjà associé à un compte.';
       $this->render('register');
       return;
+    }
+
+    else {
+      $error_password = "Votre mot de passe doit contenir au moins";
+      $error_length = ", 8 caractères";
+      $error_upper = ", un caractère majuscule";
+      $error_lower = ", un caractère minuscule";
+      $error_number = ", un chiffre";
+      $error_special = ", un caractère spécial";
+      $error_string_length = strlen(trim($error_password));
+
+      foreach ($password_verification as $key => $value) {
+        if (($value != 0) && ($value != 1)) {
+          $_SESSION['failed_email'] = $email;
+          $_SESSION['error'] = 'Erreur inconnue de mot de passe.';
+          $this->render('register');
+          return;
+        }
+
+        if ($value == 0) {
+
+          switch ($key) {
+
+            case 'length':
+              $error_password .= $error_length;
+              break;
+
+            case 'uppercase':
+              $error_password .= $error_upper;
+              break;
+
+            case 'lowercase':
+              $error_password .= $error_lower;
+              break;
+
+            case 'number':
+              $error_password .= $error_number;
+              break;
+
+            case 'special':
+              $error_password .= $error_special;
+              break;
+            
+            default:
+              $_SESSION['failed_email'] = $email;
+              $_SESSION['error'] = 'Erreur inconnue de mot de passe.';
+              $this->render('register');
+              return;
+          }
+        }
+      }
+
+      if (strlen(trim($error_password)) > $error_string_length) {
+        $_SESSION['failed_email'] = $email;
+        $_SESSION['error'] = $error_password . '.';
+        $this->render('register');
+        return;
+      }
     }
 
     try {

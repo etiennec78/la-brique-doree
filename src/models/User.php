@@ -158,4 +158,28 @@ class User {
 
         User::setUserData($uid, 'successive_api_calls', $successive);
     }
+
+    public static function passwordVerification($password) {
+        $verifications = [
+            'length' => 0,
+            'uppercase' => 0,
+            'lowercase' => 0,
+            'number' => 0,
+            'special' => 0,
+
+        ];
+
+        $password = trim($password);
+
+        if (strlen($password) > 8) {
+            $verifications['length'] = 1;
+        }
+
+        $verifications['uppercase'] = preg_match('/[A-Z]/', $password);
+        $verifications['lowercase'] = preg_match('/[a-z]/', $password) ;
+        $verifications['number'] = preg_match('/\d/', $password) ;
+        $verifications['special'] = preg_match('/\W/', $password) ;
+
+        return $verifications;
+    }
 }
