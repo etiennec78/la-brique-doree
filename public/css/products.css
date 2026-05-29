@@ -118,3 +118,37 @@
   display: flex;
   gap: 2px;
 }
+
+.products-toolbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.products-toolbar .filters-panel {
+  padding: 20px 0px 0px 20px ;
+  display: inline-block;
+}
+
+.sort-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 20px 0px 0px;
+}
+
+.sort-container label {
+  color: var(--offwhite);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.custom-sort-select {
+  background-color: var(--darkgray);
+  color: var(--solid-gold);
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  height: 48px;
+}

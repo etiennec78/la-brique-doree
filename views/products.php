@@ -3,7 +3,7 @@ $title = "La Brique Dorée";
 $h1 = "NOS PRODUITS";
 $staff_page = false;
 $css_files = ['/css/food-cards.css', '/css/products.css'];
-$js_files = ['/js/cart.js', '/js/filters.js'];
+$js_files = ['/js/cart.js', '/js/filters.js', '/js/sort_products.js'];
 include __DIR__ . '/../includes/header.php';
 ?>
 <main>
@@ -17,24 +17,37 @@ include __DIR__ . '/../includes/header.php';
       <input type="checkbox" class="filter" id="nut" checked />
       <input type="checkbox" class="filter" id="sulfite" checked />
 
-      <details class="filters-panel">
-        <summary>
-          <img src="/assets/images/filter.svg" alt="Filtres">
-        </summary>
-        <aside class="filters-menu" aria-label="Filtres allergenes">
-          <div class="filters-list">
-            <label for="crustacean">Crustacé</label>
-            <label for="fish">Poisson</label>
-            <label for="gluten">Gluten</label>
-            <label for="milk">Lait</label>
-            <label for="sesame">Sésame</label>
-            <label for="egg">Œuf</label>
-            <label for="soy">Soja</label>
-            <label for="nut">Fruit à coque</label>
-            <label for="sulfite">Sulfite</label>
-          </div>
-        </aside>
-      </details>
+      <div class="products-toolbar">
+        
+        <details class="filters-panel">
+          <summary>
+            <img src="/assets/images/filter.svg" alt="Filtres">
+          </summary>
+          <aside class="filters-menu" aria-label="Filtres allergenes">
+            <div class="filters-list">
+              <label for="crustacean">Crustacé</label>
+              <label for="fish">Poisson</label>
+              <label for="gluten">Gluten</label>
+              <label for="milk">Lait</label>
+              <label for="sesame">Sésame</label>
+              <label for="egg">Œuf</label>
+              <label for="soy">Soja</label>
+              <label for="nut">Fruit à coque</label>
+              <label for="sulfite">Sulfite</label>
+            </div>
+          </aside>
+        </details>
+
+        <div class="sort-container">
+            <label for="sort-price">Trier par prix :</label>
+            <select id="sort-price" class="custom-sort-select">
+                <option value="default">Par défaut</option>
+                <option value="asc">Ordre croissant (du - cher au + cher)</option>
+                <option value="desc">Ordre décroissant (du + cher au - cher)</option>
+            </select>
+        </div>
+
+      </div>
 
       <section class="menu-content">
         <div class="food-section" name="Menus">
@@ -49,7 +62,7 @@ include __DIR__ . '/../includes/header.php';
                     $menus_data = $menu['foods'];
                     $menu_allergens_classes = implode(' ', array_map('htmlspecialchars', $menu['allergens']));
                 ?>
-                <article class="description <?= $menu_allergens_classes ?>" description="<?= $description ?>" price="<?= $price ?>€">
+                <article class="description <?= $menu_allergens_classes ?>" description="<?= $description ?>" price="<?= $price ?>€" data-raw-price="<?= $menu['price'] ?>">
                   <h3><?= $name ?></h3>
                   <div class="menu-grid">
                     <?php foreach($menus_data as $menu_item): ?>
@@ -82,7 +95,7 @@ include __DIR__ . '/../includes/header.php';
                             $image_path = '/assets/' . htmlspecialchars($food['image_path']);
                             $allergens_classes = implode(' ', array_map('htmlspecialchars', $food['allergens']));
                         ?>
-                        <article class="description <?= $allergens_classes ?>" description="<?= $description ?>" price="<?= $price ?>€" style="background-image: url('<?= $image_path ?>');">
+                        <article class="description <?= $allergens_classes ?>" description="<?= $description ?>" price="<?= $price ?>€" style="background-image: url('<?= $image_path ?>');" data-raw-price="<?= $food['price'] ?>">
                             <h3><?= $name ?></h3>
                             <form action="/update_cart" method="POST">
                                 <input type="hidden" name="item_id" value="<?= $id ?>">
