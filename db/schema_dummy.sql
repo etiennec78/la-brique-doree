@@ -33,8 +33,7 @@ INSERT INTO cart (user_id, payment_status_id, created_at, coupon_id) VALUES
 (3, 2, '2026-03-28 22:30:00.000000', NULL),
 (4, 2, '2026-03-28 22:30:00.000000', NULL),
 -- pending carts
-(1, 1, '2026-03-28 22:30:00.000000', NULL),
-(1, 1, '2026-03-28 22:30:00.000000', NULL),
+(2, 1, '2026-03-28 22:30:00.000000', NULL),
 (1, 1, '2026-03-28 22:30:00.000000', NULL);
 
 INSERT INTO cart_menu (cart_id, menu_id, quantity) VALUES
@@ -44,15 +43,15 @@ INSERT INTO cart_menu (cart_id, menu_id, quantity) VALUES
 (4, 2, 1),
 (5, 1, 1),
 (6, 3, 1),
-(7, 1, 2),
-(7, 4, 1);
+(6, 1, 2),
+(6, 4, 1);
 
 INSERT INTO cart_food (cart_id, food_id, quantity) VALUES
-(7, 1, 1),
-(7, 6, 1),
-(7, 7, 1),
-(7, 10, 1),
-(7, 12, 1);
+(6, 1, 1),
+(6, 6, 1),
+(6, 7, 1),
+(6, 10, 1),
+(6, 12, 1);
 
 INSERT INTO orders (cart_id, customer_id, cook_id, delivery_person_id, order_status_id, is_takeaway, takeaway_time, cook_assigned_at) VALUES
 -- finished orders (for reviews)
@@ -61,8 +60,8 @@ INSERT INTO orders (cart_id, customer_id, cook_id, delivery_person_id, order_sta
 (3, 3, 2, 4, 5, FALSE, NULL, NULL),
 (4, 4, 2, 4, 5, FALSE, NULL, NULL),
 -- pending orders
-(1, 1, 2, 4, 2, FALSE, NULL, NOW()),
-(1, 1, 2, 4, 1, TRUE, '2027-03-28 22:30:00.000000', NULL);
+(5, 2, 2, 4, 2, FALSE, NULL, NOW()),
+(6, 1, 2, 4, 1, TRUE, '2027-03-28 22:30:00.000000', NULL);
 
 
 ----- REVIEWS -----
