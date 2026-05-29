@@ -72,18 +72,21 @@ class AuthController extends Controller
     $existing_user = User::findByEmail($email);
 
     if (empty($email) || empty($password)) {
+      $_SESSION['failed_email'] = $email;
       $_SESSION['error'] = 'Veuillez remplir tous les champs.';
       $this->render('register');
       return;
     }
 
     if (!preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/', $password)) {
+      $_SESSION['failed_email'] = $email;
       $_SESSION['error'] = 'Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.';
       $this->render('register');
       return;
     }
 
     elseif (!empty($existing_user)) {
+      $_SESSION['failed_email'] = $email;
       $_SESSION['error'] = 'L\'email est déjà associé à un compte.';
       $this->render('register');
       return;

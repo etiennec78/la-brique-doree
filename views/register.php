@@ -13,7 +13,8 @@ include __DIR__ . '/../includes/header.php';
             <form action="/register" method="post">
                 <div class="input-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="email" value="<?= isset($_SESSION['failed_email']) ? htmlspecialchars($_SESSION['failed_email']) : '' ?>" required>
+                    <?php unset($_SESSION['failed_email']); ?>
                 </div>
                 <div class="input-group">
                     <label for="password">Mot de passe</label>
