@@ -115,13 +115,35 @@ img[src$=".svg"]:not(#cart) {
   font-weight: bold;
 }
 
-#navbar-header span {
-  padding: 8px clamp(10px, 10vw, 150px);
+#navbar-header nav {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px clamp(10px, 7vw, 50px);
   background: var(--gold);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
+
+#nav-default { 
+  font-size: clamp(14px, 2vw, 24px); 
+}
+
+#nav-client { 
+  font-size: clamp(10px, 1.8vw, 22px); 
+}
+
+#nav-delivery { 
+  font-size: clamp(9px, 1.6vw, 20px); 
+}
+
+#nav-cook    { 
+  font-size: clamp(9px, 1.4vw, 18px); 
+}
+
+#nav-admin   { 
+  font-size: clamp(6px, 1.1vw, 16px); 
 }
 
 #logo {

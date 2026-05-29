@@ -51,17 +51,17 @@ if (isset($_SESSION['user'])) {
         <section id="navbar-header">
             
             <?php if (!isset($_SESSION['user'])): ?>
-                <span style="font-size:2vw;">
+                <nav id="nav-default">
                     <a href="/" class="navbarbutton">Accueil</a>
                     <a href="/products" class="navbarbutton">Nos produits</a>
                     <a href="/reviews" class="navbarbutton">Avis</a>
                     <a href="/login" class="navbarbutton">Connexion</a>
                     <button id="theme-toggle" class="navbarbutton">🌙</button>
-                </span>
+                </nav>
 
             <?php else: ?>
                 <?php if ($_SESSION['user']['role'] === 'cook'): ?>
-                    <span style="font-size:1.4vw;">
+                    <nav id="nav-cook">
                         <a href="/" class="navbarbutton">Accueil</a>
                         <a href="/products" class="navbarbutton">Nos produits</a>
                         <a href="/reviews" class="navbarbutton">Avis</a>
@@ -77,10 +77,10 @@ if (isset($_SESSION['user'])) {
 
                         <a href="/logout" class="navbarbutton alert">Déconnexion</a>
                         <button id="theme-toggle" class="navbarbutton">🌙</button>
-                    </span>
+                    </nav>
 
                 <?php elseif ($_SESSION['user']['role'] === 'delivery_person'): ?>
-                    <span style="font-size:1.5vw;">
+                    <nav id="nav-delivery">
                         <a href="/" class="navbarbutton">Accueil</a>
                         <a href="/products" class="navbarbutton">Nos produits</a>
                         <a href="/reviews" class="navbarbutton">Avis</a>
@@ -96,11 +96,11 @@ if (isset($_SESSION['user'])) {
 
                         <a href="/logout" class="navbarbutton alert">Déconnexion</a>
                         <button id="theme-toggle" class="navbarbutton">🌙</button>
-                    </span>
+                    </nav>
                 
 
                 <?php elseif ($_SESSION['user']['role'] === 'administrator'): ?>
-                    <span style="font-size:1.1vw;">
+                    <nav id="nav-admin">
                         <a href="/" class="navbarbutton">Accueil</a>
                         <a href="/products" class="navbarbutton">Nos produits</a>
                         <a href="/reviews" class="navbarbutton">Avis</a>
@@ -118,11 +118,11 @@ if (isset($_SESSION['user'])) {
 
                         <a href="/logout" class="navbarbutton alert">Déconnexion</a>
                         <button id="theme-toggle" class="navbarbutton">🌙</button>
-                    </span>
+                    </nav>
                 
 
                 <?php else: ?>
-                    <span style="font-size:1.7vw;">
+                    <nav id="nav-client">
                         <a href="/" class="navbarbutton">Accueil</a>
                         <a href="/products" class="navbarbutton">Nos produits</a>
                         <a href="/reviews" class="navbarbutton">Avis</a>
@@ -137,7 +137,7 @@ if (isset($_SESSION['user'])) {
 
                         <a href="/logout" class="navbarbutton alert">Déconnexion</a>
                         <button id="theme-toggle" class="navbarbutton">🌙</button>
-                    </span>
+                    </nav>
                 <?php endif; ?>
             <?php endif; ?>
         </section>
