@@ -65,7 +65,7 @@ include __DIR__ . '/../includes/header.php';
                         <td>
                             <form action="/global_reduction" method="POST">
                                 <input type="hidden" name="user_id" value="<?= $user_data['id'] ?>">
-                                <input type="text" name="reduction" maxlength=3 size=3 value="<?= $user_data['global_reduction'] * 100 ?>" onchange="this.form.submit()">
+                                <input type="number" name="reduction" min=0 max=100 value="<?= $user_data['global_reduction'] * 100 ?>" onchange="this.form.submit()">
                                 <noscript>
                                     <button id="manage" type="submit" class="action-link">Appliquer</button>
                                 </noscript>
