@@ -16,7 +16,7 @@ class OrdersController extends Controller {
         $uid = $_SESSION['user']['id'];
         $cart_count = Cart::getCartCount();
         $cart_id = Cart::getUserCartId($uid);
-        $coupon = Coupon::getCouponFromUser($uid);
+        $coupon = Coupon::getCouponFromCart($cart_id);
         $global_reduction = User::getGlobalReduction($uid);
         $expired_coupon = (
             !empty($coupon)

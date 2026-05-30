@@ -102,11 +102,12 @@ include __DIR__ . '/../includes/header.php';
               <details class="coupon-details">
               <summary>Code promo ?</summary>
                 <form class="coupon-form" action="/apply_coupon" method="POST">
-                  <?php if (!empty($coupon['code'])): ?>
-                    <input type="text" name="coupon" placeholder="Code promo" value="<?= $coupon['code'] ?>">
-                  <?php else: ?>
-                    <input type="text" name="coupon" placeholder="Code promo" value="">
-                  <?php endif; ?>
+                  <?php 
+                  if (empty($coupon['code'])) {
+                    $coupon['code'] = '';
+                  }
+                  ?>
+                  <input type="text" name="coupon" placeholder="Code promo" value="<?= $coupon['code'] ?>">
                   <noscript>
                     <button id="submit_coupon" class="basic-btn" type="submit">Appliquer</button>
                   </noscript>
