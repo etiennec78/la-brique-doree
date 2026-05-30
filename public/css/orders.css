@@ -227,3 +227,13 @@ input#takeaway_time {
 button#takeaway {
   width: 100%;
 }
+
+@media (max-width: 768px) {
+  .cart-page {
+    flex-direction: column;
+  }
+
+  #cart-bar {
+    margin: 25px 0px; /* Optional: adjusts margins so it fits nicer on mobile screens */
+  }
+}

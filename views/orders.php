@@ -21,7 +21,7 @@ include __DIR__ . '/../includes/header.php';
             include __DIR__ . '/../includes/bento_grid.php'; 
             ?>
           <?php endif; ?>
-      </section>
+          </section>
         </div>
         <div id="cart-bar">
           <h2>Votre panier</h2>
