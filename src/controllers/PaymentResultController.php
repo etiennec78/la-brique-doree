@@ -21,7 +21,7 @@ class PaymentResultController extends Controller {
     $api_key = getAPIKey($vendeur);
     $control_check = md5($api_key . "#" . $trans . "#" . $montant . "#" . $vendeur . "#" . $status_bank . "#");
 
-    $isSuccess = ($status_bank === 'accepted' && $control_bank === $control_check);
+    $isSuccess = ($_SESSION['free_order'] || ($status_bank === 'accepted' && $control_bank === $control_check));
 
     if ($isSuccess) {
         try {
@@ -29,11 +29,24 @@ class PaymentResultController extends Controller {
             require_once __DIR__ . '/../models/Cart.php';
             require_once __DIR__ . '/../models/Order.php';
 
+            if ($_SESSION['free_order']) {
+                $cart_id = Cart::getUserCartId($user_id);
+            }
+
             Cart::markCartAsPaid($cart_id, $user_id);
 
             if (!Order::checkOrderExistsByCartId($cart_id)) {
-                $is_takeaway = isset($_GET['is_takeaway']) ? (int)$_GET['is_takeaway'] : 0;
-                $takeaway_time_str = isset($_GET['takeaway_time']) && !empty($_GET['takeaway_time']) ? $_GET['takeaway_time'] : null;
+                
+                if ($_SESSION['free_order']) {
+                    $is_takeaway = $_SESSION['free_takeaway'];
+                    $takeaway_time_str = $_SESSION['free_time'];
+                }
+
+                else {
+                    $is_takeaway = isset($_GET['is_takeaway']) ? (int)$_GET['is_takeaway'] : 0;
+                    $takeaway_time_str = isset($_GET['takeaway_time']) && !empty($_GET['takeaway_time']) ? $_GET['takeaway_time'] : null;
+                }
+
                 $takeaway_time = $takeaway_time_str ? date('Y-m-d ') . $takeaway_time_str . ':00' : null;
 
                 $order_status = 1; // default: paid
