@@ -2,6 +2,22 @@
 
 class AdminController extends Controller {
     public function index() {
+        /*
+            
+         INPUT :
+                 
+            None
+          
+         OUTPUT :
+
+            None
+
+          
+         SUMMARY :
+            
+            Requires role level 3, fetches all user detailed information alongside active delivery statuses, and renders the administration dashboard view.
+
+        */
         $this->requireRole(3);
 
         require_once __DIR__ . '/../models/User.php';
@@ -19,6 +35,22 @@ class AdminController extends Controller {
     }
 
     public function applyGlobalReduction() {
+        /*
+            
+         INPUT :
+                 
+            None
+          
+         OUTPUT :
+
+            None
+
+          
+         SUMMARY :
+            
+            Requires role level 3, captures specified global reduction and user ID flags via global POST data, performs the modification, and forwards the browser to the administration route.
+
+        */
         $this->requireRole(3);
 
         require_once __DIR__ . '/../models/User.php';
@@ -32,6 +64,22 @@ class AdminController extends Controller {
     }
 
     public function apiBanUser() {
+        /*
+            
+         INPUT :
+                 
+            None
+          
+         OUTPUT :
+
+            None
+
+          
+         SUMMARY :
+            
+            Requires role level 3 in API mode, enforces an account ban state targeting a specific user from POST parameters if they do not match the current user ID, and outputs a JSON confirmation payload.
+
+        */
         $this->requireRole(3, true);
 
         require_once __DIR__ . '/../models/User.php';
