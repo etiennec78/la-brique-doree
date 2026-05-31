@@ -4,6 +4,22 @@ class AuthController extends Controller
 {
   public function showLogin()
   {
+    /*
+        
+     INPUT :
+             
+        None
+      
+     OUTPUT :
+
+        None
+
+      
+     SUMMARY :
+        
+        Evaluates active sessions to redirect authenticated users to the entry point, or presents the basic login template file if no current session exists.
+
+    */
     if (isset($_SESSION['user'])) {
       header("Location: /");
       exit();
@@ -13,6 +29,22 @@ class AuthController extends Controller
 
   public function processLogin()
   {
+    /*
+        
+     INPUT :
+             
+        None
+      
+     OUTPUT :
+
+        None
+
+      
+     SUMMARY :
+        
+        Processes submitted login data via global POST fields, handles validation checks, checks active block statuses, configures user session attributes, and handles custom dashboard routing depending on user positions.
+
+    */
     require_once __DIR__ . '/../models/User.php';
 
     $email = $_POST['email'] ?? '';
@@ -56,6 +88,22 @@ class AuthController extends Controller
 
   public function showRegister()
   {
+    /*
+        
+     INPUT :
+             
+        None
+      
+     OUTPUT :
+
+        None
+
+      
+     SUMMARY :
+        
+        Validates whether user authentication details already exist inside the global session scope to reroute them, or alternatively shows the blank registration profile page.
+
+    */
     if (isset($_SESSION['user'])) {
       header("Location: /");
       exit();
@@ -65,6 +113,22 @@ class AuthController extends Controller
 
   public function processRegister()
   {
+    /*
+        
+     INPUT :
+             
+        None
+      
+     OUTPUT :
+
+        None
+
+      
+     SUMMARY :
+        
+        Processes the input fields for a new user registration, screens for pre-existing matching emails, analyzes password safety policies, logs record details within the database system, and triggers session storage initialization.
+
+    */
     require_once __DIR__ . '/../models/User.php';
 
     $email = $_POST['email'] ?? '';
@@ -166,6 +230,22 @@ class AuthController extends Controller
 
   public function logout()
   {
+    /*
+        
+     INPUT :
+             
+        None
+      
+     OUTPUT :
+
+        None
+
+      
+     SUMMARY :
+        
+        Removes ongoing user session processes entirely, wipes internal variables, and passes location headers directing users to the login route.
+
+    */
     session_destroy();
     unset($_SESSION);
 
