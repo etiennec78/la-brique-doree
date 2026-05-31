@@ -37,13 +37,13 @@ class AdminController extends Controller {
         require_once __DIR__ . '/../models/User.php';
 
         $id = $_POST['user_id'];
-        $etat = $_POST['banned'];
+        $state = $_POST['banned'];
 
         if ($id != $_SESSION['user']['id']) {
-            User::setUserData($id, 'banned', $etat);
+            User::setUserData($id, 'banned', $state);
         }
 
-        echo json_encode(['success' => true, 'banned' => $etat]);
+        echo json_encode(['success' => true, 'banned' => $state]);
         exit();
     }
 }
