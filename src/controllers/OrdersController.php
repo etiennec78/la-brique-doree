@@ -133,7 +133,17 @@ class OrdersController extends Controller {
         if (isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false) {
             require_once __DIR__ . '/../models/Cart.php';
             header('Content-Type: application/json');
-            echo json_encode(['cart_count' => Cart::getCartCount()]);
+
+            $response = [
+            'cart_count' => Cart::getCartCount()
+            ];
+
+            if (isset($_SESSION['error'])) {
+                $response['error'] = $_SESSION['error'];
+                unset($_SESSION['error']);
+            }
+
+            echo json_encode($response);
             exit();
         }
 
