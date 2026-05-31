@@ -2,6 +2,22 @@
 
 class CookController extends Controller {
     private function getEnrichedPendingOrders() {
+        /*
+            
+         INPUT :
+                 
+            None
+          
+         OUTPUT :
+
+            (array) $pending_orders : variable representing the list of enriched orders
+
+          
+         SUMMARY :
+            
+            Fetches orders with paid or preparing states that do not have an assigned delivery person, and enriches each order record with its corresponding items list.
+
+        */
         require_once __DIR__ . '/../models/Order.php';
         $pending_orders = Order::getOrdersFromState(['paid', 'preparing']);
         
@@ -18,6 +34,22 @@ class CookController extends Controller {
     }
 
     public function index() {
+        /*
+            
+         INPUT :
+                 
+            None
+          
+         OUTPUT :
+
+            None
+
+          
+         SUMMARY :
+            
+            Requires role level 2 or 3, retrieves core dataset values for the kitchen environment including pending and delivery orders, and displays the cook interface view.
+
+        */
         $this->requireRole([2, 3]);
 
         require_once __DIR__ . '/../models/Cart.php';
@@ -46,6 +78,22 @@ class CookController extends Controller {
     }
 
     public function menuEditor() {
+        /*
+            
+         INPUT :
+                 
+            None
+          
+         OUTPUT :
+
+            None
+
+          
+         SUMMARY :
+            
+            Requires role level 2 or 3, aggregates existing menus while resolving internal food allergen classifications, collects sorted food variants, and presents the menu configuration dashboard.
+
+        */
         $this->requireRole([2, 3]);
         require_once __DIR__ . '/../models/Menu.php';
         require_once __DIR__ . '/../models/Order.php';
@@ -78,6 +126,22 @@ class CookController extends Controller {
     }
 
     public function assignOrder() {
+        /*
+            
+         INPUT :
+                 
+            None
+          
+         OUTPUT :
+
+            None
+
+          
+         SUMMARY :
+            
+            Requires role level 2 or 3, processes an order selection from global POST variables to modify its execution status to ready, or binds it to a vacant courier.
+
+        */
         $this->requireRole([2, 3]);
         require_once __DIR__ . '/../models/Order.php';
 
@@ -110,6 +174,22 @@ class CookController extends Controller {
     }
 
     public function finishTakeaway() {
+        /*
+            
+         INPUT :
+                 
+            None
+          
+         OUTPUT :
+
+            None
+
+          
+         SUMMARY :
+            
+            Requires role level 2 or 3, updates the condition of a localized takeaway order to a completed delivery status using parameters sent over POST, and performs route forwarding.
+
+        */
         $this->requireRole([2, 3]);
         require_once __DIR__ . '/../models/Order.php';
 
@@ -125,6 +205,22 @@ class CookController extends Controller {
     }
 
     public function apiCookGetPending() {
+        /*
+            
+         INPUT :
+                 
+            None
+          
+         OUTPUT :
+
+            None
+
+          
+         SUMMARY :
+            
+            Requires role level 2 or 3 in API mode, extracts active kitchen operations alongside transit items, and formats the response structure into a JSON stream.
+
+        */
         $this->requireRole([2, 3], true);
 
         require_once __DIR__ . '/../models/Order.php';
