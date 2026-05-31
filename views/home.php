@@ -2,8 +2,8 @@
 $title = "La Brique Dorée";
 $h1 = "LA BRIQUE DOREE";
 $staff_page = false;
-$css_files = ['/css/slideshow.css'];
-$js_files = ['/js/slider.js'];
+$css_files = ['/css/slideshow.css', '/css/food-cards.css', '/css/products.css']; 
+$js_files = ['/js/slider.js']; 
 include __DIR__ . '/../includes/header.php';
 ?>
 <main>
@@ -44,6 +44,45 @@ include __DIR__ . '/../includes/header.php';
             </div>
         </div>
     </div>
+
+    <section class="chef-highlights">
+        <h2>⭐ Les Coups de Cœur du Chef ⭐</h2>
+        <p class="chef-subtitle">Découvrez nos créations incontournables, prêtes à être savourées.</p>
+
+        <div class="bento">
+            
+            <article class="description" description="Notre ramen traditionnel fait de briques savoureuses." price="14,50€" style="background-image: url('/assets/images/food/dish/ramen.webp');">
+                <h3>Le Ramen</h3>
+                <form action="/update_cart" method="POST">
+                    <input type="hidden" name="item_id" value="1">
+                    <input type="hidden" name="item_type" value="food">
+                    <input type="hidden" name="action" value="add">
+                    <button class="add-to-cart" type="submit" aria-label="Ajouter au panier">+</button>
+                </form>
+            </article>
+
+            <article class="description" description="Un grand classique revisité façon briques." price="12,00€" style="background-image: url('/assets/images/food/dish/burger.png');">
+                <h3>Burger briques</h3>
+                <form action="/update_cart" method="POST">
+                    <input type="hidden" name="item_id" value="2">
+                    <input type="hidden" name="item_type" value="food">
+                    <input type="hidden" name="action" value="add">
+                    <button class="add-to-cart" type="submit" aria-label="Ajouter au panier">+</button>
+                </form>
+            </article>
+
+            <article class="description" description="Une magnifique brique sucrée au glaçage succulent." price="6,50€" style="background-image: url('/assets/images/food/dessert/cake.jpg');">
+                <h3>Gâteau</h3>
+                <form action="/update_cart" method="POST">
+                    <input type="hidden" name="item_id" value="3">
+                    <input type="hidden" name="item_type" value="food">
+                    <input type="hidden" name="action" value="add">
+                    <button class="add-to-cart" type="submit" aria-label="Ajouter au panier">+</button>
+                </form>
+            </article>
+
+        </div>
+    </section>
 </main>
 
 <?php
