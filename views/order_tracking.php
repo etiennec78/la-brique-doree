@@ -78,5 +78,4 @@ include __DIR__ . '/../includes/header.php';
   if (isset($_SESSION['error'])){
     unset($_SESSION['error']);
   }
-  include __DIR__ . '/../includes/footer.php'; 
 ?>
