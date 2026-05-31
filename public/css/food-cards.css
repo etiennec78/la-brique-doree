@@ -25,7 +25,7 @@ article::before {
   align-items: center;
   padding-right: 15px;
   text-shadow: 0px 0px 5px black;
-  z-index: 1;
+  z-index: 2;
 }
 
 article h3 {
