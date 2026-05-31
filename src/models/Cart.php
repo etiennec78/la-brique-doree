@@ -3,6 +3,22 @@ require_once __DIR__ . '/../db_connect.php';
 
 class Cart {
     public static function getUserCartId($uid) {
+        /*
+         
+          INPUT :
+                 
+                    (int) $uid : variable representing the user ID
+          
+          OUTPUT :
+
+          (int) $id : variable representing the active cart ID, or 0 if not found
+
+          
+          SUMMARY :
+         
+        This function fetches the active cart ID for a specific user from the database.
+
+        */
         global $pdo;
         $stmt_c = $pdo->prepare("SELECT id FROM cart WHERE user_id = ? AND payment_status_id = 1 LIMIT 1");
         $stmt_c->execute([$uid]);
@@ -11,6 +27,22 @@ class Cart {
     }
 
     public static function createCart($uid) {
+        /*
+         
+          INPUT :
+                 
+                    (int) $uid : variable representing the user ID
+          
+          OUTPUT :
+
+          (int) $id : variable representing the newly created cart ID
+
+          
+          SUMMARY :
+         
+        This function creates a new cart record for the user and returns its generated ID.
+
+        */
         global $pdo;
         $stmt = $pdo->prepare("INSERT INTO cart (user_id, payment_status_id, created_at) VALUES (?, 1, NOW())");
         $stmt->execute([$uid]);
@@ -18,14 +50,63 @@ class Cart {
     }
 
     public static function getFoodCount($cart_id) {
+        /*
+         
+          INPUT :
+                 
+                    (int) $cart_id : variable representing the cart ID
+          
+          OUTPUT :
+
+          (int) $count : variable representing the total quantity of food items
+
+          
+          SUMMARY :
+         
+        This function gets the total number of food items in a given cart.
+
+        */
         return self::getItemCount($cart_id, 'cart_food');
     }
 
     public static function getMenuCount($cart_id) {
+        /*
+         
+          INPUT :
+                 
+                    (int) $cart_id : variable representing the cart ID
+          
+          OUTPUT :
+
+          (int) $count : variable representing the total quantity of menu items
+
+          
+          SUMMARY :
+         
+        This function gets the total number of menu items in a given cart.
+
+        */
         return self::getItemCount($cart_id, 'cart_menu');
     }
 
     private static function getItemCount($cart_id, $table) {
+        /*
+         
+          INPUT :
+                 
+                    (int) $cart_id : variable representing the cart ID
+        (str) $table : variable representing the target table name
+          
+          OUTPUT :
+
+          (int) $count : variable representing the sum of item quantities
+
+          
+          SUMMARY :
+         
+        This function counts the total items in a specified cart table by summing their quantities.
+
+        */
         global $pdo;
         $stmt = $pdo->prepare("SELECT SUM(quantity) FROM $table WHERE cart_id = ?");
         $stmt->execute([$cart_id]);
@@ -33,6 +114,22 @@ class Cart {
     }
 
     public static function getCartCount() {
+        /*
+         
+          INPUT :
+                 
+                    None
+          
+          OUTPUT :
+
+          (int) $total : variable representing the combined total items count
+
+          
+          SUMMARY :
+         
+        This function computes the overall total count of items across all types in the active user session's cart.
+
+        */
         if (isset($_SESSION['user'])) {
             try {
                 $uid = $_SESSION['user']['id'];
@@ -52,6 +149,24 @@ class Cart {
     }
 
     public static function getCartItems($uid, $item_type, $cart_id=-1) {
+        /*
+         
+          INPUT :
+                 
+                    (int) $uid : variable representing the user ID
+        (str) $item_type : variable representing the item type ('food' or 'menu')
+        (int) $cart_id : variable representing the cart ID, defaults to -1 for active cart
+          
+          OUTPUT :
+
+          (array) $items : variable representing the retrieved list of cart items
+
+          
+          SUMMARY :
+         
+        This function retrieves all items matching a specific type for a user's cart from the database.
+
+        */
         global $pdo;
 
         // Check arguments
@@ -80,6 +195,25 @@ class Cart {
     }
 
     public static function getItemQuantity($table_name, $foreign_key, $cart_id, $item_id) {
+        /*
+         
+          INPUT :
+                 
+                    (str) $table_name : variable representing the table name
+        (str) $foreign_key : variable representing the item foreign key name
+        (int) $cart_id : variable representing the cart ID
+        (int) $item_id : variable representing the item ID
+          
+          OUTPUT :
+
+          (int) $quantity : variable representing the quantity of the item in the cart
+
+          
+          SUMMARY :
+         
+        This function returns the existing quantity of a specific item in a cart table.
+
+        */
         global $pdo;
         $stmt = $pdo->prepare("SELECT quantity FROM $table_name WHERE cart_id = ? AND $foreign_key = ?");
         $stmt->execute([$cart_id, $item_id]);
@@ -88,30 +222,126 @@ class Cart {
     }
 
     public static function incrementItemQuantity($table_name, $foreign_key, $cart_id, $item_id) {
+        /*
+         
+          INPUT :
+                 
+                    (str) $table_name : variable representing the table name
+        (str) $foreign_key : variable representing the item foreign key name
+        (int) $cart_id : variable representing the cart ID
+        (int) $item_id : variable representing the item ID
+          
+          OUTPUT :
+
+          (bool) $result : variable representing the execution success status
+
+          
+          SUMMARY :
+         
+        This function increments the quantity of a given item within a cart by one.
+
+        */
         global $pdo;
         $stmt = $pdo->prepare("UPDATE $table_name SET quantity = quantity + 1 WHERE cart_id = ? AND $foreign_key = ?");
         return $stmt->execute([$cart_id, $item_id]);
     }
 
     public static function decrementItemQuantity($table_name, $foreign_key, $cart_id, $item_id) {
+        /*
+         
+          INPUT :
+                 
+                    (str) $table_name : variable representing the table name
+        (str) $foreign_key : variable representing the item foreign key name
+        (int) $cart_id : variable representing the cart ID
+        (int) $item_id : variable representing the item ID
+          
+          OUTPUT :
+
+          (bool) $result : variable representing the execution success status
+
+          
+          SUMMARY :
+         
+        This function decrements the quantity of a given item within a cart by one.
+
+        */
         global $pdo;
         $stmt = $pdo->prepare("UPDATE $table_name SET quantity = quantity - 1 WHERE cart_id = ? AND $foreign_key = ?");
         return $stmt->execute([$cart_id, $item_id]);
     }
 
     public static function removeItem($table_name, $foreign_key, $cart_id, $item_id) {
+        /*
+         
+          INPUT :
+                 
+                    (str) $table_name : variable representing the table name
+        (str) $foreign_key : variable representing the item foreign key name
+        (int) $cart_id : variable representing the cart ID
+        (int) $item_id : variable representing the item ID
+          
+          OUTPUT :
+
+          (bool) $result : variable representing the execution success status
+
+          
+          SUMMARY :
+         
+        This function deletes a specific item entirely from the targeted cart table.
+
+        */
         global $pdo;
         $stmt = $pdo->prepare("DELETE FROM $table_name WHERE cart_id = ? AND $foreign_key = ?");
         return $stmt->execute([$cart_id, $item_id]);
     }
 
     public static function addItem($table_name, $foreign_key, $cart_id, $item_id) {
+        /*
+         
+          INPUT :
+                 
+                    (str) $table_name : variable representing the table name
+        (str) $foreign_key : variable representing the item foreign key name
+        (int) $cart_id : variable representing the cart ID
+        (int) $item_id : variable representing the item ID
+          
+          OUTPUT :
+
+          (bool) $result : variable representing the execution success status
+
+          
+          SUMMARY :
+         
+        This function inserts a new item entry with a quantity of one into the cart table.
+
+        */
         global $pdo;
         $stmt = $pdo->prepare("INSERT INTO $table_name (cart_id, $foreign_key, quantity) VALUES (?, ?, 1)");
         return $stmt->execute([$cart_id, $item_id]);
     }
 
     public static function updateItem($user_id, $item_id, $item_type, $action, $amount = null) {
+        /*
+         
+          INPUT :
+                 
+                    (int) $user_id : variable representing the user ID
+        (int) $item_id : variable representing the item ID
+        (str) $item_type : variable representing the item type ('food' or 'menu')
+        (str) $action : variable representing the operation to run ('add', 'remove', or 'set')
+        (int|null) $amount : variable representing the exact quantity to set
+          
+          OUTPUT :
+
+          None : This function does not return a value
+
+          
+          SUMMARY :
+         
+        This function handles adding, removing, or setting explicit quantities for items in the user's cart, enforcing limit validation and database transactions.
+
+        */
         global $pdo;
 
         if (!isset($_SESSION['user'])) {
@@ -185,6 +415,23 @@ class Cart {
 
 
     public static function markCartAsPaid($cart_id, $user_id) {
+        /*
+         
+          INPUT :
+                 
+                    (int) $cart_id : variable representing the cart ID
+        (int) $user_id : variable representing the user ID
+          
+          OUTPUT :
+
+          (bool) $result : variable representing the execution success status
+
+          
+          SUMMARY :
+         
+        This function updates the payment status of a specific cart to mark it as paid.
+
+        */
         global $pdo;
         $stmt = $pdo->prepare("UPDATE cart SET payment_status_id = 2 WHERE id = ? AND user_id = ?");
         return $stmt->execute([$cart_id, $user_id]);
