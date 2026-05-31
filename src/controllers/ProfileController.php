@@ -57,6 +57,14 @@ class ProfileController extends Controller {
         try {
             $old_user_data = User::getUserInfo($target);
 
+            $street_nb = !empty($_POST['street_nb']) ? $_POST['street_nb'] : null;
+            $street_nb_suf = !empty($_POST['street_nb_suf']) ? $_POST['street_nb_suf'] : null;
+            $street = !empty($_POST['street']) ? $_POST['street'] : null;
+            $zip_code = !empty($_POST['zip_code']) ? $_POST['zip_code'] : null;
+            $intercom_code = !empty($_POST['intercom_code']) ? $_POST['intercom_code'] : null;
+            $birth_date = !empty($_POST['birth_date']) ? $_POST['birth_date'] : null;
+            $phone = !empty($_POST['phone']) ? $_POST['phone'] : null;
+
             $address_has_changed = (
                 $old_user_data['street_nb'] != $_POST['street_nb'] or
                 $old_user_data['street_nb_suf'] != $_POST['street_nb_suf'] or
@@ -66,13 +74,13 @@ class ProfileController extends Controller {
 
             $email_has_changed = ($old_user_data['email'] != $_POST['email']);
 
-            if ($email_has_changed and User::mailExists($_POST['email'])) {
+            if ($email_has_changed && User::mailExists($_POST['email'])) {
                 $_SESSION['error'] = 'L\'adresse email est déjà utilisée.';
                 header('Content-Type: application/json');
                 echo json_encode(['success' => false]);
                 exit();
             } else {
-                if ($address_has_changed) {
+                if ($address_has_changed && !empty($street) && !empty($zip_code)) {
                     $coordinates = Location::getLocationCoord($_POST, $uid);
                     if (isset($coordinates['error'])) {
                         $_SESSION['error'] = $coordinates['error'];
@@ -80,8 +88,11 @@ class ProfileController extends Controller {
                         User::setUserData($target, 'latitude', $coordinates['lat']);
                         User::setUserData($target, 'longitude', $coordinates['lng']);
                     }
+                } elseif ($address_has_changed && (empty($street) || empty($zip_code))) {
+                    User::setUserData($target, 'latitude', null);
+                    User::setUserData($target, 'longitude', null);
                 }
-
+                
                 $birth_date = !empty($_POST['birth_date']) ? $_POST['birth_date'] : null;
 
                 User::setAllUserData($_POST['first_name'], $_POST['last_name'], $_POST['street_nb'], $_POST['street_nb_suf'], $_POST['street'], $_POST['zip_code'], $_POST['phone'], $_POST['email'], $_POST['intercom_code'], $birth_date, $target);

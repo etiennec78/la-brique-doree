@@ -22,7 +22,7 @@ include __DIR__ . '/../includes/header.php';
                 <div class="input-group">
                     <label for="street_nb">Adresse</label>
                     <div id="address-group">
-                        <input type="number" id="street_nb" name="street_nb" min="1" value="<?= $user_data['street_nb'] ?>">
+                        <input type="number" id="street_nb" name="street_nb" value="<?= $user_data['street_nb'] ?>">
                         <select name="street_nb_suf" id="street_nb_suf" value="<?= $user_data['street_nb_suf'] ?>">
                             <option value=""></option>
                             <option value="bis">Bis</option>
@@ -36,11 +36,11 @@ include __DIR__ . '/../includes/header.php';
                 <div class="input-group">
                    
                     <label for="zip_code">Code postal</label>
-                    <input type="number" id="zip_code" name="zip_code" min="1" value="<?= $user_data['zip_code'] ?>">
+                    <input type="number" id="zip_code" name="zip_code" value="<?= $user_data['zip_code'] ?>">
                 </div>
                 <div class="input-group">
                     <label for="phone">Numéro de téléphone</label>
-                    <input type="tel" id="phone" name="phone" value="<?= $user_data['phone'] ?>" required>
+                    <input type="tel" id="phone" name="phone" value="<?= $user_data['phone'] ?>">
                 </div>
                 <div class="input-group">
                     <label for="email">Email</label>
