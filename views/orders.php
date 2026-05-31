@@ -111,8 +111,6 @@ include __DIR__ . '/../includes/header.php';
               </details>
             <?php endif; ?>
           <?php endif; ?>
-          <?php else: ?>
-            <p>Panier vide.</p>
           <?php endif; ?>
         </div>
       </section>
