@@ -2,6 +2,22 @@
 
 class ReviewsController extends Controller {
     public function index() {
+        /*
+            
+         INPUT :
+                 
+            None
+          
+         OUTPUT :
+
+            None
+
+          
+         SUMMARY :
+            
+            Checks if a user is authenticated, evaluates their administrative privileges along with their eligibility to write a review based on their last order status, and renders the reviews management interface.
+
+        */
         require_once __DIR__ . '/../models/Cart.php';
         require_once __DIR__ . '/../models/Order.php';
         require_once __DIR__ . '/../models/Review.php';
@@ -45,6 +61,22 @@ class ReviewsController extends Controller {
     }
 
     public function addReview() {
+        /*
+            
+         INPUT :
+                 
+            None
+          
+         OUTPUT :
+
+            None
+
+          
+         SUMMARY :
+            
+            Authenticates the current session, processes a new or existing review submission from POST parameters, validates structural rating requirements according to the delivery or takeaway status of the corresponding order, and handles redirection back to the reviews page.
+
+        */
         require_once __DIR__ . '/../models/Order.php';
         require_once __DIR__ . '/../models/Review.php';
         require_once __DIR__ . '/../models/User.php';
