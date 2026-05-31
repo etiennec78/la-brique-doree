@@ -17,14 +17,14 @@ document.addEventListener('DOMContentLoaded', function () {
 	*/
 
     const select = document.getElementById('sort-price');
-    const bentos = document.querySelectorAll('.items-grid');
+    const items-grids = document.querySelectorAll('.items-grid');
 
-    bentos.forEach(function (bento) {
+    items-grids.forEach(function (items-grid) {
 	/*
 	 	
 	  INPUT :
 	         
-		(Element) $bento : The current bento grid element container.
+		(Element) $items-grid : The current items-grid grid element container.
 	  
 	  OUTPUT :
 
@@ -33,10 +33,10 @@ document.addEventListener('DOMContentLoaded', function () {
 	  
 	  SUMMARY :
 	 	
-		Iterates through each bento grid container to store the initial order of its child items.
+		Iterates through each items-grid grid container to store the initial order of its child items.
 
 	*/
-        Array.from(bento.children).forEach((item, index) => {
+        Array.from(items-grid.children).forEach((item, index) => {
 	/*
 	 	
 	  INPUT :
@@ -72,16 +72,16 @@ document.addEventListener('DOMContentLoaded', function () {
 	  
 	  SUMMARY :
 	 	
-		Triggers the sorting process for all bento layout items when the selection option changes.
+		Triggers the sorting process for all items-grid layout items when the selection option changes.
 
 	*/
 
-        bentos.forEach(function (bento) {
+        items-grids.forEach(function (items-grid) {
 	/*
 	 	
 	  INPUT :
 	         
-		(Element) $bento : The current bento container being sorted.
+		(Element) $items-grid : The current items-grid container being sorted.
 	  
 	  OUTPUT :
 
@@ -90,11 +90,11 @@ document.addEventListener('DOMContentLoaded', function () {
 	  
 	  SUMMARY :
 	 	
-		Sorts and re-appends the items within each individual bento container based on the selected sorting order.
+		Sorts and re-appends the items within each individual items-grid container based on the selected sorting order.
 
 	*/
 
-            const items = Array.from(bento.children);
+            const items = Array.from(items-grid.children);
 
             items.sort(function (a, b) {
 	/*
@@ -114,6 +114,14 @@ document.addEventListener('DOMContentLoaded', function () {
 		Compares two elements based on their price attribute or initial order depending on the active sort option.
 
 	*/
+
+                const getPrice = (element) => {
+                    const article = element.tagName === 'ARTICLE' ? element : element.querySelector('article');
+                    if (!article) return 0;
+
+                    const priceStr = article.getAttribute('price') || '0';
+                    return parseFloat(priceStr.replace(',', '.').replace(/[^\d.-]/g, ''));
+                };
 
                 const priceA = parseFloat(a.getAttribute('data-raw-price'));
                 const priceB = parseFloat(b.getAttribute('data-raw-price'));
@@ -145,10 +153,10 @@ document.addEventListener('DOMContentLoaded', function () {
 	  
 	  SUMMARY :
 	 	
-		Re-appends the sorted item back to the bento parent element to update the DOM order.
+		Re-appends the sorted item back to the items-grid parent element to update the DOM order.
 
 	*/
-                bento.appendChild(item);
+                items-grid.appendChild(item);
             });
 
         });
