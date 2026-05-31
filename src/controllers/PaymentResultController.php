@@ -2,6 +2,22 @@
 
 class PaymentResultController extends Controller {
   public function index() {
+    /*
+        
+     INPUT :
+             
+        None
+      
+     OUTPUT :
+
+        None
+
+      
+     SUMMARY :
+        
+        Validates the bank transaction safety parameters using md5 checksum controls, updates the cart payment status, establishes delivery or takeaway timing constraints, assigns an available cook if present, and executes the payment result view presentation.
+
+    */
     if (!isset($_SESSION['user'])) {
         header('Location: /login');
         exit();
