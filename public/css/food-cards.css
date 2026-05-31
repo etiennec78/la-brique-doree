@@ -126,6 +126,12 @@ article h3 {
   margin: 0;
 }
 
+.nb-selector .amount::-webkit-outer-spin-button,
+.nb-selector .amount::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .nb-selector .add-to-cart:hover,
 .nb-selector .remove-from-cart:hover {
   background: var(--darkred);
