@@ -2,6 +2,22 @@
 
 class OrderTrackingController extends Controller {
   public function index() {
+    /*
+        
+     INPUT :
+             
+        None
+      
+     OUTPUT :
+
+        None
+
+      
+     SUMMARY :
+        
+        Collects active ongoing delivery tasks linked to the authenticated user ID, maps relational staff profiles (cooks and couriers), and shows the dynamic tracking interface view.
+
+    */
     if (!isset($_SESSION['user'])) {
         header('Location: /login');
         exit();
@@ -33,6 +49,22 @@ class OrderTrackingController extends Controller {
   }
 
   public function apiOrderStatus() {
+    /*
+        
+     INPUT :
+             
+        None
+      
+     OUTPUT :
+
+        None
+
+      
+     SUMMARY :
+        
+        Evaluates ongoing order status logs linked to safe user references using arrays provided inside GET attributes and terminates execution returning JSON payloads.
+
+    */
     if (!isset($_SESSION['user'])) {
         http_response_code(401);
         echo json_encode(['error' => 'Unauthorized']);
