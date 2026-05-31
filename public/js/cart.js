@@ -36,6 +36,10 @@ document.addEventListener("DOMContentLoaded", () => {
                         ], { duration: 300 });
                     }
                 }
+
+                if (data && data.error && typeof toast === "function") {
+                    toast(data.error);
+                }
             })
             .catch(error => {
                 console.error("Error while updating cart :", error);
