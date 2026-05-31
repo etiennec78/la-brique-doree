@@ -1,7 +1,7 @@
 function count_char() {
   let zone = document.getElementById("review-comm");
-  let chiffre = document.getElementById("nb-caracteres");
-  let bouton = document.getElementById("submit-avis");
+  let chiffre = document.getElementById("nb-characters");
+  let bouton = document.getElementById("submit-review");
   let longueur = zone.value.length;
 
   chiffre.innerText = longueur;

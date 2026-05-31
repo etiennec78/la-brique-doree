@@ -130,7 +130,7 @@ textarea {
     color: var(--text-on-bg);
 }
 
-#nb-caracteres {
+#nb-characters {
     font-weight: bold;
     color:var(--solid-gold);
 }

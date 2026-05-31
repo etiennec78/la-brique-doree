@@ -7,7 +7,7 @@ function slideSuivant() {
     slideshow.style.transform = `translateX(-${index * 25}%)`;
 }
 
-setInterval(slideSuivant, 5000); //répète la fonction toutes les 5 secondes
+setInterval(slideSuivant, 5000); //Repeats the function every 5 seconds
 
 document.getElementById('next').onclick = slideSuivant;
 

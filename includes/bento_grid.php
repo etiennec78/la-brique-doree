@@ -1,7 +1,7 @@
 <?php
 $is_editable = $is_editable ?? false;
 ?>
-<!-- Boucler pour chaque menu + 1 (plats individuels) -->
+<!-- Loops for each menu + 1 (individual food) -->
 <?php for($i = 0; $i < count($menus) + $cart_has_food; $i++): ?>
     <div class="menu">
     <?php

@@ -47,7 +47,7 @@ include __DIR__ . '/../includes/header.php';
                     $user_id = strtolower((string)$user_data['id']);
                     $user_role = $user_data['role'];
                         
-                    // Application des filtres
+                    // Filters application
                     if ($search !== '' && !str_contains($user_name, $search) && !str_contains($user_id, $search)) {
                         continue;
                     }

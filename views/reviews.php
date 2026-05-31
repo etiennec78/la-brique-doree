@@ -43,7 +43,7 @@ include __DIR__ . '/../includes/header.php';
                             <td colspan="2" class="review-text">
                                 <textarea name="comment" required><?= htmlspecialchars($review['comment']) ?></textarea>
                                 <div class="edit-review-actions">
-                                    <button type="submit" name="submit_avis" class="basic-btn btn-send">Mettre à jour</button>
+                                    <button type="submit" name="submit_review" class="basic-btn btn-send">Mettre à jour</button>
                                     <a href="/reviews" class="basic-btn gray-btn btn-cancel">Annuler</a>
                                 </div>
                             </td>
@@ -140,8 +140,8 @@ include __DIR__ . '/../includes/header.php';
             <tr>
                 <td colspan="2" class="review-text">
                     <textarea id="review-comm" name="comment" maxlength="255" placeholder="Partagez votre expérience ici..." oninput="count_char()" required></textarea>
-                    <p class="counter-text"><span id="nb-caracteres">0</span> / 255</p>
-                    <button type="submit" id="submit-avis" name="submit_avis" class="basic-btn btn-send" disabled>Envoyer l'avis</button>
+                    <p class="counter-text"><span id="nb-characters">0</span> / 255</p>
+                    <button type="submit" id="submit-review" name="submit_review" class="basic-btn btn-send" disabled>Envoyer l'avis</button>
                 </td>
             </tr>
         </table>

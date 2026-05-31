@@ -226,7 +226,7 @@ CREATE TABLE coupon (
 );
 
 
--- ------- STATUTS (PAIEMENT ET LIVRAISON) -------
+-- ------- STATUTS (PAYMENTS AND DELIVERY) -------
 
 CREATE TABLE payment_status (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -245,7 +245,7 @@ INSERT INTO order_status (name) VALUES
 ('paid'), ('preparing'), ('ready'), ('shipping'), ('delivered');
 
 
--- ------- LE PANIER -------
+-- ------- THE CART -------
 
 CREATE TABLE cart (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -259,7 +259,7 @@ CREATE TABLE cart (
 );
 
 
--- ------- LA COMMANDE (Lien Resto/Livreur) -------
+-- ------- THE ORDER (Link Cook / Delivery-Person) -------
 
 CREATE TABLE orders (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -281,7 +281,7 @@ CREATE TABLE orders (
 );
 
 
--- ------- CONTENU DU PANIER (Liaisons) -------
+-- ------- CART CONTENT (Links) -------
 
 CREATE TABLE cart_menu (
     cart_id INT,
@@ -302,7 +302,7 @@ CREATE TABLE cart_food (
 );
 
 
--- ------- PAIEMENT -------
+-- ------- PAYMENT -------
 
 CREATE TABLE payment (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -317,7 +317,7 @@ CREATE TABLE payment (
 
 
 
--- ------- AVIS -------
+-- ------- REVIEWS -------
 
 CREATE TABLE reviews (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -328,7 +328,7 @@ CREATE TABLE reviews (
     FOREIGN KEY(order_id) REFERENCES orders(id)
 );
 
--- ------- ANNULATIONS LIVRAISON -------
+-- ------- DELIVERY CANCELLATION -------
 
 CREATE TABLE delivery_cancellation (
     order_id INT,
