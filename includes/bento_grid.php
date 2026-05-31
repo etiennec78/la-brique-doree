@@ -69,7 +69,7 @@ $menu_editor = $menu_editor ?? false;
                 $style = (!$menu_loop || !$merge_menu_items) ? 'flex: 1; background-image: url(/assets/' . htmlspecialchars($card['image_path']) . '); background-size: cover; background-position: center;' : '';
                 ?>
                 <?php if ($menu_editor): ?>
-                    <a href="/menu_editor?type=<?= $menu_loop ? 'menu' : 'food' ?>&id=<?= $card['item_id'] ?>" style="display: contents;">
+                    <a href="/menu_editor?type=<?= $menu_loop ? 'menu' : 'food' ?>&id=<?= $card['id'] ?>" style="display: contents;">
                 <?php endif; ?>
                 <article class="description <?= $card['allergens_classes'] ?? '' ?>" description="<?= $card['description'] ?>" price="<?= $price_str ?>€" style="<?= $style ?>">
                     <h3><?= htmlspecialchars($card['name']) ?></h3>
