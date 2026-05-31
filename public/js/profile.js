@@ -17,7 +17,14 @@ document.addEventListener("DOMContentLoaded", function() {
                     form.style.opacity = "0.5";
                     setTimeout(() => form.style.opacity = "1", 500);
                 }
+
+                if (result.error) {
+                    toast(result.error);
+                }
             })
+            .catch(err => {
+                toast("Une erreur inattendue est survenue.");
+            });
         });
     }
 });

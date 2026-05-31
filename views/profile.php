@@ -40,7 +40,7 @@ include __DIR__ . '/../includes/header.php';
                 </div>
                 <div class="input-group">
                     <label for="phone">Numéro de téléphone</label>
-                    <input type="tel" id="phone" name="phone" value="<?= $user_data['phone'] ?>">
+                    <input type="tel" id="phone" name="phone" value="<?= $user_data['phone'] ?>" required>
                 </div>
                 <div class="input-group">
                     <label for="email">Email</label>

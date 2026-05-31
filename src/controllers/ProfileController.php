@@ -74,10 +74,10 @@ class ProfileController extends Controller {
 
             $email_has_changed = ($old_user_data['email'] != $_POST['email']);
 
-            if ($email_has_changed && User::mailExists($_POST['email'])) {
+            if ($email_has_changed && User::findByEmail($_POST['email'])) {
                 $_SESSION['error'] = 'L\'adresse email est déjà utilisée.';
                 header('Content-Type: application/json');
-                echo json_encode(['success' => false]);
+                echo json_encode(['success' => false, 'error' => $_SESSION['error']]);
                 exit();
             } else {
                 if ($address_has_changed && !empty($street) && !empty($zip_code)) {
@@ -102,7 +102,7 @@ class ProfileController extends Controller {
                     $street_nb_suf, 
                     $street, 
                     $zip_code, 
-                    $phone, 
+                    $_POST['phone'], 
                     $_POST['email'], 
                     $intercom_code, 
                     $birth_date, 
@@ -114,15 +114,20 @@ class ProfileController extends Controller {
                 }
 
                 header('Content-Type: application/json');
-                echo json_encode(['success' => true]);
+                echo json_encode([
+                    'success' => true, 
+                    'error' => $_SESSION['error'] ?? null
+                ]);
                 exit();
             }
-        } catch (\PDOException $error) {
-            $pdo->rollBack();
+        } catch (\Throwable $error) {
+            if (isset($pdo) && $pdo->inTransaction()) {
+                $pdo->rollBack();
+            }
             error_log("Profile update error: " . $error->getMessage());
             $_SESSION['error'] = 'Erreur lors de la mise à jour des données du profil : ' . $error->getMessage();
             header('Content-Type: application/json');
-            echo json_encode(['success' => false]);
+            echo json_encode(['success' => false, 'error' => $_SESSION['error']]);
             exit();
         }
 
