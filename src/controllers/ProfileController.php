@@ -66,10 +66,10 @@ class ProfileController extends Controller {
             $phone = !empty($_POST['phone']) ? $_POST['phone'] : null;
 
             $address_has_changed = (
-                $old_user_data['street_nb'] != $_POST['street_nb'] or
-                $old_user_data['street_nb_suf'] != $_POST['street_nb_suf'] or
-                $old_user_data['street'] != $_POST['street'] or
-                $old_user_data['zip_code'] != $_POST['zip_code']
+                $old_user_data['street_nb'] != $street_nb or
+                $old_user_data['street_nb_suf'] != $street_nb_suf or
+                $old_user_data['street'] != $street or
+                $old_user_data['zip_code'] != $zip_code
             );
 
             $email_has_changed = ($old_user_data['email'] != $_POST['email']);
@@ -95,7 +95,19 @@ class ProfileController extends Controller {
                 
                 $birth_date = !empty($_POST['birth_date']) ? $_POST['birth_date'] : null;
 
-                User::setAllUserData($_POST['first_name'], $_POST['last_name'], $_POST['street_nb'], $_POST['street_nb_suf'], $_POST['street'], $_POST['zip_code'], $_POST['phone'], $_POST['email'], $_POST['intercom_code'], $birth_date, $target);
+                User::setAllUserData(
+                    $_POST['first_name'], 
+                    $_POST['last_name'], 
+                    $street_nb, 
+                    $street_nb_suf, 
+                    $street, 
+                    $zip_code, 
+                    $phone, 
+                    $_POST['email'], 
+                    $intercom_code, 
+                    $birth_date, 
+                    $target
+                );
 
                 if ($target == $uid) {
                     $_SESSION['user'] = array_merge($_SESSION['user'], $_POST);
