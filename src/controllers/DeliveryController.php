@@ -2,6 +2,22 @@
 
 class DeliveryController extends Controller {
     private function assignNextDeliveriesIfEmpty($uid) {
+        /*
+            
+         INPUT :
+                 
+            (mixed) $uid : variable representing the unique user identifier of the delivery courier
+          
+         OUTPUT :
+
+            None
+
+          
+         SUMMARY :
+            
+            Evaluates current tasks linked to a courier and automatically queries and binds up to three pending orders if their list is vacant.
+
+        */
         require_once __DIR__ . '/../models/Order.php';
         require_once __DIR__ . '/../models/Delivery.php';
         
@@ -15,6 +31,22 @@ class DeliveryController extends Controller {
     }
 
     public function index() {
+        /*
+            
+         INPUT :
+                 
+            None
+          
+         OUTPUT :
+
+            None
+
+          
+         SUMMARY :
+            
+            Requires role level 3 or 4, compiles target delivery details filtered by administrative scope or individual profile identity, dynamically shapes geographical mapping strings, and handles template execution.
+
+        */
         $this->requireRole([3, 4]);
 
         include_once __DIR__ . '/../format_data.php';
@@ -60,6 +92,22 @@ class DeliveryController extends Controller {
     }
 
     public function confirmDelivery() {
+        /*
+            
+         INPUT :
+                 
+            None
+          
+         OUTPUT :
+
+            None
+
+          
+         SUMMARY :
+            
+            Requires role level 4, marks a designated shipment identifier as delivered based on POST inputs, assigns backup requests if the driver queue clears out, and sends redirection responses.
+
+        */
         $this->requireRole(4);
         require_once __DIR__ . '/../models/Order.php';
         require_once __DIR__ . '/../models/Delivery.php';
@@ -77,6 +125,22 @@ class DeliveryController extends Controller {
     }
 
     public function cancelDelivery() {
+        /*
+            
+         INPUT :
+                 
+            None
+          
+         OUTPUT :
+
+            None
+
+          
+         SUMMARY :
+            
+            Requires role level 4, cancels an ongoing transit item derived from POST parameters, shifts next tasks into the active queue when required, and forces location adjustments.
+
+        */
         $this->requireRole(4);
         require_once __DIR__ . '/../models/Order.php';
         require_once __DIR__ . '/../models/Delivery.php';
@@ -94,6 +158,22 @@ class DeliveryController extends Controller {
     }
 
     public function apiDeliveryGetPending() {
+        /*
+            
+         INPUT :
+                 
+            None
+          
+         OUTPUT :
+
+            None
+
+          
+         SUMMARY :
+            
+            Requires role level 3 or 4 in API mode, queries active tasks across couriers based on authorization details, and passes the output dataset structured as JSON.
+
+        */
         $this->requireRole([3, 4], true);
 
         require_once __DIR__ . '/../models/Delivery.php';
