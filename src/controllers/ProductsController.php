@@ -2,6 +2,22 @@
 
 class ProductsController extends Controller {
     public function index() {
+        /*
+            
+         INPUT :
+                 
+            None
+          
+         OUTPUT :
+
+            None
+
+          
+         SUMMARY :
+            
+            Collects active cart aggregates, fetches global menus while dynamically merging internal allergen items into classification strings, retrieves sorted individual foods, and invokes the products catalog display template.
+
+        */
         require_once __DIR__ . '/../models/Cart.php';
         require_once __DIR__ . '/../models/Menu.php';
         require_once __DIR__ . '/../models/Order.php';
