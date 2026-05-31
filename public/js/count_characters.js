@@ -1,21 +1,21 @@
 function count_char() {
   let zone = document.getElementById("review-comm");
-  let chiffre = document.getElementById("nb-characters");
-  let bouton = document.getElementById("submit-review");
-  let longueur = zone.value.length;
+  let number = document.getElementById("nb-characters");
+  let button = document.getElementById("submit-review");
+  let length = zone.value.length;
 
-  chiffre.innerText = longueur;
+  number.innerText = length;
 
-  if (longueur > 255) {
+  if (length > 255) {
 
-    chiffre.style.color = "red";
-    bouton.disabled = true;
-    bouton.style.opacity = "0.5";
-    bouton.style.cursor = "not-allowed";
+    number.style.color = "red";
+    button.disabled = true;
+    button.style.opacity = "0.5";
+    button.style.cursor = "not-allowed";
   } else {
-    chiffre.style.color = "(--solid-gold)";
-    bouton.disabled = false;
-    bouton.style.opacity = "1";
-    bouton.style.cursor = "pointer";
+    number.style.color = "(--solid-gold)";
+    button.disabled = false;
+    button.style.opacity = "1";
+    button.style.cursor = "pointer";
   }
 }

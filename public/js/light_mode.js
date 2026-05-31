@@ -1,7 +1,7 @@
 let btn = document.getElementById("theme-toggle");
 let body = document.body;
 
-function majIcone() {
+function updateIcon() {
   if (body.classList.contains("light-theme")) {
     btn.innerText = "🌙";
   } else {
@@ -13,12 +13,12 @@ window.addEventListener("DOMContentLoaded", () => {
   if (document.cookie.includes("theme=light")) {
     body.classList.add("light-theme");
   }
-  majIcone();
+  updateIcon();
 });
 
 btn.addEventListener("click", () => {
   body.classList.toggle("light-theme");
-  majIcone();
+  updateIcon();
 
   let theme;
   if (body.classList.contains("light-theme")) {
