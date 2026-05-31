@@ -110,6 +110,7 @@ class CookController extends Controller {
             $menu['allergens'] = array_unique($menu_allergens);
             $menu['allergens_classes'] = implode(' ', array_map('strtolower', array_map('htmlspecialchars', $menu['allergens'])));
         }
+        unset($menu);
 
         $foods = Food::getAll();
         $sorted_foods = Order::sortByType($foods);
@@ -240,7 +241,7 @@ class CookController extends Controller {
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['item_id'], $_POST['action'])) {
-            $food_id = (int)$_POST['item_id']; // item_id correspond ici au food_id
+            $food_id = (int)$_POST['item_id'];
             $action = $_POST['action'];
 
             $menu_id = isset($_POST['menu_id']) ? (int)$_POST['menu_id'] : null;
@@ -273,5 +274,26 @@ class CookController extends Controller {
         $referer = $_SERVER['HTTP_REFERER'] ?? '/';
         header("Location: $referer");
         exit();
+    }
+
+    public function addMenuFood() {
+        require_once __DIR__ . '/../models/Menu.php';
+
+        $this->requireRole([2, 3], true);
+
+        $menu_id = isset($_GET['menu_id']) ? (int)$_GET['menu_id'] : 0;
+        $food_id = isset($_GET['food_id']) ? (int)$_GET['food_id'] : 0;
+
+        if ($menu_id > 0 && $food_id > 0) {
+            Menu::updateItem($menu_id, $food_id, 'add');
+        }
+
+        header('Location: /menu_editor');
+        exit;
+    }
+
+    public function foodPicker() {
+        $this->requireRole([2, 3]);
+        $this->render('food_picker', []);
     }
 }

@@ -8,6 +8,9 @@ $item_selector_type = $item_selector_type ?? 'add_only';
 /* Visually merge food cards from menus into one menu card */
 $merge_menu_items = $merge_menu_items ?? false;
 
+/* Act as an item picker for foods */
+$is_picker = $is_picker ?? false;
+
 /*Show a card to add foods to menus and edit data*/
 $menu_editor = $menu_editor ?? false;
 $picker_target = $menu_editor ? 'menu' : 'panier'
@@ -68,7 +71,19 @@ $picker_target = $menu_editor ? 'menu' : 'panier'
                 $price_val = floatval($card['price']);
                 $price_str = number_format($price_val, 2, ",");
                 $style = (!$menu_loop || !$merge_menu_items) ? 'flex: 1; background-image: url(/assets/' . htmlspecialchars($card['image_path']) . '); background-size: cover; background-position: center;' : '';
+
+                // Manage the food picker
+                $link_url = null;
+                if ($is_picker) {
+                    $link_url = "/add_menu_food?menu_id=" . $picker_menu_id . "&food_id=" . $card['id'];
+                } elseif ($menu_editor && !($menu_loop && !$merge_menu_items)) {
+                    $link_url = "/edit_menu?type=" . ($menu_loop ? 'menu' : 'food') . "&id=" . ($menu_loop ? $menu['id'] : $card['id']);
+                }
                 ?>
+
+                <?php if ($link_url): ?>
+                <a href="<?= $link_url ?>" style="display: contents;">
+                <?php endif; ?>
                 <article class="description <?= $card['allergens_classes'] ?? '' ?>" description="<?= $card['description'] ?>" price="<?= $price_str ?>€" style="<?= $style ?>">
                     <h3><?= htmlspecialchars($card['name']) ?></h3>
 
@@ -115,8 +130,8 @@ $picker_target = $menu_editor ? 'menu' : 'panier'
                 <?php endif; ?>
             <?php endforeach; ?>
             <!-- Show an add card at the end of the category for the menu editor -->
-            <?php if ($menu_editor): ?>
-                <a href="/food_picker">
+            <?php if ($menu_editor && $menu_loop): ?>
+                <a href="/food_picker?menu_id=<?= $menu['id'] ?>">
                     <article class="add-card"></article>
                 </a>
             <?php endif; ?>

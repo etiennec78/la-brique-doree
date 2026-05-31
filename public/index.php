@@ -13,6 +13,8 @@ $router->add('GET', 'admin', 'AdminController', 'index');
 $router->add('GET', 'register', 'AuthController', 'showRegister');
 $router->add('GET', 'login', 'AuthController', 'showLogin');
 $router->add('GET', 'logout', 'AuthController', 'logout');
+$router->add('GET', 'add_menu_food', 'CookController', 'addMenuFood');
+$router->add('GET', 'food_picker', 'CookController', 'foodPicker');
 $router->add('GET', 'delivery', 'DeliveryController', 'index');
 $router->add('GET', 'api_delivery', 'DeliveryController', 'apiDeliveryGetPending');
 $router->add('GET', '', 'HomeController', 'index');
