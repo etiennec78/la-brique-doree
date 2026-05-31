@@ -3,6 +3,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const select = document.getElementById('sort-price');
     const bentos = document.querySelectorAll('.bento');
 
+    bentos.forEach(function (bento) {
+        Array.from(bento.children).forEach((item, index) => {
+            item.setAttribute('data-initial-order', index);
+        });
+    });
+
     select.addEventListener('change', function () {
 
         bentos.forEach(function (bento) {
@@ -18,6 +24,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     return priceA - priceB;
                 } else if (select.value === 'desc') {
                     return priceB - priceA;
+                } else if (select.value === 'default') {
+                    const orderA = parseInt(a.getAttribute('data-initial-order'));
+                    const orderB = parseInt(b.getAttribute('data-initial-order'));
+                    return orderA - orderB;
                 }
 
                 return 0;
