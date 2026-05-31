@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="297mm"
+   height="210mm"
+   viewBox="0 0 297 210"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
+   sodipodi:docname="add.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#555555"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.62356896"
+     inkscape:cx="539.63558"
+     inkscape:cy="594.16043"
+     inkscape:window-width="1714"
+     inkscape:window-height="1040"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="opacity:1;fill:#181818;fill-opacity:1;stroke:none;stroke-width:10.9895;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
+       id="rect4"
+       width="297"
+       height="210"
+       x="-3.3172546e-06"
+       y="2.1316282e-14"
+       inkscape:label="Background" />
+    <text
+       xml:space="preserve"
+       style="font-size:304.347px;font-family:'Adwaita Mono';-inkscape-font-specification:'Adwaita Mono';writing-mode:lr-tb;direction:ltr;opacity:1;fill:#fffcf5;fill-opacity:1;stroke:#000000;stroke-width:76.0874;stroke-linecap:square;stroke-dasharray:38.0437, 152.174;stroke-dashoffset:0;stroke-opacity:0;paint-order:stroke fill markers"
+       x="57.195839"
+       y="208.47833"
+       id="text1"
+       inkscape:label="Plus"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         style="fill:#fffcf5;fill-opacity:1;stroke-width:76.0874;stroke-dasharray:38.0437, 152.174;stroke-dashoffset:0"
+         x="57.195839"
+         y="208.47833">+</tspan></text>
+    <ellipse
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#fffcf5;stroke-width:12.5092;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
+       id="path1"
+       cx="148.49969"
+       cy="104.99967"
+       rx="97.323975"
+       ry="97.324829"
+       inkscape:label="Circle" />
+  </g>
+</svg>
