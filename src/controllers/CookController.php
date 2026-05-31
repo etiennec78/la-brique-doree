@@ -232,4 +232,46 @@ class CookController extends Controller {
         echo json_encode(['pending' => $pending_orders, 'delivery' => $delivery_orders]);
         exit();
     }
+
+    public static function updateMenu() {
+        if (!isset($_SESSION['user'])) {
+            header('Location: /login');
+            exit();
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['item_id'], $_POST['action'])) {
+            $food_id = (int)$_POST['item_id']; // item_id correspond ici au food_id
+            $action = $_POST['action'];
+
+            $menu_id = isset($_POST['menu_id']) ? (int)$_POST['menu_id'] : null;
+
+            if ($menu_id) {
+                require_once __DIR__ . '/../models/Menu.php';
+
+                if (isset($_POST['amount']) && $action === 'set') {
+                    $amount = (int)$_POST['amount'];
+                    Menu::updateItem($menu_id, $food_id, $action, $amount);
+                } else {
+                    Menu::updateItem($menu_id, $food_id, $action);
+                }
+            } else {
+                $_SESSION['error'] = "Erreur : ID du menu manquant lors de la mise à jour.";
+            }
+        }
+
+        if (isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false) {
+            header('Content-Type: application/json');
+            $response = [];
+            if (isset($_SESSION['error'])) {
+                $response['error'] = $_SESSION['error'];
+                unset($_SESSION['error']);
+            }
+            echo json_encode($response);
+            exit();
+        }
+
+        $referer = $_SERVER['HTTP_REFERER'] ?? '/';
+        header("Location: $referer");
+        exit();
+    }
 }
