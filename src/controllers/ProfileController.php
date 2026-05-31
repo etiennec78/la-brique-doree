@@ -2,6 +2,22 @@
 
 class ProfileController extends Controller {
     public function index($target_id = NULL) {
+        /*
+            
+         INPUT :
+                 
+            (mixed) $target_id : variable representing the unique identifier of the profile to display
+          
+         OUTPUT :
+
+            None
+
+          
+         SUMMARY :
+            
+            Authenticates current session, determines the profile view scope based on administrative context or defaults to the self identity, queries user dataset arrays, and renders the profile management interface.
+
+        */
         if (!isset($_SESSION['user'])) {
             header('Location: /login');
             exit();
@@ -36,6 +52,22 @@ class ProfileController extends Controller {
     }
 
     public function updateProfile() {
+        /*
+            
+         INPUT :
+                 
+            None
+          
+         OUTPUT :
+
+            None
+
+          
+         SUMMARY :
+            
+            Manages updates to user record values, cross-checks email uniqueness thresholds, determines geographical coordinate modifications using location API components when address elements transition, and responds using structured JSON streams.
+
+        */
         if (!isset($_SESSION['user'])) {
             header('Content-Type: application/json');
             echo json_encode(['success' => false]);
