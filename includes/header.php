@@ -145,7 +145,6 @@ if (isset($_SESSION['user'])) {
         <div id="toast-container">
             <?php if (isset($_SESSION['error'])): ?>
                 <div id="toast"><?= $_SESSION['error'] ?></div>
-                <?php unset($_SESSION['error']); ?>
             <?php endif; ?>
         </div>
     </header>

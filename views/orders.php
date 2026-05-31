@@ -102,11 +102,7 @@ include __DIR__ . '/../includes/header.php';
               <details class="coupon-details">
               <summary>Code promo ?</summary>
                 <form class="coupon-form" action="/apply_coupon" method="POST">
-                  <?php 
-                  if (empty($coupon['code'])) {
-                    $coupon['code'] = '';
-                  }
-                  ?>
+                  <?php $coupon['code'] = isset($_SESSION['previous_coupon']) ? $_SESSION['previous_coupon'] : ''; ?>
                   <input type="text" name="coupon" placeholder="Code promo" value="<?= $coupon['code'] ?>">
                   <noscript>
                     <button id="submit_coupon" class="basic-btn" type="submit">Appliquer</button>
@@ -121,4 +117,9 @@ include __DIR__ . '/../includes/header.php';
         </div>
       </section>
     </main>
-<?php include __DIR__ . '/../includes/footer.php'; ?>
+<?php
+  if (isset($_SESSION['error'])){
+    unset($_SESSION['error']);
+  }
+  include __DIR__ . '/../includes/footer.php'; 
+?>

@@ -17,6 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
             if (newDetails) newDetails.open = true;
           }
         }
+        const backgroundToast = doc.getElementById("toast");
+        if (backgroundToast && typeof toast === "function") {
+          toast(backgroundToast.innerText);
+        }
       })
       .catch(error => console.error("Error:", error));
   }

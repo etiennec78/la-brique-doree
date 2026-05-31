@@ -154,6 +154,7 @@ class OrdersController extends Controller {
         require_once __DIR__ . '/../models/Coupon.php';
 
         $coupon_code = isset($_POST['coupon']) ? trim($_POST['coupon']) : '';
+        $_SESSION['previous_coupon'] = $coupon_code;
         $uid = $_SESSION['user']['id'];
         $cart_id = Cart::getUserCartId($uid);
 
@@ -168,8 +169,11 @@ class OrdersController extends Controller {
         // Add coupon if valid
         $coupon = Coupon::getCoupon($coupon_code);
 
-        if ($coupon == false) {
+        if ($coupon === false) {
             $_SESSION['error'] = 'Le coupon utilisé est invalide.';
+            Coupon::addCouponToCart(null, $cart_id);
+            header("Location: /orders");
+            exit();
         }
 
         else {

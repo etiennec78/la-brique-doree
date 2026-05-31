@@ -41,3 +41,9 @@ include __DIR__ . '/../includes/header.php';
         <?php endif; ?>
     </div>
 </main>
+<?php
+  if (isset($_SESSION['error'])){
+    unset($_SESSION['error']);
+  }
+  include __DIR__ . '/../includes/footer.php'; 
+?>
