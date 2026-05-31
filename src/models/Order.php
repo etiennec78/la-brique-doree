@@ -96,6 +96,7 @@ class Order {
     }
 
     public static function getAllOrdersFromUser($uid) {
+    /*
 	 	
 	  INPUT :
 	         
