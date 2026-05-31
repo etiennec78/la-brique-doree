@@ -1,7 +1,40 @@
 // Intercept the forms and update the cart-bar UI asynchronously
 document.addEventListener("DOMContentLoaded", () => {
+    /*
+        
+     INPUT :
+             
+        None
+      
+     OUTPUT :
+
+        None
+
+      
+     SUMMARY :
+        
+        Establishes master document listeners during application setup to filter cart parameter changes, intercepting transmission signals to enable asynchronous layout modifications smoothly.
+
+    */
 
   function updateCartBarFromResponse(responsePromise, openCouponDetails = false) {
+    /*
+        
+     INPUT :
+             
+        (Promise) responsePromise : variable representing the unresolved fetch action stream reference
+        (boolean) openCouponDetails : variable specifying whether discount parameter submenus open automatically
+      
+     OUTPUT :
+
+        None
+
+      
+     SUMMARY :
+        
+        Extracts HTML string data segments upon network pipeline resolution to completely reassemble checkout description boxes while initializing application toast notices.
+
+    */
     responsePromise
       .then(res => res.text())
       .then(html => {
@@ -27,6 +60,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Use event delegation because elements inside #cart-bar will be replaced
   document.body.addEventListener("submit", (e) => {
+    /*
+        
+     INPUT :
+             
+        (Event) e : variable tracking active transaction configuration contexts
+      
+     OUTPUT :
+
+        None
+
+      
+     SUMMARY :
+        
+        Blocks classic page transitions for logistics configurations and promotional forms, capturing raw elements to stream background updates securely.
+
+    */
     if (e.target.id === "delivery-type") {
       e.preventDefault();
       const formData = new FormData(e.target);

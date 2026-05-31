@@ -1,8 +1,35 @@
 document.addEventListener("DOMContentLoaded", function() {
+    /*
+        
+     INPUT :
+             
+        None
+      
+     OUTPUT :
+
+        None
+
+      
+     SUMMARY :
+        
+        Initializes custom form listeners after structure building cycles, intercepting adjustments to trigger asynchronous save commands while giving immediate opacity pulsing feedback to the user.
+
+    */
     const form = document.getElementById("profile-form");
 
     if (form) {
         form.addEventListener("submit", function(event) {
+            /*
+                
+             INPUT :
+                     
+                (Event) event : variable tracking the native submission execution loop parameters
+              
+             OUTPUT :
+
+                None
+
+            */
             event.preventDefault();
 
             const formData = new FormData(form);

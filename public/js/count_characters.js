@@ -1,4 +1,20 @@
 function count_char() {
+    /*
+        
+     INPUT :
+             
+        None
+      
+     OUTPUT :
+
+        None
+
+      
+     SUMMARY :
+        
+        Tracks text lengths within the evaluation comments block real-time, modifying count tracker elements styling attributes and locking submission buttons dynamically when bounds cross a 255-character threshold constraint.
+
+    */
   let zone = document.getElementById("review-comm");
   let number = document.getElementById("nb-characters");
   let button = document.getElementById("submit-review");

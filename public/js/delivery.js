@@ -1,4 +1,15 @@
 function getAddress(delivery) {
+    /*
+        
+     INPUT :
+             
+        (object) delivery : variable representing the structured shipment entry descriptor dictionary
+      
+     OUTPUT :
+
+        (string) : variable representing the fully formatted human-readable location address string
+
+    */
     if (!delivery) return '';
     const nbSuf = delivery.street_nb_suf ? delivery.street_nb_suf : '';
     const town = delivery.town ? delivery.town : '';
@@ -6,6 +17,22 @@ function getAddress(delivery) {
 }
 
 function checkDeliveryStatus() {
+    /*
+        
+     INPUT :
+             
+        None
+      
+     OUTPUT :
+
+        None
+
+      
+     SUMMARY :
+        
+        Triggers systematic polling commands directed to the shipment synchronization routes, clearing stale layout modules to rebuild map routing links, status indicators, and confirmation submission actions.
+
+    */
     fetch('/api_delivery')
     .then(response => response.json())
     .then(data => {

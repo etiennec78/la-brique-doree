@@ -1,4 +1,20 @@
 function formatTime(datetimeStr) {
+    /*
+        
+     INPUT :
+             
+        (string) datetimeStr : variable representing the incoming target timestamp string
+      
+     OUTPUT :
+
+        (string) : variable representing the clean formatted hour and minute layout text string
+
+      
+     SUMMARY :
+        
+        Evaluates a structured timestamp object, extracts hour and minute values into an aligned, zero-padded configuration pattern, or provides a default immediate text fallback statement.
+
+    */
     if (!datetimeStr) return 'Au plus vite';
     const date = new Date(datetimeStr);
     const h = date.getHours().toString().padStart(2, '0');
@@ -7,6 +23,22 @@ function formatTime(datetimeStr) {
 }
 
 function renderItems(items) {
+    /*
+        
+     INPUT :
+             
+        (object) items : variable representing the composite dictionary holding menu arrays and individual food array objects
+      
+     OUTPUT :
+
+        (string) : variable representing the generated HTML itemized list structure string
+
+      
+     SUMMARY :
+        
+        Loops across grouped selections and standalone items inside a specific request payload configuration to append structural labels into an HTML list block for dashboard layout inclusion.
+
+    */
     const menusArray = items.menus || [];
 
     const menusEnHTML = [];
@@ -29,6 +61,22 @@ function renderItems(items) {
 }
 
 function checkCookStatus() {
+    /*
+        
+     INPUT :
+             
+        None
+      
+     OUTPUT :
+
+        None
+
+      
+     SUMMARY :
+        
+        Polls the unified preparation pipeline database status through network fetch operations, parsing pending line queues along with takeout schedules to update management panels asynchronously.
+
+    */
     fetch('/api_cook')
     .then(response => response.json())
     .then(data => {

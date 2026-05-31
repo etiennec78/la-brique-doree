@@ -1,6 +1,22 @@
 let statusInterval = null;
 
 function checkOrderStatus() {
+    /*
+        
+     INPUT :
+             
+        None
+      
+     OUTPUT :
+
+        None
+
+      
+     SUMMARY :
+        
+        Extracts identifiers across pending item trackers, executes network inquiries to evaluate preparation updates, and requests fresh application fragments asynchronously when divergence occurs.
+
+    */
   const orderTrackers = document.querySelectorAll('.order-tracker');
   if (orderTrackers.length === 0) return;
 
