@@ -32,7 +32,7 @@ include __DIR__ . '/../includes/header.php';
             <?php endif; ?>
             <p>Prix total : <?= number_format($order['total_price'], 2, ",") ?>€</p>
 
-            <section class="bento">
+            <section class="items-container">
                 <?php 
                 $is_editable = false;
                 include __DIR__ . '/../includes/bento_grid.php'; 

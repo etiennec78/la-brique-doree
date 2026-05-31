@@ -284,4 +284,20 @@ class Order {
 
         return ['foods' => $foods, 'menus' => $menus];
     }
+
+    public static function sortByType($foods) {
+        // Sort a list of foods in a dictionnary with food types as keys
+        $dict = [];
+
+        foreach ($foods as $food) {
+            $type = $food['food_type'];
+
+            if (!isset($dict[$type])) {
+                $dict[$type] = [];
+            }
+            $dict[$type][] = $food;
+        }
+
+        return $dict;
+    }
 }

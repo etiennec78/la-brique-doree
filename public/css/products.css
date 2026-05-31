@@ -58,52 +58,20 @@
   background: var(--solid-gold);
 }
 
-#crustacean.filter:not(:checked) ~ .menu-content .food-section .crustacean,
-#fish.filter:not(:checked) ~ .menu-content .food-section .fish,
-#gluten.filter:not(:checked) ~ .menu-content .food-section .gluten,
-#milk.filter:not(:checked) ~ .menu-content .food-section .milk,
-#sesame.filter:not(:checked) ~ .menu-content .food-section .sesame,
-#egg.filter:not(:checked) ~ .menu-content .food-section .egg,
-#soy.filter:not(:checked) ~ .menu-content .food-section .soy,
-#nut.filter:not(:checked) ~ .menu-content .food-section .nut,
-#sulfite.filter:not(:checked) ~ .menu-content .food-section .sulfite {
+#crustacean.filter:not(:checked) ~ .menu .food-section .crustacean,
+#fish.filter:not(:checked) ~ .menu .food-section .fish,
+#gluten.filter:not(:checked) ~ .menu .food-section .gluten,
+#milk.filter:not(:checked) ~ .menu .food-section .milk,
+#sesame.filter:not(:checked) ~ .menu .food-section .sesame,
+#egg.filter:not(:checked) ~ .menu .food-section .egg,
+#soy.filter:not(:checked) ~ .menu .food-section .soy,
+#nut.filter:not(:checked) ~ .menu .food-section .nut,
+#sulfite.filter:not(:checked) ~ .menu .food-section .sulfite {
   display: none;
 }
 
-.bento {
+.items-grid {
   grid-template-columns: repeat(auto-fill, minmax(min(100%, max(220px, 25%)), 1fr));
-}
-
-.add-to-cart {
-  position: absolute;
-  bottom: 12px;
-  right: 12px;
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  border-radius: 50%;
-  border: none;
-  color: var(--offwhite);
-  background: var(--red);
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  font-size: 1.2rem;
-  font-weight: 700;
-  line-height: 1;
-  cursor: pointer;
-  opacity: 0;
-  transform: translateY(calc(var(--card-height) - var(--card-title-height)));
-  transition: opacity .25s ease, transform .25s ease;
-  z-index: 2;
-}
-
-.add-to-cart:hover {
-  background: var(--darkred);
-}
-
-.add-to-cart:active {
-  background: var(--red);
 }
 
 .menu-grid {
@@ -151,14 +119,4 @@
   font-size: 0.95rem;
   cursor: pointer;
   height: 48px;
-}
-
-.description h3 {
-    font-size: 1.1rem;
-    padding-right: 55px;
-    padding-top: 2px;
-}
-  
-.description::before,.description::after {
-  font-size: 0.95rem;
 }

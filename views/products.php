@@ -48,71 +48,15 @@ include __DIR__ . '/../includes/header.php';
         </div>
 
       </div>
-
-      <section class="menu-content">
-        <div class="food-section" name="Menus">
-          <h2>~ Nos Menus ~</h2>
-          <section class="bento">
-            <?php foreach($menus as $menu): ?>
-                <?php
-                    $id = $menu['id'];
-                    $name = htmlspecialchars($menu['name']);
-                    $price = number_format($menu['price'], 2, ",");
-                    $description = htmlspecialchars($menu['description']);
-                    $menus_data = $menu['foods'];
-                    $menu_allergens_classes = implode(' ', array_map('htmlspecialchars', $menu['allergens']));
-                ?>
-                <article class="description <?= $menu_allergens_classes ?>" description="<?= $description ?>" price="<?= $price ?>€" data-raw-price="<?= $menu['price'] ?>">
-                  <h3><?= $name ?></h3>
-                  <div class="menu-grid">
-                    <?php foreach($menus_data as $menu_item): ?>
-                        <?php for($j = 0; $j < $menu_item['quantity']; $j++): ?>
-                            <div style="flex: 1; background-image: url(/assets/<?= htmlspecialchars($menu_item['image_path']) ?>); background-size: cover; background-position: center;"></div>
-                        <?php endfor; ?>
-                    <?php endforeach; ?>
-                  </div>
-                  <form action="/update_cart" method="POST">
-                    <input type="hidden" name="item_id" value="<?= $id ?>">
-                    <input type="hidden" name="item_type" value="menu">
-                    <input type="hidden" name="action" value="add">
-                    <button class="add-to-cart" type="submit" aria-label="Ajouter au panier">+</button>
-                  </form>
-                </article>
-            <?php endforeach; ?>
-          </section>
-        </div>
-
-        <?php foreach($food_types as $food_type): ?>
-            <div class="food-section" name="<?= htmlspecialchars($food_type['name']) ?>">
-                <h2>~ <?= htmlspecialchars($food_type['name']) ?> ~</h2>
-                <section class="bento">
-                    <?php foreach($food_type['foods'] as $food): ?>
-                        <?php
-                            $id = $food['id'];
-                            $name = htmlspecialchars($food['name']);
-                            $description = htmlspecialchars($food['description']);
-                            $price = number_format($food['price'], 2, ",");
-                            $image_path = '/assets/' . htmlspecialchars($food['image_path']);
-                            $allergens_classes = implode(' ', array_map('htmlspecialchars', $food['allergens']));
-                        ?>
-                        <article class="description <?= $allergens_classes ?>" description="<?= $description ?>" price="<?= $price ?>€" style="background-image: url('<?= $image_path ?>');" data-raw-price="<?= $food['price'] ?>">
-                            <h3><?= $name ?></h3>
-                            <form action="/update_cart" method="POST">
-                                <input type="hidden" name="item_id" value="<?= $id ?>">
-                                <input type="hidden" name="item_type" value="food">
-                                <input type="hidden" name="action" value="add">
-                                <button class="add-to-cart" type="submit" aria-label="Ajouter au panier">+</button>
-                            </form>
-                        </article>
-                    <?php endforeach; ?>
-                </section>
-            </div>
-        <?php endforeach; ?>
-      </section>
-    </main>
+      <?php
+      $is_editable = true;
+      $merge_menu_items = true;
+      include __DIR__ . '/../includes/bento_grid.php';
+      ?>
+</main>
 <?php
   if (isset($_SESSION['error'])){
     unset($_SESSION['error']);
   }
-  include __DIR__ . '/../includes/footer.php'; 
+  include __DIR__ . '/../includes/footer.php';
 ?>

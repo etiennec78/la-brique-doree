@@ -9,15 +9,16 @@ include __DIR__ . '/../includes/header.php';
 <main>
       <section class="cart-page">
         <div id="cart-content">
-          <section class="bento">
+          <section class="items-container">
           <?php if (count($menus) <= 0 && !$cart_has_food): ?>
-            <div class="items-grid">
+            <div class="category gray-container">
               <p>Votre panier est vide.</p>
               <button onclick="location.href='/products'" class="basic-btn">Explorer la carte</button>
             </div>
           <?php else: ?>
             <?php 
             $is_editable = true;
+            $item_selector_type = 'plus_minus';
             include __DIR__ . '/../includes/bento_grid.php'; 
             ?>
           <?php endif; ?>

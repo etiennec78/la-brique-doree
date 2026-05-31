@@ -6,7 +6,7 @@ class Food {
         global $pdo;
         $stmt = $pdo->prepare("SELECT id, name FROM food_type ORDER BY id ASC");
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
     }
 
     public static function getByType($typeId) {
@@ -26,5 +26,21 @@ class Food {
         ");
         $stmt->execute([$foodId]);
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
+
+
+    public static function getAll() {
+        global $pdo;
+        $stmt = $pdo->prepare("SELECT id, name, price, description, image_path, food_type FROM food ORDER BY id ASC");
+        $stmt->execute();
+        $foods = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($foods as &$food) {
+            // Get allergens and format theme as classes
+            $allergens = self::getAllergens($food['id']);
+            $food['allergens_classes'] = implode(' ', array_map('strtolower', array_map('htmlspecialchars', $allergens)));
+        }
+
+        return $foods;
     }
 }

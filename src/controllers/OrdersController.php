@@ -9,6 +9,8 @@ class OrdersController extends Controller {
 
         require_once __DIR__ . '/../models/Cart.php';
         require_once __DIR__ . '/../models/Coupon.php';
+        require_once __DIR__ . '/../models/Food.php';
+        require_once __DIR__ . '/../models/Order.php';
         require_once __DIR__ . '/../models/User.php';
         require_once __DIR__ . '/../models/Menu.php';
         require_once __DIR__ . '/../getapikey.php';
@@ -47,6 +49,9 @@ class OrdersController extends Controller {
         $menus = Cart::getCartItems($uid, "menu");
         $foods = Cart::getCartItems($uid, "food");
         $cart_has_food = count($foods) > 0;
+
+        $sorted_foods = Order::sortByType($foods);
+        $food_types = Food::getTypes();
 
         foreach ($menus as &$menu) {
             $menu['foods'] = Menu::getMenuFoods($menu['id']);
@@ -99,7 +104,8 @@ class OrdersController extends Controller {
                 'total_price' => $total_price,
                 'cart_details' => $cart_details,
                 'menus' => $menus,
-                'foods' => $foods,
+                'sorted_foods' => $sorted_foods,
+                'food_types' => $food_types,
                 'cart_has_food' => $cart_has_food,
                 'montant_cybank' => $montant_cybank,
                 'control' => $control,
@@ -127,7 +133,12 @@ class OrdersController extends Controller {
             }
 
             require_once __DIR__ . '/../models/Cart.php';
-            Cart::updateItem($user_id, $item_id, $item_type, $action);
+            if (isset($_POST['amount']) && $_POST['action'] === 'set') {
+                $amount = (int)$_POST['amount'];
+                Cart::updateItem($user_id, $item_id, $item_type, 'set', $amount);
+            } else {
+                Cart::updateItem($user_id, $item_id, $item_type, $action);
+            }
         }
 
         if (isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false) {

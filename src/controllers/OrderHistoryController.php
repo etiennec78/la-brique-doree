@@ -61,6 +61,8 @@ class OrderHistoryController extends Controller {
         $order['total_price'] += $item['price'] * $item['quantity'];
       }
 
+      $sorted_foods = Order::sortByType($foods);
+
       // Get the associated coupon
       $order['coupon'] = Coupon::getCouponFromCart($order['cart_id']);
       if ($order['coupon'] != null) {
@@ -85,7 +87,7 @@ class OrderHistoryController extends Controller {
         'next_id' => $next_id ?? null,
         'order' => $order ?? [],
         'menus' => $menus ?? [],
-        'foods' => $foods ?? [],
+        'sorted_foods' => $sorted_foods ?? [],
         'cart_has_food' => $cart_has_food ?? false
       ]
     );

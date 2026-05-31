@@ -63,8 +63,9 @@ class Cart {
         // Get the current cart, or the one specified by $cart_id
         $condition = ($cart_id == -1) ? "c.payment_status_id = 1" : "c.id = $cart_id";
 
-        // Get the image only for food type
-        $select = ($item_type == "food") ? ", mf.image_path" : "";
+        // Get the image and type only for food items
+        $select = ($item_type == "food") ? ", mf.image_path, mf.food_type" : "";
+        $order = ($item_type == "food") ? "ORDER BY mf.food_type ASC" : "";
 
         $stmt = $pdo->prepare("
             SELECT mf.id, mf.name, mf.price, mf.description, cmf.quantity $select
@@ -72,6 +73,7 @@ class Cart {
             JOIN cart_$item_type cmf ON c.id = cmf.cart_id
             JOIN $item_type mf ON cmf.$item_type"."_id = mf.id
             WHERE c.user_id = ? AND $condition
+            $order
         ");
         $stmt->execute([$uid]);
         return $stmt->fetchAll();
@@ -109,7 +111,7 @@ class Cart {
         return $stmt->execute([$cart_id, $item_id]);
     }
 
-    public static function updateItem($user_id, $item_id, $item_type, $action) {
+    public static function updateItem($user_id, $item_id, $item_type, $action, $amount = null) {
         global $pdo;
 
         if (!isset($_SESSION['user'])) {
@@ -149,10 +151,28 @@ class Cart {
                 elseif ($action === 'add' && $current_quantity >= 9 ) {
                     $_SESSION['error'] = 'Vous ne pouvez pas ajouter plus de 9 fois le même article dans votre panier.';
                 }
+                elseif ($action === 'set' && $amount !== null) {
+                    if ($amount <= 0) {
+                        self::removeItem($table_name, $foreign_key, $cart_id, $item_id);
+                    } elseif ($amount <= 9) {
+                        $stmt = $pdo->prepare("UPDATE $table_name SET quantity = ? WHERE cart_id = ? AND $foreign_key = ?");
+                        $stmt->execute([$amount, $cart_id, $item_id]);
+                    } else {
+                        $_SESSION['error'] = 'Vous ne pouvez pas ajouter plus de 9 fois le même article dans votre panier.';
+                    }
+                }
             } 
             
             elseif ($action === 'add') {
                 self::addItem($table_name, $foreign_key, $cart_id, $item_id);
+            }
+            elseif ($action === 'set' && $amount !== null && $amount > 0) {
+                if ($amount <= 9) {
+                    $stmt = $pdo->prepare("INSERT INTO $table_name (cart_id, $foreign_key, quantity) VALUES (?, ?, ?)");
+                    $stmt->execute([$cart_id, $item_id, $amount]);
+                } else {
+                    $_SESSION['error'] = 'Vous ne pouvez pas ajouter plus de 9 fois le même article dans votre panier.';
+                }
             }
 
             $pdo->commit();
