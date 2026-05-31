@@ -32,7 +32,9 @@ $picker_target = $menu_editor ? 'menu' : 'panier'
             $cards = $menus;
         } else {
             $menu = $menus[$i];
-            $category_name = $menu['name'];
+            $cat_price_val = floatval($menu['price']);
+            $cat_price_str = number_format($cat_price_val, 2, ",");
+            $category_name = $menu['name'] . ' (' . $cat_price_str . '€)';
             $cards = $menu['foods'];
         }
     } else {
