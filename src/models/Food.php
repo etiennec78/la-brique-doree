@@ -3,6 +3,22 @@ require_once __DIR__ . '/../db_connect.php';
 
 class Food {
     public static function getTypes() {
+	/*
+	 	
+	  INPUT :
+	         
+   	 	 None
+	  
+	  OUTPUT :
+
+ 		 (array) $types : variable representing an associative array of food types indexed by their ID
+
+	  
+	  SUMMARY :
+	 	
+		This function retrieves all food types ordered by their ID as a key-pair array.
+
+	*/
         global $pdo;
         $stmt = $pdo->prepare("SELECT id, name FROM food_type ORDER BY id ASC");
         $stmt->execute();
@@ -10,6 +26,22 @@ class Food {
     }
 
     public static function getByType($typeId) {
+	/*
+	 	
+	  INPUT :
+	         
+   	 	 (int) $typeId : variable representing the food type ID
+	  
+	  OUTPUT :
+
+ 		 (array) $foods : variable representing an array of food items belonging to the type
+
+	  
+	  SUMMARY :
+	 	
+		This function fetches all food items that belong to a specific food type ID.
+
+	*/
         global $pdo;
         $stmt = $pdo->prepare("SELECT id, name, price, description, image_path FROM food f WHERE f.food_type = ?");
         $stmt->execute([$typeId]);
@@ -17,6 +49,22 @@ class Food {
     }
 
     public static function getAllergens($foodId) {
+	/*
+	 	
+	  INPUT :
+	         
+   	 	 (int) $foodId : variable representing the food item ID
+	  
+	  OUTPUT :
+
+ 		 (array) $allergens : variable representing a sequential array of allergen names
+
+	  
+	  SUMMARY :
+	 	
+		This function retrieves a list of allergen names associated with a specific food item ID.
+
+	*/
         global $pdo;
         $stmt = $pdo->prepare("
             SELECT a.name
@@ -30,6 +78,22 @@ class Food {
 
 
     public static function getAll() {
+	/*
+	 	
+	  INPUT :
+	         
+   	 	 None
+	  
+	  OUTPUT :
+
+ 		 (array) $foods : variable representing an array of all food items with their formatted allergen classes
+
+	  
+	  SUMMARY :
+	 	
+		This function fetches all food items from the database and appends their associated allergens formatted as a string of space-separated HTML-safe CSS classes.
+
+	*/
         global $pdo;
         $stmt = $pdo->prepare("SELECT id, name, price, description, image_path, food_type FROM food ORDER BY id ASC");
         $stmt->execute();
