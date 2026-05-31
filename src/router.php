@@ -12,6 +12,17 @@ class Router {
     public function dispatch($requestedUrl, $requestMethod) {
         $requestedUrl = trim(parse_url($requestedUrl, PHP_URL_PATH), '/');
 
+        if (isset($_SESSION['user']['id'])) {
+            require_once __DIR__ . '/models/User.php';
+            $check_user = User::getUserInfo($_SESSION['user']['id']);
+            if (!empty($check_user['banned'])) {
+                unset($_SESSION['user']);
+                $_SESSION['error'] = 'Votre compte a été suspendu.';
+                header('Location: /login');
+                exit();
+            }
+        }
+
         require_once __DIR__ . '/controllers/Controller.php';
 
         foreach ($this->routes as $route) {
