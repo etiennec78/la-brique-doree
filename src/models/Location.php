@@ -2,6 +2,23 @@
 
 class Location {
     public static function formAddressHasChanged($target, $form_data) {
+	/*
+	 	
+	  INPUT :
+	         
+   	 	 (mixed) $target : variable representing the user identifier
+		 (array) $form_data : variable representing the form data
+	  
+	  OUTPUT :
+
+ 		 (int) $address_has_changed : variable representing whether the address fields have been modified (1 if changed, 0 otherwise)
+
+	  
+	  SUMMARY :
+	 	
+		This function compares incoming address fields from the POST request against the user's existing address data in the database to detect modifications.
+
+	*/
         require_once __DIR__ . '/../models/User.php';
 
         $user_data = User::getUserInfo($target);
@@ -19,6 +36,22 @@ class Location {
     }
 
     public static function getAPITimeout($uid) {
+	/*
+	 	
+	  INPUT :
+	         
+   	 	 (int) $uid : variable representing the user ID
+	  
+	  OUTPUT :
+
+ 		 (int) $difference : variable representing the remaining timeout in seconds
+
+	  
+	  SUMMARY :
+	 	
+		This function checks the timestamp of the last API call made by a user and determines the remaining wait time based on a required 5-second delay.
+
+	*/
         require_once __DIR__ . '/../models/User.php';
 
         $last_api_call = new DateTime(User::getUserData($uid, 'last_api_call'));
@@ -29,6 +62,23 @@ class Location {
     }
 
     public static function getLocationCoord($location_data, $uid) {
+	/*
+	 	
+	  INPUT :
+	         
+   	 	 (array) $location_data : variable representing the raw location information
+		 (int) $uid : variable representing the user ID
+	  
+	  OUTPUT :
+
+ 		 (array) $position : variable representing the geographic coordinates (latitude and longitude) or an error message
+
+	  
+	  SUMMARY :
+	 	
+		This function queries the HERE Geocoding API to retrieve coordinates for a given address while handling rate limits, API key checks, and logging requirements.
+
+	*/
         require_once __DIR__ . '/../format_data.php';
         require_once __DIR__ . '/../models/User.php';
         $DEFAULT_COORD = [
