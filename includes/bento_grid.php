@@ -48,6 +48,7 @@ $merge_menu_items = $merge_menu_items ?? false;
                     <input type="hidden" name="item_id" value="<?= $menu['id'] ?>">
                     <input type="hidden" name="item_type" value="<?= $menu_loop ? 'menu' : 'food'?>">
                     <div class="nb-selector">
+                        <button type="submit" name="action" value="set" style="display: none;"></button>
                         <button class="remove-from-cart" type="submit" name="action" value="remove" aria-label="Retirer du panier">-</button>
                         <input type="number" class="amount" name="amount" min="0" max="9" value="<?= $menu['quantity'] ?>"/>
                         <button class="add-to-cart" type="submit" name="action" value="add" aria-label="Ajouter au panier">+</button>
@@ -74,6 +75,7 @@ $merge_menu_items = $merge_menu_items ?? false;
                                 <input type="hidden" name="item_id" value="<?= $card['id'] ?>">
                                 <input type="hidden" name="item_type" value="<?= $menu_loop ? 'menu' : 'food'?>">
                                 <div class="nb-selector">
+                                    <button type="submit" name="action" value="set" style="display: none;"></button>
                                     <button class="remove-from-cart" type="submit" name="action" value="remove" aria-label="Retirer du panier">-</button>
                                     <input type="number" class="amount" name="amount" min="0" max="9" value="<?= $card['quantity'] ?>"/>
                                     <button class="add-to-cart" type="submit" name="action" value="add" aria-label="Ajouter au panier">+</button>
