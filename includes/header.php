@@ -67,6 +67,7 @@ if (isset($_SESSION['user'])) {
                         <a href="/reviews" class="navbarbutton">Avis</a>
                         <a href="/profile" class="navbarbutton">Mon Profil</a>
                         <a href="/cook" class="navbarbutton">Gestion Commandes</a>
+                        <a href="/menu_editor" class="navbarbutton">Éditeur de menus</a>
 
                         <?php require_once '../src/models/Order.php'; ?>
                         <?php if (!empty(Order::getUserActiveOrders($_SESSION['user']['id']))): ?>
@@ -108,6 +109,7 @@ if (isset($_SESSION['user'])) {
                         <a href="/admin" class="navbarbutton">Panel Admin</a>
                         <a href="/cook" class="navbarbutton">Gestion Commandes</a>
                         <a href="/delivery" class="navbarbutton">Mes Livraisons</a>
+                        <a href="/menu_editor" class="navbarbutton">Éditeur de menus</a>
 
                         <?php require_once '../src/models/Order.php'; ?>
                         <?php if (!empty(Order::getUserActiveOrders($_SESSION['user']['id']))): ?>

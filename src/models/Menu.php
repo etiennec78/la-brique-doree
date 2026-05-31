@@ -44,7 +44,7 @@ class Menu {
 	*/
         global $pdo;
         $stmt = $pdo->prepare("
-            SELECT f.id as item_id, f.name, f.price, f.description, f.image_path, mf.quantity
+            SELECT f.id, f.name, f.price, f.description, f.image_path, mf.quantity
             FROM food f
             JOIN menu_food mf ON f.id = mf.food_id
             WHERE mf.menu_id = ?

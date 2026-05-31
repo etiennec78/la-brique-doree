@@ -7,6 +7,9 @@ $item_selector_type = $item_selector_type ?? 'add_only';
 
 /* Visually merge food cards from menus into one menu card */
 $merge_menu_items = $merge_menu_items ?? false;
+
+/*Show a card to add foods to menus and edit data*/
+$menu_editor = $menu_editor ?? false;
 ?>
 
 <!-- Loop for each menu (or 1 if combined) + individual food categories -->
@@ -65,6 +68,9 @@ $merge_menu_items = $merge_menu_items ?? false;
                 $price_str = number_format($price_val, 2, ",");
                 $style = (!$menu_loop || !$merge_menu_items) ? 'flex: 1; background-image: url(/assets/' . htmlspecialchars($card['image_path']) . '); background-size: cover; background-position: center;' : '';
                 ?>
+                <?php if ($menu_editor): ?>
+                    <a href="/menu_editor?type=<?= $menu_loop ? 'menu' : 'food' ?>&id=<?= $card['id'] ?>" style="display: contents;">
+                <?php endif; ?>
                 <article class="description <?= $card['allergens_classes'] ?? '' ?>" description="<?= $card['description'] ?>" price="<?= $price_str ?>€" style="<?= $style ?>">
                     <h3><?= htmlspecialchars($card['name']) ?></h3>
 
@@ -101,7 +107,16 @@ $merge_menu_items = $merge_menu_items ?? false;
                         </div>
                     <?php endif; ?>
                 </article>
+                <?php if (isset($card_link) && $card_link): ?>
+                </a>
+                <?php endif; ?>
             <?php endforeach; ?>
+            <!-- Show an add card at the end of the category for the menu editor -->
+            <?php if ($menu_editor): ?>
+                <a href="/menu_editor">
+                    <article class="add-card"></article>
+                </a>
+            <?php endif; ?>
         </div>
     </div>
 
