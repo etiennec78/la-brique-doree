@@ -2,6 +2,22 @@
 
 class OrdersController extends Controller {
     public function index() {
+        /*
+            
+         INPUT :
+                 
+            None
+          
+         OUTPUT :
+
+            None
+
+          
+         SUMMARY :
+            
+            Compiles current basket selections, applies structural discount updates including active coupons and global reductions, formats specific external payment gateway secure signatures, and displays the primary order checkout interface.
+
+        */
         if (!isset($_SESSION['user'])) {
             header('Location: /login');
             exit();
@@ -116,6 +132,22 @@ class OrdersController extends Controller {
     }
 
     public function updateCart() {
+        /*
+            
+         INPUT :
+                 
+            None
+          
+         OUTPUT :
+
+            None
+
+          
+         SUMMARY :
+            
+            Updates specific amounts or performs item additions/removals inside a user's persistent basket context based on POST properties, outputting a JSON packet summary or forcing HTTP referer redirections.
+
+        */
         if (!isset($_SESSION['user'])) {
             header('Location: /login');
             exit();
@@ -164,6 +196,22 @@ class OrdersController extends Controller {
     }
 
     public function applyCoupon() {
+        /*
+            
+         INPUT :
+                 
+            None
+          
+         OUTPUT :
+
+            None
+
+          
+         SUMMARY :
+            
+            Attaches or detaches a chosen relational promotional coupon key to the user's active shopping basket database reference based on submitted forms.
+
+        */
         if (!isset($_SESSION['user'])) {
             header('Location: /login');
             exit();
@@ -207,6 +255,22 @@ class OrdersController extends Controller {
     }
 
     public function setDeliveryType() {
+        /*
+            
+         INPUT :
+                 
+            None
+          
+         OUTPUT :
+
+            None
+
+          
+         SUMMARY :
+            
+            Saves selected logistics specifications such as takeaway status flags and custom time values inside global session variables.
+
+        */
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($_POST['is_takeaway'])) {
                 $_SESSION['is_takeaway'] = $_POST['is_takeaway'] === '1';
