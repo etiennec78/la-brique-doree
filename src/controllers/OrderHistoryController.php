@@ -2,6 +2,22 @@
 
 class OrderHistoryController extends Controller {
   public function index() {
+    /*
+        
+     INPUT :
+             
+        None
+      
+     OUTPUT :
+
+        None
+
+      
+     SUMMARY :
+        
+        Validates user sessions, verifies viewing permissions for historical order logs based on admin privileges, aggregates precise pricing configurations including active coupon updates, and displays the history interface view.
+
+    */
     if (!isset($_SESSION['user'])) {
       header('Location: /login');
       exit();
