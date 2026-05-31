@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	*/
 
     const select = document.getElementById('sort-price');
-    const bentos = document.querySelectorAll('.bento');
+    const bentos = document.querySelectorAll('.items-grid');
 
     bentos.forEach(function (bento) {
 	/*
