@@ -52,4 +52,74 @@ class Menu {
         $stmt->execute([$menu_id]);
         return $stmt->fetchAll();
     }
+
+    private static function getFoodQuantity($menu_id, $food_id) {
+        global $pdo;
+        $stmt = $pdo->prepare("SELECT quantity FROM menu_food WHERE menu_id = ? AND food_id = ?");
+        $stmt->execute([$menu_id, $food_id]);
+        $result = $stmt->fetchColumn();
+        return $result !== false ? (int)$result : 0;
+    }
+
+    private static function insertFood($menu_id, $food_id, $quantity) {
+        global $pdo;
+        $stmt = $pdo->prepare("INSERT INTO menu_food (menu_id, food_id, quantity) VALUES (?, ?, ?)");
+        return $stmt->execute([$menu_id, $food_id, $quantity]);
+    }
+
+    private static function removeFood($menu_id, $food_id) {
+        global $pdo;
+        $stmt = $pdo->prepare("DELETE FROM menu_food WHERE menu_id = ? AND food_id = ?");
+        error_log("DELETE FROM menu_food WHERE menu_id = $menu_id AND food_id = $food_id");
+        return $stmt->execute([$menu_id, $food_id]);
+    }
+
+    private static function incrementFoodQuantity($menu_id, $food_id) {
+        global $pdo;
+        $stmt = $pdo->prepare("UPDATE menu_food SET quantity = quantity + 1 WHERE menu_id = ? AND food_id = ?");
+        error_log("UPDATE menu_food SET quantity = quantity + 1 WHERE menu_id = $menu_id AND food_id = $food_id");
+        return $stmt->execute([$menu_id, $food_id]);
+    }
+
+    private static function decrementFoodQuantity($menu_id, $food_id) {
+        global $pdo;
+        $stmt = $pdo->prepare("UPDATE menu_food SET quantity = quantity - 1 WHERE menu_id = ? AND food_id = ?");
+        error_log("UPDATE menu_food SET quantity = quantity - 1 WHERE menu_id = $menu_id AND food_id = $food_id");
+        return $stmt->execute([$menu_id, $food_id]);
+    }
+
+    private static function setFoodQuantity($menu_id, $food_id, $quantity) {
+        global $pdo;
+        $stmt = $pdo->prepare("UPDATE menu_food SET quantity = ? WHERE menu_id = ? AND food_id = ?");
+        return $stmt->execute([$quantity, $menu_id, $food_id]);
+    }
+
+    public static function updateItem($menu_id, $food_id, $action, $amount = null) {
+        $current_quantity = self::getFoodQuantity($menu_id, $food_id);
+
+        if ($current_quantity > 0) {
+            if ($action === 'remove') {
+                if ($current_quantity > 1) {
+                    self::decrementFoodQuantity($menu_id, $food_id);
+                } else {
+                    self::removeFood($menu_id, $food_id);
+                }
+            } else if ($action === 'add') {
+                  self::incrementFoodQuantity($menu_id, $food_id);
+            } else if ($action === 'set' && $amount !== null) {
+                if ($amount <= 0) {
+                    self::removeFood($menu_id, $food_id);
+                } else {
+                    self::setFoodQuantity($menu_id, $food_id, $amount);
+                }
+            }
+        } else {
+          if ($action === 'add') {
+              self::insertFood($menu_id, $food_id, 1);
+          } elseif ($action === 'set' && $amount !== null && $amount > 0) {
+              self::insertFood($menu_id, $food_id, $amount);
+          }
+        }
+        return true;
+    }
 }

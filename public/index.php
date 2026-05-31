@@ -33,6 +33,7 @@ $router->add('POST', 'global_reduction', 'AdminController', 'applyGlobalReductio
 $router->add('POST', 'api_ban_user', 'AdminController', 'apiBanUser');
 $router->add('POST', 'register', 'AuthController', 'processRegister');
 $router->add('POST', 'login', 'AuthController', 'processLogin');
+$router->add('POST', 'update_menu', 'CookController', 'updateMenu');
 $router->add('POST', 'confirm_delivery', 'DeliveryController', 'confirmDelivery');
 $router->add('POST', 'cancel_delivery', 'DeliveryController', 'cancelDelivery');
 $router->add('POST', 'set_delivery_type', 'OrdersController', 'setDeliveryType');

@@ -107,4 +107,15 @@ class Food {
 
         return $foods;
     }
+
+    public static function getAllWithMenuQuantities($menu_id) {
+      global $pdo;
+      $stmt = $pdo->prepare("
+      SELECT f.*, COALESCE(mf.quantity, 0) as quantity
+      FROM food f
+      LEFT JOIN menu_food mf ON f.id = mf.food_id AND mf.menu_id = ?
+      ");
+      $stmt->execute([$menu_id]);
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
