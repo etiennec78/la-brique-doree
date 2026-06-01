@@ -13,7 +13,8 @@ $is_picker = $is_picker ?? false;
 
 /*Show a card to add foods to menus and edit data*/
 $menu_editor = $menu_editor ?? false;
-$picker_target = $menu_editor ? 'menu' : 'panier'
+$picker_target = $menu_editor ? 'menu' : 'panier';
+$editing_menu = $editing_menu ?? null;
 ?>
 
 <!-- Loop for each menu (or 1 if combined) + individual food categories -->
@@ -50,19 +51,40 @@ $picker_target = $menu_editor ? 'menu' : 'panier'
 
     <div class="category <?= $merge_menu_items ? '' : 'gray-container' ?>">
         <div class="category-header">
-            <h2><?= $category_name ?></h2>
-            <?php if ($menu_loop && $is_editable && !$merge_menu_items && !$menu_editor): ?>
-                <!-- +/- button to add or remove menus from the cart -->
-                <form method="POST" action="/update_cart" style="display:inline; margin:0; padding:0;">
-                    <input type="hidden" name="item_id" value="<?= $menu['id'] ?>">
-                    <input type="hidden" name="item_type" value="<?= $menu_loop ? 'menu' : 'food'?>">
-                    <div class="nb-selector">
-                        <button type="submit" name="action" value="set" style="display: none;"></button>
-                        <button class="remove-from-cart" type="submit" name="action" value="remove" aria-label="Retirer du <?= $picker_target ?>">-</button>
-                        <input type="number" class="amount" name="amount" min="0" max="9" value="<?= $menu['quantity'] ?>"/>
-                        <button class="add-to-cart" type="submit" name="action" value="add" aria-label="Ajouter au <?= $picker_target ?>">+</button>
-                    </div>
+            <?php if ($editing_menu == $menu['id']): ?>
+                <!-- inputs and floppy disk icon to save menu changes -->
+                <form action="/edit_menu" method="post">
+                    <input type="text" id="title" name="title" value="<?= $menu['name'] ?>">
+                    <input type="number" id="price" name="price" step="0.01" value="<?= $cat_price_val ?>">
+                    <button type="submit" class="basic-btn save-btn">
+                        <img src="/assets/images/save.svg" alt="Modifier le menu" class="edit-icon">
+                    </button>
                 </form>
+            <?php else: ?>
+                <!-- category title -->
+                <h2><?= $category_name ?></h2>
+                <?php if ($menu_editor): ?>
+                    <!-- pencil icon to edit menu -->
+                    <a href="?edit=<?= $menu['id'] ?>" title="Modifier le menu">
+                        <img src="/assets/images/pencil.svg" alt="Modifier le menu" class="edit-icon">
+                    </a>
+                <?php endif; ?>
+            <?php endif; ?>
+
+            <?php if ($menu_loop): ?>
+                <?php if ($is_editable && !$merge_menu_items && !$menu_editor): ?>
+                    <!-- +/- button to add or remove menus from the cart -->
+                    <form method="POST" action="/update_cart" style="display:inline; margin:0; padding:0;">
+                        <input type="hidden" name="item_id" value="<?= $menu['id'] ?>">
+                        <input type="hidden" name="item_type" value="<?= $menu_loop ? 'menu' : 'food'?>">
+                        <div class="nb-selector">
+                            <button type="submit" name="action" value="set" style="display: none;"></button>
+                            <button class="remove-from-cart" type="submit" name="action" value="remove" aria-label="Retirer du <?= $picker_target ?>">-</button>
+                            <input type="number" class="amount" name="amount" min="0" max="9" value="<?= $menu['quantity'] ?>"/>
+                            <button class="add-to-cart" type="submit" name="action" value="add" aria-label="Ajouter au <?= $picker_target ?>">+</button>
+                        </div>
+                    </form>
+                <?php endif; ?>
             <?php endif; ?>
         </div>
 

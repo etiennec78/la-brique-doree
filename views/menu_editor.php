@@ -12,6 +12,7 @@ include __DIR__ . '/../includes/header.php';
         $item_selector_type = 'plus_minus';
         $merge_menu_items = false;
         $menu_editor = true;
+        $editing_menu = $_GET['edit'] ?? null;
         include __DIR__ . '/../includes/bento_grid.php';
     ?>
     </section>
