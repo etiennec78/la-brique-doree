@@ -37,3 +37,7 @@
 .category-header .subtitle input {
     width: 100%;
 }
+
+h5 {
+    margin: 0px;
+}
