@@ -54,7 +54,7 @@ $editing_menu = $editing_menu ?? null;
     }
     ?>
 
-    <div class="category <?= $merge_menu_items ? '' : 'gray-container' ?>">
+    <div class="category <?= $merge_menu_items ? '' : 'gray-container' ?>" <?= ($menu_loop && !$merge_menu_items) ? 'id="menu-' . $menu['id'] . '"' : '' ?>>
         <div class="category-header">
             <?php if ($menu_loop && !$merge_menu_items && $editing_menu == $menu['id']): ?>
                 <!-- inputs and floppy disk icon to save menu changes -->
@@ -72,7 +72,7 @@ $editing_menu = $editing_menu ?? null;
                 <h2><?= $category_name ?></h2>
                 <?php if ($menu_editor && $menu_loop): ?>
                     <!-- pencil icon to edit menu -->
-                    <a href="?edit=<?= $menu['id'] ?>" title="Modifier le menu">
+                    <a href="?edit=<?= $menu['id'] ?>#menu-<?= $menu['id'] ?>" title="Modifier le menu">
                         <img src="/assets/images/pencil.svg" alt="Modifier le menu" class="edit-icon">
                     </a>
                     <div class="subtitle"><h5><?= $menu['description'] ?></h5></div>
