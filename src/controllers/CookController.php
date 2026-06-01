@@ -170,12 +170,24 @@ class CookController extends Controller {
 
         $food_types = Food::getTypes();
         $allergens = Food::getAllAllergens();
+        $edit_id = $_GET['edit_id'] ?? null;
         $selected_food_type = $_GET['food_type'] ?? '';
 
-        if ($selected_food_type && $selected_food_type > count($food_types)) {
-            $_SESSION['error'] = "Erreur : Le type de nourriture envoyé est invalide !";
-            header('Location: /menu_editor');
-            exit();
+        $defaults = [];
+        if ($edit_id) {
+            $defaults = Food::getById($edit_id);
+            if (!$defaults) {
+                $_SESSION['error'] = "Erreur : Impossible de trouver ce plat dans la base de données !";
+                header('Location: /menu_editor');
+                exit();
+            }
+        } elseif ($selected_food_type) {
+            if ($selected_food_type > count($food_types)) {
+                $_SESSION['error'] = "Erreur : Le type de nourriture envoyé est invalide !";
+                header('Location: /menu_editor');
+                exit();
+            }
+            $defaults['food_type'] = $selected_food_type;
         }
 
         $this->render(
@@ -183,7 +195,7 @@ class CookController extends Controller {
             [
                 'food_types' => $food_types,
                 'allergens' => $allergens,
-                'selected_food_type' => $selected_food_type
+                'defaults' => $defaults
             ]
         );
     }

@@ -279,3 +279,8 @@ input {
 .logo {
   padding: 5px;
 }
+
+option {
+  background-color: var(--darkgray);
+  color: var(--text-on-bg);
+}
