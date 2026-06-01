@@ -2,36 +2,6 @@
 require_once __DIR__ . '/../db_connect.php';
 
 class Order {
-    public static function getUserRunningOrder($uid) {
-  /*
-
-    INPUT :
-
-         (int) $uid : variable representing the user ID
-
-    OUTPUT :
-
-      (array|bool) $order : variable representing the most recent active order details, or false if not found
-
-
-    SUMMARY :
-
-    This function retrieves the latest active order and its current status for a specific customer.
-
-  */
-        global $pdo;
-        $stmt = $pdo->prepare("
-        SELECT o.id, os.id as status, o.cook_id, o.delivery_person_id, o.is_takeaway
-        FROM order_status os
-        JOIN orders o on o.order_status_id = os.id
-        WHERE o.customer_id = ?
-        ORDER BY o.id DESC
-        LIMIT 1
-        ");
-        $stmt->execute([$uid]);
-        return $stmt->fetch();
-    }
-
     public static function getOrderById($id) {
   /*
 
@@ -91,35 +61,6 @@ class Order {
             ORDER BY COALESCE(o.takeaway_time, '1000-01-01 00:00:00') ASC, o.id ASC
         ");
         $stmt->execute($order_names);
-        return $stmt->fetchAll();
-    }
-
-    public static function getAllOrdersFromUser($uid) {
-    /*
-
-    INPUT :
-
-         (int) $uid : variable representing the user ID
-
-    OUTPUT :
-
-      (array) $orders : variable representing all orders placed by the user, including payment amounts, sorted from newest to oldest
-
-
-    SUMMARY :
-
-    This function retrieves the complete order history for a specific customer along with corresponding payment details.
-
-  */
-        global $pdo;
-        $stmt = $pdo->prepare("
-        SELECT o.id, o.takeaway_time, o.cook_id, o.delivery_person_id, p.amount
-        FROM orders o
-        LEFT JOIN payment p ON o.cart_id = p.cart_id
-        WHERE o.customer_id = ?
-        ORDER BY o.id DESC
-        ");
-        $stmt->execute([$uid]);
         return $stmt->fetchAll();
     }
 

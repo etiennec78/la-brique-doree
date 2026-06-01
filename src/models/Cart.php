@@ -49,46 +49,6 @@ class Cart {
         return $pdo->lastInsertId();
     }
 
-    public static function getFoodCount($cart_id) {
-        /*
-         
-          INPUT :
-                 
-                    (int) $cart_id : variable representing the cart ID
-          
-          OUTPUT :
-
-          (int) $count : variable representing the total quantity of food items
-
-          
-          SUMMARY :
-         
-        This function gets the total number of food items in a given cart.
-
-        */
-        return self::getItemCount($cart_id, 'cart_food');
-    }
-
-    public static function getMenuCount($cart_id) {
-        /*
-         
-          INPUT :
-                 
-                    (int) $cart_id : variable representing the cart ID
-          
-          OUTPUT :
-
-          (int) $count : variable representing the total quantity of menu items
-
-          
-          SUMMARY :
-         
-        This function gets the total number of menu items in a given cart.
-
-        */
-        return self::getItemCount($cart_id, 'cart_menu');
-    }
-
     private static function getItemCount($cart_id, $table) {
         /*
          
@@ -136,8 +96,8 @@ class Cart {
                 $cart_id = self::getUserCartId($uid);
 
                 if ($cart_id) {
-                    $count_food = self::getFoodCount($cart_id);
-                    $count_menu = self::getMenuCount($cart_id);
+                    $count_food = self::getItemCount($cart_id, 'cart_food');
+                    $count_menu = self::getItemCount($cart_id, 'cart_menu');
                     return (int)$count_food + (int)$count_menu;
                 }
             } catch (\PDOException $error) {

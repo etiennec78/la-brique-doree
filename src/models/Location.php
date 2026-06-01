@@ -1,40 +1,6 @@
 <?php
 
 class Location {
-    public static function formAddressHasChanged($target, $form_data) {
-  /*
-
-    INPUT :
-
-         (mixed) $target : variable representing the user identifier
-     (array) $form_data : variable representing the form data
-
-    OUTPUT :
-
-      (int) $address_has_changed : variable representing whether the address fields have been modified (1 if changed, 0 otherwise)
-
-
-    SUMMARY :
-
-    This function compares incoming address fields from the POST request against the user's existing address data in the database to detect modifications.
-
-  */
-        require_once __DIR__ . '/../models/User.php';
-
-        $user_data = User::getUserInfo($target);
-        $location_keys = ['street_nb', 'street_nb_suf', 'street', 'zip_code'];
-        $address_has_changed = 0;
-
-        foreach($location_keys as $key)
-            if (
-                empty($_POST[$key]) != empty($user_data[$key])
-                or strtolower($_POST[$key]) != strtolower($user_data[$key])
-            )
-                $address_has_changed = 1;
-
-        return $address_has_changed;
-    }
-
     public static function getAPITimeout($uid) {
   /*
 

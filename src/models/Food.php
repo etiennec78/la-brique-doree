@@ -25,29 +25,6 @@ class Food {
         return $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
     }
 
-    public static function getByType($typeId) {
-  /*
-
-    INPUT :
-
-         (int) $typeId : variable representing the food type ID
-
-    OUTPUT :
-
-      (array) $foods : variable representing an array of food items belonging to the type
-
-
-    SUMMARY :
-
-    This function fetches all food items that belong to a specific food type ID.
-
-  */
-        global $pdo;
-        $stmt = $pdo->prepare("SELECT id, name, price, description, image_path FROM food f WHERE f.food_type = ?");
-        $stmt->execute([$typeId]);
-        return $stmt->fetchAll();
-    }
-
     public static function getAllergens($foodId) {
   /*
 
@@ -106,16 +83,5 @@ class Food {
         }
 
         return $foods;
-    }
-
-    public static function getAllWithMenuQuantities($menu_id) {
-      global $pdo;
-      $stmt = $pdo->prepare("
-      SELECT f.*, COALESCE(mf.quantity, 0) as quantity
-      FROM food f
-      LEFT JOIN menu_food mf ON f.id = mf.food_id AND mf.menu_id = ?
-      ");
-      $stmt->execute([$menu_id]);
-      return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
