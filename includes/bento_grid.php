@@ -1,4 +1,9 @@
 <?php
+
+/* Avoiding the undefined variable php warning */
+require_once __DIR__ . '/../src/models/Food.php';
+$food_types = Food::getTypes();
+
 /* Show a +/- button to edit the amout of items in cart */
 $is_editable = $is_editable ?? false;
 
