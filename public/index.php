@@ -41,6 +41,7 @@ $router->add('POST', 'assign_order', 'CookController', 'assignOrder');
 $router->add('POST', 'finish_takeaway', 'CookController', 'finishTakeaway');
 $router->add('POST', 'confirm_delivery', 'DeliveryController', 'confirmDelivery');
 $router->add('POST', 'cancel_delivery', 'DeliveryController', 'cancelDelivery');
+$router->add('POST', 'delete_menu', 'MenuEditorController', 'deleteMenu');
 $router->add('POST', 'update_menu', 'MenuEditorController', 'updateMenu');
 $router->add('POST', 'manage_food', 'MenuEditorController', 'manageFood');
 $router->add('POST', 'create_menu', 'MenuEditorController', 'createMenu');

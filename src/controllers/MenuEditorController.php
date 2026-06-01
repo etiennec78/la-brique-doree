@@ -124,6 +124,7 @@ class MenuEditorController extends Controller {
         require_once __DIR__ . '/../models/Menu.php';
 
         $menu_id = (int)$_POST['menu_id'];
+        $menu_id = (int)$_POST['menu_id'];
 
         // Add or remove foods from menu
         if (isset($_POST['action']) && isset($_POST['item_id'])) {
@@ -164,6 +165,27 @@ class MenuEditorController extends Controller {
             echo json_encode($response);
             exit();
         }
+
+        header("Location: /menu_editor");
+        exit();
+    }
+
+    public function deleteMenu() {
+        if (!isset($_SESSION['user'])) {
+            header('Location: /login');
+            exit();
+        }
+        $this->requireRole([2, 3]);
+        if (!isset($_POST['menu_id'])) {
+            $_SESSION['error'] = "Erreur : ID du menu manquant lors de la mise à jour.";
+            header('Location: /menu_editor');
+            exit();
+        }
+
+        require_once __DIR__ . '/../models/Menu.php';
+
+        $menu_id = (int)$_POST['menu_id'];
+        Menu::deleteMenu($menu_id);
 
         header("Location: /menu_editor");
         exit();

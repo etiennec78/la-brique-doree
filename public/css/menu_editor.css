@@ -8,11 +8,34 @@
     gap: 12px;
 }
 
+.menu .category-header .menu-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.menu .category-header .menu-actions form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.menu-actions-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.delete-menu-form {
+    display: none;
+}
+
 .edit-icon {
     width: 28px;
 }
 
-.save-btn {
+.save-btn,
+.delete-btn {
     display: inline-flex;
     width: 34px;
     height: 34px;
@@ -45,4 +68,11 @@ h5 {
 .basic-btn[onclick="location.href='/menu_editor'"] {
     margin: 25px; 
     text-align: left;
+}
+
+.delete-btn {
+    background: var(--red);
+}
+.delete-btn:hover {
+    background: var(--darkred);
 }

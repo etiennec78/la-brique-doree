@@ -58,15 +58,26 @@ $editing_menu = $editing_menu ?? null;
         <div class="category-header">
             <?php if ($menu_loop && !$merge_menu_items && $editing_menu == $menu['id']): ?>
                 <!-- inputs and floppy disk icon to save menu changes -->
-                <form action="/update_menu" method="post">
-                    <input type="hidden" name="menu_id" value="<?= $menu['id'] ?>">
-                    <input type="text" id="name" name="name" maxlength="30" value="<?= $menu['name'] ?>">
-                    <input type="number" id="price" name="price" step="0.01" value="<?= $cat_price_val ?>">
-                    <button type="submit" class="basic-btn save-btn">
-                        <img src="/assets/images/save.svg" alt="Modifier le menu" class="edit-icon">
-                    </button>
-                    <div class="subtitle"><input type="text" id="description" name="description" maxlength="255" value="<?= $menu['description'] ?>"></div>
-                </form>
+                <div class="menu-actions">
+                    <form action="/update_menu" method="post">
+                        <input type="hidden" name="menu_id" value="<?= $menu['id'] ?>">
+                        <div class="menu-actions-row">
+                            <input type="text" id="name" name="name" maxlength="30" value="<?= $menu['name'] ?>">
+                            <input type="number" id="price" name="price" step="0.01" value="<?= $cat_price_val ?>">
+                            <button type="submit" class="basic-btn save-btn">
+                                <img src="/assets/images/save.svg" alt="Modifier le menu" class="edit-icon">
+                            </button>
+                            <button type="submit" form="delete-menu-<?= $menu['id'] ?>" class="basic-btn save-btn delete-btn">
+                                <img src="/assets/images/delete.svg" alt="Supprimer le menu" class="edit-icon">
+                            </button>
+                        </div>
+                        <div class="subtitle"><input type="text" id="description" name="description" maxlength="255" value="<?= $menu['description'] ?>"></div>
+                    </form>
+                    <!-- delete button -->
+                    <form id="delete-menu-<?= $menu['id'] ?>" action="/delete_menu" method="post" class="delete-menu-form">
+                        <input type="hidden" name="menu_id" value="<?= $menu['id'] ?>">
+                    </form>
+                </div>
             <?php else: ?>
                 <!-- category title -->
                 <h2><?= $category_name ?></h2>

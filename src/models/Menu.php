@@ -143,4 +143,10 @@ class Menu {
         $stmt = $pdo->prepare("INSERT INTO menu (name, description, price) VALUES (?, ?, ?)");
         return $stmt->execute([$name, $description, $price]);
     }
+
+    public static function deleteMenu($menu_id) {
+        global $pdo;
+        $stmt = $pdo->prepare("DELETE FROM menu WHERE id = ?");
+        return $stmt->execute([$menu_id]);
+    }
 }
