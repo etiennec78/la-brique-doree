@@ -11,8 +11,12 @@ include __DIR__ . '/../includes/header.php';
             <div class="input-group">
                 <label for="name">Nom</label>
                 <input type="text" id="name" name="name" maxlength="30" required>
+            </div>
+            <div class="input-group">
                 <label for="description">Description</label>
                 <input type="text" id="description" name="description" maxlength="255" required>
+            </div>
+            <div class="input-group">
                 <label for="price">Prix</label>
                 <input type="number" id="price" name="price" step="0.01" required>
             </div>
