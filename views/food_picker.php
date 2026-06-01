@@ -29,5 +29,4 @@ $picker_menu_id = $menu_id;
         <?php include __DIR__ . '/../includes/bento_grid.php'; ?>
     </section>
 </main>
-
 <?php include __DIR__ . '/../includes/footer.php'; ?>

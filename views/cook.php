@@ -106,8 +106,3 @@ include __DIR__ . '/../includes/header.php';
             </div>
         </div>
     </main>
-<?php
-  if (isset($_SESSION['error'])){
-    unset($_SESSION['error']);
-  }
-?>

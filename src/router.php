@@ -72,6 +72,10 @@ class Router {
                 $controller = new $controllerName();
                 $controller->$actionName();
 
+                if (isset($_SESSION['error'])) {
+                    unset($_SESSION['error']);
+                }
+
                 return;
             }
         }

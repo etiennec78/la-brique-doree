@@ -56,8 +56,3 @@ include __DIR__ . '/../includes/header.php';
             <?php endforeach; ?>
         <?php endif; ?>
     </main>
-<?php
-  if (isset($_SESSION['error'])){
-    unset($_SESSION['error']);
-  }
-?>

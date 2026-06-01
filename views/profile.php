@@ -58,9 +58,4 @@ include __DIR__ . '/../includes/header.php';
             </form>
         </div>
     </main>
-<?php
-  if (isset($_SESSION['error'])){
-    unset($_SESSION['error']);
-  }
-  include __DIR__ . '/../includes/footer.php'; 
-?>
+<?php include __DIR__ . '/../includes/footer.php'; ?>

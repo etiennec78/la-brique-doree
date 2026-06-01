@@ -72,10 +72,4 @@ include __DIR__ . '/../includes/header.php';
             <button onclick="location.href='/order_history'" class="basic-btn">Historique des commandes</button>
         </div>
     </div>
-    </main>
-
-<?php
-  if (isset($_SESSION['error'])){
-    unset($_SESSION['error']);
-  }
-?>
+</main>
