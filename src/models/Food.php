@@ -126,7 +126,7 @@ class Food {
         $stmt->execute([$name, $food_type, $description, $price, $image_path]);
 
         // Link allergens
-        $id = $pdo->lastInsertId();
+        $food_id = $pdo->lastInsertId();
         if (!empty($allergen_ids)) {
             $stmtAllergen = $pdo->prepare("INSERT INTO food_allergen (food_id, allergen_id) VALUES (?, ?)");
 
