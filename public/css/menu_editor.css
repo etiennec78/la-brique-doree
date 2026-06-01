@@ -1,3 +1,4 @@
 .add-card {
     background-image: url(/assets/images/add.svg);
+    background-color: var(--lightgray);
 }
