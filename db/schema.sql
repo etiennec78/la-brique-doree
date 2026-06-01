@@ -9,7 +9,7 @@ INSERT INTO allergen (name) VALUES
 ('crustacean'), ('fish'), ('gluten'), ('milk'), ('sesame'), ('egg'), ('soy'), ('nut'), ('sulfite');
 
 
--- ------- NUTRISCORE, TIME_SLOT et FOOD_TYPE -------
+-- ------- TIME_SLOT and FOOD_TYPE -------
 
 CREATE TABLE nutriscore (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -74,7 +74,7 @@ INSERT INTO food (name, food_type, price, description, image_path) VALUES
 ('Dessert glacé', 3, 4.9, 'Alliance sucrée et rafraîchissante, pour les plus gourmands.', 'images/food/dessert/cupcakes_ice_cream.jpg'),
 ('Banane', 3, 0.9, 'Simple et naturellement sucrée, parfaite en dessert ou en encas.', 'images/food/dessert/banana.jpg');
 
--- Table de liaison pour les allergènes
+-- Linking table for allergenes
 CREATE TABLE food_allergen (
     food_id INT,
     allergen_id INT,
@@ -149,7 +149,7 @@ INSERT INTO menu (name, description, price, min_people, time_slot_id) VALUES
 ('Menu gourmand', 'Un menu pour les gourmands, arriverez-vous à le terminer ?', 19.9, 1, NULL),
 ('Menu doré', 'Un menu pour les palais les plus fins', 54.9, 1, 2);
 
--- Table de liaison entre Menu et Food
+-- Linking table between Menu and Food
 CREATE TABLE menu_food (
     menu_id INT,
     food_id INT,
@@ -179,7 +179,7 @@ INSERT INTO menu_food (menu_id, food_id, quantity) VALUES
 (4, 15, 1), -- Champagne
 (4, 16, 1); -- Plateau de fromages
 
--- ------- ROLES et USERS -------
+-- ------- ROLES and USERS -------
 
 CREATE TABLE role (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -226,7 +226,7 @@ CREATE TABLE coupon (
 );
 
 
--- ------- STATUTS (PAYMENTS AND DELIVERY) -------
+-- ------- STATUS (PAYMENTS AND DELIVERY) -------
 
 CREATE TABLE payment_status (
     id INT PRIMARY KEY AUTO_INCREMENT,
