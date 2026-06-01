@@ -11,14 +11,6 @@ INSERT INTO allergen (name) VALUES
 
 -- ------- TIME_SLOT and FOOD_TYPE -------
 
-CREATE TABLE nutriscore (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    name CHAR(1) UNIQUE NOT NULL
-);
-
-INSERT INTO nutriscore (name) VALUES
-('A'), ('B'), ('C'), ('D'), ('E');
-
 CREATE TABLE time_slot (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(7) UNIQUE NOT NULL
@@ -45,9 +37,7 @@ CREATE TABLE food (
     price FLOAT NOT NULL,
     description VARCHAR(255) NOT NULL,
     image_path VARCHAR(50) NOT NULL,
-    nutriscore_id INT,
-    FOREIGN KEY(food_type) REFERENCES food_type(id),
-    FOREIGN KEY(nutriscore_id) REFERENCES nutriscore(id)
+    FOREIGN KEY(food_type) REFERENCES food_type(id)
 );
 
 INSERT INTO food (name, food_type, price, description, image_path) VALUES
