@@ -70,8 +70,11 @@ $picker_target = $menu_editor ? 'menu' : 'panier'
             <!-- For each card to display in this category -->
             <?php foreach ($cards as $card): ?>
                 <?php
-                $price_val = floatval($card['price']);
-                $price_str = number_format($price_val, 2, ",");
+                $price_str = "";
+                if (!$menu_loop || $merge_menu_items) {
+                    $price_val = floatval($card['price']);
+                    $price_str = number_format($price_val, 2, ",") . '€';
+                }
                 $style = (!$menu_loop || !$merge_menu_items) ? 'flex: 1; background-image: url(/assets/' . htmlspecialchars($card['image_path']) . '); background-size: cover; background-position: center;' : '';
 
                 // Manage the food picker
@@ -86,7 +89,7 @@ $picker_target = $menu_editor ? 'menu' : 'panier'
                 <?php if ($link_url): ?>
                 <a href="<?= $link_url ?>" style="display: contents;">
                 <?php endif; ?>
-                <article class="description <?= $card['allergens_classes'] ?? '' ?>" description="<?= $card['description'] ?>" price="<?= $price_str ?>€" style="<?= $style ?>">
+                <article class="description <?= $card['allergens_classes'] ?? '' ?>" description="<?= $card['description'] ?>" price="<?= $price_str ?>" style="<?= $style ?>">
                     <h3><?= htmlspecialchars($card['name']) ?></h3>
 
                     <?php if ($is_editable && ( ($menu_editor && $menu_loop) || (!$menu_editor && (!$menu_loop || $merge_menu_items)) )): ?>
