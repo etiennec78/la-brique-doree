@@ -279,38 +279,3 @@ input {
 .logo {
   padding: 5px;
 }
-
-.chef-highlights {
-  max-width: 1200px;
-  margin: 60px auto;
-  padding: 0 40px;
-  text-align: center;
-}
-
-.chef-highlights h2 {
-  color: var(--solid-gold);
-  font-size: 2rem ;
-  margin-bottom: 10px;
-}
-
-.chef-highlights .chef-subtitle {
-  color: var(--offwhite);
-  font-style: italic;
-  margin-bottom: 45px;
-  font-size: 1.1rem;
-}
-
-.chef-highlights .bento {
-  display: grid;
-  justify-content: center;
-  justify-items: center;
-  width: 100%;
-  gap: 30px;
-}
-
-.chef-highlights .description {
-  width: 100%;
-  max-width: 340px; 
-  min-height: 300px;
-  position: relative;
-}
