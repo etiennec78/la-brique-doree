@@ -1,6 +1,6 @@
 .add-card {
     background-image: url(/assets/images/add.svg);
-    background-color: var(--lightgray);
+    background-color: var(--solid-gold);
 }
 
 .menu .category-header form {
