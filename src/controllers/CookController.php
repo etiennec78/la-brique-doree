@@ -144,10 +144,46 @@ class CookController extends Controller {
          *
          */
         $this->requireRole([2, 3]);
+        $this->render('menu_creator');
+    }
+
+    public function foodCreator() {
+        /*
+         *
+         *    INPUT :
+         *
+         *       None
+         *
+         *    OUTPUT :
+         *
+         *       None
+         *
+         *
+         *    SUMMARY :
+         *
+         *       Requires role level 2 or 3, displays a form to create a new food entry in the database from the values entered.
+         *
+         */
+        $this->requireRole([2, 3]);
+
+        require_once __DIR__ . '/../models/Food.php';
+
+        $food_types = Food::getTypes();
+        $allergens = Food::getAllAllergens();
+        $selected_food_type = $_GET['food_type'] ?? '';
+
+        if ($selected_food_type && $selected_food_type >= count($food_types)) {
+            $_SESSION['error'] = "Erreur : Le type de nourriture envoyé est invalide !";
+            header('Location: /menu_editor');
+            exit();
+        }
 
         $this->render(
-            'menu_creator',
+            'food_creator',
             [
+                'food_types' => $food_types,
+                'allergens' => $allergens,
+                'selected_food_type' => $selected_food_type
             ]
         );
     }
@@ -347,9 +383,26 @@ class CookController extends Controller {
 
         $name = isset($_POST['name']) ? $_POST['name'] : "Menu name";
         $description = isset($_POST['description']) ? $_POST['description'] : "No description";
-        $price = isset($_POST['price']) ? $_POST['price'] : 0;
+        $price = isset($_POST['price']) ? $_POST['price'] : 100;
 
         Menu::createMenu($name, $description, $price);
+
+        header('Location: /menu_editor');
+        exit;
+    }
+
+    public function createFood() {
+        require_once __DIR__ . '/../models/Food.php';
+
+        $this->requireRole([2, 3], true);
+
+        $name = isset($_POST['name']) ? $_POST['name'] : "Menu name";
+        $food_type = isset($_POST['food_type']) && $_POST['food_type'] != '' ? $_POST['food_type'] : 1;
+        $description = isset($_POST['description']) ? $_POST['description'] : "No description";
+        $price = isset($_POST['price']) ? $_POST['price'] : 100;
+        $image_path = isset($_POST['image_path']) ? $_POST['image_path'] : "/images/unknown.svg";
+
+        Food::createFood($name, $food_type, $description, $price, $image_path);
 
         header('Location: /menu_editor');
         exit;

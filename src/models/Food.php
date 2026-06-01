@@ -54,6 +54,33 @@ class Food {
     }
 
 
+    public static function getAllAllergens() {
+  /*
+
+    INPUT :
+
+         None
+
+    OUTPUT :
+
+      (array) $allergens : variable representing a sequential array of allergen names
+
+
+    SUMMARY :
+
+    This function retrieves the list of all allergens from the database.
+
+    */
+        global $pdo;
+        $stmt = $pdo->prepare("
+          SELECT a.name
+          FROM allergen a
+        ");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
+
+
     public static function getAll() {
   /*
 
@@ -83,5 +110,22 @@ class Food {
         }
 
         return $foods;
+    }
+
+    public static function createFood($name, $food_type, $description, $price, $image_path, $allergen_ids = []) {
+        global $pdo;
+        // Insert the new food
+        $stmt = $pdo->prepare("INSERT INTO food (name, food_type, description, price, image_path) VALUES (?, ?, ?, ?, ?)");
+        $stmt->execute([$name, $food_type, $description, $price, $image_path]);
+
+        // Link allergens
+        $id = $pdo->lastInsertId();
+        if (!empty($allergen_ids)) {
+            $stmtAllergen = $pdo->prepare("INSERT INTO food_allergen (food_id, allergen_id) VALUES (?, ?)");
+
+            foreach ($allergen_ids as $allergen_id) {
+                $stmtAllergen->execute([$food_id, $allergen_id]);
+            }
+        }
     }
 }
