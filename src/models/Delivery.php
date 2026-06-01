@@ -92,4 +92,30 @@ class Delivery {
 
         return $url;
     }
+
+    public static function setOrderDeliverypersonAsAdmin($order_id) {
+  /*
+
+    INPUT :
+
+         (int) $order_id : variable representing an order ID
+
+    OUTPUT :
+
+      none
+
+
+    SUMMARY :
+
+    This function sets the delivery person ID of a specific order to NULL, effectively setting it as an admin order in order history.
+
+  */
+        global $pdo;
+        $stmt = $pdo->prepare("
+            UPDATE orders
+            SET delivery_person_id = NULL
+            WHERE id = ?
+        ");
+        $stmt->execute([$order_id]);
+    }
 }

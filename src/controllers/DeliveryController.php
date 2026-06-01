@@ -105,19 +105,27 @@ class DeliveryController extends Controller {
           
          SUMMARY :
             
-            Requires role level 4, marks a designated shipment identifier as delivered based on POST inputs, assigns backup requests if the driver queue clears out, and sends redirection responses.
+            Requires role level 3 or 4, marks a designated shipment identifier as delivered based on POST inputs, assigns backup requests if the driver queue clears out, and sends redirection responses.
 
         */
-        $this->requireRole(4);
+        $this->requireRole([3, 4]);
         require_once __DIR__ . '/../models/Order.php';
         require_once __DIR__ . '/../models/Delivery.php';
 
         if (isset($_POST['order_id'])) {
             $order_id = $_POST['order_id'];
             $uid = $_SESSION['user']['id'];
+            $is_admin = ($_SESSION['user']['role_id'] == 3);
 
-            Order::setDeliveredStatus($order_id);
-            $this->assignNextDeliveriesIfEmpty($uid);
+            if (!$is_admin) {
+                Order::setDeliveredStatus($order_id);
+                $this->assignNextDeliveriesIfEmpty($uid);
+            }
+
+            else {
+                Delivery::setOrderDeliverypersonAsAdmin($order_id);
+                Order::setDeliveredStatus($order_id);
+            }
         }
 
         header('Location: /delivery');
@@ -138,19 +146,26 @@ class DeliveryController extends Controller {
           
          SUMMARY :
             
-            Requires role level 4, cancels an ongoing transit item derived from POST parameters, shifts next tasks into the active queue when required, and forces location adjustments.
+            Requires role level 3 or 4, cancels an ongoing transit item derived from POST parameters, shifts next tasks into the active queue when required, and forces location adjustments.
 
         */
-        $this->requireRole(4);
+        $this->requireRole([3, 4]);
         require_once __DIR__ . '/../models/Order.php';
         require_once __DIR__ . '/../models/Delivery.php';
 
         if (isset($_POST['order_id'])) {
             $order_id = $_POST['order_id'];
             $uid = $_SESSION['user']['id'];
-            
-            Order::cancelDelivery($order_id, $uid);
-            $this->assignNextDeliveriesIfEmpty($uid);
+            $is_admin = ($_SESSION['user']['role_id'] == 3);
+
+            if (!$is_admin) {
+                Order::cancelDelivery($order_id, $uid);
+                $this->assignNextDeliveriesIfEmpty($uid);
+            }
+
+            else {
+                Order::cancelDelivery($order_id, $uid);
+            }
         }
 
         header('Location: /delivery');
