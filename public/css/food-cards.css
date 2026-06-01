@@ -1,6 +1,6 @@
 :root {
   --card-height: 200px;
-  --card-title-height: 38px;
+  --card-title-height: 58px;
 }
 
 article {
@@ -50,6 +50,11 @@ article h3 {
   content: attr(description);
   position: absolute;
   bottom: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding-inline: 20px;
+  justify-content: center;
   height: 0;
   filter: saturate(50%);
   backdrop-filter: blur(5px);
@@ -229,11 +234,12 @@ article > form > .add-to-cart:active {
 }
 
 .description h3 {
-    font-size: 1.5rem;
-    line-height: 1.3;
+    box-sizing: border-box;
+    font-size: 1.4rem;
+    line-height: 1.2;
     margin: 0;
-    padding: 6px;
-    padding-bottom: 12px;
+    padding-top: 4px;
+    padding-bottom: 4px;
     padding-right: 80px;
     padding-left: 40px;
 }
