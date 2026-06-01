@@ -51,7 +51,7 @@ $editing_menu = $editing_menu ?? null;
 
     <div class="category <?= $merge_menu_items ? '' : 'gray-container' ?>">
         <div class="category-header">
-            <?php if ($editing_menu == $menu['id']): ?>
+            <?php if ($menu_loop && !$merge_menu_items && $editing_menu == $menu['id']): ?>
                 <!-- inputs and floppy disk icon to save menu changes -->
                 <form action="/update_menu" method="post">
                     <input type="hidden" name="menu_id" value="<?= $menu['id'] ?>">
