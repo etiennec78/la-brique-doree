@@ -126,7 +126,7 @@ class Food {
         $stmt->execute([$name, $food_type, $description, $price, $image_path]);
 
         // Link allergens
-        $id = $pdo->lastInsertId();
+        $food_id = $pdo->lastInsertId();
         if (!empty($allergen_ids)) {
             $stmtAllergen = $pdo->prepare("INSERT INTO food_allergen (food_id, allergen_id) VALUES (?, ?)");
 
@@ -134,5 +134,28 @@ class Food {
                 $stmtAllergen->execute([$food_id, $allergen_id]);
             }
         }
+    }
+
+    public static function editFood($food_id, $name, $food_type, $description, $price, $image_path, $allergen_ids = []) {
+      global $pdo;
+      // Edit the food
+      $stmt = $pdo->prepare("
+          UPDATE food
+          SET name=?, food_type=?, description=?, price=?, image_path=?
+          WHERE id = ?
+      ");
+      $stmt->execute([$name, $food_type, $description, $price, $image_path, $food_id]);
+
+      // Replace allergen links for this food
+      $stmt = $pdo->prepare("DELETE FROM food_allergen WHERE food_id = ?");
+      $stmt->execute([$food_id]);
+
+      if (!empty($allergen_ids)) {
+        $stmt = $pdo->prepare("INSERT INTO food_allergen (food_id, allergen_id) VALUES (?, ?)");
+
+        foreach ($allergen_ids as $allergen_id) {
+          $stmt->execute([$food_id, $allergen_id]);
+        }
+      }
     }
 }
