@@ -70,21 +70,18 @@ class Menu {
     private static function removeFood($menu_id, $food_id) {
         global $pdo;
         $stmt = $pdo->prepare("DELETE FROM menu_food WHERE menu_id = ? AND food_id = ?");
-        error_log("DELETE FROM menu_food WHERE menu_id = $menu_id AND food_id = $food_id");
         return $stmt->execute([$menu_id, $food_id]);
     }
 
     private static function incrementFoodQuantity($menu_id, $food_id) {
         global $pdo;
         $stmt = $pdo->prepare("UPDATE menu_food SET quantity = quantity + 1 WHERE menu_id = ? AND food_id = ?");
-        error_log("UPDATE menu_food SET quantity = quantity + 1 WHERE menu_id = $menu_id AND food_id = $food_id");
         return $stmt->execute([$menu_id, $food_id]);
     }
 
     private static function decrementFoodQuantity($menu_id, $food_id) {
         global $pdo;
         $stmt = $pdo->prepare("UPDATE menu_food SET quantity = quantity - 1 WHERE menu_id = ? AND food_id = ?");
-        error_log("UPDATE menu_food SET quantity = quantity - 1 WHERE menu_id = $menu_id AND food_id = $food_id");
         return $stmt->execute([$menu_id, $food_id]);
     }
 
