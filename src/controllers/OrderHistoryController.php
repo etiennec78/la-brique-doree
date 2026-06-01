@@ -86,6 +86,12 @@ class OrderHistoryController extends Controller {
         $order['total_price'] *= (1 - $reduction);
       }
 
+      // Get the applied global reduction
+      $order['global_reduction'] = Coupon::getGlobalReductionFromCart($order['cart_id']);
+      if ($order['global_reduction'] != 0) {
+        $order['total_price'] *= (1 - $order['global_reduction']);
+      }
+
       // Get previous and next order ids
       $index = array_search($order_id, $order_ids);
       if ($index !== false) {

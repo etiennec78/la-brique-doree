@@ -26,15 +26,15 @@ INSERT INTO coupon (code, discount_percent, expiration_date) VALUES
 
 ----- CART -----
 
-INSERT INTO cart (user_id, payment_status_id, created_at, coupon_id) VALUES
+INSERT INTO cart (user_id, payment_status_id, created_at, coupon_id, global_reduction) VALUES
 -- paid carts
-(1, 2, '2026-03-28 22:30:00.000000', 1),
-(2, 2, '2026-03-28 22:30:00.000000', NULL),
-(3, 2, '2026-03-28 22:30:00.000000', NULL),
-(4, 2, '2026-03-28 22:30:00.000000', NULL),
+(1, 2, '2026-03-28 22:30:00.000000', 1, 0.0),
+(2, 2, '2026-03-28 22:30:00.000000', NULL, 0.0),
+(3, 2, '2026-03-28 22:30:00.000000', NULL, 0.0),
+(4, 2, '2026-03-28 22:30:00.000000', NULL, 0.0),
 -- pending carts
-(2, 1, '2026-03-28 22:30:00.000000', NULL),
-(1, 1, '2026-03-28 22:30:00.000000', NULL);
+(2, 1, '2026-03-28 22:30:00.000000', NULL, 0.0),
+(1, 1, '2026-03-28 22:30:00.000000', NULL, 0.0);
 
 INSERT INTO cart_menu (cart_id, menu_id, quantity) VALUES
 (1, 1, 9),

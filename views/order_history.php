@@ -30,6 +30,9 @@ include __DIR__ . '/../includes/header.php';
             <?php if ($order['coupon'] != null): ?>
                 <p>Code utilisé : <?= $order['coupon']['code'] ?> (-<?= (100 * $order['coupon']['discount_percent']) ?>%)</p>
             <?php endif; ?>
+            <?php if ($order['global_reduction'] != 0): ?>
+                <p>Réduction globale : (-<?= (100 * $order['global_reduction']) ?>%)</p>
+            <?php endif; ?>
             <p>Prix total : <?= number_format($order['total_price'], 2, ",") ?>€</p>
 
             <section class="items-container">

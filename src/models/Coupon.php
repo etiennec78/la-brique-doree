@@ -25,6 +25,33 @@ class Coupon {
         $stmt->execute([$coupon_id, $cart_id]);
     }
 
+    public static function addGlobalReductionToCart($user_id, $cart_id) {
+  /*
+
+    INPUT :
+
+         (int) $user_id : variable representing the user ID
+     (int) $cart_id : variable representing the cart ID
+
+    OUTPUT :
+
+      None
+
+
+    SUMMARY :
+
+    This function associates the user's global reduction with a given cart by updating the cart record.
+
+  */
+        global $pdo;
+        $stmt = $pdo->prepare("
+          UPDATE cart 
+          SET global_reduction = (SELECT global_reduction FROM users WHERE id = ?) 
+          WHERE id = ?
+        ");
+        $stmt->execute([$user_id, $cart_id]);
+    }
+
     public static function getCoupon($coupon) {
   /*
 
@@ -74,5 +101,33 @@ class Coupon {
       ");
       $stmt->execute([$cart_id]);
       return $stmt->fetch();
+    }
+
+    public static function getGlobalReductionFromCart($cart_id) {
+  /*
+
+    INPUT :
+
+         (int) $cart_id : variable representing the cart ID
+
+    OUTPUT :
+
+      (float) $reduction : variable representing the global reduction attached to the cart
+
+
+    SUMMARY :
+
+    This function retrieves the global reduction applied to a specific cart ID.
+
+  */
+      global $pdo;
+      $stmt = $pdo->prepare("
+        SELECT global_reduction
+        FROM cart
+        WHERE id = ?
+      ");
+      $stmt->execute([$cart_id]);
+      $reduction = $stmt->fetchColumn();
+      return $reduction !== false ? (float)$reduction : 0.0;
     }
 }

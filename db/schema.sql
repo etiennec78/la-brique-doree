@@ -199,7 +199,7 @@ CREATE TABLE users (
     latitude FLOAT DEFAULT NULL,
     longitude FLOAT DEFAULT NULL,
     intercom_code VARCHAR(50),
-    global_reduction FLOAT NOT NULL DEFAULT 0,
+    global_reduction FLOAT NOT NULL DEFAULT 0.0,
     last_api_call DATETIME NOT NULL DEFAULT 0,
     successive_api_calls INT NOT NULL DEFAULT 0,
     FOREIGN KEY(role_id) REFERENCES role(id)
@@ -243,6 +243,7 @@ CREATE TABLE cart (
     payment_status_id INT,
     created_at DATETIME NOT NULL,
     coupon_id INT,
+    global_reduction FLOAT NOT NULL DEFAULT 0.0,
     FOREIGN KEY(payment_status_id) REFERENCES payment_status(id),
     FOREIGN KEY(user_id) REFERENCES users(id),
     FOREIGN KEY(coupon_id) REFERENCES coupon(id)

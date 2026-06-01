@@ -99,6 +99,7 @@ class OrdersController extends Controller {
         if ($global_reduction != 0) {
             $cart_details[] = "Réduction globale ". ($global_reduction * 100) . "% (-". number_format($total_price * $global_reduction, 2, '.', '') ."€)";
             $total_price *= (1 - $global_reduction);
+            Coupon::addGlobalReductionToCart($uid, $cart_id);
         }
 
         $montant_cybank = number_format($total_price, 2, '.', '');
