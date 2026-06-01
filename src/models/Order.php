@@ -54,7 +54,7 @@ class Order {
                 deliv.first_name AS delivery_first_name,
                 deliv.last_name AS delivery_last_name
             FROM orders o
-            JOIN users u ON o.customer_id = u.id
+            JOIN users u ON o.user_id = u.id
             JOIN order_status os ON o.order_status_id = os.id
             LEFT JOIN users deliv ON o.delivery_person_id = deliv.id
             WHERE os.name IN ($placeholders)
@@ -85,7 +85,7 @@ class Order {
         $stmt = $pdo->prepare("
             SELECT o.id
             FROM orders o
-            WHERE o.customer_id = ? AND o.order_status_id = 5
+            WHERE o.user_id = ? AND o.order_status_id = 5
             ORDER BY o.id DESC
         ");
         $stmt->execute([$uid]);
@@ -286,7 +286,7 @@ class Order {
             SELECT o.id as order_id, r.id as review_id, o.is_takeaway
             FROM orders o
             LEFT JOIN reviews r ON r.order_id = o.id
-            WHERE o.customer_id = ?
+            WHERE o.user_id = ?
             ORDER BY o.id DESC
             LIMIT 1
         ");
@@ -318,13 +318,13 @@ class Order {
         return $stmt->fetch();
     }
 
-    public static function createOrder($cart_id, $customer_id, $order_status_id, $cook_id, $is_takeaway, $takeaway_time) {
+    public static function createOrder($cart_id, $user_id, $order_status_id, $cook_id, $is_takeaway, $takeaway_time) {
   /*
 
     INPUT :
 
          (int) $cart_id : variable representing the cart ID
-     (int) $customer_id : variable representing the customer user ID
+     (int) $user_id : variable representing the customer user ID
      (int|null) $cook_id : variable representing the cook user ID
      (int) $order_status_id : variable representing the order status ID
      (int|bool) $is_takeaway : variable representing whether the order is takeaway
@@ -344,10 +344,10 @@ class Order {
         $cook_assigned_at = $cook_id == null ? "NULL" : "NOW()";
 
         $stmt = $pdo->prepare("
-            INSERT INTO orders (cart_id, customer_id, cook_id, order_status_id, is_takeaway, takeaway_time, cook_assigned_at)
+            INSERT INTO orders (cart_id, user_id, cook_id, order_status_id, is_takeaway, takeaway_time, cook_assigned_at)
             VALUES (?, ?, ?, ?, ?, ?, $cook_assigned_at)
         ");
-        $stmt->execute([$cart_id, $customer_id, $cook_id, $order_status_id, $is_takeaway, $takeaway_time]);
+        $stmt->execute([$cart_id, $user_id, $cook_id, $order_status_id, $is_takeaway, $takeaway_time]);
         return $pdo->lastInsertId();
     }
 
@@ -441,7 +441,7 @@ class Order {
             SELECT o.id, os.id as status, o.cook_id, o.delivery_person_id, o.is_takeaway
             FROM order_status os
             JOIN orders o on o.order_status_id = os.id
-            WHERE o.customer_id = ? AND (os.id < 5 $force_sql)
+            WHERE o.user_id = ? AND (os.id < 5 $force_sql)
             ORDER BY o.id DESC
         ");
         $stmt->execute($params);
@@ -472,7 +472,7 @@ class Order {
             SELECT o.id, os.id as status
             FROM order_status os
             JOIN orders o on o.order_status_id = os.id
-            WHERE o.customer_id = ? AND o.id IN ($inQuery)
+            WHERE o.user_id = ? AND o.id IN ($inQuery)
         ");
         $params = array_merge([$uid], $order_ids);
         $stmt->execute($params);

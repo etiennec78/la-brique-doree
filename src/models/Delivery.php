@@ -23,7 +23,7 @@ class Delivery {
         $stmt = $pdo->prepare("
             SELECT o.id, u.first_name, u.last_name, u.street_nb, u.street_nb_suf, u.street, u.town, u.zip_code, u.intercom_code, u.latitude, u.longitude
             FROM orders o
-            LEFT JOIN users u ON o.customer_id = u.id
+            LEFT JOIN users u ON o.user_id = u.id
             JOIN order_status os ON os.id = o.order_status_id
             WHERE o.delivery_person_id = ? AND os.name = 'shipping'
         ");
@@ -52,7 +52,7 @@ class Delivery {
         $stmt = $pdo->prepare("
             SELECT u.latitude, u.longitude
             FROM orders o
-            JOIN users u ON o.customer_id = u.id
+            JOIN users u ON o.user_id = u.id
             JOIN order_status os ON os.id = o.order_status_id
             WHERE o.delivery_person_id = ? AND os.name = 'shipping'
         ");

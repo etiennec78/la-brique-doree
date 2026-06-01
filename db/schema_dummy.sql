@@ -53,7 +53,7 @@ INSERT INTO cart_food (cart_id, food_id, quantity) VALUES
 (6, 10, 1),
 (6, 12, 1);
 
-INSERT INTO orders (cart_id, customer_id, cook_id, delivery_person_id, order_status_id, is_takeaway, takeaway_time, cook_assigned_at) VALUES
+INSERT INTO orders (cart_id, user_id, cook_id, delivery_person_id, order_status_id, is_takeaway, takeaway_time, cook_assigned_at) VALUES
 -- finished orders (for reviews)
 (1, 1, 2, 4, 5, FALSE, NULL, NULL),
 (2, 2, 2, 4, 5, FALSE, NULL, NULL),

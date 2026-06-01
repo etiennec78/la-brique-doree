@@ -70,7 +70,7 @@ class User {
         $stmt = $pdo->prepare("
             SELECT u.id, u.email, u.first_name, u.last_name, u.global_reduction, u.banned, r.name AS role, COUNT(o.id) as orders
             FROM users u
-            LEFT JOIN orders o on u.id = o.customer_id
+            LEFT JOIN orders o on u.id = o.user_id
             LEFT JOIN role r ON u.role_id = r.id
             GROUP BY u.id, u.email, u.first_name, u.last_name, r.name
         ");
