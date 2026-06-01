@@ -75,7 +75,6 @@ class OrderTrackingController extends Controller {
     $uid = $_SESSION['user']['id'];
     
     header('Content-Type: application/json');
-    exit();
 
     if (isset($_GET['ids'])) {
         $ids = explode(',', $_GET['ids']);
