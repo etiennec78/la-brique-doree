@@ -126,6 +126,32 @@ class CookController extends Controller {
         );
     }
 
+    public function menuCreator() {
+        /*
+         *
+         *    INPUT :
+         *
+         *       None
+         *
+         *    OUTPUT :
+         *
+         *       None
+         *
+         *
+         *    SUMMARY :
+         *
+         *       Requires role level 2 or 3, displays a form to create a new menu in the database from the values entered.
+         *
+         */
+        $this->requireRole([2, 3]);
+
+        $this->render(
+            'menu_creator',
+            [
+            ]
+        );
+    }
+
     public function assignOrder() {
         /*
             
@@ -312,5 +338,20 @@ class CookController extends Controller {
     public function foodPicker() {
         $this->requireRole([2, 3]);
         $this->render('food_picker', []);
+    }
+
+    public function createMenu() {
+        require_once __DIR__ . '/../models/Menu.php';
+
+        $this->requireRole([2, 3], true);
+
+        $name = isset($_POST['name']) ? $_POST['name'] : "Menu name";
+        $description = isset($_POST['description']) ? $_POST['description'] : "No description";
+        $price = isset($_POST['price']) ? $_POST['price'] : 0;
+
+        Menu::createMenu($name, $description, $price);
+
+        header('Location: /menu_editor');
+        exit;
     }
 }

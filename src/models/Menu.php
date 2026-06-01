@@ -137,4 +137,10 @@ class Menu {
         }
         return true;
     }
+
+    public static function createMenu($name, $description, $price) {
+        global $pdo;
+        $stmt = $pdo->prepare("INSERT INTO menu (name, description, price) VALUES (?, ?, ?)");
+        return $stmt->execute([$name, $description, $price]);
+    }
 }

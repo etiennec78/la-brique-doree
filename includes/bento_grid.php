@@ -60,12 +60,12 @@ $editing_menu = $editing_menu ?? null;
                 <!-- inputs and floppy disk icon to save menu changes -->
                 <form action="/update_menu" method="post">
                     <input type="hidden" name="menu_id" value="<?= $menu['id'] ?>">
-                    <input type="text" id="name" name="name" value="<?= $menu['name'] ?>">
+                    <input type="text" id="name" name="name" maxlength="30" value="<?= $menu['name'] ?>">
                     <input type="number" id="price" name="price" step="0.01" value="<?= $cat_price_val ?>">
                     <button type="submit" class="basic-btn save-btn">
                         <img src="/assets/images/save.svg" alt="Modifier le menu" class="edit-icon">
                     </button>
-                    <div class="subtitle"><input type="text" id="description" name="description" value="<?= $menu['description'] ?>"></div>
+                    <div class="subtitle"><input type="text" id="description" name="description" maxlength="255" value="<?= $menu['description'] ?>"></div>
                 </form>
             <?php else: ?>
                 <!-- category title -->
@@ -173,3 +173,12 @@ $editing_menu = $editing_menu ?? null;
     </div>
 
 <?php endfor; ?>
+<?php if ($menu_editor): ?>
+    <div class="category">
+        <div class="items-grid">
+            <a href="/menu_creator">
+                <article class="add-card"></article>
+            </a>
+        </div>
+    </dib>
+<?php endif; ?>

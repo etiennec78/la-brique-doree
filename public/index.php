@@ -27,6 +27,7 @@ $router->add('GET', 'products', 'ProductsController', 'index');
 $router->add('GET', 'profile', 'ProfileController', 'index');
 $router->add('GET', 'cook', 'CookController', 'index');
 $router->add('GET', 'menu_editor', 'CookController', 'menuEditor');
+$router->add('GET', 'menu_creator', 'CookController', 'menuCreator');
 $router->add('GET', 'api_cook', 'CookController', 'apiCookGetPending');
 $router->add('GET', 'reviews', 'ReviewsController', 'index');
 
@@ -36,6 +37,7 @@ $router->add('POST', 'api_ban_user', 'AdminController', 'apiBanUser');
 $router->add('POST', 'register', 'AuthController', 'processRegister');
 $router->add('POST', 'login', 'AuthController', 'processLogin');
 $router->add('POST', 'update_menu', 'CookController', 'updateMenu');
+$router->add('POST', 'create_menu', 'CookController', 'createMenu');
 $router->add('POST', 'confirm_delivery', 'DeliveryController', 'confirmDelivery');
 $router->add('POST', 'cancel_delivery', 'DeliveryController', 'cancelDelivery');
 $router->add('POST', 'set_delivery_type', 'OrdersController', 'setDeliveryType');
