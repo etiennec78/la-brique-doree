@@ -111,8 +111,8 @@ $editing_menu = $editing_menu ?? null;
                 $link_url = null;
                 if ($is_picker) {
                     $link_url = "/add_menu_food?menu_id=" . $picker_menu_id . "&food_id=" . $card['id'];
-                } elseif ($menu_editor && !($menu_loop && !$merge_menu_items)) {
-                    $link_url = "/food_creator?type=" . ($menu_loop ? 'menu' : 'food') . "&id=" . ($menu_loop ? $menu['id'] : $card['id']);
+                } elseif ($menu_editor && !$menu_loop) {
+                    $link_url = "/food_creator?edit_id=" . $card['id'];
                 }
                 ?>
 

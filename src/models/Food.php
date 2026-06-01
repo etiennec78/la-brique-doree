@@ -2,6 +2,13 @@
 require_once __DIR__ . '/../db_connect.php';
 
 class Food {
+    public static function getById($food_id) {
+        global $pdo;
+        $stmt = $pdo->prepare("SELECT * FROM food WHERE id = ?");
+        $stmt->execute([$food_id]);
+        return $stmt->fetch();
+    }
+
     public static function getTypes() {
   /*
 
