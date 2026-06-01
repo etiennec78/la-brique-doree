@@ -65,6 +65,7 @@ $editing_menu = $editing_menu ?? null;
                     <button type="submit" class="basic-btn save-btn">
                         <img src="/assets/images/save.svg" alt="Modifier le menu" class="edit-icon">
                     </button>
+                    <div class="subtitle"><input type="text" id="description" name="description" value="<?= $menu['description'] ?>"></div>
                 </form>
             <?php else: ?>
                 <!-- category title -->
@@ -74,15 +75,16 @@ $editing_menu = $editing_menu ?? null;
                     <a href="?edit=<?= $menu['id'] ?>" title="Modifier le menu">
                         <img src="/assets/images/pencil.svg" alt="Modifier le menu" class="edit-icon">
                     </a>
+                    <div class="subtitle"><h5><?= $menu['description'] ?></h5></div>
                 <?php endif; ?>
             <?php endif; ?>
 
-            <?php if ($menu_loop): ?>
-                <?php if ($is_editable && !$merge_menu_items && !$menu_editor): ?>
+            <?php if ($menu_loop && !$merge_menu_items): ?>
+                <?php if ($is_editable && !$menu_editor): ?>
                     <!-- +/- button to add or remove menus from the cart -->
                     <form method="POST" action="/update_cart" style="display:inline; margin:0; padding:0;">
                         <input type="hidden" name="item_id" value="<?= $menu['id'] ?>">
-                        <input type="hidden" name="item_type" value="<?= $menu_loop ? 'menu' : 'food'?>">
+                        <input type="hidden" name="item_type" value="menu">
                         <div class="nb-selector">
                             <button type="submit" name="action" value="set" style="display: none;"></button>
                             <button class="remove-from-cart" type="submit" name="action" value="remove" aria-label="Retirer du <?= $picker_target ?>">-</button>
@@ -119,7 +121,6 @@ $editing_menu = $editing_menu ?? null;
                 <?php endif; ?>
                 <article class="description <?= $card['allergens_classes'] ?? '' ?>" description="<?= $card['description'] ?>" price="<?= $price_str ?>" style="<?= $style ?>">
                     <h3><?= htmlspecialchars($card['name']) ?></h3>
-
                     <?php if ($is_editable && ( ($menu_editor && $menu_loop) || (!$menu_editor && (!$menu_loop || $merge_menu_items)) )): ?>
                         <?php if ($item_selector_type === 'plus_minus'): ?>
                             <!-- +/- button for cart items -->

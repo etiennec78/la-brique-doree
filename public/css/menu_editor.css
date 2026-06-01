@@ -20,3 +20,20 @@
     padding: 0;
     margin: 0;
 }
+
+.category-header form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.category-header .subtitle {
+    order: 2;
+    width: 100%;
+    margin: 0;
+    text-align: center;
+}
+
+.category-header .subtitle input {
+    width: 100%;
+}

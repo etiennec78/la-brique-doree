@@ -192,6 +192,7 @@ article > form > .add-to-cart:active {
   justify-content: center;
   gap: 20px;
   margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
 .category-header h2 {

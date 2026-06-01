@@ -268,6 +268,11 @@ class CookController extends Controller {
             Menu::updateName($menu_id, $_POST['name']);
         }
 
+        // Change the description of the menu
+        if (isset($_POST['description'])) {
+            Menu::updateDescription($menu_id, $_POST['description']);
+        }
+
         // Change the price of the menu
         if (isset($_POST['price'])) {
             Menu::updatePrice($menu_id, $_POST['price']);

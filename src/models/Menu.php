@@ -97,6 +97,12 @@ class Menu {
         return $stmt->execute([$name, $menu_id]);
     }
 
+    public static function updateDescription($menu_id, $description) {
+        global $pdo;
+        $stmt = $pdo->prepare("UPDATE menu SET description = ? WHERE id = ?");
+        return $stmt->execute([$description, $menu_id]);
+    }
+
     public static function updatePrice($menu_id, $price) {
         global $pdo;
         $stmt = $pdo->prepare("UPDATE menu SET price = ? WHERE id = ?");
