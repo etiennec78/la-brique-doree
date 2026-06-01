@@ -11,15 +11,6 @@
   width: 75px;
 }
 
-#street_nb_suf {
-  padding: 10px;
-  border-radius: 5px;
-  border: none;
-  background-color: var(--input-color);
-  color: var(--text-on-bg);
-  font-family: inherit;
-}
-
 .alert-btn {
   background: var(--red);
 }

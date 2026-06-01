@@ -32,6 +32,7 @@
     border-radius: 3px;
     color: var(--text-on-bg);
     background: var(--input-color);
+    background-color: var(--input-color);
 }
 
 .basic-btn {
