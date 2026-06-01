@@ -172,7 +172,7 @@ class CookController extends Controller {
         $allergens = Food::getAllAllergens();
         $selected_food_type = $_GET['food_type'] ?? '';
 
-        if ($selected_food_type && $selected_food_type >= count($food_types)) {
+        if ($selected_food_type && $selected_food_type > count($food_types)) {
             $_SESSION['error'] = "Erreur : Le type de nourriture envoyé est invalide !";
             header('Location: /menu_editor');
             exit();
