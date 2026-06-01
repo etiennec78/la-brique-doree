@@ -114,6 +114,7 @@ class MenuEditorController extends Controller {
             header('Location: /login');
             exit();
         }
+        $this->requireRole([2, 3]);
         if (!isset($_POST['menu_id'])) {
             $_SESSION['error'] = "Erreur : ID du menu manquant lors de la mise à jour.";
             header('Location: /menu_editor');
