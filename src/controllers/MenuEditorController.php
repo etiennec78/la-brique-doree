@@ -79,6 +79,7 @@ class MenuEditorController extends Controller {
         $allergens = Food::getAllAllergens();
         $edit_id = $_GET['edit_id'] ?? null;
         $selected_food_type = $_GET['food_type'] ?? '';
+        $edit_mode = false;
 
         $defaults = [];
         if ($edit_id) {
@@ -100,6 +101,7 @@ class MenuEditorController extends Controller {
         $this->render(
             'food_creator',
             [
+                'edit_id' => $edit_id,
                 'food_types' => $food_types,
                 'allergens' => $allergens,
                 'defaults' => $defaults
@@ -202,18 +204,23 @@ class MenuEditorController extends Controller {
         exit;
     }
 
-    public function createFood() {
+    public function manageFood() {
         require_once __DIR__ . '/../models/Food.php';
 
         $this->requireRole([2, 3], true);
 
+        $edit_id = isset($_POST['edit_id']) ? $_POST['edit_id'] : null;
         $name = isset($_POST['name']) ? $_POST['name'] : "Menu name";
         $food_type = isset($_POST['food_type']) && $_POST['food_type'] != '' ? $_POST['food_type'] : 1;
         $description = isset($_POST['description']) ? $_POST['description'] : "No description";
         $price = isset($_POST['price']) ? $_POST['price'] : 100;
         $image_path = isset($_POST['image_path']) ? $_POST['image_path'] : "/images/unknown.svg";
 
-        Food::createFood($name, $food_type, $description, $price, $image_path);
+        if ($edit_id) {
+            Food::editFood($edit_id, $name, $food_type, $description, $price, $image_path);
+        } else {
+            Food::createFood($name, $food_type, $description, $price, $image_path);
+        }
 
         header('Location: /menu_editor');
         exit;

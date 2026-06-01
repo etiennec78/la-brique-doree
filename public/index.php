@@ -42,7 +42,7 @@ $router->add('POST', 'finish_takeaway', 'CookController', 'finishTakeaway');
 $router->add('POST', 'confirm_delivery', 'DeliveryController', 'confirmDelivery');
 $router->add('POST', 'cancel_delivery', 'DeliveryController', 'cancelDelivery');
 $router->add('POST', 'update_menu', 'MenuEditorController', 'updateMenu');
-$router->add('POST', 'create_food', 'MenuEditorController', 'createFood');
+$router->add('POST', 'manage_food', 'MenuEditorController', 'manageFood');
 $router->add('POST', 'create_menu', 'MenuEditorController', 'createMenu');
 $router->add('POST', 'set_delivery_type', 'OrdersController', 'setDeliveryType');
 $router->add('POST', 'update_cart', 'OrdersController', 'updateCart');

@@ -8,7 +8,10 @@ include __DIR__ . '/../includes/header.php';
 
 <main>
     <div class="form-page">
-        <form action="/create_food" method="post">
+        <form action="/manage_food" method="post">
+            <?php if ($edit_id): ?>
+                <input type="hidden" name="edit_id" value="<?= $edit_id ?>">
+            <?php endif; ?>
             <div class="input-group">
                 <label for="name">Nom</label>
                 <input type="text" id="name" name="name" maxlength="30" value="<?= $defaults['name'] ?? '' ?>" required>
@@ -34,7 +37,7 @@ include __DIR__ . '/../includes/header.php';
                 <label for="image_path">Emplacement de l'image</label>
                 <input type="text" id="image_path" name="image_path" maxlength="255" placeholder="images/food/..." value="<?= $defaults['image_path'] ?? '' ?>" required>
             </div>
-            <button type="submit" class="basic-btn"><?= (($defaults['name'] ?? '') == '') ? 'Créer' : 'Modifier' ?> le plat</button>
+            <button type="submit" class="basic-btn"><?= $edit_id ? 'Modifier' : 'Créer' ?> le plat</button>
         </form>
     </div>
 </main>
