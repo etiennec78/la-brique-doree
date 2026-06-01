@@ -56,7 +56,17 @@ class AdminController extends Controller {
         require_once __DIR__ . '/../models/User.php';
 
         if (isset($_POST['user_id']) and isset($_POST['reduction'])) {
-            User::setUserData($_POST['user_id'], 'global_reduction', $_POST['reduction']/100);
+            $reduction = $_POST['reduction'];
+            
+            if ($reduction > 100) {
+                $reduction = 100;
+            }
+
+            elseif ($reduction < 0) {
+                $reduction = 0;
+            }
+
+            User::setUserData($_POST['user_id'], 'global_reduction', $reduction/100);
         }
 
         header('Location: /admin');
