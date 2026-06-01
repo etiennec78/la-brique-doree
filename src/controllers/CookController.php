@@ -239,25 +239,38 @@ class CookController extends Controller {
             header('Location: /login');
             exit();
         }
+        if (!isset($_POST['menu_id'])) {
+            $_SESSION['error'] = "Erreur : ID du menu manquant lors de la mise à jour.";
+            header('Location: /menu_editor');
+            exit();
+        }
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['item_id'], $_POST['action'])) {
+        require_once __DIR__ . '/../models/Menu.php';
+
+        $menu_id = (int)$_POST['menu_id'];
+
+        // Add or remove foods from menu
+        if (isset($_POST['action']) && isset($_POST['item_id'])) {
             $food_id = (int)$_POST['item_id'];
             $action = $_POST['action'];
 
-            $menu_id = isset($_POST['menu_id']) ? (int)$_POST['menu_id'] : null;
-
-            if ($menu_id) {
-                require_once __DIR__ . '/../models/Menu.php';
-
-                if (isset($_POST['amount']) && $action === 'set') {
-                    $amount = (int)$_POST['amount'];
-                    Menu::updateItem($menu_id, $food_id, $action, $amount);
-                } else {
-                    Menu::updateItem($menu_id, $food_id, $action);
-                }
+            // Set or increment the amount of foods
+            if (isset($_POST['amount']) && $action === 'set') {
+                $amount = (int)$_POST['amount'];
+                Menu::updateItem($menu_id, $food_id, $action, $amount);
             } else {
-                $_SESSION['error'] = "Erreur : ID du menu manquant lors de la mise à jour.";
+                Menu::updateItem($menu_id, $food_id, $action);
             }
+        }
+
+        // Change the name of the menu
+        if (isset($_POST['name'])) {
+            Menu::updateName($menu_id, $_POST['name']);
+        }
+
+        // Change the price of the menu
+        if (isset($_POST['price'])) {
+            Menu::updatePrice($menu_id, $_POST['price']);
         }
 
         if (isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false) {
@@ -271,8 +284,7 @@ class CookController extends Controller {
             exit();
         }
 
-        $referer = $_SERVER['HTTP_REFERER'] ?? '/';
-        header("Location: $referer");
+        header("Location: /menu_editor");
         exit();
     }
 

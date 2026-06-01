@@ -91,6 +91,18 @@ class Menu {
         return $stmt->execute([$quantity, $menu_id, $food_id]);
     }
 
+    public static function updateName($menu_id, $name) {
+        global $pdo;
+        $stmt = $pdo->prepare("UPDATE menu SET name = ? WHERE id = ?");
+        return $stmt->execute([$name, $menu_id]);
+    }
+
+    public static function updatePrice($menu_id, $price) {
+        global $pdo;
+        $stmt = $pdo->prepare("UPDATE menu SET price = ? WHERE id = ?");
+        return $stmt->execute([$price, $menu_id]);
+    }
+
     public static function updateItem($menu_id, $food_id, $action, $amount = null) {
         $current_quantity = self::getFoodQuantity($menu_id, $food_id);
 

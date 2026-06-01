@@ -53,8 +53,9 @@ $editing_menu = $editing_menu ?? null;
         <div class="category-header">
             <?php if ($editing_menu == $menu['id']): ?>
                 <!-- inputs and floppy disk icon to save menu changes -->
-                <form action="/edit_menu" method="post">
-                    <input type="text" id="title" name="title" value="<?= $menu['name'] ?>">
+                <form action="/update_menu" method="post">
+                    <input type="hidden" name="menu_id" value="<?= $menu['id'] ?>">
+                    <input type="text" id="name" name="name" value="<?= $menu['name'] ?>">
                     <input type="number" id="price" name="price" step="0.01" value="<?= $cat_price_val ?>">
                     <button type="submit" class="basic-btn save-btn">
                         <img src="/assets/images/save.svg" alt="Modifier le menu" class="edit-icon">
