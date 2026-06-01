@@ -9,15 +9,7 @@ INSERT INTO allergen (name) VALUES
 ('crustacean'), ('fish'), ('gluten'), ('milk'), ('sesame'), ('egg'), ('soy'), ('nut'), ('sulfite');
 
 
--- ------- TIME_SLOT and FOOD_TYPE -------
-
-CREATE TABLE time_slot (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(7) UNIQUE NOT NULL
-);
-
-INSERT INTO time_slot (name) VALUES
-('lunch'), ('dinner');
+-- ------- FOOD_TYPE -------
 
 CREATE TABLE food_type (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -127,17 +119,14 @@ CREATE TABLE menu (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(30) NOT NULL,
     description VARCHAR(255) NOT NULL,
-    price FLOAT NOT NULL,
-    min_people INT,
-    time_slot_id INT,
-    FOREIGN KEY(time_slot_id) REFERENCES time_slot(id)
+    price FLOAT NOT NULL
 );
 
-INSERT INTO menu (name, description, price, min_people, time_slot_id) VALUES
-('Menu enfant', 'Un menu pour les futurs petits minis micro prochains constructeurs !' , 7.9, 1, NULL),
-('Partage d''Asie', 'Un menu qui vous fera voyager dans un autre continent', 37.9, 3, 1),
-('Menu gourmand', 'Un menu pour les gourmands, arriverez-vous à le terminer ?', 19.9, 1, NULL),
-('Menu doré', 'Un menu pour les palais les plus fins', 54.9, 1, 2);
+INSERT INTO menu (name, description, price) VALUES
+('Menu enfant', 'Un menu pour les futurs petits minis micro prochains constructeurs !' , 7.9),
+('Partage d''Asie', 'Un menu qui vous fera voyager dans un autre continent', 37.9),
+('Menu gourmand', 'Un menu pour les gourmands, arriverez-vous à le terminer ?', 19.9),
+('Menu doré', 'Un menu pour les palais les plus fins', 54.9);
 
 -- Linking table between Menu and Food
 CREATE TABLE menu_food (
