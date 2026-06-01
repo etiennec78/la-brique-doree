@@ -70,7 +70,7 @@
   display: none;
 }
 
-.items-grid {
+.items_grid {
   grid-template-columns: repeat(auto-fill, minmax(min(100%, max(220px, 25%)), 1fr));
 }
 

@@ -15,16 +15,15 @@ document.addEventListener('DOMContentLoaded', function () {
     Initializes product sorting functionality once the DOM content is fully loaded.
 
   */
-
     const select = document.getElementById('sort-price');
-    const items-grids = document.querySelectorAll('.items-grid');
+    const items_grids = document.querySelectorAll('.items_grid');
 
-    items-grids.forEach(function (items-grid) {
+    items_grids.forEach(function (items_grid) {
   /*
 
     INPUT :
 
-    (Element) $items-grid : The current items-grid grid element container.
+    (Element) $items_grid : The current items_grid grid element container.
 
     OUTPUT :
 
@@ -33,10 +32,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     SUMMARY :
 
-    Iterates through each items-grid grid container to store the initial order of its child items.
+    Iterates through each items_grid grid container to store the initial order of its child items.
 
   */
-        Array.from(items-grid.children).forEach((item, index) => {
+        Array.from(items_grid.children).forEach((item, index) => {
   /*
 
     INPUT :
@@ -72,16 +71,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     SUMMARY :
 
-    Triggers the sorting process for all items-grid layout items when the selection option changes.
+    Triggers the sorting process for all items_grid layout items when the selection option changes.
 
   */
 
-        items-grids.forEach(function (items-grid) {
+        items_grids.forEach(function (items_grid) {
   /*
 
     INPUT :
 
-    (Element) $items-grid : The current items-grid container being sorted.
+    (Element) $items_grid : The current items_grid container being sorted.
 
     OUTPUT :
 
@@ -90,11 +89,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     SUMMARY :
 
-    Sorts and re-appends the items within each individual items-grid container based on the selected sorting order.
+    Sorts and re-appends the items within each individual items_grid container based on the selected sorting order.
 
   */
 
-            const items = Array.from(items-grid.children);
+            const items = Array.from(items_grid.children);
 
             items.sort(function (a, b) {
   /*
@@ -123,8 +122,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     return parseFloat(priceStr.replace(',', '.').replace(/[^\d.-]/g, ''));
                 };
 
-                const priceA = parseFloat(a.getAttribute('data-raw-price'));
-                const priceB = parseFloat(b.getAttribute('data-raw-price'));
+                const priceA = getPrice(a);
+                const priceB = getPrice(b);
 
                 if (select.value === 'asc') {
                     return priceA - priceB;
@@ -153,10 +152,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     SUMMARY :
 
-    Re-appends the sorted item back to the items-grid parent element to update the DOM order.
+    Re-appends the sorted item back to the items_grid parent element to update the DOM order.
 
   */
-                items-grid.appendChild(item);
+                items_grid.appendChild(item);
             });
 
         });

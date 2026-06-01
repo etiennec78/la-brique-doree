@@ -96,7 +96,7 @@ $editing_menu = $editing_menu ?? null;
             <?php endif; ?>
         </div>
 
-        <div class="items-grid">
+        <div class="items_grid">
             <!-- For each card to display in this category -->
             <?php foreach ($cards as $card): ?>
                 <?php
@@ -175,7 +175,7 @@ $editing_menu = $editing_menu ?? null;
 <?php endfor; ?>
 <?php if ($menu_editor): ?>
     <div class="category">
-        <div class="items-grid">
+        <div class="items_grid">
             <a href="/menu_creator">
                 <article class="add-card"></article>
             </a>
