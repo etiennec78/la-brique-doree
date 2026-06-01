@@ -1,119 +1,119 @@
 document.addEventListener('DOMContentLoaded', function () {
-	/*
-	 	
-	  INPUT :
-	         
-		None
-	  
-	  OUTPUT :
+  /*
 
-		(void) : No return value
+    INPUT :
 
-	  
-	  SUMMARY :
-	 	
-		Initializes product sorting functionality once the DOM content is fully loaded.
+    None
 
-	*/
+    OUTPUT :
+
+    (void) : No return value
+
+
+    SUMMARY :
+
+    Initializes product sorting functionality once the DOM content is fully loaded.
+
+  */
 
     const select = document.getElementById('sort-price');
     const items-grids = document.querySelectorAll('.items-grid');
 
     items-grids.forEach(function (items-grid) {
-	/*
-	 	
-	  INPUT :
-	         
-		(Element) $items-grid : The current items-grid grid element container.
-	  
-	  OUTPUT :
+  /*
 
-		(void) : No return value
+    INPUT :
 
-	  
-	  SUMMARY :
-	 	
-		Iterates through each items-grid grid container to store the initial order of its child items.
+    (Element) $items-grid : The current items-grid grid element container.
 
-	*/
+    OUTPUT :
+
+    (void) : No return value
+
+
+    SUMMARY :
+
+    Iterates through each items-grid grid container to store the initial order of its child items.
+
+  */
         Array.from(items-grid.children).forEach((item, index) => {
-	/*
-	 	
-	  INPUT :
-	         
-		(Element) $item : The current product item element.
-		(int) $index : The current index of the item.
-	  
-	  OUTPUT :
+  /*
 
-		(void) : No return value
+    INPUT :
 
-	  
-	  SUMMARY :
-	 	
-		Sets a custom data attribute on each child item to record its initial order.
+    (Element) $item : The current product item element.
+    (int) $index : The current index of the item.
 
-	*/
+    OUTPUT :
+
+    (void) : No return value
+
+
+    SUMMARY :
+
+    Sets a custom data attribute on each child item to record its initial order.
+
+  */
             item.setAttribute('data-initial-order', index);
         });
     });
 
     select.addEventListener('change', function () {
-	/*
-	 	
-	  INPUT :
-	         
-		None
-	  
-	  OUTPUT :
+  /*
 
-		(void) : No return value
+    INPUT :
 
-	  
-	  SUMMARY :
-	 	
-		Triggers the sorting process for all items-grid layout items when the selection option changes.
+    None
 
-	*/
+    OUTPUT :
+
+    (void) : No return value
+
+
+    SUMMARY :
+
+    Triggers the sorting process for all items-grid layout items when the selection option changes.
+
+  */
 
         items-grids.forEach(function (items-grid) {
-	/*
-	 	
-	  INPUT :
-	         
-		(Element) $items-grid : The current items-grid container being sorted.
-	  
-	  OUTPUT :
+  /*
 
-		(void) : No return value
+    INPUT :
 
-	  
-	  SUMMARY :
-	 	
-		Sorts and re-appends the items within each individual items-grid container based on the selected sorting order.
+    (Element) $items-grid : The current items-grid container being sorted.
 
-	*/
+    OUTPUT :
+
+    (void) : No return value
+
+
+    SUMMARY :
+
+    Sorts and re-appends the items within each individual items-grid container based on the selected sorting order.
+
+  */
 
             const items = Array.from(items-grid.children);
 
             items.sort(function (a, b) {
-	/*
-	 	
-	  INPUT :
-	         
-		(Element) $a : The first element for comparison.
-		(Element) $b : The second element for comparison.
-	  
-	  OUTPUT :
+  /*
 
-		(int) $result : A negative, zero, or positive value indicating sorting order.
+    INPUT :
 
-	  
-	  SUMMARY :
-	 	
-		Compares two elements based on their price attribute or initial order depending on the active sort option.
+    (Element) $a : The first element for comparison.
+    (Element) $b : The second element for comparison.
 
-	*/
+    OUTPUT :
+
+    (int) $result : A negative, zero, or positive value indicating sorting order.
+
+
+    SUMMARY :
+
+    Compares two elements based on their price attribute or initial order depending on the active sort option.
+
+  */
 
                 const getPrice = (element) => {
                     const article = element.tagName === 'ARTICLE' ? element : element.querySelector('article');
@@ -140,22 +140,22 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             items.forEach(function (item) {
-	/*
-	 	
-	  INPUT :
-	         
-		(Element) $item : The sorted product item element.
-	  
-	  OUTPUT :
+  /*
 
-		(void) : No return value
+    INPUT :
 
-	  
-	  SUMMARY :
-	 	
-		Re-appends the sorted item back to the items-grid parent element to update the DOM order.
+    (Element) $item : The sorted product item element.
 
-	*/
+    OUTPUT :
+
+    (void) : No return value
+
+
+    SUMMARY :
+
+    Re-appends the sorted item back to the items-grid parent element to update the DOM order.
+
+  */
                 items-grid.appendChild(item);
             });
 

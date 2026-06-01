@@ -3,22 +3,22 @@ require_once __DIR__ . '/../db_connect.php';
 
 class Order {
     public static function getUserRunningOrder($uid) {
-	/*
-	 	
-	  INPUT :
-	         
-   	 	 (int) $uid : variable representing the user ID
-	  
-	  OUTPUT :
+  /*
 
- 		 (array|bool) $order : variable representing the most recent active order details, or false if not found
+    INPUT :
 
-	  
-	  SUMMARY :
-	 	
-		This function retrieves the latest active order and its current status for a specific customer.
+         (int) $uid : variable representing the user ID
 
-	*/
+    OUTPUT :
+
+      (array|bool) $order : variable representing the most recent active order details, or false if not found
+
+
+    SUMMARY :
+
+    This function retrieves the latest active order and its current status for a specific customer.
+
+  */
         global $pdo;
         $stmt = $pdo->prepare("
         SELECT o.id, os.id as status, o.cook_id, o.delivery_person_id, o.is_takeaway
@@ -33,22 +33,22 @@ class Order {
     }
 
     public static function getOrderById($id) {
-	/*
-	 	
-	  INPUT :
-	         
-   	 	 (int) $id : variable representing the order ID
-	  
-	  OUTPUT :
+  /*
 
- 		 (array|bool) $order : variable representing the full order data record, or false if not found
+    INPUT :
 
-	  
-	  SUMMARY :
-	 	
-		This function fetches a single order record from the database using its unique order ID.
+         (int) $id : variable representing the order ID
 
-	*/
+    OUTPUT :
+
+      (array|bool) $order : variable representing the full order data record, or false if not found
+
+
+    SUMMARY :
+
+    This function fetches a single order record from the database using its unique order ID.
+
+  */
         global $pdo;
         $stmt = $pdo->prepare("SELECT * FROM orders WHERE id = ?");
         $stmt->execute([$id]);
@@ -56,22 +56,22 @@ class Order {
     }
 
     public static function getOrdersFromState($order_names) {
-	/*
-	 	
-	  INPUT :
-	         
-   	 	 (array) $order_names : variable representing an array of order status names to filter by
-	  
-	  OUTPUT :
+  /*
 
- 		 (array) $orders : variable representing a list of orders matching the specified statuses, sorted by takeaway time and ID
+    INPUT :
 
-	  
-	  SUMMARY :
-	 	
-		This function retrieves a list of orders that match any of the provided status names, complete with customer and delivery person names, ordered chronologically.
+         (array) $order_names : variable representing an array of order status names to filter by
 
-	*/
+    OUTPUT :
+
+      (array) $orders : variable representing a list of orders matching the specified statuses, sorted by takeaway time and ID
+
+
+    SUMMARY :
+
+    This function retrieves a list of orders that match any of the provided status names, complete with customer and delivery person names, ordered chronologically.
+
+  */
         global $pdo;
         $placeholders = implode(',', array_fill(0, count($order_names), '?'));
         $stmt = $pdo->prepare("
@@ -96,21 +96,21 @@ class Order {
 
     public static function getAllOrdersFromUser($uid) {
     /*
-	 	
-	  INPUT :
-	         
-   	 	 (int) $uid : variable representing the user ID
-	  
-	  OUTPUT :
 
- 		 (array) $orders : variable representing all orders placed by the user, including payment amounts, sorted from newest to oldest
+    INPUT :
 
-	  
-	  SUMMARY :
-	 	
-		This function retrieves the complete order history for a specific customer along with corresponding payment details.
+         (int) $uid : variable representing the user ID
 
-	*/
+    OUTPUT :
+
+      (array) $orders : variable representing all orders placed by the user, including payment amounts, sorted from newest to oldest
+
+
+    SUMMARY :
+
+    This function retrieves the complete order history for a specific customer along with corresponding payment details.
+
+  */
         global $pdo;
         $stmt = $pdo->prepare("
         SELECT o.id, o.takeaway_time, o.cook_id, o.delivery_person_id, p.amount
@@ -124,22 +124,22 @@ class Order {
     }
 
     public static function getAllCompletedOrderIdsFromUser($uid) {
-	/*
-	 	
-	  INPUT :
-	         
-   	 	 (int) $uid : variable representing the user ID
-	  
-	  OUTPUT :
+  /*
 
- 		 (array) $ids : variable representing a sequential array of completed order IDs (status ID 5)
+    INPUT :
 
-	  
-	  SUMMARY :
-	 	
-		This function fetches a list of IDs for all completed orders belonging to a specific user.
+         (int) $uid : variable representing the user ID
 
-	*/
+    OUTPUT :
+
+      (array) $ids : variable representing a sequential array of completed order IDs (status ID 5)
+
+
+    SUMMARY :
+
+    This function fetches a list of IDs for all completed orders belonging to a specific user.
+
+  */
         global $pdo;
         $stmt = $pdo->prepare("
             SELECT o.id
@@ -152,22 +152,22 @@ class Order {
     }
 
     public static function getAvailableStaff($role_name) {
-	/*
-	 	
-	  INPUT :
-	         
-   	 	 (str) $role_name : variable representing the role name ('cook' or 'delivery_person')
-	  
-	  OUTPUT :
+  /*
 
- 		 (int|null) $staff_id : variable representing the ID of an available staff member, or null if none are available
+    INPUT :
 
-	  
-	  SUMMARY :
-	 	
-		This function identifies an available, non-busy staff member for a given role who was assigned an order longest ago.
+         (str) $role_name : variable representing the role name ('cook' or 'delivery_person')
 
-	*/
+    OUTPUT :
+
+      (int|null) $staff_id : variable representing the ID of an available staff member, or null if none are available
+
+
+    SUMMARY :
+
+    This function identifies an available, non-busy staff member for a given role who was assigned an order longest ago.
+
+  */
         global $pdo;
 
         $allowed_roles = ['cook', 'delivery_person'];
@@ -206,23 +206,23 @@ class Order {
     }
 
     public static function setShippingStatus($order_id, $delivery_person_id) {
-	/*
-	 	
-	  INPUT :
-	         
-   	 	 (int) $order_id : variable representing the order ID
-		 (int) $delivery_person_id : variable representing the delivery person ID
-	  
-	  OUTPUT :
+  /*
 
- 		 None
+    INPUT :
 
-	  
-	  SUMMARY :
-	 	
-		This function updates an order's status to 'shipping' (status ID 4) and assigns a specific delivery person along with the current timestamp.
+         (int) $order_id : variable representing the order ID
+     (int) $delivery_person_id : variable representing the delivery person ID
 
-	*/
+    OUTPUT :
+
+      None
+
+
+    SUMMARY :
+
+    This function updates an order's status to 'shipping' (status ID 4) and assigns a specific delivery person along with the current timestamp.
+
+  */
         global $pdo;
         $stmt = $pdo->prepare("
             UPDATE orders
@@ -236,22 +236,22 @@ class Order {
     }
 
     public static function setReadyStatus($order_id) {
-	/*
-	 	
-	  INPUT :
-	         
-   	 	 (int) $order_id : variable representing the order ID
-	  
-	  OUTPUT :
+  /*
 
- 		 None
+    INPUT :
 
-	  
-	  SUMMARY :
-	 	
-		This function updates an order's status to 'ready' (status ID 3).
+         (int) $order_id : variable representing the order ID
 
-	*/
+    OUTPUT :
+
+      None
+
+
+    SUMMARY :
+
+    This function updates an order's status to 'ready' (status ID 3).
+
+  */
         global $pdo;
         $stmt = $pdo->prepare("
             UPDATE orders
@@ -262,22 +262,22 @@ class Order {
     }
 
     public static function setDeliveredStatus($order_id) {
-	/*
-	 	
-	  INPUT :
-	         
-   	 	 (int) $order_id : variable representing the order ID
-	  
-	  OUTPUT :
+  /*
 
- 		 None
+    INPUT :
 
-	  
-	  SUMMARY :
-	 	
-		This function updates an order's status to 'delivered' (status ID 5).
+         (int) $order_id : variable representing the order ID
 
-	*/
+    OUTPUT :
+
+      None
+
+
+    SUMMARY :
+
+    This function updates an order's status to 'delivered' (status ID 5).
+
+  */
         global $pdo;
         $stmt = $pdo->prepare("
         UPDATE orders
@@ -288,23 +288,23 @@ class Order {
     }
 
     public static function cancelDelivery($order_id, $uid) {
-	/*
-	 	
-	  INPUT :
-	         
-   	 	 (int) $order_id : variable representing the order ID
-		 (int) $uid : variable representing the delivery person ID
-	  
-	  OUTPUT :
+  /*
 
- 		 None
+    INPUT :
 
-	  
-	  SUMMARY :
-	 	
-		This function logs a delivery cancellation record and resets the order status back to 'ready' (status ID 3) while clearing the delivery person assignment.
+         (int) $order_id : variable representing the order ID
+     (int) $uid : variable representing the delivery person ID
 
-	*/
+    OUTPUT :
+
+      None
+
+
+    SUMMARY :
+
+    This function logs a delivery cancellation record and resets the order status back to 'ready' (status ID 3) while clearing the delivery person assignment.
+
+  */
         global $pdo;
         
         $stmt_cancel = $pdo->prepare("
@@ -324,22 +324,22 @@ class Order {
     }
 
     public static function getLastOrder($uid) {
-	/*
-	 	
-	  INPUT :
-	         
-   	 	 (int) $uid : variable representing the user ID
-	  
-	  OUTPUT :
+  /*
 
- 		 (array|bool) $order : variable representing the latest order data including its review ID, or false if not found
+    INPUT :
 
-	  
-	  SUMMARY :
-	 	
-		This function retrieves the most recent order placed by a customer, along with any associated review ID.
+         (int) $uid : variable representing the user ID
 
-	*/
+    OUTPUT :
+
+      (array|bool) $order : variable representing the latest order data including its review ID, or false if not found
+
+
+    SUMMARY :
+
+    This function retrieves the most recent order placed by a customer, along with any associated review ID.
+
+  */
         global $pdo;
         $stmt = $pdo->prepare("
             SELECT o.id as order_id, r.id as review_id, o.is_takeaway
@@ -355,22 +355,22 @@ class Order {
 
 
     public static function checkOrderExistsByCartId($cart_id) {
-	/*
-	 	
-	  INPUT :
-	         
-   	 	 (int) $cart_id : variable representing the cart ID
-	  
-	  OUTPUT :
+  /*
 
- 		 (array|bool) $order : variable representing the order record matching the cart ID, or false if not found
+    INPUT :
 
-	  
-	  SUMMARY :
-	 	
-		This function checks if an order has already been created for a given cart ID.
+         (int) $cart_id : variable representing the cart ID
 
-	*/
+    OUTPUT :
+
+      (array|bool) $order : variable representing the order record matching the cart ID, or false if not found
+
+
+    SUMMARY :
+
+    This function checks if an order has already been created for a given cart ID.
+
+  */
         global $pdo;
         $stmt = $pdo->prepare("SELECT id FROM orders WHERE cart_id = ?");
         $stmt->execute([$cart_id]);
@@ -378,27 +378,27 @@ class Order {
     }
 
     public static function createOrder($cart_id, $customer_id, $order_status_id, $cook_id, $is_takeaway, $takeaway_time) {
-	/*
-	 	
-	  INPUT :
-	         
-   	 	 (int) $cart_id : variable representing the cart ID
-		 (int) $customer_id : variable representing the customer user ID
-		 (int|null) $cook_id : variable representing the cook user ID
-		 (int) $order_status_id : variable representing the order status ID
-		 (int|bool) $is_takeaway : variable representing whether the order is takeaway
-		 (str|null) $takeaway_time : variable representing the requested takeaway time
-	  
-	  OUTPUT :
+  /*
 
- 		 (string) $order_id : variable representing the newly created order ID
+    INPUT :
 
-	  
-	  SUMMARY :
-	 	
-		This function inserts a new order record into the database with its initial details and returns its ID.
+         (int) $cart_id : variable representing the cart ID
+     (int) $customer_id : variable representing the customer user ID
+     (int|null) $cook_id : variable representing the cook user ID
+     (int) $order_status_id : variable representing the order status ID
+     (int|bool) $is_takeaway : variable representing whether the order is takeaway
+     (str|null) $takeaway_time : variable representing the requested takeaway time
 
-	*/
+    OUTPUT :
+
+      (string) $order_id : variable representing the newly created order ID
+
+
+    SUMMARY :
+
+    This function inserts a new order record into the database with its initial details and returns its ID.
+
+  */
         global $pdo;
         $cook_assigned_at = $cook_id == null ? "NULL" : "NOW()";
 
@@ -411,23 +411,23 @@ class Order {
     }
 
     public static function deliveryCanceled($order_id, $uid) {
-	/*
-	 	
-	  INPUT :
-	         
-   	 	 (int) $order_id : variable representing the order ID
-		 (int) $uid : variable representing the delivery person ID
-	  
-	  OUTPUT :
+  /*
 
- 		 (bool) $is_canceled : variable representing whether the order delivery was canceled by this delivery person
+    INPUT :
 
-	  
-	  SUMMARY :
-	 	
-		This function checks if a delivery person has previously canceled the delivery for a specific order.
+         (int) $order_id : variable representing the order ID
+     (int) $uid : variable representing the delivery person ID
 
-	*/
+    OUTPUT :
+
+      (bool) $is_canceled : variable representing whether the order delivery was canceled by this delivery person
+
+
+    SUMMARY :
+
+    This function checks if a delivery person has previously canceled the delivery for a specific order.
+
+  */
         global $pdo;
         $stmt = $pdo->prepare("
             SELECT o.* FROM orders o
@@ -439,23 +439,23 @@ class Order {
     }
 
     public static function getNextDeliveries($uid, $limit = 3) {
-	/*
-	 	
-	  INPUT :
-	         
-   	 	 (int) $uid : variable representing the delivery person ID
-		 (int) $limit : variable representing the maximum number of deliveries to fetch (defaults to 3)
-	  
-	  OUTPUT :
+  /*
 
- 		 (array) $orders : variable representing a list of available orders ready for delivery
+    INPUT :
 
-	  
-	  SUMMARY :
-	 	
-		This function fetches the next available orders that are ready for delivery and have not been canceled by the specifying delivery person.
+         (int) $uid : variable representing the delivery person ID
+     (int) $limit : variable representing the maximum number of deliveries to fetch (defaults to 3)
 
-	*/
+    OUTPUT :
+
+      (array) $orders : variable representing a list of available orders ready for delivery
+
+
+    SUMMARY :
+
+    This function fetches the next available orders that are ready for delivery and have not been canceled by the specifying delivery person.
+
+  */
         global $pdo;
         $stmt = $pdo->prepare("
             SELECT o.* FROM orders o
@@ -469,23 +469,23 @@ class Order {
     }
 
     public static function getUserActiveOrders($uid, $force_ids = []) {
-	/*
-	 	
-	  INPUT :
-	         
-   	 	 (int) $uid : variable representing the user ID
-		 (array) $force_ids : variable representing an optional list of order IDs to explicitly include
-	  
-	  OUTPUT :
+  /*
 
- 		 (array) $orders : variable representing an array of active order records
+    INPUT :
 
-	  
-	  SUMMARY :
-	 	
-		This function retrieves all active or in-progress orders for a user, with the ability to forcefully include specific order IDs.
+         (int) $uid : variable representing the user ID
+     (array) $force_ids : variable representing an optional list of order IDs to explicitly include
 
-	*/
+    OUTPUT :
+
+      (array) $orders : variable representing an array of active order records
+
+
+    SUMMARY :
+
+    This function retrieves all active or in-progress orders for a user, with the ability to forcefully include specific order IDs.
+
+  */
         global $pdo;
         $params = [$uid];
         $force_sql = "";
@@ -508,23 +508,23 @@ class Order {
     }
 
     public static function getOrderStatuses($uid, $order_ids) {
-	/*
-	 	
-	  INPUT :
-	         
-   	 	 (int) $uid : variable representing the user ID
-		 (array) $order_ids : variable representing an array of order IDs to query
-	  
-	  OUTPUT :
+  /*
 
- 		 (array) $statuses : variable representing an associative array mapping order IDs to their status IDs
+    INPUT :
 
-	  
-	  SUMMARY :
-	 	
-		This function retrieves the status IDs for a collection of order IDs belonging to a specific customer.
+         (int) $uid : variable representing the user ID
+     (array) $order_ids : variable representing an array of order IDs to query
 
-	*/
+    OUTPUT :
+
+      (array) $statuses : variable representing an associative array mapping order IDs to their status IDs
+
+
+    SUMMARY :
+
+    This function retrieves the status IDs for a collection of order IDs belonging to a specific customer.
+
+  */
         global $pdo;
         $inQuery = implode(',', array_fill(0, count($order_ids), '?'));
         $stmt = $pdo->prepare("
@@ -543,22 +543,22 @@ class Order {
     }
     
     public static function getOrderItems($order_id) {
-	/*
-	 	
-	  INPUT :
-	         
-   	 	 (int) $order_id : variable representing the order ID
-	  
-	  OUTPUT :
+  /*
 
- 		 (array) $items : variable representing an associative array containing separate lists of foods and menus
+    INPUT :
 
-	  
-	  SUMMARY :
-	 	
-		This function retrieves all food and menu items associated with a given order through its linked cart.
+         (int) $order_id : variable representing the order ID
 
-	*/
+    OUTPUT :
+
+      (array) $items : variable representing an associative array containing separate lists of foods and menus
+
+
+    SUMMARY :
+
+    This function retrieves all food and menu items associated with a given order through its linked cart.
+
+  */
         global $pdo;
 
         $stmt = $pdo->prepare("
@@ -585,22 +585,22 @@ class Order {
     }
 
     public static function sortByType($foods) {
-	/*
-	 	
-	  INPUT :
-	         
-   	 	 (array) $foods : variable representing an array of food items
-	  
-	  OUTPUT :
+  /*
 
- 		 (array) $sorted_foods : variable representing an associative array of food items grouped by their food type
+    INPUT :
 
-	  
-	  SUMMARY :
-	 	
-		This function categorizes and groups a collection of food items into a dictionary structure using their food type as keys.
+         (array) $foods : variable representing an array of food items
 
-	*/
+    OUTPUT :
+
+      (array) $sorted_foods : variable representing an associative array of food items grouped by their food type
+
+
+    SUMMARY :
+
+    This function categorizes and groups a collection of food items into a dictionary structure using their food type as keys.
+
+  */
         // Sort a list of foods in a dictionnary with food types as keys
         $dict = [];
 

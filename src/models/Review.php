@@ -3,25 +3,25 @@ require_once __DIR__ . '/../db_connect.php';
 
 class Review {
     public static function addReview($order_id, $product, $delivery, $comment) {
-	/*
-	 	
-	  INPUT :
-	         
-   	 	 (int) $order_id : variable representing the order ID
-		 (int) $product : variable representing the product rating stars
-		 (int) $delivery : variable representing the delivery rating stars
-		 (str) $comment : variable representing the review comment text
-	  
-	  OUTPUT :
+  /*
 
- 		 None
+    INPUT :
 
-	  
-	  SUMMARY :
-	 	
-		This function inserts a new customer review record into the database for a completed order.
+         (int) $order_id : variable representing the order ID
+     (int) $product : variable representing the product rating stars
+     (int) $delivery : variable representing the delivery rating stars
+     (str) $comment : variable representing the review comment text
 
-	*/
+    OUTPUT :
+
+      None
+
+
+    SUMMARY :
+
+    This function inserts a new customer review record into the database for a completed order.
+
+  */
         global $pdo;
         $stmt = $pdo->prepare("
           INSERT INTO reviews (order_id, product_stars, delivery_stars, comment)
@@ -31,25 +31,25 @@ class Review {
     }
 
     public static function updateReview($review_id, $product, $delivery, $comment) {
-	/*
-	 	
-	  INPUT :
-	         
-   	 	 (int) $review_id : variable representing the review ID
-		 (int) $product : variable representing the product rating stars
-		 (int) $delivery : variable representing the delivery rating stars
-		 (str) $comment : variable representing the review comment text
-	  
-	  OUTPUT :
+  /*
 
- 		 None
+    INPUT :
 
-	  
-	  SUMMARY :
-	 	
-		This function updates an existing review record with new ratings and comment text.
+         (int) $review_id : variable representing the review ID
+     (int) $product : variable representing the product rating stars
+     (int) $delivery : variable representing the delivery rating stars
+     (str) $comment : variable representing the review comment text
 
-	*/
+    OUTPUT :
+
+      None
+
+
+    SUMMARY :
+
+    This function updates an existing review record with new ratings and comment text.
+
+  */
         global $pdo;
         
         $stmt = $pdo->prepare("
@@ -61,22 +61,22 @@ class Review {
     }
 
     public static function getReviews() {
-	/*
-	 	
-	  INPUT :
-	         
-   	 	 None
-	  
-	  OUTPUT :
+  /*
 
- 		 (array) $reviews : variable representing an array of all reviews with customer details, ordered by newest first
+    INPUT :
 
-	  
-	  SUMMARY :
-	 	
-		This function fetches all customer reviews along with the respective reviewer's name and ID.
+         None
 
-	*/
+    OUTPUT :
+
+      (array) $reviews : variable representing an array of all reviews with customer details, ordered by newest first
+
+
+    SUMMARY :
+
+    This function fetches all customer reviews along with the respective reviewer's name and ID.
+
+  */
         global $pdo;
         $stmt = $pdo->prepare("
             SELECT r.id, u.id as user_id, u.first_name, u.last_name, r.product_stars, r.delivery_stars, r.comment
@@ -90,22 +90,22 @@ class Review {
     }
 
     public static function getReviewer($review_id) {
-	/*
-	 	
-	  INPUT :
-	         
-   	 	 (int) $review_id : variable representing the review ID
-	  
-	  OUTPUT :
+  /*
 
- 		 (int|bool) $user_id : variable representing the user ID of the reviewer, or false if not found
+    INPUT :
 
-	  
-	  SUMMARY :
-	 	
-		This function retrieves the customer user ID associated with a specific review ID.
+         (int) $review_id : variable representing the review ID
 
-	*/
+    OUTPUT :
+
+      (int|bool) $user_id : variable representing the user ID of the reviewer, or false if not found
+
+
+    SUMMARY :
+
+    This function retrieves the customer user ID associated with a specific review ID.
+
+  */
         global $pdo;
         $stmt = $pdo->prepare("
             SELECT u.id
