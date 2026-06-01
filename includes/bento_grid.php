@@ -64,7 +64,7 @@ $editing_menu = $editing_menu ?? null;
             <?php else: ?>
                 <!-- category title -->
                 <h2><?= $category_name ?></h2>
-                <?php if ($menu_editor): ?>
+                <?php if ($menu_editor && $menu_loop): ?>
                     <!-- pencil icon to edit menu -->
                     <a href="?edit=<?= $menu['id'] ?>" title="Modifier le menu">
                         <img src="/assets/images/pencil.svg" alt="Modifier le menu" class="edit-icon">
