@@ -227,3 +227,13 @@ article > form > .add-to-cart:active {
 .menu-grid > div {
   flex: 1;
 }
+
+.description h3 {
+    font-size: 1.5rem;
+    line-height: 1.3;
+    margin: 0;
+    padding: 6px;
+    padding-bottom: 12px;
+    padding-right: 80px;
+    padding-left: 40px;
+}
