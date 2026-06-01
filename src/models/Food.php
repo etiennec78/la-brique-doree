@@ -158,4 +158,10 @@ class Food {
         }
       }
     }
+
+    public static function deleteFood($food_id) {
+        global $pdo;
+        $stmt = $pdo->prepare("DELETE FROM food WHERE id = ?");
+        $stmt->execute([$food_id]);
+    }
 }

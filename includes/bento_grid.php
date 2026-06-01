@@ -67,7 +67,7 @@ $editing_menu = $editing_menu ?? null;
                             <button type="submit" class="basic-btn save-btn">
                                 <img src="/assets/images/save.svg" alt="Modifier le menu" class="edit-icon">
                             </button>
-                            <button type="submit" form="delete-menu-<?= $menu['id'] ?>" class="basic-btn save-btn delete-btn">
+                            <button type="submit" form="delete-menu-<?= $menu['id'] ?>" class="basic-btn save-btn red-btn">
                                 <img src="/assets/images/delete.svg" alt="Supprimer le menu" class="edit-icon">
                             </button>
                         </div>

@@ -49,7 +49,7 @@ include __DIR__ . '/../includes/header.php';
                         </form>
                         <form action="/cancel_delivery" method="POST">
                             <input type="hidden" name="order_id" value="<?= $delivery['id'] ?>">
-                            <button type="submit" class="basic-btn action-btn btn-cancel">Annuler</button>
+                            <button type="submit" class="basic-btn action-btn red-btn">Annuler</button>
                         </form>
                     </div>
                 </div>

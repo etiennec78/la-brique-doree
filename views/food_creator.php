@@ -2,7 +2,7 @@
 $title = "La Brique Dorée - Créateur de plats";
 $h1 = "CREATEUR DE PLATS";
 $staff_page = true;
-$css_files = ['/css/form.css'];
+$css_files = ['/css/form.css', '/css/menu_editor.css'];
 include __DIR__ . '/../includes/header.php';
 ?>
 
@@ -39,5 +39,12 @@ include __DIR__ . '/../includes/header.php';
             </div>
             <button type="submit" class="basic-btn"><?= $edit_id ? 'Modifier' : 'Créer' ?> le plat</button>
         </form>
+        <?php if ($edit_id): ?>
+            <form action="/manage_food" method="post">
+                <input type="hidden" name="edit_id" value="<?= $edit_id ?>">
+                <input type="hidden" name="delete">
+                <button type="submit" class="basic-btn red-btn">Supprimer le plat</button>
+            </form>
+        <?php endif; ?>
     </div>
 </main>

@@ -34,8 +34,7 @@
     width: 28px;
 }
 
-.save-btn,
-.delete-btn {
+.save-btn {
     display: inline-flex;
     width: 34px;
     height: 34px;
@@ -68,11 +67,4 @@ h5 {
 .basic-btn[onclick="location.href='/menu_editor'"] {
     margin: 25px; 
     text-align: left;
-}
-
-.delete-btn {
-    background: var(--red);
-}
-.delete-btn:hover {
-    background: var(--darkred);
 }

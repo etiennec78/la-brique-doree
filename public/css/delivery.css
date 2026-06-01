@@ -52,10 +52,3 @@
 .btn-confirm:hover {
     background: var(--darkgreen);
 }
-
-.btn-cancel {
-    background: var(--red);
-}
-.btn-cancel:hover {
-    background: var(--darkred);
-}

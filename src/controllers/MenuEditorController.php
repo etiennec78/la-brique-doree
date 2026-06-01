@@ -233,6 +233,7 @@ class MenuEditorController extends Controller {
         $this->requireRole([2, 3], true);
 
         $edit_id = isset($_POST['edit_id']) ? $_POST['edit_id'] : null;
+        $delete = isset($_POST['delete']);
         $name = isset($_POST['name']) ? $_POST['name'] : "Menu name";
         $food_type = isset($_POST['food_type']) && $_POST['food_type'] != '' ? $_POST['food_type'] : 1;
         $description = isset($_POST['description']) ? $_POST['description'] : "No description";
@@ -240,7 +241,11 @@ class MenuEditorController extends Controller {
         $image_path = isset($_POST['image_path']) ? $_POST['image_path'] : "/images/unknown.svg";
 
         if ($edit_id) {
-            Food::editFood($edit_id, $name, $food_type, $description, $price, $image_path);
+            if ($delete) {
+                Food::deleteFood($edit_id);
+            } else {
+                Food::editFood($edit_id, $name, $food_type, $description, $price, $image_path);
+            }
         } else {
             Food::createFood($name, $food_type, $description, $price, $image_path);
         }
