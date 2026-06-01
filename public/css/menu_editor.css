@@ -41,3 +41,8 @@
 h5 {
     margin: 0px;
 }
+
+.basic-btn[onclick="location.href='/menu_editor'"] {
+    margin: 25px; 
+    text-align: left;
+}

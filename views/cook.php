@@ -7,10 +7,6 @@ $js_files = ['/js/cook.js'];
 include __DIR__ . '/../includes/header.php';
 ?>
 <main>
-        <?php if(isset($_GET['error'])): ?>
-            <p style="text-align: center; font-weight: bold;"><?= $_GET['error'] ?></p>
-        <?php endif; ?>
-
         <div class="tabs">  
             <nav class="tabs-nav">
                 <label class="tab-item">
@@ -33,7 +29,7 @@ include __DIR__ . '/../includes/header.php';
                     </tr>
 
                     <?php if (empty($pending_orders)): ?>
-                        <tr><td colspan="3" style="text-align:center;">Aucune commande en attente.</td></tr>
+                        <tr><td colspan="3">Aucune commande en attente.</td></tr>
                     <?php endif; ?>
 
                     <?php foreach ($pending_orders as $order): ?>
@@ -75,7 +71,7 @@ include __DIR__ . '/../includes/header.php';
                     </tr>
 
                     <?php if (empty($delivery_orders)): ?>
-                        <tr><td colspan="2" style="text-align:center;">Aucune livraison en cours.</td></tr>
+                        <tr><td colspan="2">Aucune livraison en cours.</td></tr>
                     <?php endif; ?>
 
                     <?php foreach ($delivery_orders as $order): ?>

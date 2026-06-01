@@ -10,10 +10,10 @@ include __DIR__ . '/../includes/header.php';
     <div class="tracking-container">
         <?php if (empty($orders)): ?>
             <h2>Aucune commande en cours</h2>
-            <p style="text-align: center; margin-bottom: 2rem;">Vous n'avez pas de commande en préparation ou en cours de livraison actuellement.</p>
+            <p>Vous n'avez pas de commande en préparation ou en cours de livraison actuellement.</p>
         <?php else: ?>
             <?php foreach ($orders as $order): ?>
-            <div class="order-tracker" id="order-<?= $order['id'] ?>" data-order-id="<?= $order['id'] ?>" data-status="<?= $order['status'] ?>" style="margin-bottom: 4rem; padding-bottom: 2rem; border-bottom: 1px solid #ccc;">
+            <div class="order-tracker" id="order-<?= $order['id'] ?>" data-order-id="<?= $order['id'] ?>" data-status="<?= $order['status'] ?>">
                 <h2>Commande #<?= $order['id'] ?></h2>
                 <?php $is_takeaway = isset($order['is_takeaway']) && $order['is_takeaway']; ?>
                 <div class="stepper">
@@ -51,7 +51,7 @@ include __DIR__ . '/../includes/header.php';
                         <?php else: ?>
                             <p>Livreur : <?= $get_name($order['delivery_person']) ?></p>
                             <p>Arrivée : 10 min</p>
-                            <iframe id="map-<?= $order['id'] ?>" src="https://www.openstreetmap.org/export/embed.html?bbox=9.113277196884157%2C55.72994659971866%2C9.11605328321457%2C55.73135269752343&marker=55.730662,9.114866&amp;layer=mapnik" style="width:100%; height:200px; border:0;"></iframe>
+                            <iframe id="map-<?= $order['id'] ?>" src="https://www.openstreetmap.org/export/embed.html?bbox=9.113277196884157%2C55.72994659971866%2C9.11605328321457%2C55.73135269752343&marker=55.730662,9.114866&amp;layer=mapnik"></iframe>
                         <?php endif; ?>
                     <?php else: ?>
                         <p>Commande <?= $is_takeaway ? 'récupérée' : 'livrée' ?> !<br/>Merci pour votre confiance. N'hésitez pas à nous laisser un avis !</p>

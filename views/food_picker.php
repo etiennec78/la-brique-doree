@@ -22,7 +22,7 @@ $picker_menu_id = $menu_id;
 ?>
 
 <main>
-    <div style="margin: 25px; text-align: left;">
+    <div>
         <button onclick="location.href='/menu_editor'" class="basic-btn">Retour à l'éditeur</button>
     </div>
     <section class="menu">

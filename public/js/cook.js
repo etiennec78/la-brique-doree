@@ -92,7 +92,7 @@ function checkCookStatus() {
                 </tr>
             `;
             if (data.pending.length === 0) {
-                pendingHTML += `<tr><td colspan="3" style="text-align:center;">Aucune commande en attente.</td></tr>`;
+                pendingHTML += `<tr><td colspan="3">Aucune commande en attente.</td></tr>`;
             } else {
                 data.pending.forEach(order => {
                     let name = `${order.first_name || ''} ${order.last_name || ''}`;
@@ -128,7 +128,7 @@ function checkCookStatus() {
                 </tr>
             `;
             if (data.delivery.length === 0) {
-                deliveryHTML += `<tr><td colspan="2" style="text-align:center;">Aucune livraison en cours.</td></tr>`;
+                deliveryHTML += `<tr><td colspan="2">Aucune livraison en cours.</td></tr>`;
             } else {
                 data.delivery.forEach(order => {
                     let name = `${order.first_name || ''} ${order.last_name || ''}`;

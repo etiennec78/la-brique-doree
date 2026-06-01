@@ -20,7 +20,7 @@ include __DIR__ . '/../includes/header.php';
                         <option value="cook" <?= (($_GET['role'] ?? '') === 'cook') ? 'selected' : '' ?>>Restaurateurs</option>
                     </select>
                     <noscript>
-                        <button type="submit" class="action-link" onchange="this.form.submit()" style="margin-left: 10px; cursor: pointer;">Filtrer</button>
+                        <button type="submit" class="action-link" onchange="this.form.submit()">Filtrer</button>
                     </noscript>
                 </form>
             </div>
