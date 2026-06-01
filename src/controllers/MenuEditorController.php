@@ -109,7 +109,7 @@ class MenuEditorController extends Controller {
         );
     }
 
-    public static function updateMenu() {
+    public function updateMenu() {
         if (!isset($_SESSION['user'])) {
             header('Location: /login');
             exit();
