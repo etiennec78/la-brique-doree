@@ -215,10 +215,15 @@ class CookController extends Controller {
 
         $order_id = (int)$_POST['order_id'];
         $order = Order::getOrderById($order_id);
+        $is_admin = ($_SESSION['user']['role_id'] == 3);
 
         if (!$order) {
             header('Location: /cook?error=order_not_found');
             exit();
+        }
+
+        if ($is_admin) {
+            Order::setOrderCookAsAdmin($order_id);
         }
 
         if ($order['is_takeaway']) {
@@ -255,9 +260,13 @@ class CookController extends Controller {
         */
         $this->requireRole([2, 3]);
         require_once __DIR__ . '/../models/Order.php';
+        $is_admin = ($_SESSION['user']['role_id'] == 3);
 
         if (isset($_POST['order_id'])) {
             $order_id = (int)$_POST['order_id'];
+            if ($is_admin) {
+                Order::setOrderCookAsAdmin($order_id);
+            }
             Order::setDeliveredStatus($order_id);
             header('Location: /cook?success=finished&tab=delivery');
             exit();
