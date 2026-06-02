@@ -31,6 +31,7 @@ class OrderHistoryController extends Controller {
     require_once __DIR__ . '/../models/User.php';
 
     $uid = $_SESSION['user']['id'];
+    $cart_count = Cart::getCartCount();
     $is_admin = User::isAdmin($uid);
 
     // Get the user id to lookup
@@ -103,6 +104,7 @@ class OrderHistoryController extends Controller {
     $this->render(
       'order_history',
       [
+        'cart_count' => $cart_count,
         'target_id' => $target_id,
         'order_id' => $order_id ?? null,
         'prev_id' => $prev_id ?? null,

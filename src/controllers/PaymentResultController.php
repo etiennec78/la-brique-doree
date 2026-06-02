@@ -24,8 +24,11 @@ class PaymentResultController extends Controller {
     }
 
     global $pdo;
+    include_once __DIR__ . '/../models/Cart.php';
     include_once __DIR__ . '/../db_connect.php';
     include_once __DIR__ . '/../getapikey.php';
+
+    $cart_count = Cart::getCartCount();
 
     $trans = $_GET['transaction'] ?? 'error';
     $montant = $_GET['montant'] ?? 'error';
@@ -89,6 +92,7 @@ class PaymentResultController extends Controller {
     }
 
     $this->render('payment_result', [
+        'cart_count' => $cart_count,
         'isSuccess' => $isSuccess,
         'title' => $title,
         'message' => $message,

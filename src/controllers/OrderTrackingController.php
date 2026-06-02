@@ -23,11 +23,13 @@ class OrderTrackingController extends Controller {
         exit();
     }
 
+    require_once __DIR__ . '/../models/Cart.php';
     require_once __DIR__ . '/../models/Order.php';
     require_once __DIR__ . '/../models/User.php';
     include_once __DIR__ . '/../format_data.php';
 
     $uid = $_SESSION['user']['id'];
+    $cart_count = Cart::getCartCount();
     
     $force_ids = isset($_GET['keep_ids']) ? explode(',', $_GET['keep_ids']) : [];
     $force_ids = array_filter($force_ids, 'is_numeric');
@@ -42,6 +44,7 @@ class OrderTrackingController extends Controller {
     $this->render(
       'order_tracking',
       [
+        'cart_count' => $cart_count,
         'orders' => $orders,
         'get_name' => 'getName'
       ]
